@@ -1,23 +1,26 @@
 package org.usfirst.frc.team3501.robot;
 
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 public class Robot extends IterativeRobot {
+  private static DriveTrain driveTrain;
+  private static OI oi;
 
   @Override
   public void robotInit() {
-    DriveTrain.getDriveTrain();
-    OI.getOI();
+    driveTrain = DriveTrain.getDriveTrain();
+    oi = OI.getOI();
   }
-  
-  public static DriveTrain getDriveTrain(){
-	  return DriveTrain.getDriveTrain();
+
+  public static DriveTrain getDriveTrain() {
+    return DriveTrain.getDriveTrain();
   }
-  
-  public static OI getOI(){
-	  return OI.getOI();
+
+  public static OI getOI() {
+    return OI.getOI();
   }
 
   @Override
