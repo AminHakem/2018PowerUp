@@ -1,7 +1,9 @@
 package org.usfirst.frc.team3501.robot.subsystems;
 
 import org.usfirst.frc.team3501.robot.Constants;
-import edu.wpi.first.wpilibj.CANTalon;
+
+import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
@@ -14,11 +16,11 @@ public class DriveTrain extends Subsystem {
     rearLeft = new CANTalon(Constants.DriveTrain.REAR_LEFT);
     rearRight = new CANTalon(Constants.DriveTrain.REAR_RIGHT);
   }
-  
-  public static DriveTrain getDriveTrain(){
-	  if(driveTrain == null)
-		  driveTrain = new DriveTrain();
-	  return driveTrain;
+
+  public static DriveTrain getDriveTrain() {
+    if (driveTrain == null)
+      driveTrain = new DriveTrain();
+    return driveTrain;
   }
 
   @Override
