@@ -40,8 +40,49 @@ public class DriveTrain extends Subsystem {
         return driveTrain;
     }
 
-    public void setMotorSpeeds(double left, double right) {
+    // DRIVE METHODS
+    public void setMotorValues(double left, double right) {
         robotDrive.tankDrive(left, right);
+    }
+
+    public void joystickDrive(double left, double right) {
+        robotDrive.tankDrive(left, right);
+    }
+
+    public void stop() {
+        setMotorValues(0, 0);
+    }
+
+    public double getFrontLeftMotorVal() {
+        return frontLeft.get();
+    }
+
+    public double getFrontRightMotorVal() {
+        return frontRight.get();
+    }
+
+    public double getRearLeftMotorVal() {
+        return frontLeft.get();
+    }
+
+    public double getRearRightMotorVal() {
+        return frontLeft.get();
+    }
+
+    public CANTalon getFrontLeft() {
+        return frontLeft;
+    }
+
+    public CANTalon getFrontRight() {
+        return frontRight;
+    }
+
+    public CANTalon getRearLeft() {
+        return rearLeft;
+    }
+
+    public CANTalon getRearRight() {
+        return rearRight;
     }
 
     // ENCODER METHODS
