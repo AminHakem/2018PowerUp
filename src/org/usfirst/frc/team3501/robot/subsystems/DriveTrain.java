@@ -4,6 +4,7 @@ import org.usfirst.frc.team3501.robot.Constants;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -11,13 +12,25 @@ public class DriveTrain extends Subsystem {
     private static DriveTrain driveTrain;
     private CANTalon frontLeft, frontRight, rearLeft, rearRight;
     private RobotDrive robotDrive;
+    private Encoder leftEncoder, rightEncoder;
 
     private DriveTrain() {
+        // MOTOR CONTROLLERS
         frontLeft = new CANTalon(Constants.DriveTrain.FRONT_LEFT);
         frontRight = new CANTalon(Constants.DriveTrain.FRONT_RIGHT);
         rearLeft = new CANTalon(Constants.DriveTrain.REAR_LEFT);
         rearRight = new CANTalon(Constants.DriveTrain.REAR_RIGHT);
 
+        // ENCODERS
+        leftEncoder = new Encoder(Constants.DriveTrain.ENCODER_LEFT_A,
+                Constants.DriveTrain.ENCODER_LEFT_B);
+        rightEncoder = new Encoder(Constants.DriveTrain.ENCODER_RIGHT_A,
+                Constants.DriveTrain.ENCODER_RIGHT_B);
+
+        leftEncoder.setDistancePerPulse(Constants.DriveTrain.INCHES_PER_PULSE);
+        rightEncoder.setDistancePerPulse(Constants.DriveTrain.INCHES_PER_PULSE);
+
+        // ROBOT DRIVE
         robotDrive = new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
     }
 
@@ -29,6 +42,37 @@ public class DriveTrain extends Subsystem {
 
     public void setMotorSpeeds(double left, double right) {
         robotDrive.tankDrive(left, right);
+    }
+
+    // ENCODER METHODS
+
+    public double getLeftEncoder() {
+        return leftEncoder.getDistance();
+    }
+
+    public double getRightEncoder() {
+        return rightEncoder.getDistance();
+    }
+
+    public double getAvgEncoderDistance() {
+        return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
+    }
+
+    public void resetEncoders() {
+        leftEncoder.reset();
+        rightEncoder.reset();
+    }
+
+    public double getLeftSpeed() {
+        return leftEncoder.getRate();
+    }
+
+    public double getRightSpeed() {
+        return rightEncoder.getRate();
+    }
+
+    public double getSpeed() {
+        return (getLeftSpeed() + getRightSpeed()) / 2.0;
     }
 
     @Override
