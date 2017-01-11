@@ -14,16 +14,16 @@ public class Constants {
 
   public static class DriveTrain {
     // MOTOR CONTROLLERS
-    public static final int FRONT_LEFT = 0;
-    public static final int FRONT_RIGHT = 0;
-    public static final int REAR_LEFT = 0;
-    public static final int REAR_RIGHT = 0;
+    public static final int FRONT_LEFT = 1;
+    public static final int FRONT_RIGHT = 3;
+    public static final int REAR_LEFT = 2;
+    public static final int REAR_RIGHT = 9;
 
     // ENCODERS
-    public static final int ENCODER_LEFT_A = 0;
-    public static final int ENCODER_LEFT_B = 0;
+    public static final int ENCODER_LEFT_A = 2;
+    public static final int ENCODER_LEFT_B = 3;
     public static final int ENCODER_RIGHT_A = 0;
-    public static final int ENCODER_RIGHT_B = 0;
+    public static final int ENCODER_RIGHT_B = 1;
 
     public static final int INCHES_PER_PULSE = 0;
   }
