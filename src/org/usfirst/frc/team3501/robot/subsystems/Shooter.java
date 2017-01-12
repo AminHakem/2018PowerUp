@@ -14,7 +14,7 @@ public class Shooter {
 
 	/**
 	 * Runs the fly wheel at a given speed in () for input time in seconds
-	 * 
+	 *
 	 * @param speed
 	 *            in ()
 	 * @param time
@@ -33,7 +33,7 @@ public class Shooter {
 
 	/**
 	 * Runs index wheel at a given speed in () for input time in seconds
-	 * 
+	 *
 	 * @param speed
 	 *            in ()
 	 * @param time
