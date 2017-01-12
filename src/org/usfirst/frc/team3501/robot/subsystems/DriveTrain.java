@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3501.robot.subsystems;
 
 import org.usfirst.frc.team3501.robot.Constants;
+import org.usfirst.frc.team3501.robot.commands.driving.JoystickDrive;
 
 import com.ctre.CANTalon;
 
@@ -46,8 +47,8 @@ public class DriveTrain extends Subsystem {
     robotDrive.tankDrive(left, right);
   }
 
-  public void joystickDrive(final double left, final double right) {
-    robotDrive.tankDrive(left, right);
+  public void joystickDrive(final double thrust, final double twist) {
+    robotDrive.arcadeDrive(thrust, twist);
   }
 
   public void stop() {
@@ -119,6 +120,7 @@ public class DriveTrain extends Subsystem {
 
   @Override
   protected void initDefaultCommand() {
+    setDefaultCommand(new JoystickDrive());
   }
 
 }

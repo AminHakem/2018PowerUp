@@ -20,10 +20,10 @@ public class JoystickDrive extends Command {
 
   @Override
   protected void execute() {
-    final double left = OI.leftJoystick.getY();
-    final double right = OI.rightJoystick.getY();
+    final double thrust = OI.rightJoystick.getY();
+    final double twist = OI.rightJoystick.getTwist();
 
-    Robot.getDriveTrain().joystickDrive(left, right);
+    Robot.getDriveTrain().joystickDrive(-thrust, -twist);
   }
 
   @Override
