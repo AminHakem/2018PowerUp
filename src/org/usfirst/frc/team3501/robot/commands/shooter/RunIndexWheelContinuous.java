@@ -6,6 +6,9 @@ import edu.wpi.first.wpilibj.command.Command;
  * Runs index wheel continuously until ________
  */
 public class RunIndexWheelContinuous extends Command {
+	public RunIndexWheelContinuous() {
+
+	}
 
 	// Called just before this Command runs the first time
 	@Override

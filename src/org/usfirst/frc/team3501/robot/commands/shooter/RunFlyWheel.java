@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.command.Command;
  *            in seconds
  */
 public class RunFlyWheel extends Command {
+	public RunFlyWheel() {
+
+	}
 
 	// Called just before this Command runs the first time
 	@Override

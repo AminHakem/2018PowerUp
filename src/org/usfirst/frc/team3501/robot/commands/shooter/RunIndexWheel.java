@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.command.Command;
  *            in seconds
  */
 public class RunIndexWheel extends Command {
+	public RunIndexWheel() {
+
+	}
 
 	// Called just before this Command runs the first time
 	@Override

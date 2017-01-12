@@ -2,11 +2,13 @@ package org.usfirst.frc.team3501.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ * Stops fly wheel
+ */
 public class StopFlyWheel extends Command {
+	public StopFlyWheel() {
 
-	/**
-	 * Stops fly wheel
-	 */
+	}
 
 	// Called just before this Command runs the first time
 	@Override

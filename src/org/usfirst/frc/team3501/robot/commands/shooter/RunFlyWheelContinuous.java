@@ -6,6 +6,9 @@ import edu.wpi.first.wpilibj.command.Command;
  * Runs fly wheel continuously until ________
  */
 public class RunFlyWheelContinuous extends Command {
+	public RunFlyWheelContinuous() {
+
+	}
 
 	// Called just before this Command runs the first time
 	@Override
