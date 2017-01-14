@@ -1,5 +1,8 @@
 package org.usfirst.frc.team3501.robot.commands.shooter;
 
+import org.usfirst.frc.team3501.robot.Robot;
+
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -11,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Command;
  * @author Shaina
  */
 public class RunIndexWheel extends Command {
+  Timer timer;
   private double time;
   private double motorVal;
 
@@ -23,6 +27,9 @@ public class RunIndexWheel extends Command {
    *          in seconds, amount of time to run index wheel motor
    */
   public RunIndexWheel(double motorVal, double time) {
+    requires(Robot.getShooter());
+
+    timer = new Timer();
     this.motorVal = motorVal;
     this.time = time;
   }
@@ -30,6 +37,9 @@ public class RunIndexWheel extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    timer.start();
+    Robot.getShooter().setIndexWheelMotorVal(motorVal);
+
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -40,17 +50,20 @@ public class RunIndexWheel extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.getShooter().stopIndexWheel();
+
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 
   @Override
   protected boolean isFinished() {
-    return false;
+    return timer.get() >= time;
   }
 
 }
