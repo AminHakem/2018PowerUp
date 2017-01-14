@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * Runs index wheel continuously when corresponding button is pressed
  *
+ * Run stopIndexWheel to stop
+ *
  * @param motorVal
  *          [-1,1]
  * @author shaina

@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * Runs fly wheel continuously when corresponding button pressed
  *
+ * Run stopFlyWheel command to stop
+ *
  * @param motorVal
  *          [-1,1]
  * @author shaina
