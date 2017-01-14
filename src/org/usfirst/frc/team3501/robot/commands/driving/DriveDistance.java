@@ -5,11 +5,15 @@ import org.usfirst.frc.team3501.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
+ * This command makes the robot drive a specified distance using encoders on the
+ * robot and using a feedback loop
  *
+ * parameters:
+ * distance the robot will move in inches
  */
 public class DriveDistance extends Command {
 
-  public DriveDistance() {
+  public DriveDistance(double distance) {
     requires(Robot.getDriveTrain());
   }
 
