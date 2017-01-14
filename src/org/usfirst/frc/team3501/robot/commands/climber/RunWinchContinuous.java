@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3501.robot.commands.climber;
 
+import org.usfirst.frc.team3501.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -12,6 +14,7 @@ public class RunWinchContinuous extends Command {
   private double motorVal;
 
   public RunWinchContinuous(double motorVal) {
+    requires(Robot.getClimber());
     this.motorVal = motorVal;
   }
 
@@ -31,10 +34,11 @@ public class RunWinchContinuous extends Command {
 
   @Override
   protected void end() {
-
+    Robot.getClimber().stop();
   }
 
   @Override
   protected void interrupted() {
+    end();
   }
 }
