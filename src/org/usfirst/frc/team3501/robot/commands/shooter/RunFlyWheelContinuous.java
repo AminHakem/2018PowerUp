@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
  * Runs fly wheel continuously when corresponding button pressed
  *
  * @param motorVal
- *          motor value
+ *          [-1,1]
  * @author shaina
  */
 public class RunFlyWheelContinuous extends Command {

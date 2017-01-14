@@ -3,10 +3,10 @@ package org.usfirst.frc.team3501.robot.commands.shooter;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Runs index wheel at a given speed in () for given time in seconds
+ * Runs index wheel at a given speed for given time in seconds
  *
- * @param speed
- *          in ()
+ * @param motorVal
+ *          [-1,1]
  * @param time
  *          in seconds
  * @author shaina

@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
  * Runs the fly wheel at a given speed for a given time (sec)
  *
  * @param motorVal
- *          in ()
+ *          [-1,1]
  * @param time
  *          in seconds
  * @author shaina
