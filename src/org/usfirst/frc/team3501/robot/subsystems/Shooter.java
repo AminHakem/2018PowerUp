@@ -1,12 +1,25 @@
 package org.usfirst.frc.team3501.robot.subsystems;
 
-public class Shooter {
+import org.usfirst.frc.team3501.robot.Constants;
+
+import com.ctre.CANTalon;
+
+import edu.wpi.first.wpilibj.command.Subsystem;
+
+public class Shooter extends Subsystem {
   private static Shooter shooter;
+  private final CANTalon flyWheel, indexWheel;
 
   private Shooter() {
-
+    flyWheel = new CANTalon(Constants.Shooter.FLY_WHEEL);
+    indexWheel = new CANTalon(Constants.Shooter.INDEX_WHEEL);
   }
 
+  /**
+   * Returns shooter object
+   *
+   * @return Shooter object
+   */
   public static Shooter getShooter() {
     if (shooter == null) {
       shooter = new Shooter();
@@ -15,24 +28,41 @@ public class Shooter {
   }
 
   /**
-   * Stops fly wheel
+   * Sets fly wheel motor value to input.
+   *
+   * @param val
+   *          motor value from -1 to 1(fastest forward)
    */
-  public void stopFlywheel() {
-
-  }
-
   public void setFlyWheelMotorVal(final double val) {
-
+    flyWheel.set(val);
   }
 
   /**
-   * Stops index wheel
+   * Stops fly wheel motor.
    */
-  public void stopIndexWheel() {
-
+  public void stopFlyWheel() {
+    flyWheel.set(0);
   }
 
+  /**
+   * Sets index wheel motor value to input.
+   *
+   * @param val
+   *          motor value from -1 to 1(fastest forward)
+   */
   public void setIndexWheelMotorVal(final double val) {
+    indexWheel.set(val);
+  }
+
+  /**
+   * Stops index wheel motor.
+   */
+  public void stopIndexWheel() {
+    indexWheel.set(0);
+  }
+
+  @Override
+  protected void initDefaultCommand() {
 
   }
 }
