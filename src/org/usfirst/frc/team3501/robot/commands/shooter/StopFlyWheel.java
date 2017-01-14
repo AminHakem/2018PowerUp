@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3501.robot.commands.shooter;
 
+import org.usfirst.frc.team3501.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -30,6 +32,7 @@ public class StopFlyWheel extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.getShooter().stopFlyWheel();
   }
 
   // Called when another command which requires one or more of the same
@@ -40,8 +43,7 @@ public class StopFlyWheel extends Command {
 
   @Override
   protected boolean isFinished() {
-    // TODO Auto-generated method stub
-    return false;
+    return true;
   }
 
 }
