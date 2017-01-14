@@ -9,7 +9,7 @@ public class Climber {
 
   public static Climber getClimber() {
     if (climber == null) {
-      climber = climber();
+      climber = new Climber();
     }
     return climber;
   }

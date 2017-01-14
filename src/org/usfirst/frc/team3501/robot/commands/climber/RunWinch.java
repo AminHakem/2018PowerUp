@@ -3,7 +3,7 @@ package org.usfirst.frc.team3501.robot.commands.climber;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Runs the winch at a given time and motor value
+ * Runs the winch for a given time and motor value
  *
  * @author shivanighanta
  *
