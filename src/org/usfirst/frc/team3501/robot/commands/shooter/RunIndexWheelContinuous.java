@@ -4,12 +4,16 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * Runs index wheel continuously when corresponding button is pressed
- *
+ * 
+ * @param motorVal
+ *          motor value
  * @author shaina
  */
 public class RunIndexWheelContinuous extends Command {
-  public RunIndexWheelContinuous() {
+  private double motorVal;
 
+  public RunIndexWheelContinuous(double motorVal) {
+    this.motorVal = motorVal;
   }
 
   // Called just before this Command runs the first time
