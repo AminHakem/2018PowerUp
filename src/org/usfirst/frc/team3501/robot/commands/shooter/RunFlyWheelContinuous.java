@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3501.robot.commands.shooter;
 
+import org.usfirst.frc.team3501.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -27,6 +29,7 @@ public class RunFlyWheelContinuous extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.getShooter().setFlyWheelMotorVal(motorVal);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -37,6 +40,7 @@ public class RunFlyWheelContinuous extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.getShooter().stopFlyWheel();
   }
 
   // Called when another command which requires one or more of the same
@@ -49,6 +53,7 @@ public class RunFlyWheelContinuous extends Command {
   @Override
   protected boolean isFinished() {
     return false;
+
   }
 
 }
