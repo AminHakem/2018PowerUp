@@ -6,7 +6,12 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
+ * This commands make the robot drive for a specified time with the motors set
+ * at a specified value between 1 and -1
  *
+ * parameters:
+ * time: how long the robot should drive for - in seconds
+ * motorVal: the motor input to set the motors to
  */
 public class TimeDrive extends Command {
   Timer timer;
