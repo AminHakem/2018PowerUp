@@ -1,5 +1,9 @@
 package org.usfirst.frc.team3501.robot.commands.climber;
 
+import org.usfirst.frc.team3501.robot.Robot;
+
+import com.sun.glass.ui.Timer;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -9,16 +13,20 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class RunWinch extends Command {
+  Timer timer;
   private double time;
   private double motorVal;
 
   public RunWinch(double time, double motorVal) {
+    requires(Robot.getClimber());
     this.time = time;
     this.motorVal = motorVal;
   }
 
   @Override
   protected void initialize() {
+    timer.start();
+    Robot.getClimber().setMotorValues(motorVal, motorVal);
   }
 
   @Override
@@ -28,15 +36,16 @@ public class RunWinch extends Command {
 
   @Override
   protected boolean isFinished() {
-    return false;
+    return timer.get() >= time;
   }
 
   @Override
   protected void end() {
-
+    Robot.getClimber().stop();
   }
 
   @Override
   protected void interrupted() {
+    end();
   }
 }

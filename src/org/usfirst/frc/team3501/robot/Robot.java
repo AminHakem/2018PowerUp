@@ -27,6 +27,10 @@ public class Robot extends IterativeRobot {
     return DriveTrain.getDriveTrain();
   }
 
+  public static Climber getClimber() {
+    return Climber.getClimber();
+  }
+
   public static OI getOI() {
     return OI.getOI();
   }
