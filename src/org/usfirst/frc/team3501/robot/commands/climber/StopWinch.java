@@ -27,15 +27,17 @@ public class StopWinch extends Command {
 
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   @Override
   protected void end() {
+    Robot.getClimber().stop();
 
   }
 
   @Override
   protected void interrupted() {
+    end();
   }
 }
