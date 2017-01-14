@@ -4,10 +4,16 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * Runs fly wheel continuously when corresponding button pressed
+ *
+ * @param motorVal
+ *          motor value
+ * @author shaina
  */
 public class RunFlyWheelContinuous extends Command {
-  public RunFlyWheelContinuous() {
+  private double motorVal;
 
+  public RunFlyWheelContinuous(double motorVal) {
+    this.motorVal = motorVal;
   }
 
   // Called just before this Command runs the first time
