@@ -8,8 +8,8 @@ package org.usfirst.frc.team3501.robot;
 
 public class Constants {
   public static class OI {
-    public final static int LEFT_STICK_PORT = 0;
-    public final static int RIGHT_STICK_PORT = 1;
+    public final static int LEFT_STICK_PORT = 1;
+    public final static int RIGHT_STICK_PORT = 0;
   }
 
   public static class DriveTrain {

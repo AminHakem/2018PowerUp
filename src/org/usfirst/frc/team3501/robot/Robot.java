@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3501.robot;
 
+import org.usfirst.frc.team3501.robot.commands.driving.TimeDrive;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -25,6 +26,7 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void autonomousInit() {
+    Scheduler.getInstance().add(new TimeDrive(1.5, 0.4));
   }
 
   @Override

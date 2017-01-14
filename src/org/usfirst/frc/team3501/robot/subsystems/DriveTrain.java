@@ -47,12 +47,12 @@ public class DriveTrain extends Subsystem {
     frontLeft.set(left);
     rearLeft.set(left);
 
-    frontRight.set(right);
-    rearRight.set(right);
+    frontRight.set(-right);
+    rearRight.set(-right);
   }
 
   public void joystickDrive(final double thrust, final double twist) {
-    robotDrive.arcadeDrive(thrust, twist);
+    robotDrive.arcadeDrive(thrust, twist, true);
   }
 
   public void stop() {
