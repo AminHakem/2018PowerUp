@@ -6,7 +6,9 @@ import org.usfirst.frc.team3501.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * This command will run throughout teleop and listens for joystick inputs to
+ * drive the driveTrain. This never finishes until teleop ends.
+ * - works in conjunction with OI.java
  */
 public class JoystickDrive extends Command {
 
