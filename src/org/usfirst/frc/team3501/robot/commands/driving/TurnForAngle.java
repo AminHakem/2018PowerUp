@@ -2,14 +2,21 @@ package org.usfirst.frc.team3501.robot.commands.driving;
 
 import org.usfirst.frc.team3501.robot.Robot;
 
+import edu.wpi.first.wpilibj.Relay.Direction;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
+ * This command turns the robot for a specified angle in specified direction -
+ * either left or right
+ *
+ * parameters:
+ * angle the robot will turn - in degrees
+ * direction the robot will turn - either right or left
  *
  */
 public class TurnForAngle extends Command {
 
-  public TurnForAngle() {
+  public TurnForAngle(double angle, Direction direction) {
     requires(Robot.getDriveTrain());
   }
 
