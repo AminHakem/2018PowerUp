@@ -10,13 +10,13 @@ import edu.wpi.first.wpilibj.command.Command;
  * either left or right
  *
  * parameters:
- * angle the robot will turn - in degrees
- * direction the robot will turn - either right or left
- *
+ * angle: the robot will turn - in degrees
+ * direction: the robot will turn - either right or left
+ * motorVal: the motor input to set the motors to
  */
 public class TurnForAngle extends Command {
 
-  public TurnForAngle(double angle, Direction direction) {
+  public TurnForAngle(double angle, Direction direction, double motorVal) {
     requires(Robot.getDriveTrain());
   }
 

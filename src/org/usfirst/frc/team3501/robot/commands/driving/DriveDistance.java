@@ -10,10 +10,11 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  * parameters:
  * distance the robot will move in inches
+ * motorVal: the motor input to set the motors to
  */
 public class DriveDistance extends Command {
 
-  public DriveDistance(double distance) {
+  public DriveDistance(double distance, double motorVal) {
     requires(Robot.getDriveTrain());
   }
 
