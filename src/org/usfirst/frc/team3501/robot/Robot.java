@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 
 public class Robot extends IterativeRobot {
   private static DriveTrain driveTrain;
+  private static Shooter shooter;
   private static OI oi;
   private static Shooter shooter;
 
@@ -22,6 +23,10 @@ public class Robot extends IterativeRobot {
 
   public static DriveTrain getDriveTrain() {
     return DriveTrain.getDriveTrain();
+  }
+
+  public static Shooter getShooter() {
+    return Shooter.getShooter();
   }
 
   public static OI getOI() {
