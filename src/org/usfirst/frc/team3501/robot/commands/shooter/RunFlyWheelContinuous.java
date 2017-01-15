@@ -54,7 +54,12 @@ public class RunFlyWheelContinuous extends Command {
 
   @Override
   protected boolean isFinished() {
+<<<<<<< 7fe535d58b388a1d87b3728095d8a38786865468
     return false;
+=======
+    // TODO
+    return !Robot.getOI().toggleFlyWheel.get();
+>>>>>>> Add buttons to OI class
   }
 
 }
