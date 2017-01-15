@@ -54,7 +54,7 @@ public class RunFlyWheelContinuous extends Command {
 
   @Override
   protected boolean isFinished() {
-    return false;
+    return !Robot.getOI().toggleFlyWheel.get();
   }
 
 }
