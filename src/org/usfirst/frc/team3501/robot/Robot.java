@@ -11,7 +11,6 @@ public class Robot extends IterativeRobot {
   private static DriveTrain driveTrain;
   private static Shooter shooter;
   private static OI oi;
-  private static Shooter shooter;
 
   @Override
   public void robotInit() {

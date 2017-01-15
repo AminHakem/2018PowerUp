@@ -10,11 +10,19 @@ public class OI {
   public static Joystick rightJoystick;
   public static Button toggleWinch;
 
+  public static Button toggleIndexWheel;
+  public static Button toggleFlyWheel;
+
   public OI() {
     leftJoystick = new Joystick(Constants.OI.LEFT_STICK_PORT);
     rightJoystick = new Joystick(Constants.OI.RIGHT_STICK_PORT);
     toggleWinch = new JoystickButton(leftJoystick,
         Constants.OI.TOGGLE_WINCH_PORT);
+
+    toggleIndexWheel = new JoystickButton(leftJoystick,
+        Constants.OI.TOGGLE_INDEXWHEEL_PORT);
+    toggleFlyWheel = new JoystickButton(leftJoystick,
+        Constants.OI.TOGGLE_FLYWHEEL_PORT);
 
   }
 
