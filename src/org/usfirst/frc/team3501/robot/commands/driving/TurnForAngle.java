@@ -1,8 +1,8 @@
 package org.usfirst.frc.team3501.robot.commands.driving;
 
+import org.usfirst.frc.team3501.robot.Constants.Direction;
 import org.usfirst.frc.team3501.robot.Robot;
 
-import edu.wpi.first.wpilibj.Relay.Direction;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
