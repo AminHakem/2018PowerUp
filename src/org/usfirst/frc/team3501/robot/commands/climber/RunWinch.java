@@ -33,11 +33,7 @@ public class RunWinch extends Command {
    *          value range is from -1 to 1
    */
   public RunWinch(double time, double motorVal) {
-<<<<<<< a5147d5928f01620d8e10f2e9cdea079526d2db3
     requires(Robot.getDriveTrain());
-=======
-    requires(Robot.getClimber());
->>>>>>> Implement RunWinch
     this.time = time;
     this.motorVal = motorVal;
   }
@@ -45,10 +41,6 @@ public class RunWinch extends Command {
   @Override
   protected void initialize() {
     timer.start();
-<<<<<<< a5147d5928f01620d8e10f2e9cdea079526d2db3
-=======
-    Robot.getClimber().setMotorValues(motorVal, motorVal);
->>>>>>> Implement RunWinch
   }
 
   @Override
@@ -64,12 +56,7 @@ public class RunWinch extends Command {
 
   @Override
   protected void end() {
-<<<<<<< a5147d5928f01620d8e10f2e9cdea079526d2db3
     Robot.getDriveTrain().stop();
-
-=======
-    Robot.getClimber().stop();
->>>>>>> Implement RunWinch
   }
 
   @Override

@@ -34,7 +34,6 @@ public class RunWinchContinuous extends Command {
   @Override
   protected void initialize() {
     Robot.getDriveTrain().setMotorValues(motorVal, motorVal);
-
   }
 
   @Override
