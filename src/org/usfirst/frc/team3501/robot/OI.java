@@ -6,16 +6,17 @@ public class OI {
   private static OI oi;
   public static Joystick leftJoystick;
   public static Joystick rightJoystick;
+  public static ClimberButton climberButton;
 
   public OI() {
     leftJoystick = new Joystick(Constants.OI.LEFT_STICK_PORT);
     rightJoystick = new Joystick(Constants.OI.RIGHT_STICK_PORT);
 
   }
-  
-  public static OI getOI(){
-	  if(oi == null)
-		  oi = new OI();
-	  return oi;
+
+  public static OI getOI() {
+    if (oi == null)
+      oi = new OI();
+    return oi;
   }
 }

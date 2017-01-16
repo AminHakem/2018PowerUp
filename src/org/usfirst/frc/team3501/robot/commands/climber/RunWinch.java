@@ -26,7 +26,7 @@ public class RunWinch extends Command {
   @Override
   protected void initialize() {
     timer.start();
-    Robot.getClimber().setMotorValues(motorVal, motorVal);
+    Robot.getClimber().setMotorValue(motorVal);
   }
 
   @Override

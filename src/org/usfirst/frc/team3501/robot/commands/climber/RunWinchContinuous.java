@@ -20,6 +20,8 @@ public class RunWinchContinuous extends Command {
 
   @Override
   protected void initialize() {
+    Robot.getClimber().setMotorValues(motorVal);
+
   }
 
   @Override

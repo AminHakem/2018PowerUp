@@ -13,4 +13,12 @@ public class Climber {
     }
     return climber;
   }
+
+  public void stop() {
+    setMotorValues(0);
+  }
+
+  public void setMotorValues(final double val) {
+
+  }
 }
