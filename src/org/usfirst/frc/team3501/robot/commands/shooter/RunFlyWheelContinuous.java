@@ -3,9 +3,10 @@ package org.usfirst.frc.team3501.robot.commands.shooter;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Runs fly wheel continuously when corresponding button pressed
+ * This command will run the fly wheel motor continuously until the button
+ * triggering it is released.
  *
- * Run stopFlyWheel command to stop
+ * pre-condition: This command must be run by a button in OI.
  *
  * @param motorVal
  *          [-1,1]
@@ -37,6 +38,7 @@ public class RunFlyWheelContinuous extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 
   @Override

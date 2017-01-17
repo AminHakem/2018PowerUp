@@ -3,10 +3,11 @@ package org.usfirst.frc.team3501.robot.commands.shooter;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Runs index wheel continuously when corresponding button is pressed
+ * This command will run the index wheel motor continuously until the button
+ * triggering it is released.
  *
- * Run stopIndexWheel to stop
- *
+ * pre-condition: This command must be run by a button in OI.
+ * 
  * @param motorVal
  *          [-1,1]
  * @author shaina
