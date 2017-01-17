@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  *
  * @param motorVal
- *          [-1,1]
+ *          value range is from -1 to 1
  * @param time
  *          in seconds
  * @author shaina
