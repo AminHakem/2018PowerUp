@@ -18,7 +18,6 @@ public class OI {
     rightJoystick = new Joystick(Constants.OI.RIGHT_STICK_PORT);
     toggleWinch = new JoystickButton(leftJoystick,
         Constants.OI.TOGGLE_WINCH_PORT);
-
     toggleIndexWheel = new JoystickButton(leftJoystick,
         Constants.OI.TOGGLE_INDEXWHEEL_PORT);
     toggleFlyWheel = new JoystickButton(leftJoystick,
