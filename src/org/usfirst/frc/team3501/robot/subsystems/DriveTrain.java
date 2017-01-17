@@ -98,11 +98,11 @@ public class DriveTrain extends Subsystem {
 
   // ENCODER METHODS
 
-  public double getLeftEncoder() {
+  public double getLeftEncoderDistance() {
     return leftEncoder.getDistance();
   }
 
-  public double getRightEncoder() {
+  public double getRightEncoderDistance() {
     return rightEncoder.getDistance();
   }
 
