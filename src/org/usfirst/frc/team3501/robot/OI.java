@@ -6,11 +6,12 @@ public class OI {
   private static OI oi;
   public static Joystick leftJoystick;
   public static Joystick rightJoystick;
-  public static ClimberButton climberButton;
+  public static Button toggleWinch;
 
   public OI() {
     leftJoystick = new Joystick(Constants.OI.LEFT_STICK_PORT);
     rightJoystick = new Joystick(Constants.OI.RIGHT_STICK_PORT);
+     toggleWinch = new JoystickButton(leftJoystick,Constants.OI.TOGGLE_WINCH_PORT);
 
   }
 
