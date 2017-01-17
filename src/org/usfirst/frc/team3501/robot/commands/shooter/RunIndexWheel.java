@@ -3,7 +3,11 @@ package org.usfirst.frc.team3501.robot.commands.shooter;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Runs index wheel at a given speed for given time in seconds
+ * This command runs index wheel at a given speed for given time in seconds.
+ *
+ * pre-condition: fly wheel is running at full speed to prepare for shooting
+ * fuel
+ *
  *
  * @param motorVal
  *          [-1,1]

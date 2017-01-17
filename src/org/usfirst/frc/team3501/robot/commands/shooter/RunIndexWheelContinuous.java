@@ -6,8 +6,9 @@ import edu.wpi.first.wpilibj.command.Command;
  * This command will run the index wheel motor continuously until the button
  * triggering it is released.
  *
- * pre-condition: This command must be run by a button in OI.
- * 
+ * pre-condition: This command must be run by a button in OI with
+ * button.whileHeld(...).
+ *
  * @param motorVal
  *          [-1,1]
  * @author shaina

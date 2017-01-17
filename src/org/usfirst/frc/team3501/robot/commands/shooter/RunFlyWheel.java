@@ -3,13 +3,14 @@ package org.usfirst.frc.team3501.robot.commands.shooter;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Runs the fly wheel at a given speed for a given time (sec)
+ * This command runs the fly wheel at a given speed for a given time. The fly
+ * wheel is intended to shoot balls fed by the intake wheel.
  *
  * @param motorVal
  *          [-1,1]
  * @param time
  *          in seconds
- * @author shaina
+ * @author Shaina
  */
 public class RunFlyWheel extends Command {
   private double motorVal;
