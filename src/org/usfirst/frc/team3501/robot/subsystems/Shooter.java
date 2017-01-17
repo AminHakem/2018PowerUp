@@ -21,15 +21,7 @@ public class Shooter {
 
   }
 
-  /**
-   * Runs the fly wheel at a given speed in () for input time in seconds
-   *
-   * @param speed
-   *          in ()
-   * @param time
-   *          in seconds
-   */
-  public void runFlywheel(double speed, double time) {
+  public void setFlyWheelMotorVal(final double val) {
 
   }
 
@@ -40,29 +32,7 @@ public class Shooter {
 
   }
 
-  /**
-   * Runs index wheel at a given speed in () for input time in seconds
-   *
-   * @param speed
-   *          in ()
-   * @param time
-   *          in seconds
-   */
-  public void runIndexWheel(double speed, double time) {
-
-  }
-
-  /**
-   * Runs fly wheel continuously until ________
-   */
-  public void runFlywheelContinuous() {
-
-  }
-
-  /**
-   * Runs index wheel continuously until ________
-   */
-  public void runIndexWheelContinuous() {
+  public void setIndexWheelMotorVal(final double val) {
 
   }
 }
