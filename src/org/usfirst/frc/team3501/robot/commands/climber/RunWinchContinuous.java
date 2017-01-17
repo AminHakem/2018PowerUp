@@ -14,13 +14,12 @@ public class RunWinchContinuous extends Command {
   private double motorVal;
 
   public RunWinchContinuous(double motorVal) {
-    requires(Robot.getClimber());
     this.motorVal = motorVal;
   }
 
   @Override
   protected void initialize() {
-    Robot.getClimber().setMotorValues(motorVal);
+    Robot.getClimber().setMotorValue(motorVal);
 
   }
 
