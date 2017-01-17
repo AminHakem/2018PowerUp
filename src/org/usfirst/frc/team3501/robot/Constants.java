@@ -24,8 +24,6 @@ public class Constants {
     public static final int ENCODER_LEFT_B = 1;
     public static final int ENCODER_RIGHT_A = 2;
     public static final int ENCODER_RIGHT_B = 3;
-
-    public static final int INCHES_PER_PULSE = 0;
   }
 
   public static enum Direction {

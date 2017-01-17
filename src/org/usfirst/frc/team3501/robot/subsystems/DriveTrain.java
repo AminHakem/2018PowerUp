@@ -10,6 +10,11 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
+  public static final double WHEEL_DIAMETER = 6; // inches
+  public static final int ENCODER_PULSES_PER_REVOLUTION = 256;
+  public static final double INCHES_PER_PULSE = WHEEL_DIAMETER * Math.PI
+      / ENCODER_PULSES_PER_REVOLUTION;
+
   private static DriveTrain driveTrain;
   private final CANTalon frontLeft, frontRight, rearLeft, rearRight;
   private final RobotDrive robotDrive;
@@ -28,8 +33,8 @@ public class DriveTrain extends Subsystem {
     rightEncoder = new Encoder(Constants.DriveTrain.ENCODER_RIGHT_A,
         Constants.DriveTrain.ENCODER_RIGHT_B);
 
-    leftEncoder.setDistancePerPulse(Constants.DriveTrain.INCHES_PER_PULSE);
-    rightEncoder.setDistancePerPulse(Constants.DriveTrain.INCHES_PER_PULSE);
+    leftEncoder.setDistancePerPulse(INCHES_PER_PULSE);
+    rightEncoder.setDistancePerPulse(INCHES_PER_PULSE);
 
     // ROBOT DRIVE
     robotDrive = new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
