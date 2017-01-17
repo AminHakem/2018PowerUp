@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  * @param motorVal
  *          value range is from -1 to 1
- * @author shaina
+ * @author Shaina
  */
 public class RunIndexWheelContinuous extends Command {
   private double motorVal;

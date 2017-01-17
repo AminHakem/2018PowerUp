@@ -3,7 +3,8 @@ package org.usfirst.frc.team3501.robot.commands.shooter;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This command stops the index wheel.
+ * This command stops the index wheel. Do not call unless the trigger button has
+ * been released.
  *
  * @author Shaina
  */
