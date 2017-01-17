@@ -39,7 +39,6 @@ public class RunIndexWheel extends Command {
   protected void initialize() {
     timer.start();
     Robot.getShooter().setIndexWheelMotorVal(motorVal);
-
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -51,7 +50,6 @@ public class RunIndexWheel extends Command {
   @Override
   protected void end() {
     Robot.getShooter().stopIndexWheel();
-
   }
 
   // Called when another command which requires one or more of the same
