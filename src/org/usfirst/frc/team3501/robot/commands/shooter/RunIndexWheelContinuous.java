@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  * button.whileHeld(...).
  *
  * @param motorVal
- *          [-1,1]
+ *          value range is from -1 to 1
  * @author shaina
  */
 public class RunIndexWheelContinuous extends Command {

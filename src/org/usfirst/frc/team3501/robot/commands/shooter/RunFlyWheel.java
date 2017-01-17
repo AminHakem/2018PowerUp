@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
  * wheel is intended to shoot balls fed by the intake wheel.
  *
  * @param motorVal
- *          [-1,1]
+ *          value range from -1 to 1
  * @param time
  *          in seconds
  * @author Shaina
