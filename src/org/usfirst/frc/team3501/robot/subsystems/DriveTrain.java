@@ -29,9 +29,9 @@ public class DriveTrain extends Subsystem {
 
     // ENCODERS
     leftEncoder = new Encoder(Constants.DriveTrain.ENCODER_LEFT_A,
-        Constants.DriveTrain.ENCODER_LEFT_B);
+        Constants.DriveTrain.ENCODER_LEFT_B, false, Encoder.EncodingType.k4X);
     rightEncoder = new Encoder(Constants.DriveTrain.ENCODER_RIGHT_A,
-        Constants.DriveTrain.ENCODER_RIGHT_B);
+        Constants.DriveTrain.ENCODER_RIGHT_B, false, Encoder.EncodingType.k4X);
 
     leftEncoder.setDistancePerPulse(INCHES_PER_PULSE);
     rightEncoder.setDistancePerPulse(INCHES_PER_PULSE);
