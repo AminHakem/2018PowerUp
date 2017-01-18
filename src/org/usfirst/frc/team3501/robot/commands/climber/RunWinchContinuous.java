@@ -6,7 +6,15 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * This command will run the winch motor continuously until the button
- * triggering it is released
+ * triggering it is released.
+ *
+ * pre-condition: This command must be run by a button in OI. The robot must be
+ * attached to the rope.
+ *
+ * post-condition: Winch motor set to a specified speed.
+ *
+ * @param motorVal
+ *          value range is from -1 to 1
  *
  * @author shivanighanta
  *

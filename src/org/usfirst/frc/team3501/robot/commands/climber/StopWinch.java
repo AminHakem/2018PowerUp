@@ -5,7 +5,9 @@ import org.usfirst.frc.team3501.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Stops the winch
+ * This command stops the winch
+ *
+ * post-condition: the motor values are set to 0.
  *
  * @author shivanighanta
  *

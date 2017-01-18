@@ -7,7 +7,13 @@ import com.sun.glass.ui.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This command runs the winch for a given motor value and time in seconds
+ * This command runs the winch at a specified speed and time in seconds when the
+ * button triggering it is pressed.
+ *
+ * pre-condition: This command is run by a button in OI. The robot must be
+ * attached to the rope.
+ *
+ * post-condition: Winch motor set to a specified speed for a specified time.
  *
  * @param motorVal
  *          value range is from -1 to 1
