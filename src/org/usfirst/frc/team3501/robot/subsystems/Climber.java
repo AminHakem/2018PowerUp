@@ -15,10 +15,10 @@ public class Climber {
   }
 
   public void stop() {
-    setMotorValues(0);
+    setMotorValue(0);
   }
 
-  public void setMotorValues(final double val) {
+  public void setMotorValue(final double val) {
 
   }
 }

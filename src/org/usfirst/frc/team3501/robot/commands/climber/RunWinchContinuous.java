@@ -5,7 +5,8 @@ import org.usfirst.frc.team3501.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Runs the winch continuously at a given motor value
+ * This command will run the winch motor continuously until the button
+ * triggering it is released
  *
  * @author shivanighanta
  *
@@ -30,7 +31,7 @@ public class RunWinchContinuous extends Command {
 
   @Override
   protected boolean isFinished() {
-    return false;
+    return !Robot.getOI().toggleWinch.get();
   }
 
   @Override

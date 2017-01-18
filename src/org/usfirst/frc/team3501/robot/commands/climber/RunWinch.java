@@ -7,8 +7,12 @@ import com.sun.glass.ui.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Runs the winch for a given time and motor value
+ * This command runs the winch for a given motor value and time in seconds
  *
+ * @param motorVal
+ *          value range is from -1 to 1
+ * @param time
+ *          in seconds
  * @author shivanighanta
  *
  */
