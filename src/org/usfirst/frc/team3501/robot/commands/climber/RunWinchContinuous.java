@@ -43,7 +43,7 @@ public class RunWinchContinuous extends Command {
 
   @Override
   protected boolean isFinished() {
-    return false;
+    return !Robot.getOI().toggleWinch.get();
   }
 
   @Override
