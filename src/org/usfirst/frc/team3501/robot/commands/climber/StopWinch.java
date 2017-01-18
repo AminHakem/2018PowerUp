@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class StopWinch extends Command {
 
   public StopWinch() {
+    requires(Robot.getClimber());
+
   }
 
   @Override
