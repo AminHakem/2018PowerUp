@@ -5,12 +5,14 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  * Starts running the intake for a specific period of time that the user inputs.
- * 
+ *
  * @author Meeta
  */
 public class RunIntake extends Command {
-  public RunIntake(double timeToMove) {
+  private double timeToMove;
 
+  public RunIntake(double timeToMove) {
+    this.timeToMove = timeToMove;
   }
 
   @Override
