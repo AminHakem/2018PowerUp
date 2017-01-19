@@ -1,59 +1,68 @@
 package org.usfirst.frc.team3501.robot.subsystems;
 
 public class Shooter {
-	public Shooter() {
+  private static Shooter shooter;
 
-	}
+  private Shooter() {
 
-	/**
-	 * Stops fly wheel
-	 */
-	public void stopFlywheel() {
+  }
 
-	}
+  public static Shooter getShooter() {
+    if (shooter == null) {
+      shooter = new Shooter();
+    }
+    return shooter;
+  }
 
-	/**
-	 * Runs the fly wheel at a given speed in () for input time in seconds
-	 *
-	 * @param speed
-	 *            in ()
-	 * @param time
-	 *            in seconds
-	 */
-	public void runFlywheel(double speed, double time) {
+  /**
+   * Stops fly wheel
+   */
+  public void stopFlywheel() {
 
-	}
+  }
 
-	/**
-	 * Stops index wheel
-	 */
-	public void stopIndexWheel() {
+  /**
+   * Runs the fly wheel at a given speed in () for input time in seconds
+   *
+   * @param speed
+   *          in ()
+   * @param time
+   *          in seconds
+   */
+  public void runFlywheel(double speed, double time) {
 
-	}
+  }
 
-	/**
-	 * Runs index wheel at a given speed in () for input time in seconds
-	 *
-	 * @param speed
-	 *            in ()
-	 * @param time
-	 *            in seconds
-	 */
-	public void runIndexWheel(double speed, double time) {
+  /**
+   * Stops index wheel
+   */
+  public void stopIndexWheel() {
 
-	}
+  }
 
-	/**
-	 * Runs fly wheel continuously until ________
-	 */
-	public void runFlywheelContinuous() {
+  /**
+   * Runs index wheel at a given speed in () for input time in seconds
+   *
+   * @param speed
+   *          in ()
+   * @param time
+   *          in seconds
+   */
+  public void runIndexWheel(double speed, double time) {
 
-	}
+  }
 
-	/**
-	 * Runs index wheel continuously until ________
-	 */
-	public void runIndexWheelContinuous() {
+  /**
+   * Runs fly wheel continuously until ________
+   */
+  public void runFlywheelContinuous() {
 
-	}
+  }
+
+  /**
+   * Runs index wheel continuously until ________
+   */
+  public void runIndexWheelContinuous() {
+
+  }
 }
