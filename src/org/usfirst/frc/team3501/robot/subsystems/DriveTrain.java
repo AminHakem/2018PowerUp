@@ -80,22 +80,6 @@ public class DriveTrain extends Subsystem {
     return frontLeft.get();
   }
 
-  public CANTalon getFrontLeft() {
-    return frontLeft;
-  }
-
-  public CANTalon getFrontRight() {
-    return frontRight;
-  }
-
-  public CANTalon getRearLeft() {
-    return rearLeft;
-  }
-
-  public CANTalon getRearRight() {
-    return rearRight;
-  }
-
   // ENCODER METHODS
 
   public double getLeftEncoderDistance() {
