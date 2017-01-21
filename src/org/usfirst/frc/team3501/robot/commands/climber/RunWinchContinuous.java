@@ -6,7 +6,8 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * This command will run the winch motor continuously until the button
- * triggering it is released. This command also runs the drive train.
+ * triggering it is released. This command also makes the drive train motors run
+ * because the winch is controlled by the drive train.
  *
  * pre-condition: This command must be run by a button in OI. The robot must be
  * attached to the rope.

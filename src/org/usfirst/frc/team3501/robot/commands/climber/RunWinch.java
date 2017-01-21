@@ -7,7 +7,8 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * This command runs the winch at a specified speed and time in seconds when the
- * button triggering it is pressed. This command also runs the drive train.
+ * button triggering it is pressed. This command also makes the drive train
+ * motors run because the winch is controlled by the drive train.
  *
  * pre-condition: This command is run by a button in OI. The robot must be
  * attached to the rope.
