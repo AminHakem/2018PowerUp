@@ -27,12 +27,6 @@ public class Constants {
     public static final int ENCODER_RIGHT_B = 3;
   }
 
-  public static class Climber {
-    // MOTOR CONTROLLERS
-    public static final int MOTOR = 1;
-
-  }
-
   public static enum Direction {
     LEFT, RIGHT, DOWN, UP, FORWARD, BACKWARD;
   }

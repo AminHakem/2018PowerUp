@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * This command will run the winch motor continuously until the button
- * triggering it is released.
+ * triggering it is released. This command also runs the drive train.
  *
  * pre-condition: This command must be run by a button in OI. The robot must be
  * attached to the rope.
@@ -23,17 +23,19 @@ public class RunWinchContinuous extends Command {
   private double motorVal;
 
   /**
-   * 
+   * See JavaDoc comment in class for details
+   *
    * @param motorVal
+   *          value range is from -1 to 1
    */
   public RunWinchContinuous(double motorVal) {
-    requires(Robot.getClimber());
+    requires(Robot.getDriveTrain());
     this.motorVal = motorVal;
   }
 
   @Override
   protected void initialize() {
-    Robot.getClimber().setMotorValue(motorVal);
+    Robot.getDriveTrain().setMotorValues(motorVal, motorVal);
 
   }
 
@@ -44,12 +46,12 @@ public class RunWinchContinuous extends Command {
 
   @Override
   protected boolean isFinished() {
-    return !Robot.getOI().toggleWinch.get();
+    return false;
   }
 
   @Override
   protected void end() {
-    Robot.getClimber().stop();
+
   }
 
   @Override

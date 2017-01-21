@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * This command runs the winch at a specified speed and time in seconds when the
- * button triggering it is pressed.
+ * button triggering it is pressed. This command also runs the drive train.
  *
  * pre-condition: This command is run by a button in OI. The robot must be
  * attached to the rope.
@@ -28,12 +28,15 @@ public class RunWinch extends Command {
   private double motorVal;
 
   /**
+   * See JavaDoc comment in class for details
    *
-   * @author shivanighanta
-   *
+   * @param time
+   *          time in seconds to run the winch
+   * @param motorVal
+   *          value range is from -1 to 1
    */
   public RunWinch(double time, double motorVal) {
-    requires(Robot.getClimber());
+    requires(Robot.getDriveTrain());
     this.time = time;
     this.motorVal = motorVal;
   }
@@ -41,11 +44,11 @@ public class RunWinch extends Command {
   @Override
   protected void initialize() {
     timer.start();
-    Robot.getClimber().setMotorValue(motorVal);
   }
 
   @Override
   protected void execute() {
+    Robot.getDriveTrain().setMotorValues(motorVal, motorVal);
 
   }
 
@@ -56,7 +59,8 @@ public class RunWinch extends Command {
 
   @Override
   protected void end() {
-    Robot.getClimber().stop();
+    Robot.getDriveTrain().stop();
+
   }
 
   @Override
