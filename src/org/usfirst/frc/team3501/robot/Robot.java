@@ -36,10 +36,6 @@ public class Robot extends IterativeRobot {
     return OI.getOI();
   }
 
-  public static Shooter getShooter() {
-    return Shooter.getShooter();
-  }
-
   public static OI getOI() {
     return OI.getOI();
   }
