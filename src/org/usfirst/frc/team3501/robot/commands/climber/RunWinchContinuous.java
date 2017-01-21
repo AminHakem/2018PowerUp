@@ -22,6 +22,10 @@ import edu.wpi.first.wpilibj.command.Command;
 public class RunWinchContinuous extends Command {
   private double motorVal;
 
+  /**
+   * 
+   * @param motorVal
+   */
   public RunWinchContinuous(double motorVal) {
     requires(Robot.getClimber());
     this.motorVal = motorVal;

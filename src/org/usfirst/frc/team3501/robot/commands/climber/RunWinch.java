@@ -21,11 +21,17 @@ import edu.wpi.first.wpilibj.command.Command;
  * @author shivanighanta
  *
  */
+
 public class RunWinch extends Command {
   Timer timer;
   private double time;
   private double motorVal;
 
+  /**
+   *
+   * @author shivanighanta
+   *
+   */
   public RunWinch(double time, double motorVal) {
     requires(Robot.getClimber());
     this.time = time;
