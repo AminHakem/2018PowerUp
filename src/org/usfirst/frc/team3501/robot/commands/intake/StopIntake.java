@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3501.robot.commands.intake;
 
+import org.usfirst.frc.team3501.robot.subsystems.Intake;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -26,12 +28,14 @@ public class StopIntake extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Intake.intake.setSpeed(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 
   @Override

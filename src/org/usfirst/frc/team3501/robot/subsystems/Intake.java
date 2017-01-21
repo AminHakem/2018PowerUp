@@ -1,47 +1,36 @@
 package org.usfirst.frc.team3501.robot.subsystems;
 
+import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/***
- *
- *
+/**
  * @author Meeta
- *
  */
 public class Intake extends Subsystem {
+  public static Intake intake = null;
+  protected double speed = 0;
+  private CANTalon intakeWheel;
+
+  // create speed of intake whee
   public Intake() {
 
   }
 
-  /**
-   * Runs the intake continuously
-   */
-  public void RunContinous() {
-
-  }
-
-  /**
-   * Starts running the intake for a specific period of time that the user
-   * inputs.
-   *
-   * @param timeToMove
-   *          in seconds
-   */
-  public void RunIntake(double timeToMove) {
-
-  }
-
-  /**
-   * Stops the intake
-   */
-  public void StopIntake() {
-
+  public static Intake getIntake() {
+    if (intake == null) {
+      intake = new Intake();
+    }
+    return intake;
   }
 
   @Override
   protected void initDefaultCommand() {
-    // TODO Auto-generated method stub
 
+  }
+
+  public void setSpeed(double speed) {
+    this.speed = speed;
   }
 
 }

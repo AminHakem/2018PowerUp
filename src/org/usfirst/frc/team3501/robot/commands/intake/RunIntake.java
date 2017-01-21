@@ -1,5 +1,8 @@
 package org.usfirst.frc.team3501.robot.commands.intake;
 
+import org.usfirst.frc.team3501.robot.subsystems.Intake;
+
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -10,15 +13,16 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class RunIntake extends Command {
   private double timeToMove;
+  public Timer timer;
 
   public RunIntake(double timeToMove) {
+    timer = new Timer();
     this.timeToMove = timeToMove;
   }
 
   @Override
   protected boolean isFinished() {
-    // TODO Auto-generated method stub
-    return false;
+    return timer.get() >= timeToMove;
   }
 
   // Called just before this Command runs the first time
@@ -34,11 +38,13 @@ public class RunIntake extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Intake.intake.setSpeed(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }
