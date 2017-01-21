@@ -5,17 +5,14 @@ import org.usfirst.frc.team3501.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This command will run the winch motor continuously until the button
- * triggering it is released. This command also makes the drive train motors run
- * because the winch is controlled by the drive train.
+ * This command runs the winch motor continuously at a specified speed until the
+ * button triggering it is released. This command also makes the drive train
+ * motors run because the winch is controlled by the drive train.
  *
  * pre-condition: This command must be run by a button in OI. The robot must be
  * attached to the rope.
  *
  * post-condition: Winch motor set to a specified speed.
- *
- * @param motorVal
- *          value range is from -1 to 1
  *
  * @author shivanighanta
  *

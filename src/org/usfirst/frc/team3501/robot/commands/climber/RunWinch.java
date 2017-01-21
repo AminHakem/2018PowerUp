@@ -15,10 +15,6 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  * post-condition: Winch motor set to a specified speed for a specified time.
  *
- * @param motorVal
- *          value range is from -1 to 1
- * @param time
- *          in seconds
  * @author shivanighanta
  *
  */
