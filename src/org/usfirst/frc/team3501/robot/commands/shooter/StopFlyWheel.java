@@ -6,10 +6,13 @@ import edu.wpi.first.wpilibj.command.Command;
  * This command stops the fly wheel. Do not call unless the trigger button has
  * been released.
  *
- * 
+ *
  * @author Shaina
  */
 public class StopFlyWheel extends Command {
+  /**
+   * This command stops the fly wheel.
+   */
   public StopFlyWheel() {
 
   }

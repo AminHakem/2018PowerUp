@@ -8,16 +8,20 @@ import edu.wpi.first.wpilibj.command.Command;
  * pre-condition: fly wheel is running at full speed to prepare for shooting
  * fuel
  *
- * @param motorVal
- *          value range is from -1 to 1
- * @param time
- *          in seconds
  * @author Shaina
  */
 public class RunIndexWheel extends Command {
   private double time;
   private double motorVal;
 
+  /**
+   * See JavaDoc comment in class for details
+   *
+   * @param motorVal
+   *          value range from -1 to 1
+   * @param time
+   *          in seconds, amount of time to run index wheel motor
+   */
   public RunIndexWheel(double motorVal, double time) {
     this.motorVal = motorVal;
     this.time = time;

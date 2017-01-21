@@ -9,13 +9,17 @@ import edu.wpi.first.wpilibj.command.Command;
  * pre-condition: This command must be run by a button in OI, with
  * button.whileHeld(...).
  *
- * @param motorVal
- *          value range from -1 to 1
  * @author Shaina
  */
 public class RunFlyWheelContinuous extends Command {
   private double motorVal;
 
+  /**
+   * See JavaDoc comment in class for details
+   *
+   * @param motorVal
+   *          value range from -1 to 1
+   */
   public RunFlyWheelContinuous(double motorVal) {
     this.motorVal = motorVal;
   }

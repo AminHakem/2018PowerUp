@@ -9,6 +9,9 @@ import edu.wpi.first.wpilibj.command.Command;
  * @author Shaina
  */
 public class StopIndexWheel extends Command {
+  /**
+   * This command stops the index wheel.
+   */
   public StopIndexWheel() {
 
   }

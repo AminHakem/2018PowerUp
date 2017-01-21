@@ -6,16 +6,20 @@ import edu.wpi.first.wpilibj.command.Command;
  * This command runs the fly wheel at a given speed for a given time. The fly
  * wheel is intended to shoot balls fed by the intake wheel.
  *
- * @param motorVal
- *          value range from -1 to 1
- * @param time
- *          in seconds
  * @author Shaina
  */
 public class RunFlyWheel extends Command {
   private double motorVal;
   private double time;
 
+  /**
+   * See JavaDoc comment in class for details
+   *
+   * @param motorVal
+   *          value range from -1 to 1
+   * @param time
+   *          in seconds, amount of time to run fly wheel motor
+   */
   public RunFlyWheel(double motorVal, double time) {
     this.motorVal = motorVal;
     this.time = time;
