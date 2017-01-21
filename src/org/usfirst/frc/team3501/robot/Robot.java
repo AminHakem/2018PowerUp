@@ -32,10 +32,6 @@ public class Robot extends IterativeRobot {
     return OI.getOI();
   }
 
-  public static Shooter getShooter() {
-    return Shooter.getShooter();
-  }
-
   @Override
   public void autonomousInit() {
     Scheduler.getInstance().add(new TimeDrive(1.5, 0.4));
