@@ -23,7 +23,6 @@ public class OI {
         Constants.OI.TOGGLE_INDEXWHEEL_PORT);
     toggleFlyWheel = new JoystickButton(leftJoystick,
         Constants.OI.TOGGLE_FLYWHEEL_PORT);
-
   }
 
   public static OI getOI() {
