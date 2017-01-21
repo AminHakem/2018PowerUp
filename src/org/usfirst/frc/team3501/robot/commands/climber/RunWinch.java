@@ -61,6 +61,10 @@ public class RunWinch extends Command {
   @Override
   protected void end() {
     Robot.getDriveTrain().stop();
+<<<<<<< 1b45bc927675060d057730fc7c7083fb9d813f66
+=======
+
+>>>>>>> Delete StopWinch and Climber subsystem, edit javadoc comments
   }
 
   @Override

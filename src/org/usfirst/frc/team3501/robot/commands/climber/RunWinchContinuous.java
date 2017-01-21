@@ -5,9 +5,14 @@ import org.usfirst.frc.team3501.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
+<<<<<<< 1b45bc927675060d057730fc7c7083fb9d813f66
  * This command runs the winch motor continuously at a specified speed until the
  * button triggering it is released. This command also makes the drive train
  * motors run because the winch is controlled by the drive train.
+=======
+ * This command will run the winch motor continuously until the button
+ * triggering it is released. This command also runs the drive train.
+>>>>>>> Delete StopWinch and Climber subsystem, edit javadoc comments
  *
  * pre-condition: This command must be run by a button in OI. The robot must be
  * attached to the rope.
@@ -34,6 +39,10 @@ public class RunWinchContinuous extends Command {
   @Override
   protected void initialize() {
     Robot.getDriveTrain().setMotorValues(motorVal, motorVal);
+<<<<<<< 1b45bc927675060d057730fc7c7083fb9d813f66
+=======
+
+>>>>>>> Delete StopWinch and Climber subsystem, edit javadoc comments
   }
 
   @Override
@@ -43,7 +52,7 @@ public class RunWinchContinuous extends Command {
 
   @Override
   protected boolean isFinished() {
-    return !Robot.getOI().toggleWinch.get();
+    return false;
   }
 
   @Override

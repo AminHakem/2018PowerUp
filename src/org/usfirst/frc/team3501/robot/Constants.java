@@ -14,7 +14,6 @@ public class Constants {
 
     public final static int TOGGLE_FLYWHEEL_PORT = 0;
     public final static int TOGGLE_INDEXWHEEL_PORT = 0;
-    public final static int TOGGLE_WINCH_PORT = 0;
   }
 
   public static class Shooter {
