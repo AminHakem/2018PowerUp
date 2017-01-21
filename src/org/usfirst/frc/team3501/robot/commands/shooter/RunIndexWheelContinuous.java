@@ -5,8 +5,11 @@ import org.usfirst.frc.team3501.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This command will run the index wheel motor continuously until the button
+ * This command runs index wheel continuously when OI button managing index
+ * wheel is pressed. The command will run the index wheel motor until the button
  * triggering it is released.
+ *
+ * Should only be run from the operator interface.
  *
  * pre-condition: This command must be run by a button in OI with
  * button.whileHeld(...).

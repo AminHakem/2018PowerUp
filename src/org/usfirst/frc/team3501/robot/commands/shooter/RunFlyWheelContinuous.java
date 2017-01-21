@@ -5,8 +5,11 @@ import org.usfirst.frc.team3501.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This command will run the fly wheel motor continuously until the button
+ * This command runs the fly wheel continuously when OI button managing fly
+ * wheel is pressed. The command will run the fly wheel motor until the button
  * triggering it is released.
+ *
+ * Should only be run from the operator interface.
  *
  * pre-condition: This command must be run by a button in OI, with
  * button.whileHeld(...).
@@ -51,7 +54,6 @@ public class RunFlyWheelContinuous extends Command {
 
   @Override
   protected boolean isFinished() {
-    // TODO
     return false;
   }
 
