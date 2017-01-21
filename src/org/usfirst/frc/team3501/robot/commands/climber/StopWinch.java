@@ -13,11 +13,9 @@ import edu.wpi.first.wpilibj.command.Command;
 public class StopWinch extends Command {
 
   public StopWinch() {
-<<<<<<< HEAD
+
     requires(Robot.getDriveTrain());
-=======
     requires(Robot.getClimber());
->>>>>>> add Motor value in constants
 
   }
 

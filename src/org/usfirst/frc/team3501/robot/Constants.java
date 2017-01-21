@@ -24,6 +24,12 @@ public class Constants {
 
   }
 
+  public static class Shooter {
+    // MOTOR CONTROLLERS
+    public static final int FLY_WHEEL = 0;
+    public static final int INDEX_WHEEL = 0;
+  }
+
   public static class DriveTrain {
     // MOTOR CONTROLLERS
     public static final int FRONT_LEFT = 1;
