@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class StopWinch extends Command {
 
   public StopWinch() {
-    requires(Robot.getClimber());
+    requires(Robot.getDriveTrain());
 
   }
 
@@ -32,7 +32,7 @@ public class StopWinch extends Command {
 
   @Override
   protected void end() {
-    Robot.getClimber().stop();
+    Robot.getDriveTrain().stop();
 
   }
 

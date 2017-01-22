@@ -11,8 +11,6 @@ public class Constants {
     public final static int LEFT_STICK_PORT = 0;
     public final static int RIGHT_STICK_PORT = 1;
     public final static int TOGGLE_WINCH_PORT = 0;
-
-    public final static int TOGGLE_WINCH_PORT = 0;
     public final static int TOGGLE_FLYWHEEL_PORT = 0;
     public final static int TOGGLE_INDEXWHEEL_PORT = 0;
   }
