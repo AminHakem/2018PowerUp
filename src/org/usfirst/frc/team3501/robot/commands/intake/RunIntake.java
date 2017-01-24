@@ -16,6 +16,7 @@ public class RunIntake extends Command {
   public Timer timer;
 
   public RunIntake(double timeToMove) {
+    requires(Robot.getIntake());
     timer = new Timer();
     this.timeToMove = timeToMove;
   }
