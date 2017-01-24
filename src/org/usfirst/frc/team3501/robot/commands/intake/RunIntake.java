@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3501.robot.commands.intake;
 
-import org.usfirst.frc.team3501.robot.subsystems.Intake;
+import org.usfirst.frc.team3501.robot.Robot;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -28,17 +28,18 @@ public class RunIntake extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    timer.start();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.getIntake().setSpeed(Robot.getIntake().INTAKE_SPEED);
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Intake.intake.setSpeed(0);
   }
 
   // Called when another command which requires one or more of the same
