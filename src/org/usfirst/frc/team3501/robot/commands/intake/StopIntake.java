@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3501.robot.commands.intake;
 
+import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -12,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class StopIntake extends Command {
   public StopIntake() {
-
+    requires(Robot.getIntake());
   }
 
   // Called just before this Command runs the first time
@@ -41,7 +42,7 @@ public class StopIntake extends Command {
   @Override
   protected boolean isFinished() {
     // TODO Auto-generated method stub
-    return false;
+    return true;
   }
 
 }
