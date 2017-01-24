@@ -7,7 +7,8 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /***
  *
- * Runs the intake continuously.
+ * Runs the intake continuously when button is pressed, and when button is not
+ * pressed does not run.
  *
  * @author Meeta
  *

@@ -7,8 +7,6 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * Intakes the balls into ball container.
- * 
  * @author Meeta
  */
 public class Intake extends Subsystem {
