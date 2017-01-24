@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3501.robot.commands.intake;
 
+import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -16,7 +17,7 @@ public class RunIntakeContinuous extends Command {
   // speed to 0
 
   public RunIntakeContinuous() {
-
+    requires(Robot.getIntake());
   }
 
   @Override
@@ -34,7 +35,7 @@ public class RunIntakeContinuous extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
+    Robot.getIntake().setSpeed(Robot.getIntake().INTAKE_SPEED);
   }
 
   // Called once after isFinished returns true
