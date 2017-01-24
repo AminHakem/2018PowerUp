@@ -11,6 +11,7 @@ public class Intake extends Subsystem {
   public static Intake intake = null;
   protected double speed = 0;
   private CANTalon intakeWheel;
+  public static final double INTAKE_SPEED = 0;
 
   // create speed of intake whee
   public Intake() {
