@@ -41,7 +41,12 @@ public class Robot extends IterativeRobot {
   }
 
   public static Intake getIntake() {
-    return Intake.getIntake()
+    return Intake.getIntake();
+  }
+
+  public static Intake getIntake() {
+    return Intake.getIntake();
+
   }
 
   @Override
