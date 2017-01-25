@@ -6,6 +6,7 @@ import org.usfirst.frc.team3501.robot.commands.driving.JoystickDrive;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -25,6 +26,7 @@ public class DriveTrain extends Subsystem {
   private final CANTalon frontLeft, frontRight, rearLeft, rearRight;
   private final RobotDrive robotDrive;
   private final Encoder leftEncoder, rightEncoder;
+  private final DoubleSolenoid shifter;
 
   private ADXRS450_Gyro imu;
 
@@ -48,6 +50,8 @@ public class DriveTrain extends Subsystem {
     robotDrive = new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
 
     this.imu = new ADXRS450_Gyro(Constants.DriveTrain.GYRO_PORT);
+    shifter = DoubleSolenoid(10, Constants.DriveTrain.SHIFTER_FORWARD,
+        Constants.DriveTrain.SHIFTER_REVERSE);
   }
 
   public static DriveTrain getDriveTrain() {
