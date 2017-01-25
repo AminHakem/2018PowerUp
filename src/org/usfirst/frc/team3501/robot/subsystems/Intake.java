@@ -10,9 +10,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * @author Meeta
  */
 public class Intake extends Subsystem {
-  public static Intake intake = null;
+  private static Intake intake = null;
   private CANTalon intakeWheel;
   public static final double INTAKE_SPEED = 0;
+  public static final double REVERSE_SPEED = 0;
 
   public Intake() {
     intakeWheel = new CANTalon(Constants.Intake.INTAKE_ROLLER_PORT);
@@ -42,8 +43,31 @@ public class Intake extends Subsystem {
    * @param speed
    *          from -1 to 1
    */
-  public void setSpeed(double speed) {
+  private void setSpeed(double speed) {
     intakeWheel.set(speed);
+  }
+
+  /***
+   * Runs the intake wheel at the set intake speed.
+   */
+  public void runIntake() {
+    setSpeed(INTAKE_SPEED);
+  }
+
+  /***
+   * Stops the intake wheel by setting intake wheel's speed to 0.
+   */
+  public void stopIntake() {
+    setSpeed(0);
+  }
+
+  /***
+   * Purpose is to release all balls from the ball container to the outside of
+   * the robot. Reverses intake wheel by setting wheel speed to reverse speed.
+   *
+   */
+  public void reverseIntake() {
+    setSpeed(REVERSE_SPEED);
   }
 
 }
