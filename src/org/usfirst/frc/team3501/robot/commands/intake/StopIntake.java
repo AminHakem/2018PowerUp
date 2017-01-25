@@ -1,7 +1,6 @@
 package org.usfirst.frc.team3501.robot.commands.intake;
 
 import org.usfirst.frc.team3501.robot.Robot;
-import org.usfirst.frc.team3501.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -19,6 +18,7 @@ public class StopIntake extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.getIntake().stopIntake();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -29,7 +29,6 @@ public class StopIntake extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Intake.intake.setSpeed(0);
   }
 
   // Called when another command which requires one or more of the same
@@ -41,7 +40,6 @@ public class StopIntake extends Command {
 
   @Override
   protected boolean isFinished() {
-    // TODO Auto-generated method stub
     return true;
   }
 
