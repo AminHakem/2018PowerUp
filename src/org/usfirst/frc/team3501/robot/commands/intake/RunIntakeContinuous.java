@@ -1,7 +1,6 @@
 package org.usfirst.frc.team3501.robot.commands.intake;
 
 import org.usfirst.frc.team3501.robot.Robot;
-import org.usfirst.frc.team3501.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -9,6 +8,8 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  * Runs the intake continuously when button is pressed, and when button is not
  * pressed does not run.
+ *
+ * Intended to be run inside a .whileHeld() call on a button in OI
  *
  * @author Meeta
  *
@@ -23,26 +24,25 @@ public class RunIntakeContinuous extends Command {
 
   @Override
   protected boolean isFinished() {
-    // TODO Auto-generated method stub
-    return true;
+    return false;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
+    Robot.getIntake().runIntake();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.getIntake().setSpeed(Robot.getIntake().INTAKE_SPEED);
+
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Intake.intake.setSpeed(0);
+    Robot.getIntake().stopIntake();
   }
 
   // Called when another command which requires one or more of the same
