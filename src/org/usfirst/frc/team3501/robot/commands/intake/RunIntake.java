@@ -15,6 +15,10 @@ public class RunIntake extends Command {
   private double timeToMove;
   public Timer timer;
 
+  /**
+   *
+   * @param timeToMove
+   */
   public RunIntake(double timeToMove) {
     requires(Robot.getIntake());
     timer = new Timer();
@@ -35,12 +39,14 @@ public class RunIntake extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.getIntake().setSpeed(Robot.getIntake().INTAKE_SPEED);
+    Robot.getIntake().runIntake();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    timer.stop();
+    Robot.getIntake().stopIntake();
   }
 
   // Called when another command which requires one or more of the same
