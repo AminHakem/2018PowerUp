@@ -66,7 +66,7 @@ public class Intake extends Subsystem {
    * the robot. Reverses intake wheel by setting wheel speed to reverse speed.
    *
    */
-  public void reverseIntake() {
+  public void runReverseIntake() {
     setSpeed(REVERSE_SPEED);
   }
 
