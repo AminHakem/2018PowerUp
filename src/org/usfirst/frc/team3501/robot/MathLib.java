@@ -38,8 +38,8 @@ public class MathLib {
    */
   public static double getSpeedForConstantAccel(double minSpeed,
       double maxSpeed, double percentComplete) {
-    return maxSpeed + 2 * (minSpeed - maxSpeed)
-        * Math.abs(percentComplete - 0.5);
+    return maxSpeed
+        + 2 * (minSpeed - maxSpeed) * Math.abs(percentComplete - 0.5);
   }
 
   /***
@@ -65,7 +65,7 @@ public class MathLib {
 
   /***
    * Returns true if val is in the range [low, high]
-   * 
+   *
    * @param val
    *          value to test
    * @param low
@@ -76,5 +76,29 @@ public class MathLib {
    */
   public static boolean inRange(double val, double low, double high) {
     return (val <= high) && (val >= low);
+  }
+
+  public static double limitValue(double val) {
+    return limitValue(val, 1.0);
+  }
+
+  public static double limitValue(double val, double max) {
+    if (val > max) {
+      return max;
+    } else if (val < -max) {
+      return -max;
+    } else {
+      return val;
+    }
+  }
+
+  public static double limitValue(double val, double max, double min) {
+    if (val > max) {
+      return max;
+    } else if (val < min) {
+      return min;
+    } else {
+      return val;
+    }
   }
 }
