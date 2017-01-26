@@ -2,6 +2,7 @@ package org.usfirst.frc.team3501.robot.subsystems;
 
 import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.commands.driving.JoystickDrive;
+import org.usfirst.frc.team3501.robot.utils.BNO055;
 
 import com.ctre.CANTalon;
 
@@ -16,6 +17,9 @@ public class DriveTrain extends Subsystem {
   public static double driveP = 0.006, driveI = 0.001, driveD = -0.002;
   public static double defaultGyroP = 0.004, defaultGyroI = 0.0013,
       defaultGyroD = -0.005;
+  public static double driveP = 0.008, driveI = 0.001, driveD = -0.002;
+  public static double defaultGyroP = 0.009, defaultGyroI = 0.00000,
+      defaultGyroD = -0.000;
   private double gyroZero = 0;
 
   public static final double WHEEL_DIAMETER = 6; // inches
@@ -30,6 +34,7 @@ public class DriveTrain extends Subsystem {
   private final DoubleSolenoid leftGearPiston, rightGearPiston;
 
   private ADXRS450_Gyro imu;
+  private BNO055 imu;
 
   private DriveTrain() {
     // MOTOR CONTROLLERS
@@ -175,6 +180,21 @@ public class DriveTrain extends Subsystem {
   private void changeGear(DoubleSolenoid.Value gear) {
     leftGearPiston.set(gear);
     rightGearPiston.set(gear);
+  }
+
+  public double getAngle() {
+    if (!this.imu.isInitialized())
+      return -1;
+    return this.imu.getHeading() - this.gyroZero;
+  }
+
+  public void resetGyro() {
+    this.gyroZero = this.getAngle();
+
+  }
+
+  public double getZeroAngle() {
+    return this.gyroZero;
   }
 
   @Override
