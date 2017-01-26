@@ -14,7 +14,6 @@ public class StopWinch extends Command {
 
   public StopWinch() {
     requires(Robot.getDriveTrain());
-    requires(Robot.getClimber());
   }
 
   @Override

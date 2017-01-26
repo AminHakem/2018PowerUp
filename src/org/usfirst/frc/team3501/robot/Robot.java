@@ -12,8 +12,6 @@ public class Robot extends IterativeRobot {
   private static DriveTrain driveTrain;
   private static Shooter shooter;
   private static OI oi;
-  private static Shooter shooter;
-  private static OI oi;
   private static Intake intake;
 
   @Override
@@ -36,17 +34,8 @@ public class Robot extends IterativeRobot {
     return OI.getOI();
   }
 
-  public static OI getOI() {
-    return OI.getOI();
-  }
-
   public static Intake getIntake() {
     return Intake.getIntake();
-  }
-
-  public static Intake getIntake() {
-    return Intake.getIntake();
-
   }
 
   @Override

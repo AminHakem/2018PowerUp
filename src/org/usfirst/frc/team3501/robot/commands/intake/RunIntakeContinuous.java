@@ -30,13 +30,13 @@ public class RunIntakeContinuous extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.getIntake().runIntake();
+
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
+    Robot.getIntake().runIntake();
   }
 
   // Called once after isFinished returns true
