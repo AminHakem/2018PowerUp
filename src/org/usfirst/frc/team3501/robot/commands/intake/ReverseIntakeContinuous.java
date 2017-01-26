@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3501.robot.commands.intake;
 
+import org.usfirst.frc.team3501.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -9,9 +11,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ReverseIntakeContinuous extends Command {
 
-  public ReverseIntakeContinuous(double timeToMove) {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+  public ReverseIntakeContinuous() {
+    requires(Robot.getIntake());
   }
 
   // Called just before this Command runs the first time
