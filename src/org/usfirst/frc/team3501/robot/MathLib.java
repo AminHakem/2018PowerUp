@@ -101,4 +101,12 @@ public class MathLib {
       return val;
     }
   }
+
+  public static double calcLeftTankDrive(double x, double y) {
+    return limitValue(y + x);
+  }
+
+  public static double calcRightTankDrive(double x, double y) {
+    return limitValue(y - x);
+  }
 }

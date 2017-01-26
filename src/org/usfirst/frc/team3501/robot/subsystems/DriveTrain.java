@@ -2,6 +2,7 @@ package org.usfirst.frc.team3501.robot.subsystems;
 
 import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.commands.driving.JoystickDrive;
+import org.usfirst.frc.team3501.robot.utils.BNO055;
 
 import com.ctre.CANTalon;
 
@@ -10,6 +11,11 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
+  public static double driveP = 0.008, driveI = 0.001, driveD = -0.002;
+  public static double defaultGyroP = 0.009, defaultGyroI = 0.00000,
+      defaultGyroD = -0.000;
+  private double gyroZero = 0;
+
   public static final double WHEEL_DIAMETER = 6; // inches
   public static final int ENCODER_PULSES_PER_REVOLUTION = 256;
   public static final double INCHES_PER_PULSE = WHEEL_DIAMETER * Math.PI
@@ -19,6 +25,8 @@ public class DriveTrain extends Subsystem {
   private final CANTalon frontLeft, frontRight, rearLeft, rearRight;
   private final RobotDrive robotDrive;
   private final Encoder leftEncoder, rightEncoder;
+
+  private BNO055 imu;
 
   private DriveTrain() {
     // MOTOR CONTROLLERS
@@ -109,6 +117,22 @@ public class DriveTrain extends Subsystem {
 
   public double getSpeed() {
     return (getLeftSpeed() + getRightSpeed()) / 2.0;
+  }
+
+  // ------Gyro------//
+  public double getAngle() {
+    if (!this.imu.isInitialized())
+      return -1;
+    return this.imu.getHeading() - this.gyroZero;
+  }
+
+  public void resetGyro() {
+    this.gyroZero = this.getAngle();
+
+  }
+
+  public double getZeroAngle() {
+    return this.gyroZero;
   }
 
   @Override
