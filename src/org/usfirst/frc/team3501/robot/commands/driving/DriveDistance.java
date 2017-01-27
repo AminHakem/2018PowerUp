@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3501.robot.commands.driving;
 
-import org.usfirst.frc.team3501.robot.MathLib;
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.utils.PIDController;
@@ -31,8 +30,11 @@ public class DriveDistance extends Command {
   private double driveI;
   private double driveD;
 
-  public DriveDistance(double distance, double motorVal) {
+  public DriveDistance(double distance, double maxTimeOut) {
     requires(driveTrain);
+    this.maxTimeOut = maxTimeOut;
+    this.target = distance;
+
     this.driveP = driveTrain.driveP;
     this.driveI = driveTrain.driveI;
     this.driveD = driveTrain.driveD;
@@ -69,12 +71,12 @@ public class DriveDistance extends Command {
           .calcPID(this.driveTrain.getAngle() - this.driveTrain.getZeroAngle());
     }
     // System.out.println("turn: " + xVal);
-    double leftDrive = MathLib.calcLeftTankDrive(-xVal, yVal);
-    double rightDrive = MathLib.calcRightTankDrive(xVal, -yVal);
+    double leftDrive = yVal - xVal;
+    double rightDrive = yVal + xVal;
 
     this.driveTrain.setMotorValues(leftDrive, rightDrive);
 
-    System.out.println(driveTrain.getAvgEncoderDistance());
+    driveTrain.printEncoderOutput();
     // System.out.println("motorval: " + yVal);
   }
 

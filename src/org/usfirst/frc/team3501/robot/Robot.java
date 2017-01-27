@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3501.robot;
 
-import org.usfirst.frc.team3501.robot.commands.driving.TimeDrive;
+import org.usfirst.frc.team3501.robot.commands.driving.DriveDistance;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
 import org.usfirst.frc.team3501.robot.subsystems.Shooter;
@@ -40,7 +40,7 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void autonomousInit() {
-    Scheduler.getInstance().add(new TimeDrive(1.5, 0.4));
+    Scheduler.getInstance().add(new DriveDistance(25, 10));
   }
 
   @Override
