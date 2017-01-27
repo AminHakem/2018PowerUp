@@ -33,8 +33,8 @@ public class Constants {
     public static final int REAR_RIGHT = 4;
 
     // ENCODERS
-    public static final int ENCODER_LEFT_A = 0;
-    public static final int ENCODER_LEFT_B = 1;
+    public static final int ENCODER_LEFT_A = 1;
+    public static final int ENCODER_LEFT_B = 0;
     public static final int ENCODER_RIGHT_A = 2;
     public static final int ENCODER_RIGHT_B = 3;
   }
