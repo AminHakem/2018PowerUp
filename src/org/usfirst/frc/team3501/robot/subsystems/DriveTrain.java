@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -62,6 +63,10 @@ public class DriveTrain extends Subsystem {
         Constants.DriveTrain.LEFT_FORWARD, Constants.DriveTrain.LEFT_REVERSE);
     rightGearPiston = new DoubleSolenoid(Constants.DriveTrain.MODULE_NUMBER,
         Constants.DriveTrain.RIGHT_FORWARD, Constants.DriveTrain.RIGHT_REVERSE);
+
+    this.imu = BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS,
+        BNO055.vector_type_t.VECTOR_EULER, Port.kOnboard, (byte) 0x28);
+    gyroZero = imu.getHeading();
   }
 
   public static DriveTrain getDriveTrain() {
@@ -110,6 +115,8 @@ public class DriveTrain extends Subsystem {
     // System.out.println("left: " + getLeftEncoderDistance());
     // System.out.println("right: " + getRightEncoderDistance());
     System.out.println(getAvgEncoderDistance());
+    System.out.println("left: " + getLeftEncoderDistance());
+    System.out.println("right: " + getRightEncoderDistance());
   }
 
   public double getAvgEncoderDistance() {
