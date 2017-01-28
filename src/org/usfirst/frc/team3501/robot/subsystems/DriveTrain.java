@@ -7,6 +7,7 @@ import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -26,7 +27,7 @@ public class DriveTrain extends Subsystem {
   private final CANTalon frontLeft, frontRight, rearLeft, rearRight;
   private final RobotDrive robotDrive;
   private final Encoder leftEncoder, rightEncoder;
-  private final DoubleSolenoid shifter;
+  private final DoubleSolenoid leftGearPiston, rightGearPiston;
 
   private ADXRS450_Gyro imu;
 
@@ -52,6 +53,10 @@ public class DriveTrain extends Subsystem {
     this.imu = new ADXRS450_Gyro(Constants.DriveTrain.GYRO_PORT);
     shifter = DoubleSolenoid(10, Constants.DriveTrain.SHIFTER_FORWARD,
         Constants.DriveTrain.SHIFTER_REVERSE);
+    leftGearPiston = new DoubleSolenoid(Constants.DriveTrain.MODULE_NUMBER,
+        Constants.DriveTrain.LEFT_FORWARD, Constants.DriveTrain.LEFT_REVERSE);
+    rightGearPiston = new DoubleSolenoid(Constants.DriveTrain.MODULE_NUMBER,
+        Constants.DriveTrain.RIGHT_FORWARD, Constants.DriveTrain.RIGHT_REVERSE);
   }
 
   public static DriveTrain getDriveTrain() {
@@ -134,6 +139,42 @@ public class DriveTrain extends Subsystem {
 
   public double getZeroAngle() {
     return this.gyroZero;
+  /*
+   * @return a value that is the current setpoint for the piston kReverse or
+   * KForward
+   */
+  public Value getLeftGearPistonValue() {
+    return leftGearPiston.get();
+  }
+
+  /*
+   * @return a value that is the current setppoint for the piston kReverse or
+   * kForward
+   */
+  public Value getRightGearPistonValue() {
+    return rightGearPiston.get();
+  }
+
+  /*
+   * Changes the ball shift gear assembly to high
+   */
+  public void setHighGear() {
+    changeGear(Constants.DriveTrain.HIGH_GEAR);
+  }
+
+  /*
+   * Changes the ball shift gear assembly to low
+   */
+  public void setLowGear() {
+    changeGear(Constants.DriveTrain.LOW_GEAR);
+  }
+
+  /*
+   * Changes the gear to a DoubleSolenoid.Value
+   */
+  private void changeGear(DoubleSolenoid.Value gear) {
+    leftGearPiston.set(gear);
+    rightGearPiston.set(gear);
   }
 
   @Override
