@@ -67,6 +67,7 @@ public class DriveTrain extends Subsystem {
     this.imu = BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS,
         BNO055.vector_type_t.VECTOR_EULER, Port.kOnboard, (byte) 0x28);
     gyroZero = imu.getHeading();
+
   }
 
   public static DriveTrain getDriveTrain() {
@@ -147,10 +148,22 @@ public class DriveTrain extends Subsystem {
 
   public void resetGyro() {
     this.imu.reset();
+
+  public double getAngle() {
+    if (!this.imu.isInitialized())
+      return -1;
+    return this.imu.getHeading() - this.gyroZero;
+  }
+
+  public void resetGyro() {
+    this.gyroZero = this.getAngle();
+
   }
 
   public double getZeroAngle() {
     return this.gyroZero;
+  }
+
   /*
    * @return a value that is the current setpoint for the piston kReverse or
    * KForward
@@ -187,21 +200,6 @@ public class DriveTrain extends Subsystem {
   private void changeGear(DoubleSolenoid.Value gear) {
     leftGearPiston.set(gear);
     rightGearPiston.set(gear);
-  }
-
-  public double getAngle() {
-    if (!this.imu.isInitialized())
-      return -1;
-    return this.imu.getHeading() - this.gyroZero;
-  }
-
-  public void resetGyro() {
-    this.gyroZero = this.getAngle();
-
-  }
-
-  public double getZeroAngle() {
-    return this.gyroZero;
   }
 
   @Override
