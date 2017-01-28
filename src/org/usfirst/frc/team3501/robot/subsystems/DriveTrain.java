@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
   public static double driveP = 0.008, driveI = 0.001, driveD = -0.002;
-  public static double defaultGyroP = 0.009, defaultGyroI = 0.00000,
+  public static double defaultGyroP = 0.006, defaultGyroI = 0.00000,
       defaultGyroD = -0.000;
   private double gyroZero = 0;
 
@@ -77,20 +77,12 @@ public class DriveTrain extends Subsystem {
     setMotorValues(0, 0);
   }
 
-  public double getFrontLeftMotorVal() {
-    return frontLeft.get();
+  public double getLeftMotorVal() {
+    return (frontLeft.get() + rearLeft.get()) / 2;
   }
 
-  public double getFrontRightMotorVal() {
-    return frontRight.get();
-  }
-
-  public double getRearLeftMotorVal() {
-    return frontLeft.get();
-  }
-
-  public double getRearRightMotorVal() {
-    return frontLeft.get();
+  public double getRightMotorVal() {
+    return (frontRight.get() + rearRight.get()) / 2;
   }
 
   // ENCODER METHODS
@@ -104,8 +96,9 @@ public class DriveTrain extends Subsystem {
   }
 
   public void printEncoderOutput() {
-    System.out.println("left: " + getLeftEncoderDistance());
-    System.out.println("right: " + getRightEncoderDistance());
+    // System.out.println("left: " + getLeftEncoderDistance());
+    // System.out.println("right: " + getRightEncoderDistance());
+    System.out.println(getAvgEncoderDistance());
   }
 
   public double getAvgEncoderDistance() {
