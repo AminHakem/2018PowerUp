@@ -4,7 +4,14 @@ import org.usfirst.frc.team3501.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+/***
+ * Sets the gear.
+ * 
+ * @author Arunima
+ *
+ */
 public class SetGear extends Command {
+
   public SetGear() {
     requires(Robot.getDriveTrain());
   }
