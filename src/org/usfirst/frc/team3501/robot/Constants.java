@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3501.robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.SPI;
 
 /**
@@ -28,6 +30,12 @@ public class Constants {
   }
 
   public static class DriveTrain {
+    // GEARS
+    public static final int MODULE_NUMBER = 10, LEFT_FORWARD = 6,
+        LEFT_REVERSE = 5, RIGHT_FORWARD = 0, RIGHT_REVERSE = 1;
+    public static final Value HIGH_GEAR = DoubleSolenoid.Value.kForward;
+    public static final Value LOW_GEAR = DoubleSolenoid.Value.kReverse;
+
     // MOTOR CONTROLLERS
     public static final int FRONT_LEFT = 1;
     public static final int FRONT_RIGHT = 3;
