@@ -38,6 +38,7 @@ public class RunWinch extends Command {
    */
   public RunWinch(double time, double motorVal) {
     requires(Robot.getDriveTrain());
+    timer = new Timer();
     this.time = time;
     this.motorVal = motorVal;
   }

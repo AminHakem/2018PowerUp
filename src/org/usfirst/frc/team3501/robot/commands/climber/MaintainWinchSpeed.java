@@ -37,6 +37,7 @@ public class MaintainWinchSpeed extends Command {
    *          value range is from -1 to 1
    */
   public MaintainWinchSpeed(double time, double motorVal) {
+    timer = new Timer();
     requires(Robot.getDriveTrain());
     this.time = time;
     this.motorVal = motorVal;
