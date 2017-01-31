@@ -6,25 +6,23 @@ import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This command runs the winch at a specified speed and time in seconds when the
- * robot has completed the climb and when the button triggering it is pressed.
- * This command also makes the drive train motors run because the winch is
- * controlled by the drive train.
+ * This command runs the winch at a specified speed when the robot has completed
+ * the climb and when the button triggering it is pressed. This command also
+ * makes the drive train motors run because the winch is controlled by the drive
+ * train.
  *
  * pre-condition: This command is run by a button in OI. The robot must have
  * completed climbing.
  *
- * post-condition: Winch motor set to a specified speed for a specified time.
+ * post-condition: Winch motor set to a specified speed.
  *
  * @param motorVal
  *          value range is from -1 to 1
- * @param time
- *          in seconds
+ *
  * @author shivanighanta
  *
  */
 public class MaintainClimbedPosition extends Command {
-  private double time;
 
   /**
    * See JavaDoc comment in class for details
@@ -32,9 +30,8 @@ public class MaintainClimbedPosition extends Command {
    * @param time
    *          time in seconds to run the winch
    */
-  public MaintainClimbedPosition(double time) {
+  public MaintainClimbedPosition() {
     requires(Robot.getDriveTrain());
-    this.time = time;
   }
 
   @Override
@@ -50,7 +47,7 @@ public class MaintainClimbedPosition extends Command {
 
   @Override
   protected boolean isFinished() {
-    return timeSinceInitialized() >= time;
+    return false;
   }
 
   @Override

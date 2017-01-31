@@ -19,6 +19,7 @@ public class Robot extends IterativeRobot {
     oi = OI.getOI();
     shooter = Shooter.getShooter();
     intake = Intake.getIntake();
+
   }
 
   public static DriveTrain getDriveTrain() {

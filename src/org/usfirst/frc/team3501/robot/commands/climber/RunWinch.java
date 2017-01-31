@@ -32,7 +32,7 @@ public class RunWinch extends Command {
    * @param time
    *          time in seconds to run the winch
    * @param motorVal
-   *          value range is frosm -1 to 1
+   *          value range is from -1 to 1
    */
   public RunWinch(double time, double motorVal) {
     requires(Robot.getDriveTrain());
