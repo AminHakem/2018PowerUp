@@ -172,16 +172,8 @@ public class DriveTrain extends Subsystem {
    * @return a value that is the current setpoint for the piston kReverse or
    * KForward
    */
-  public Value getLeftGearPistonValue() {
+  public Value getGearPistonValue() {
     return leftGearPiston.get();
-  }
-
-  /*
-   * @return a value that is the current setppoint for the piston kReverse or
-   * kForward
-   */
-  public Value getRightGearPistonValue() {
-    return rightGearPiston.get();
   }
 
   /*
