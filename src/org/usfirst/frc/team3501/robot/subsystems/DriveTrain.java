@@ -2,12 +2,11 @@ package org.usfirst.frc.team3501.robot.subsystems;
 
 import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.commands.driving.JoystickDrive;
-import org.usfirst.frc.team3501.robot.utils.BNO055;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -27,7 +26,7 @@ public class DriveTrain extends Subsystem {
   private final RobotDrive robotDrive;
   private final Encoder leftEncoder, rightEncoder;
 
-  private BNO055 imu;
+  private ADXRS450_Gyro imu;
 
   private DriveTrain() {
     // MOTOR CONTROLLERS
@@ -48,9 +47,7 @@ public class DriveTrain extends Subsystem {
     // ROBOT DRIVE
     robotDrive = new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
 
-    this.imu = BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS,
-        BNO055.vector_type_t.VECTOR_EULER, Port.kOnboard, (byte) 0x28);
-    gyroZero = imu.getHeading();
+    this.imu = new ADXRS450_Gyro(Constants.DriveTrain.GYRO_PORT);
   }
 
   public static DriveTrain getDriveTrain() {
@@ -124,14 +121,11 @@ public class DriveTrain extends Subsystem {
 
   // ------Gyro------//
   public double getAngle() {
-    if (!this.imu.isInitialized())
-      return -1;
-    return this.imu.getHeading() - this.gyroZero;
+    return this.imu.getAngle() - this.gyroZero;
   }
 
   public void resetGyro() {
     this.gyroZero = this.getAngle();
-
   }
 
   public double getZeroAngle() {

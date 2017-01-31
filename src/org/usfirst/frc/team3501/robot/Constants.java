@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3501.robot;
 
+import edu.wpi.first.wpilibj.SPI;
+
 /**
  * The Constants stores constant values for all subsystems. This includes the
  * port values for motors and sensors, as well as important operational
@@ -37,6 +39,8 @@ public class Constants {
     public static final int ENCODER_LEFT_B = 0;
     public static final int ENCODER_RIGHT_A = 2;
     public static final int ENCODER_RIGHT_B = 3;
+
+    public static final SPI.Port GYRO_PORT = SPI.Port.kOnboardCS0;
   }
 
   public static class Climber {
