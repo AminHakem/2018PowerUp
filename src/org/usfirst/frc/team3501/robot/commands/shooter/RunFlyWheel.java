@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3501.robot.commands.shooter;
 
 import org.usfirst.frc.team3501.robot.Robot;
+import org.usfirst.frc.team3501.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -12,8 +13,8 @@ import edu.wpi.first.wpilibj.command.Command;
  * @author Shaina
  */
 public class RunFlyWheel extends Command {
+  private Shooter shooter = Robot.getShooter();
   Timer timer;
-  private double motorVal;
   private double time;
 
   /**
@@ -24,11 +25,10 @@ public class RunFlyWheel extends Command {
    * @param time
    *          in seconds, amount of time to run fly wheel motor
    */
-  public RunFlyWheel(double motorVal, double time) {
-    requires(Robot.getShooter());
+  public RunFlyWheel(double time) {
+    requires(shooter);
 
     timer = new Timer();
-    this.motorVal = motorVal;
     this.time = time;
   }
 
@@ -36,7 +36,7 @@ public class RunFlyWheel extends Command {
   @Override
   protected void initialize() {
     timer.start();
-    Robot.getShooter().setFlyWheelMotorVal(motorVal);
+    shooter.setFlyWheelMotorVal(shooter.CURRENT_SHOOTING_SPEED);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -47,7 +47,7 @@ public class RunFlyWheel extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.getShooter().stopFlyWheel();
+    shooter.stopFlyWheel();
   }
 
   // Called when another command which requires one or more of the same

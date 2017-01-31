@@ -10,9 +10,15 @@ public class Shooter extends Subsystem {
   private static Shooter shooter;
   private final CANTalon flyWheel, indexWheel;
 
+  public static final double DEFAULT_SHOOTING_SPEED = 0;
+  public static double CURRENT_SHOOTING_SPEED;
+
+  public static final double SHOOTING_SPEED_INCREMENT = 0;
+
   private Shooter() {
     flyWheel = new CANTalon(Constants.Shooter.FLY_WHEEL);
     indexWheel = new CANTalon(Constants.Shooter.INDEX_WHEEL);
+
   }
 
   /**

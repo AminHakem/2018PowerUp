@@ -1,5 +1,8 @@
 package org.usfirst.frc.team3501.robot.commands.shooter;
 
+import org.usfirst.frc.team3501.robot.Robot;
+import org.usfirst.frc.team3501.robot.subsystems.Shooter;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -10,35 +13,34 @@ import edu.wpi.first.wpilibj.command.Command;
  * flywheel is run, it will run at the increased shooting speed
  */
 public class IncreaseShootingSpeed extends Command {
+  private Shooter shooter = Robot.getShooter();
+
   public IncreaseShootingSpeed() {
 
   }
 
-  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    shooter.CURRENT_SHOOTING_SPEED += shooter.SHOOTING_SPEED_INCREMENT;
   }
 
-  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
   }
 
-  // Called once after isFinished returns true
   @Override
   protected void end() {
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 
   @Override
   protected boolean isFinished() {
-    // TODO Auto-generated method stub
-    return false;
+
+    return true;
   }
 
 }

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3501.robot.commands.shooter;
 
 import org.usfirst.frc.team3501.robot.Robot;
+import org.usfirst.frc.team3501.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -17,7 +18,7 @@ import edu.wpi.first.wpilibj.command.Command;
  * @author Shaina
  */
 public class RunIndexWheelContinuous extends Command {
-  private double motorVal;
+  private Shooter shooter = Robot.getShooter();
 
   /**
    * See JavaDoc comment in class for details
@@ -25,14 +26,14 @@ public class RunIndexWheelContinuous extends Command {
    * @param motorVal
    *          value range from -1 to 1
    */
-  public RunIndexWheelContinuous(double motorVal) {
-    this.motorVal = motorVal;
+  public RunIndexWheelContinuous() {
+
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.getShooter().setIndexWheelMotorVal(motorVal);
+    shooter.setIndexWheelMotorVal(shooter.CURRENT_SHOOTING_SPEED);
   }
 
   // Called repeatedly when this Command is scheduled to run
