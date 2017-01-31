@@ -1,18 +1,18 @@
 package org.usfirst.frc.team3501.robot.commands.climber;
 
-import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.Robot;
+import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * This command runs the winch at a specified speed and time in seconds when the
- * button triggering it is pressed. This command also makes the drive train
- * motors run because the winch is controlled by the drive train.
+ * robot has completed the climb and when the button triggering it is pressed.
+ * This command also makes the drive train motors run because the winch is
+ * controlled by the drive train.
  *
- * pre-condition: This command is run by a button in OI. The robot must be
- * attached to the rope.
+ * pre-condition: This command is run by a button in OI. The robot must have
+ * completed climbing.
  *
  * post-condition: Winch motor set to a specified speed for a specified time.
  *
@@ -23,41 +23,34 @@ import edu.wpi.first.wpilibj.command.Command;
  * @author shivanighanta
  *
  */
-public class MaintainWinchSpeed extends Command {
-  Timer timer;
+public class MaintainClimbedPosition extends Command {
   private double time;
-  private double motorVal;
 
   /**
    * See JavaDoc comment in class for details
    *
    * @param time
    *          time in seconds to run the winch
-   * @param motorVal
-   *          value range is from -1 to 1
    */
-  public MaintainWinchSpeed(double time, double motorVal) {
-    timer = new Timer();
+  public MaintainClimbedPosition(double time) {
     requires(Robot.getDriveTrain());
     this.time = time;
-    this.motorVal = motorVal;
   }
 
   @Override
   protected void initialize() {
-    timer.start();
   }
 
   @Override
   protected void execute() {
-    Robot.getDriveTrain().setMotorValues(Constants.Climber.MAINTAIN_MOTOR_VAL,
-        Constants.Climber.MAINTAIN_MOTOR_VAL);
+    Robot.getDriveTrain().setMotorValues(DriveTrain.MAINTAIN_CLIMBED_POSITION,
+        DriveTrain.MAINTAIN_CLIMBED_POSITION);
 
   }
 
   @Override
   protected boolean isFinished() {
-    return timer.get() >= time;
+    return timeSinceInitialized() >= time;
   }
 
   @Override

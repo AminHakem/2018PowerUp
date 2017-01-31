@@ -22,8 +22,9 @@ public class DriveTrain extends Subsystem {
   public static final int ENCODER_PULSES_PER_REVOLUTION = 256;
   public static final double INCHES_PER_PULSE = WHEEL_DIAMETER * Math.PI
       / ENCODER_PULSES_PER_REVOLUTION;
-
+  public static final int MAINTAIN_CLIMBED_POSITION = 1;
   private static DriveTrain driveTrain;
+
   private final CANTalon frontLeft, frontRight, rearLeft, rearRight;
   private final RobotDrive robotDrive;
   private final Encoder leftEncoder, rightEncoder;

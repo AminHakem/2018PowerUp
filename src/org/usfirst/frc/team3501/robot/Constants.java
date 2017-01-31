@@ -53,13 +53,6 @@ public class Constants {
     public static final SPI.Port GYRO_PORT = SPI.Port.kOnboardCS0;
   }
 
-  public static class Climber {
-    // MOTOR CONTROLLERS
-    public static final int MOTOR_VAL = 1;
-    public static final int MAINTAIN_MOTOR_VAL = 1;
-
-  }
-
   public static class Intake {
     public static final int INTAKE_ROLLER_PORT = 0;
 

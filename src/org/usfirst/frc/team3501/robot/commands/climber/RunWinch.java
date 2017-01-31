@@ -2,7 +2,6 @@ package org.usfirst.frc.team3501.robot.commands.climber;
 
 import org.usfirst.frc.team3501.robot.Robot;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -24,7 +23,6 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 
 public class RunWinch extends Command {
-  Timer timer;
   private double time;
   private double motorVal;
 
@@ -34,18 +32,16 @@ public class RunWinch extends Command {
    * @param time
    *          time in seconds to run the winch
    * @param motorVal
-   *          value range is from -1 to 1
+   *          value range is frosm -1 to 1
    */
   public RunWinch(double time, double motorVal) {
     requires(Robot.getDriveTrain());
-    timer = new Timer();
     this.time = time;
     this.motorVal = motorVal;
   }
 
   @Override
   protected void initialize() {
-    timer.start();
   }
 
   @Override
@@ -56,7 +52,7 @@ public class RunWinch extends Command {
 
   @Override
   protected boolean isFinished() {
-    return timer.get() >= time;
+    return timeSinceInitialized() >= time;
   }
 
   @Override
