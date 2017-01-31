@@ -68,6 +68,10 @@ public class DriveTrain extends Subsystem {
         BNO055.vector_type_t.VECTOR_EULER, Port.kOnboard, (byte) 0x28);
     gyroZero = imu.getHeading();
 
+    leftGearPiston = new DoubleSolenoid(Constants.DriveTrain.MODULE_NUMBER,
+        Constants.DriveTrain.LEFT_FORWARD, Constants.DriveTrain.LEFT_REVERSE);
+    rightGearPiston = new DoubleSolenoid(Constants.DriveTrain.MODULE_NUMBER,
+        Constants.DriveTrain.RIGHT_FORWARD, Constants.DriveTrain.RIGHT_REVERSE);
   }
 
   public static DriveTrain getDriveTrain() {
