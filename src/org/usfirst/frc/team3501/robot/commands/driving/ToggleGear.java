@@ -1,11 +1,13 @@
 package org.usfirst.frc.team3501.robot.commands.driving;
 
+import org.usfirst.frc.team3501.robot.Constants.DriveTrain;
 import org.usfirst.frc.team3501.robot.Robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This command toggles the speed at which the drive train runs at
+ * This command toggles the gear(low or high).
  *
  * post-condition: if the drivetrain is running at high gear, it will be made to
  * run at low gear, and vice versa
@@ -14,16 +16,24 @@ public class ToggleGear extends Command {
 
   public ToggleGear() {
     requires(Robot.getDriveTrain());
+
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Value gearPistonValue = Robot.getDriveTrain().getGearPistonValue();
+    if (gearPistonValue == DriveTrain.LOW_GEAR) {
+      Robot.getDriveTrain().setHighGear();
+    } else {
+      Robot.getDriveTrain().setLowGear();
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
