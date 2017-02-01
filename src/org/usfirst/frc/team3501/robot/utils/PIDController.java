@@ -161,7 +161,6 @@ public class PIDController {
     // close enough to target
     if (currError <= this.doneRange) {
       this.doneCycleCount++;
-      System.out.println(doneCycleCount);
     }
     // not close enough to target
     else {

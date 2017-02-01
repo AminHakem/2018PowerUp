@@ -28,11 +28,14 @@ public class TurnForAngle extends Command {
   private double gyroI;
   private double gyroD;
 
+  private double zeroAngle;
+
   public TurnForAngle(double angle, Direction direction, double maxTimeOut) {
     requires(Robot.getDriveTrain());
     this.direction = direction;
     this.maxTimeOut = maxTimeOut;
-    this.target = angle;
+    this.target = Math.abs(angle);
+    this.zeroAngle = driveTrain.getAngle();
 
     this.gyroP = driveTrain.defaultGyroP;
     this.gyroI = driveTrain.defaultGyroI;
@@ -46,7 +49,6 @@ public class TurnForAngle extends Command {
   @Override
   protected void initialize() {
     this.driveTrain.resetEncoders();
-    this.driveTrain.resetGyro();
     this.gyroController.setSetPoint(this.target);
   }
 
@@ -55,14 +57,14 @@ public class TurnForAngle extends Command {
     double xVal = 0;
 
     xVal = this.gyroController
-        .calcPID(this.driveTrain.getAngle() - this.driveTrain.getZeroAngle());
+        .calcPID(Math.abs(this.driveTrain.getAngle() - this.zeroAngle));
 
-    double leftDrive;
-    double rightDrive;
+    double leftDrive = 0;
+    double rightDrive = 0;
     if (direction == Constants.Direction.RIGHT) {
       leftDrive = xVal;
       rightDrive = -xVal;
-    } else {
+    } else if (direction == Constants.Direction.LEFT) {
       leftDrive = -xVal;
       rightDrive = xVal;
     }

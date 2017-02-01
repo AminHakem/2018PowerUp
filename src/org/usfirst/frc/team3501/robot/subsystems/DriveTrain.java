@@ -11,9 +11,9 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
-  public static double driveP = 0.008, driveI = 0.001, driveD = -0.002;
-  public static double defaultGyroP = 0.006, defaultGyroI = 0.00000,
-      defaultGyroD = -0.000;
+  public static double driveP = 0.006, driveI = 0.001, driveD = -0.002;
+  public static double defaultGyroP = 0.004, defaultGyroI = 0.0013,
+      defaultGyroD = -0.005;
   private double gyroZero = 0;
 
   public static final double WHEEL_DIAMETER = 6; // inches
@@ -125,7 +125,7 @@ public class DriveTrain extends Subsystem {
   }
 
   public void resetGyro() {
-    this.gyroZero = this.getAngle();
+    this.imu.reset();
   }
 
   public double getZeroAngle() {
