@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3501.robot;
 
+import org.usfirst.frc.team3501.robot.commands.driving.ToggleGear;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -13,6 +15,8 @@ public class OI {
   public static Button toggleIndexWheel;
   public static Button toggleFlyWheel;
 
+  public static Button toggleGear;
+
   public OI() {
     leftJoystick = new Joystick(Constants.OI.LEFT_STICK_PORT);
     rightJoystick = new Joystick(Constants.OI.RIGHT_STICK_PORT);
@@ -22,6 +26,9 @@ public class OI {
         Constants.OI.TOGGLE_INDEXWHEEL_PORT);
     toggleFlyWheel = new JoystickButton(leftJoystick,
         Constants.OI.TOGGLE_FLYWHEEL_PORT);
+    toggleGear = new JoystickButton(leftJoystick,
+        Constants.OI.TOGGLE_GEAR_PORT);
+    toggleGear.whenPressed(new ToggleGear());
   }
 
   public static OI getOI() {
