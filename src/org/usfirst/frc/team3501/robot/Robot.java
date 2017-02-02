@@ -1,9 +1,6 @@
 package org.usfirst.frc.team3501.robot;
 
-<<<<<<< HEAD
-=======
 import org.usfirst.frc.team3501.robot.commands.driving.DriveDistance;
->>>>>>> fix bugs
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
 import org.usfirst.frc.team3501.robot.subsystems.Shooter;
@@ -41,12 +38,15 @@ public class Robot extends IterativeRobot {
     return Intake.getIntake();
   }
 
+  // If the gear values do not match in the left and right piston, then they are
+  // both set to high gear
   @Override
   public void autonomousInit() {
-<<<<<<< HEAD
-=======
     Scheduler.getInstance().add(new DriveDistance(25, 10));
->>>>>>> fix bugs
+    if (driveTrain.getLeftGearPistonValue() != driveTrain
+        .getRightGearPistonValue()) {
+      driveTrain.setHighGear();
+    }
   }
 
   @Override
@@ -57,6 +57,7 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void teleopInit() {
+
   }
 
   @Override
