@@ -1,7 +1,8 @@
 package org.usfirst.frc.team3501.robot.commands.driving;
 
-import org.usfirst.frc.team3501.robot.Constants.DriveTrain;
+import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.Robot;
+import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Command;
@@ -13,42 +14,37 @@ import edu.wpi.first.wpilibj.command.Command;
  * run at low gear, and vice versa
  */
 public class ToggleGear extends Command {
+  DriveTrain driveTrain = Robot.getDriveTrain();
 
   public ToggleGear() {
-    requires(Robot.getDriveTrain());
-
+    requires(driveTrain);
   }
 
-  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
 
   }
 
-  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Value gearPistonValue = Robot.getDriveTrain().getGearPistonValue();
-    if (gearPistonValue == DriveTrain.LOW_GEAR) {
-      Robot.getDriveTrain().setHighGear();
+    Value leftGearPistonValue = driveTrain.getLeftGearPistonValue();
+    Value rightGearPistonValue = driveTrain.getRightGearPistonValue();
+    if (leftGearPistonValue == Constants.DriveTrain.LOW_GEAR) {
+      driveTrain.setHighGear();
     } else {
-      Robot.getDriveTrain().setLowGear();
+      driveTrain.setLowGear();
     }
   }
 
-  // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
-  // Called once after isFinished returns true
   @Override
   protected void end() {
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
   @Override
   protected void interrupted() {
   }
