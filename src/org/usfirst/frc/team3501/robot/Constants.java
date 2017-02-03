@@ -32,8 +32,9 @@ public class Constants {
 
   public static class DriveTrain {
     // GEARS
-    public static final int MODULE_NUMBER = 10, LEFT_FORWARD = 6,
-        LEFT_REVERSE = 5, RIGHT_FORWARD = 0, RIGHT_REVERSE = 1;
+    public static final int MODULE_NUMBER = 10, LEFT_GEAR_PISTON_FORWARD = 6,
+        LEFT_GEAR_PISTON_REVERSE = 5, RIGHT_GEAR_PISTON_FORWARD = 0,
+        RIGHT_GEAR_PISTON_REVERSE = 1;
     public static final Value HIGH_GEAR = DoubleSolenoid.Value.kForward;
     public static final Value LOW_GEAR = DoubleSolenoid.Value.kReverse;
 
