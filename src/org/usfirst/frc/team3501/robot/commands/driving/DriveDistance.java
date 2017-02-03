@@ -17,79 +17,56 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveDistance extends Command {
   private DriveTrain driveTrain = Robot.getDriveTrain();
   private double maxTimeOut;
-  private PIDController driveController;
-  private PIDController gyroController;
-  private Preferences prefs;
-
   private double target;
-  private double gyroP;
-  private double gyroI;
-  private double gyroD;
+  private double zeroAngle;
+  private Preferences prefs;
+  private PIDController driveController;
 
   private double driveP;
   private double driveI;
   private double driveD;
+  private double gyroP;
 
   public DriveDistance(double distance, double motorVal) {
     requires(driveTrain);
     this.maxTimeOut = maxTimeOut;
     this.target = distance;
+    this.zeroAngle = driveTrain.getAngle();
 
     this.driveP = driveTrain.driveP;
     this.driveI = driveTrain.driveI;
     this.driveD = driveTrain.driveD;
-    this.gyroP = driveTrain.defaultGyroP;
-    this.gyroI = driveTrain.defaultGyroI;
-    this.gyroD = driveTrain.defaultGyroD;
-    this.driveController = new PIDController(this.driveP, this.driveI,
-        this.driveD);
+    this.gyroP = driveTrain.driveStraightGyroP;
+    this.driveController = new PIDController(driveP, driveI, driveD);
     this.driveController.setDoneRange(0.5);
     this.driveController.setMaxOutput(1.0);
     this.driveController.setMinDoneCycles(5);
-
-    this.gyroController = new PIDController(this.gyroP, this.gyroI, this.gyroD);
-    this.gyroController.setDoneRange(1);
-    this.gyroController.setMinDoneCycles(5);
   }
 
   @Override
   protected void initialize() {
     this.driveTrain.resetEncoders();
-    this.driveTrain.resetGyro();
     this.driveController.setSetPoint(this.target);
-    this.gyroController.setSetPoint(this.driveTrain.getZeroAngle());
   }
 
   @Override
   protected void execute() {
-    double xVal = 0;
-    double yVal = this.driveController
-        .calcPID(this.driveTrain.getAvgEncoderDistance());
+    double xVal = gyroP * (driveTrain.getAngle() - zeroAngle);
+    double yVal = driveController.calcPID(driveTrain.getAvgEncoderDistance());
 
-    if (this.driveTrain.getAngle() - this.driveTrain.getZeroAngle() < 30) {
-      xVal = -this.gyroController
-          .calcPID(this.driveTrain.getAngle() - this.driveTrain.getZeroAngle());
-    }
     double leftDrive = yVal - xVal;
     double rightDrive = yVal + xVal;
-
     this.driveTrain.setMotorValues(leftDrive, rightDrive);
-
-    driveTrain.printEncoderOutput();
-    // System.out.println("turn: " + xVal);
   }
 
   @Override
   protected boolean isFinished() {
-    boolean isDone = this.driveController.isDone();
-    if (timeSinceInitialized() >= maxTimeOut || isDone)
-      System.out.println("time: " + timeSinceInitialized());
-    return timeSinceInitialized() >= maxTimeOut || isDone;
+    return timeSinceInitialized() >= maxTimeOut
+        || this.driveController.isDone();
   }
 
   @Override
   protected void end() {
-    driveTrain.stop();
   }
 
   @Override
