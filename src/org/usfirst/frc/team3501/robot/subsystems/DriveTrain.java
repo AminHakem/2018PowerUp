@@ -14,9 +14,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
   public static double driveP = 0.006, driveI = 0.001, driveD = -0.002;
-  public static double defaultGyroP = 0.004, defaultGyroI = 0.0013,
-      defaultGyroD = -0.005;
-  private double gyroZero = 0;
+  public static double turnP = 0.004, turnI = 0.0013, turnD = -0.005;
+  public static double driveStraightGyroP = 0.01;
 
   public static final double WHEEL_DIAMETER = 6; // inches
   public static final int ENCODER_PULSES_PER_REVOLUTION = 256;
@@ -106,11 +105,9 @@ public class DriveTrain extends Subsystem {
   }
 
   public void printEncoderOutput() {
-    // System.out.println("left: " + getLeftEncoderDistance());
-    // System.out.println("right: " + getRightEncoderDistance());
-    System.out.println(getAvgEncoderDistance());
     System.out.println("left: " + getLeftEncoderDistance());
     System.out.println("right: " + getRightEncoderDistance());
+    // System.out.println(getAvgEncoderDistance());
   }
 
   public double getAvgEncoderDistance() {
@@ -136,15 +133,11 @@ public class DriveTrain extends Subsystem {
 
   // ------Gyro------//
   public double getAngle() {
-    return this.imu.getAngle() - this.gyroZero;
+    return this.imu.getAngle();
   }
 
   public void resetGyro() {
     this.imu.reset();
-  }
-
-  public double getZeroAngle() {
-    return this.gyroZero;
   }
 
   /*

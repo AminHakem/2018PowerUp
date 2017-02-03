@@ -37,9 +37,9 @@ public class TurnForAngle extends Command {
     this.target = Math.abs(angle);
     this.zeroAngle = driveTrain.getAngle();
 
-    this.gyroP = driveTrain.defaultGyroP;
-    this.gyroI = driveTrain.defaultGyroI;
-    this.gyroD = driveTrain.defaultGyroD;
+    this.gyroP = driveTrain.turnP;
+    this.gyroI = driveTrain.turnI;
+    this.gyroD = driveTrain.turnD;
 
     this.gyroController = new PIDController(this.gyroP, this.gyroI, this.gyroD);
     this.gyroController.setDoneRange(1);
