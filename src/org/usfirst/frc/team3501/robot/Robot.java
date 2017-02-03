@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3501.robot;
 
-import org.usfirst.frc.team3501.robot.commands.driving.DriveDistance;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
 import org.usfirst.frc.team3501.robot.subsystems.Shooter;
@@ -42,11 +41,7 @@ public class Robot extends IterativeRobot {
   // both set to high gear
   @Override
   public void autonomousInit() {
-    Scheduler.getInstance().add(new DriveDistance(25, 10));
-    if (driveTrain.getLeftGearPistonValue() != driveTrain
-        .getRightGearPistonValue()) {
-      driveTrain.setHighGear();
-    }
+    driveTrain.setHighGear();
   }
 
   @Override
