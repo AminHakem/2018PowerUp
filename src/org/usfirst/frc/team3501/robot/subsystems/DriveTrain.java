@@ -2,7 +2,6 @@ package org.usfirst.frc.team3501.robot.subsystems;
 
 import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.commands.driving.JoystickDrive;
-import org.usfirst.frc.team3501.robot.utils.BNO055;
 
 import com.ctre.CANTalon;
 
@@ -10,7 +9,6 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -18,9 +16,6 @@ public class DriveTrain extends Subsystem {
   public static double driveP = 0.006, driveI = 0.001, driveD = -0.002;
   public static double defaultGyroP = 0.004, defaultGyroI = 0.0013,
       defaultGyroD = -0.005;
-  public static double driveP = 0.008, driveI = 0.001, driveD = -0.002;
-  public static double defaultGyroP = 0.009, defaultGyroI = 0.00000,
-      defaultGyroD = -0.000;
   private double gyroZero = 0;
 
   public static final double WHEEL_DIAMETER = 6; // inches
@@ -35,7 +30,6 @@ public class DriveTrain extends Subsystem {
   private final DoubleSolenoid leftGearPiston, rightGearPiston;
 
   private ADXRS450_Gyro imu;
-  private BNO055 imu;
 
   private DriveTrain() {
     // MOTOR CONTROLLERS
@@ -57,16 +51,6 @@ public class DriveTrain extends Subsystem {
     robotDrive = new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
 
     this.imu = new ADXRS450_Gyro(Constants.DriveTrain.GYRO_PORT);
-    shifter = DoubleSolenoid(10, Constants.DriveTrain.SHIFTER_FORWARD,
-        Constants.DriveTrain.SHIFTER_REVERSE);
-    leftGearPiston = new DoubleSolenoid(Constants.DriveTrain.MODULE_NUMBER,
-        Constants.DriveTrain.LEFT_FORWARD, Constants.DriveTrain.LEFT_REVERSE);
-    rightGearPiston = new DoubleSolenoid(Constants.DriveTrain.MODULE_NUMBER,
-        Constants.DriveTrain.RIGHT_FORWARD, Constants.DriveTrain.RIGHT_REVERSE);
-
-    this.imu = BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS,
-        BNO055.vector_type_t.VECTOR_EULER, Port.kOnboard, (byte) 0x28);
-    gyroZero = imu.getHeading();
 
     leftGearPiston = new DoubleSolenoid(Constants.DriveTrain.MODULE_NUMBER,
         Constants.DriveTrain.LEFT_FORWARD, Constants.DriveTrain.LEFT_REVERSE);
@@ -152,16 +136,6 @@ public class DriveTrain extends Subsystem {
 
   public void resetGyro() {
     this.imu.reset();
-
-  public double getAngle() {
-    if (!this.imu.isInitialized())
-      return -1;
-    return this.imu.getHeading() - this.gyroZero;
-  }
-
-  public void resetGyro() {
-    this.gyroZero = this.getAngle();
-
   }
 
   public double getZeroAngle() {

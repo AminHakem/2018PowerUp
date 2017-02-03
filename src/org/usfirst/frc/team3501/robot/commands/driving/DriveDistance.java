@@ -30,20 +30,6 @@ public class DriveDistance extends Command {
   private double driveI;
   private double driveD;
 
-  public DriveDistance(double distance, double maxTimeOut) {
-    requires(driveTrain);
-    this.maxTimeOut = maxTimeOut;
-    this.target = distance;
-
-  private double target;
-  private double gyroP;
-  private double gyroI;
-  private double gyroD;
-
-  private double driveP;
-  private double driveI;
-  private double driveD;
-
   public DriveDistance(double distance, double motorVal) {
     requires(driveTrain);
     this.maxTimeOut = maxTimeOut;
@@ -91,13 +77,6 @@ public class DriveDistance extends Command {
 
     driveTrain.printEncoderOutput();
     // System.out.println("turn: " + xVal);
-    double leftDrive = yVal - xVal;
-    double rightDrive = yVal + xVal;
-
-    this.driveTrain.setMotorValues(leftDrive, rightDrive);
-
-    driveTrain.printEncoderOutput();
-    // System.out.println("motorval: " + yVal);
   }
 
   @Override
