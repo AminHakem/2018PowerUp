@@ -2,7 +2,6 @@ package org.usfirst.frc.team3501.robot.commands.shooter;
 
 import org.usfirst.frc.team3501.robot.Robot;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -13,7 +12,6 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 
 public class ReverseIndexWheel extends Command {
-  Timer timer;
   private double time;
   private double motorVal;
 
@@ -28,14 +26,12 @@ public class ReverseIndexWheel extends Command {
 
   public ReverseIndexWheel(double time, double motorVal) {
     requires(Robot.getDriveTrain());
-    timer = new Timer();
     this.time = time;
     this.motorVal = motorVal;
   }
 
   @Override
   protected void initialize() {
-    timer.start();
 
   }
 
@@ -47,7 +43,7 @@ public class ReverseIndexWheel extends Command {
 
   @Override
   protected boolean isFinished() {
-    return timer.get() >= time;
+    return timeSinceInitialized() >= time;
   }
 
   @Override
