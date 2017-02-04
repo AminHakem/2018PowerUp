@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj.command.Command;
  * This command runs the drive train motors (which runs the winch) continuously
  * at a specified speed until the button triggering it is released
  *
- * pre-condition: This command must be run by a button in OI. The robot must be
- * attached to the rope.
+ * pre-condition: This command must be run by a button in OI with
+ * button.whileHeld(...). The robot must be attached to the rope.
  *
  * post-condition: Drive train motors set to a specified speed.
  *

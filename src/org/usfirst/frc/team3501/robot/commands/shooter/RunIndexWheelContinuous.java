@@ -55,7 +55,7 @@ public class RunIndexWheelContinuous extends Command {
 
   @Override
   protected boolean isFinished() {
-    return Robot.getOI().toggleIndexWheel.get();
+    return false;
 
   }
 

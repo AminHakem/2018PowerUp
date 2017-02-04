@@ -7,7 +7,8 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * Reverses the intake until the button triggering this command is released
  *
- * pre-condition: button is pressed
+ * pre-condition: This command must be run by a button in OI with
+ * button.whileHeld(...).
  */
 public class ReverseIntakeContinuous extends Command {
 
