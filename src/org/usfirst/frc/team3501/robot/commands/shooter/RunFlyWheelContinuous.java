@@ -7,16 +7,16 @@ import org.usfirst.frc.team3501.robot.utils.PIDController;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This command runs the fly wheel continuously when OI button managing fly
- * wheel is pressed. The command will run the fly wheel motor until the button
- * triggering it is released.
+ * This command runs the fly wheel continuously at a set speed using a PID
+ * Controller when OI button managing fly wheel is pressed. The command will run
+ * the fly wheel motor until the button triggering it is released.
  *
  * Should only be run from the operator interface.
  *
  * pre-condition: This command must be run by a button in OI, with
  * button.whileHeld(...).
  *
- * @author Shaina
+ * @author Shaina & Chris
  */
 public class RunFlyWheelContinuous extends Command {
   private Shooter shooter = Robot.getShooter();

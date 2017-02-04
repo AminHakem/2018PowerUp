@@ -8,8 +8,9 @@ import org.usfirst.frc.team3501.robot.utils.PIDController;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This command runs the fly wheel at a given speed for a given time. The fly
- * wheel is intended to shoot balls fed by the intake wheel.
+ * This command runs the fly wheel at a specific speed using a PID Controller
+ * for accuracy for a given time. The fly wheel is intended to shoot balls fed
+ * by the intake wheel.
  *
  * @author Shaina & Chris
  */
