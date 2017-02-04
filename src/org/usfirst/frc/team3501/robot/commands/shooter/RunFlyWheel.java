@@ -3,7 +3,6 @@ package org.usfirst.frc.team3501.robot.commands.shooter;
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.Shooter;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -14,7 +13,6 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class RunFlyWheel extends Command {
   private Shooter shooter = Robot.getShooter();
-  Timer timer;
   private double time;
 
   /**
@@ -27,21 +25,18 @@ public class RunFlyWheel extends Command {
    */
   public RunFlyWheel(double time) {
     requires(shooter);
-
-    timer = new Timer();
     this.time = time;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    timer.start();
-    shooter.setFlyWheelMotorVal(shooter.CURRENT_SHOOTING_SPEED);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    shooter.setFlyWheelMotorVal(shooter.CURRENT_SHOOTING_SPEED);
   }
 
   // Called once after isFinished returns true
@@ -59,7 +54,7 @@ public class RunFlyWheel extends Command {
 
   @Override
   protected boolean isFinished() {
-    return timer.get() >= time;
+    return timeSinceInitialized() >= time;
   }
 
 }

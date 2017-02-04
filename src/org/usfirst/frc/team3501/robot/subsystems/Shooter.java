@@ -10,6 +10,7 @@ public class Shooter extends Subsystem {
   private static Shooter shooter;
   private final CANTalon flyWheel, indexWheel;
 
+  public static final double DEFAULT_INDEXING_SPEED = 0;
   public static final double DEFAULT_SHOOTING_SPEED = 0;
   public static double CURRENT_SHOOTING_SPEED;
 

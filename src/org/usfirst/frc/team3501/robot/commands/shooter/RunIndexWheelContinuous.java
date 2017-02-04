@@ -27,18 +27,18 @@ public class RunIndexWheelContinuous extends Command {
    *          value range from -1 to 1
    */
   public RunIndexWheelContinuous() {
-
+    requires(shooter);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    shooter.setIndexWheelMotorVal(shooter.CURRENT_SHOOTING_SPEED);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    shooter.setIndexWheelMotorVal(shooter.DEFAULT_INDEXING_SPEED);
   }
 
   // Called once after isFinished returns true

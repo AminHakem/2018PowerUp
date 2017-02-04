@@ -1,8 +1,8 @@
 package org.usfirst.frc.team3501.robot.commands.shooter;
 
 import org.usfirst.frc.team3501.robot.Robot;
+import org.usfirst.frc.team3501.robot.subsystems.Shooter;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -14,9 +14,8 @@ import edu.wpi.first.wpilibj.command.Command;
  * @author Shaina
  */
 public class RunIndexWheel extends Command {
-  Timer timer;
+  private Shooter shooter = Robot.getShooter();
   private double time;
-  private double motorVal;
 
   /**
    * See JavaDoc comment in class for details
@@ -26,30 +25,26 @@ public class RunIndexWheel extends Command {
    * @param time
    *          in seconds, amount of time to run index wheel motor
    */
-  public RunIndexWheel(double motorVal, double time) {
-    requires(Robot.getShooter());
-
-    timer = new Timer();
-    this.motorVal = motorVal;
+  public RunIndexWheel(double time) {
+    requires(shooter);
     this.time = time;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    timer.start();
-    Robot.getShooter().setIndexWheelMotorVal(motorVal);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    shooter.setIndexWheelMotorVal(shooter.DEFAULT_INDEXING_SPEED);
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.getShooter().stopIndexWheel();
+    shooter.stopIndexWheel();
   }
 
   // Called when another command which requires one or more of the same
@@ -61,7 +56,7 @@ public class RunIndexWheel extends Command {
 
   @Override
   protected boolean isFinished() {
-    return timer.get() >= time;
+    return timeSinceInitialized() >= time;
   }
 
 }
