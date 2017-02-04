@@ -7,13 +7,13 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Shooter extends Subsystem {
-  public double wheelP = 0.005, wheelI = 0.001, wheelD = -0.003;
+  public double wheelP = 0, wheelI = 0, wheelD = -0;
   private static Shooter shooter;
   private final CANTalon flyWheel, indexWheel;
 
   public static final double DEFAULT_INDEXING_SPEED = 0;
   public static final double DEFAULT_SHOOTING_SPEED = 0;
-  public static double CURRENT_SHOOTING_SPEED;
+  public static double CURRENT_SHOOTING_SPEED = DEFAULT_SHOOTING_SPEED;
 
   public static final double SHOOTING_SPEED_INCREMENT = 0;
 
@@ -75,6 +75,6 @@ public class Shooter extends Subsystem {
   }
 
   public double getShooterSpeed() {
-    return 1.0;
+    return 0.0;
   }
 }
