@@ -7,6 +7,7 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Shooter extends Subsystem {
+  public double wheelP = 0.005, wheelI = 0.001, wheelD = -0.003;
   private static Shooter shooter;
   private final CANTalon flyWheel, indexWheel;
 
@@ -71,5 +72,9 @@ public class Shooter extends Subsystem {
   @Override
   protected void initDefaultCommand() {
 
+  }
+
+  public double getShooterSpeed() {
+    return 1.0;
   }
 }
