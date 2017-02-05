@@ -3,7 +3,6 @@ package org.usfirst.frc.team3501.robot;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
 import org.usfirst.frc.team3501.robot.subsystems.Shooter;
-import org.usfirst.frc.team3501.robot.utils.HallEffectSensor;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -13,7 +12,6 @@ public class Robot extends IterativeRobot {
   private static Shooter shooter;
   private static OI oi;
   private static Intake intake;
-  private HallEffectSensor hallEffect;
 
   @Override
   public void robotInit() {
@@ -21,8 +19,6 @@ public class Robot extends IterativeRobot {
     oi = OI.getOI();
     shooter = Shooter.getShooter();
     intake = Intake.getIntake();
-
-    hallEffect = Shooter.getHallEffectSensor();
   }
 
   public static DriveTrain getDriveTrain() {
@@ -61,7 +57,6 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void teleopPeriodic() {
-    Scheduler.getInstance().run();
-    System.out.println("Hall Effect Period: " + hallEffect.getCounterPeriod());
+
   }
 }
