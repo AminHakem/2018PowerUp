@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3501.robot.subsystems;
 
 import org.usfirst.frc.team3501.robot.Constants;
+import org.usfirst.frc.team3501.robot.utils.HallEffectSensor;
 
 import com.ctre.CANTalon;
 
@@ -9,6 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Shooter extends Subsystem {
   public double wheelP = 0, wheelI = 0, wheelD = -0;
   private static Shooter shooter;
+  private static HallEffectSensor hallEffect;
   private final CANTalon flyWheel, indexWheel;
 
   public static final double DEFAULT_INDEXING_SPEED = 0;
@@ -21,6 +23,11 @@ public class Shooter extends Subsystem {
     flyWheel = new CANTalon(Constants.Shooter.FLY_WHEEL);
     indexWheel = new CANTalon(Constants.Shooter.INDEX_WHEEL);
 
+    hallEffect = new HallEffectSensor(Constants.Shooter.HALL_EFFECT_PORT, 1);
+  }
+
+  public static HallEffectSensor getHallEffectSensor() {
+    return hallEffect;
   }
 
   /**
@@ -74,7 +81,7 @@ public class Shooter extends Subsystem {
 
   }
 
-  public double getShooterSpeed() {
-    return 0.0;
+  public double getShooterRPM() {
+    return hallEffect.getRPM();
   }
 }

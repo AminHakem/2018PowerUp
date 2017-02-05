@@ -28,6 +28,8 @@ public class Constants {
 
     public final static int TOGGLE_FLYWHEEL_PORT = 0;
     public final static int TOGGLE_INDEXWHEEL_PORT = 0;
+
+    public final static int HALL_EFFECT_PORT = 4;
   }
 
   public static class DriveTrain {

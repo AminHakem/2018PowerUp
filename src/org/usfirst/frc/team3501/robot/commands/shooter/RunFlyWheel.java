@@ -46,7 +46,7 @@ public class RunFlyWheel extends Command {
   // Called repeatedly when this Command is scheduled to run
   protected void execute() {
     double shooterSpeed = this.wheelController
-        .calcPID(this.shooter.getShooterSpeed());
+        .calcPID(this.shooter.getShooterRPM());
 
     this.shooter.setFlyWheelMotorVal(shooterSpeed);
   }
