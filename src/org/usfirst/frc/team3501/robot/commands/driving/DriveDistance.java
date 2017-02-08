@@ -27,7 +27,7 @@ public class DriveDistance extends Command {
   private double driveD;
   private double gyroP;
 
-  public DriveDistance(double distance, double motorVal) {
+  public DriveDistance(double distance, double maxTimeOut) {
     requires(driveTrain);
     this.maxTimeOut = maxTimeOut;
     this.target = distance;
