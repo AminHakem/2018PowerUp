@@ -14,10 +14,15 @@ public class Constants {
   public static class OI {
     public final static int LEFT_STICK_PORT = 0;
     public final static int RIGHT_STICK_PORT = 1;
+
+    // Need to fill in the port numbers of the following buttons
     public final static int TOGGLE_WINCH_PORT = 0;
     public final static int TOGGLE_FLYWHEEL_PORT = 0;
     public final static int TOGGLE_INDEXWHEEL_PORT = 0;
+    public final static int REVERSE_INDEXWHEEL_PORT = 0;
     public final static int TOGGLE_GEAR_PORT = 0;
+    public final static int TOGGLE_INTAKE_PORT = 0;
+    public final static int REVERSE_INTAKE_PORT = 0;
   }
 
   public static class Shooter {
@@ -40,6 +45,8 @@ public class Constants {
     public static final Value HIGH_GEAR = DoubleSolenoid.Value.kForward;
     public static final Value LOW_GEAR = DoubleSolenoid.Value.kReverse;
 
+    public static final double CLIMBER_SPEED = 5;
+
     // MOTOR CONTROLLERS
     public static final int FRONT_LEFT = 1;
     public static final int FRONT_RIGHT = 3;
@@ -53,10 +60,14 @@ public class Constants {
     public static final int ENCODER_RIGHT_B = 3;
 
     public static final SPI.Port GYRO_PORT = SPI.Port.kOnboardCS0;
+
+    public final static int TRIGGER_DRIVE_PORT = 0;
   }
 
   public static class Intake {
     public static final int INTAKE_ROLLER_PORT = 0;
+
+    public final static int HOLD_INTAKE_PORT = 0;
 
   }
 

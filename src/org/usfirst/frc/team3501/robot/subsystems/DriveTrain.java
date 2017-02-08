@@ -32,6 +32,9 @@ public class DriveTrain extends Subsystem {
 
   private ADXRS450_Gyro imu;
 
+  private boolean isClimbing;
+  private static double CLIMBER_SPEED;;
+
   private DriveTrain() {
     // MOTOR CONTROLLERS
     frontLeft = new CANTalon(Constants.DriveTrain.FRONT_LEFT);
@@ -60,6 +63,8 @@ public class DriveTrain extends Subsystem {
     rightGearPiston = new DoubleSolenoid(Constants.DriveTrain.MODULE_NUMBER,
         Constants.DriveTrain.RIGHT_GEAR_PISTON_FORWARD,
         Constants.DriveTrain.RIGHT_GEAR_PISTON_REVERSE);
+
+    CLIMBER_SPEED = Constants.DriveTrain.CLIMBER_SPEED;
   }
 
   public static DriveTrain getDriveTrain() {
@@ -181,6 +186,14 @@ public class DriveTrain extends Subsystem {
   @Override
   protected void initDefaultCommand() {
     setDefaultCommand(new JoystickDrive());
+  }
+
+  public boolean isClimbing() {
+    return this.isClimbing;
+  }
+
+  public double getClimbingSpeed() {
+    return this.CLIMBER_SPEED;
   }
 
 }

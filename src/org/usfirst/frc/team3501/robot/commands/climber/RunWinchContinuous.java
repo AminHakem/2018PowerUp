@@ -17,7 +17,6 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class RunWinchContinuous extends Command {
-  private double motorVal;
 
   /**
    * See JavaDoc comment in class for details
@@ -25,14 +24,15 @@ public class RunWinchContinuous extends Command {
    * @param motorVal
    *          value range is from -1 to 1
    */
-  public RunWinchContinuous(double motorVal) {
+  public RunWinchContinuous() {
     requires(Robot.getDriveTrain());
-    this.motorVal = motorVal;
   }
 
   @Override
   protected void initialize() {
-    Robot.getDriveTrain().setMotorValues(motorVal, motorVal);
+    Robot.getDriveTrain().setMotorValues(
+        Robot.getDriveTrain().getClimbingSpeed(),
+        Robot.getDriveTrain().getClimbingSpeed());
   }
 
   @Override
