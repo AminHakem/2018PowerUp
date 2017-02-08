@@ -81,6 +81,7 @@ public class DriveTrain extends Subsystem {
 
     frontRight.set(-right);
     rearRight.set(-right);
+    this.isClimbing = true;
   }
 
   public void joystickDrive(final double thrust, final double twist) {
@@ -89,6 +90,7 @@ public class DriveTrain extends Subsystem {
 
   public void stop() {
     setMotorValues(0, 0);
+    this.isClimbing = false;
   }
 
   public double getLeftMotorVal() {
@@ -190,6 +192,10 @@ public class DriveTrain extends Subsystem {
 
   public boolean isClimbing() {
     return this.isClimbing;
+  }
+
+  public void setClimbing(boolean isClimbing) {
+    this.isClimbing = isClimbing;
   }
 
   public double getClimbingSpeed() {
