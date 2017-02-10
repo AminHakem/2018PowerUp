@@ -27,7 +27,8 @@ public class Constants {
 
   public static class Shooter {
     // MOTOR CONTROLLERS
-    public static final int FLY_WHEEL = 0;
+    public static final int FLY_WHEEL1 = 0;
+    public static final int FLY_WHEEL2 = 0;
     public static final int INDEX_WHEEL = 0;
     public final static int TOGGLE_WINCH_PORT = 0;
 

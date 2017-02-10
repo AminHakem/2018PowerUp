@@ -11,7 +11,7 @@ public class Shooter extends Subsystem {
   public double wheelP = 0, wheelI = 0, wheelD = -0;
   private static Shooter shooter;
   private static HallEffectSensor hallEffect;
-  private final CANTalon flyWheel, indexWheel;
+  private final CANTalon flyWheel1, flyWheel2, indexWheel;
 
   public static final double DEFAULT_INDEXING_SPEED = 0;
   public static final double DEFAULT_SHOOTING_SPEED = 0;
@@ -20,7 +20,8 @@ public class Shooter extends Subsystem {
   public static final double SHOOTING_SPEED_INCREMENT = 0;
 
   private Shooter() {
-    flyWheel = new CANTalon(Constants.Shooter.FLY_WHEEL);
+    flyWheel1 = new CANTalon(Constants.Shooter.FLY_WHEEL1);
+    flyWheel2 = new CANTalon(Constants.Shooter.FLY_WHEEL2);
     indexWheel = new CANTalon(Constants.Shooter.INDEX_WHEEL);
 
     hallEffect = new HallEffectSensor(Constants.Shooter.HALL_EFFECT_PORT, 1);
@@ -49,14 +50,16 @@ public class Shooter extends Subsystem {
    *          motor value from -1 to 1(fastest forward)
    */
   public void setFlyWheelMotorVal(final double val) {
-    flyWheel.set(val);
+    flyWheel1.set(val);
+    flyWheel2.set(val);
   }
 
   /**
    * Stops fly wheel motor.
    */
   public void stopFlyWheel() {
-    flyWheel.set(0);
+    flyWheel1.set(0);
+    flyWheel2.set(0);
   }
 
   /**
