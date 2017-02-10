@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3501.robot.commands.climber;
 
 import org.usfirst.frc.team3501.robot.Robot;
+import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -17,6 +18,8 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class RunWinchContinuous extends Command {
+  DriveTrain driveTrain = Robot.getDriveTrain();
+  private double climbingSpeed;
 
   /**
    * See JavaDoc comment in class for details
@@ -25,19 +28,17 @@ public class RunWinchContinuous extends Command {
    *          value range is from -1 to 1
    */
   public RunWinchContinuous() {
-    requires(Robot.getDriveTrain());
+    requires(driveTrain);
+    climbingSpeed = driveTrain.CLIMBER_SPEED;
   }
 
   @Override
   protected void initialize() {
-    Robot.getDriveTrain().setMotorValues(
-        Robot.getDriveTrain().getClimbingSpeed(),
-        Robot.getDriveTrain().getClimbingSpeed());
   }
 
   @Override
   protected void execute() {
-
+    Robot.getDriveTrain().setMotorValues(climbingSpeed, climbingSpeed);
   }
 
   @Override

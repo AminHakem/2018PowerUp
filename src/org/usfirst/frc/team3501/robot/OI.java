@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3501.robot;
 
-import org.usfirst.frc.team3501.robot.commandgroups.ToggleWinch;
+import org.usfirst.frc.team3501.robot.commands.climber.ToggleWinch;
 import org.usfirst.frc.team3501.robot.commands.driving.ToggleGear;
 import org.usfirst.frc.team3501.robot.commands.intake.ReverseIntakeContinuous;
 import org.usfirst.frc.team3501.robot.commands.intake.RunIntakeContinuous;
@@ -57,12 +57,6 @@ public class OI {
 
     toggleWinch = new JoystickButton(leftJoystick,
         Constants.OI.TOGGLE_WINCH_PORT);
-    /*
-     * if (!Robot.getDriveTrain().isClimbing()) { toggleWinch.whenPressed(new
-     * RunWinchContinuous()); Robot.getDriveTrain().setClimbing(true); } else {
-     * toggleWinch.whenPressed(new MaintainClimbedPosition());
-     * Robot.getDriveTrain().setClimbing(false); }
-     */
     toggleWinch.whenPressed(new ToggleWinch());
   }
 

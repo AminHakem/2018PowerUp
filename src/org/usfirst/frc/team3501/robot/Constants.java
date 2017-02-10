@@ -45,8 +45,6 @@ public class Constants {
     public static final Value HIGH_GEAR = DoubleSolenoid.Value.kForward;
     public static final Value LOW_GEAR = DoubleSolenoid.Value.kReverse;
 
-    public static final double CLIMBER_SPEED = 5;
-
     // MOTOR CONTROLLERS
     public static final int FRONT_LEFT = 1;
     public static final int FRONT_RIGHT = 3;

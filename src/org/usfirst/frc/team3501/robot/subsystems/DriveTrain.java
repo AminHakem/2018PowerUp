@@ -21,8 +21,11 @@ public class DriveTrain extends Subsystem {
   public static final int ENCODER_PULSES_PER_REVOLUTION = 256;
   public static final double INCHES_PER_PULSE = WHEEL_DIAMETER * Math.PI
       / ENCODER_PULSES_PER_REVOLUTION;
-  public static final int MAINTAIN_CLIMBED_POSITION = 0;
-  public static final int TIME_TO_CLIMB_FOR = 0;
+
+  public static final double MAINTAIN_CLIMBED_POSITION = 0;
+  public static final double TIME_TO_CLIMB_FOR = 0;
+  public static final double CLIMBER_SPEED = 0;
+
   private static DriveTrain driveTrain;
 
   private final CANTalon frontLeft, frontRight, rearLeft, rearRight;
@@ -32,8 +35,7 @@ public class DriveTrain extends Subsystem {
 
   private ADXRS450_Gyro imu;
 
-  private boolean isClimbing;
-  private static double CLIMBER_SPEED;;
+  public boolean shouldBeClimbing;
 
   private DriveTrain() {
     // MOTOR CONTROLLERS
@@ -63,8 +65,6 @@ public class DriveTrain extends Subsystem {
     rightGearPiston = new DoubleSolenoid(Constants.DriveTrain.MODULE_NUMBER,
         Constants.DriveTrain.RIGHT_GEAR_PISTON_FORWARD,
         Constants.DriveTrain.RIGHT_GEAR_PISTON_REVERSE);
-
-    CLIMBER_SPEED = Constants.DriveTrain.CLIMBER_SPEED;
   }
 
   public static DriveTrain getDriveTrain() {
@@ -81,7 +81,6 @@ public class DriveTrain extends Subsystem {
 
     frontRight.set(-right);
     rearRight.set(-right);
-    this.isClimbing = true;
   }
 
   public void joystickDrive(final double thrust, final double twist) {
@@ -90,7 +89,6 @@ public class DriveTrain extends Subsystem {
 
   public void stop() {
     setMotorValues(0, 0);
-    this.isClimbing = false;
   }
 
   public double getLeftMotorVal() {
@@ -189,17 +187,4 @@ public class DriveTrain extends Subsystem {
   protected void initDefaultCommand() {
     setDefaultCommand(new JoystickDrive());
   }
-
-  public boolean isClimbing() {
-    return this.isClimbing;
-  }
-
-  public void setClimbing(boolean isClimbing) {
-    this.isClimbing = isClimbing;
-  }
-
-  public double getClimbingSpeed() {
-    return this.CLIMBER_SPEED;
-  }
-
 }
