@@ -58,14 +58,10 @@ public class Constants {
     public static final int ENCODER_RIGHT_B = 3;
 
     public static final SPI.Port GYRO_PORT = SPI.Port.kOnboardCS0;
-
-    public final static int TRIGGER_DRIVE_PORT = 0;
   }
 
   public static class Intake {
     public static final int INTAKE_ROLLER_PORT = 0;
-
-    public final static int HOLD_INTAKE_PORT = 0;
 
   }
 

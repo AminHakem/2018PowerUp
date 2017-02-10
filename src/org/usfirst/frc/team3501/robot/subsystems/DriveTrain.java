@@ -35,7 +35,7 @@ public class DriveTrain extends Subsystem {
 
   private ADXRS450_Gyro imu;
 
-  public boolean shouldBeClimbing;
+  public boolean shouldBeClimbing = false;
 
   private DriveTrain() {
     // MOTOR CONTROLLERS
