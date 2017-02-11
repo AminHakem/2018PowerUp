@@ -36,7 +36,7 @@ public class RunFlyWheelContinuous extends Command {
     this.wheelController.setDoneRange(0.5);
     this.wheelController.setMaxOutput(1.0);
     this.wheelController.setMinDoneCycles(3);
-    this.target = this.shooter.CURRENT_SHOOTING_SPEED;
+    this.target = this.shooter.getCurrentShootingSpeed();
   }
 
   @Override

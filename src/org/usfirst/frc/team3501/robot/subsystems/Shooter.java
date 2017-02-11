@@ -79,6 +79,14 @@ public class Shooter extends Subsystem {
     indexWheel.set(0);
   }
 
+  public double getCurrentShootingSpeed() {
+    return CURRENT_SHOOTING_SPEED;
+  }
+
+  public void setCurrentShootingSpeed(double Value) {
+    CURRENT_SHOOTING_SPEED = Value;
+  }
+
   @Override
   protected void initDefaultCommand() {
 
