@@ -6,6 +6,7 @@ import org.usfirst.frc.team3501.robot.commands.driving.DriveDistance;
 import org.usfirst.frc.team3501.robot.commands.driving.TurnForAngle;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *
@@ -18,8 +19,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  * again to cross the baseline.
  */
 public class AutonMiddleGear extends CommandGroup {
-  private static final double DISTANCE_TO_PEG = 91.3;
-  private static final double DISTANCE_TO_BACK_OUT = 29.75;
+  private static final double DISTANCE_TO_PEG = 91.3 - 32;
+  private static final double DISTANCE_TO_BACK_OUT = -29.75;
   private static final double THIRD_DISTANCE_TO_TRAVEL = 70;
   private static final double DISTANCE_TO_BASELINE = 50.5;
 
@@ -37,6 +38,7 @@ public class AutonMiddleGear extends CommandGroup {
    */
   public AutonMiddleGear(Direction direction) {
     addSequential(new DriveDistance(DISTANCE_TO_PEG, maxTimeOut));
+    addSequential(new WaitCommand(3));
     addSequential(new DriveDistance(DISTANCE_TO_BACK_OUT, maxTimeOut));
     addSequential(new TurnForAngle(ANGLE_TO_TURN, direction, maxTimeOut));
     addSequential(new DriveDistance(THIRD_DISTANCE_TO_TRAVEL, maxTimeOut));

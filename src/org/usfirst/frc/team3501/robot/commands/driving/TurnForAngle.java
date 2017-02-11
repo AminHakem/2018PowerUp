@@ -35,7 +35,6 @@ public class TurnForAngle extends Command {
     this.direction = direction;
     this.maxTimeOut = maxTimeOut;
     this.target = Math.abs(angle);
-    this.zeroAngle = driveTrain.getAngle();
 
     this.gyroP = driveTrain.turnP;
     this.gyroI = driveTrain.turnI;
@@ -50,6 +49,7 @@ public class TurnForAngle extends Command {
   protected void initialize() {
     this.driveTrain.resetEncoders();
     this.gyroController.setSetPoint(this.target);
+    this.zeroAngle = driveTrain.getAngle();
   }
 
   @Override

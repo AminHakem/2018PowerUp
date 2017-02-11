@@ -31,14 +31,13 @@ public class DriveDistance extends Command {
     requires(driveTrain);
     this.maxTimeOut = maxTimeOut;
     this.target = distance;
-    this.zeroAngle = driveTrain.getAngle();
 
     this.driveP = driveTrain.driveP;
     this.driveI = driveTrain.driveI;
     this.driveD = driveTrain.driveD;
     this.gyroP = driveTrain.driveStraightGyroP;
     this.driveController = new PIDController(driveP, driveI, driveD);
-    this.driveController.setDoneRange(0.5);
+    this.driveController.setDoneRange(1.0);
     this.driveController.setMaxOutput(1.0);
     this.driveController.setMinDoneCycles(5);
   }
@@ -47,6 +46,7 @@ public class DriveDistance extends Command {
   protected void initialize() {
     this.driveTrain.resetEncoders();
     this.driveController.setSetPoint(this.target);
+    this.zeroAngle = driveTrain.getAngle();
   }
 
   @Override
