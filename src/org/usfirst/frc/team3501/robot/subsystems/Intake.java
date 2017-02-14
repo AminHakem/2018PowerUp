@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Intake extends Subsystem {
   private static Intake intake = null;
   private CANTalon intakeWheel;
-  public static final double INTAKE_SPEED = 0;
-  public static final double REVERSE_SPEED = 0;
+  public static final double INTAKE_SPEED = 1;
+  public static final double REVERSE_SPEED = -1;
 
   public Intake() {
     intakeWheel = new CANTalon(Constants.Intake.INTAKE_ROLLER_PORT);

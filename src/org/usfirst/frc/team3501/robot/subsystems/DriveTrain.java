@@ -59,10 +59,10 @@ public class DriveTrain extends Subsystem {
     this.imu = new ADXRS450_Gyro(Constants.DriveTrain.GYRO_PORT);
 
     // TODO: Not sure if MODULE_NUMBER should be the same for both
-    leftGearPiston = new DoubleSolenoid(Constants.DriveTrain.MODULE_NUMBER,
+    leftGearPiston = new DoubleSolenoid(
         Constants.DriveTrain.LEFT_GEAR_PISTON_FORWARD,
         Constants.DriveTrain.LEFT_GEAR_PISTON_REVERSE);
-    rightGearPiston = new DoubleSolenoid(Constants.DriveTrain.MODULE_NUMBER,
+    rightGearPiston = new DoubleSolenoid(
         Constants.DriveTrain.RIGHT_GEAR_PISTON_FORWARD,
         Constants.DriveTrain.RIGHT_GEAR_PISTON_REVERSE);
   }

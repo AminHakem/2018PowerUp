@@ -20,9 +20,9 @@ public class Constants {
     public final static int TOGGLE_FLYWHEEL_PORT = 0;
     public final static int TOGGLE_INDEXWHEEL_PORT = 0;
     public final static int REVERSE_INDEXWHEEL_PORT = 0;
-    public final static int TOGGLE_GEAR_PORT = 0;
-    public final static int TOGGLE_INTAKE_PORT = 0;
-    public final static int REVERSE_INTAKE_PORT = 0;
+    public final static int TOGGLE_GEAR_PORT = 5;
+    public final static int TOGGLE_INTAKE_PORT = 1;
+    public final static int REVERSE_INTAKE_PORT = 2;
   }
 
   public static class Shooter {
@@ -40,9 +40,9 @@ public class Constants {
 
   public static class DriveTrain {
     // GEARS
-    public static final int MODULE_NUMBER = 10, LEFT_GEAR_PISTON_FORWARD = 6,
-        LEFT_GEAR_PISTON_REVERSE = 5, RIGHT_GEAR_PISTON_FORWARD = 0,
-        RIGHT_GEAR_PISTON_REVERSE = 1;
+    public static final int LEFT_GEAR_PISTON_FORWARD = 0,
+        LEFT_GEAR_PISTON_REVERSE = 1, RIGHT_GEAR_PISTON_FORWARD = 2,
+        RIGHT_GEAR_PISTON_REVERSE = 3;
     public static final Value HIGH_GEAR = DoubleSolenoid.Value.kForward;
     public static final Value LOW_GEAR = DoubleSolenoid.Value.kReverse;
 
@@ -62,7 +62,7 @@ public class Constants {
   }
 
   public static class Intake {
-    public static final int INTAKE_ROLLER_PORT = 0;
+    public static final int INTAKE_ROLLER_PORT = 8;
 
   }
 
