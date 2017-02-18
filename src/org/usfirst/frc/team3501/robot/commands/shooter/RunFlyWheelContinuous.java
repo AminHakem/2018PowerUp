@@ -28,9 +28,6 @@ public class RunFlyWheelContinuous extends Command {
   private double target;
 
   public RunFlyWheelContinuous() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-
     this.wheelP = this.shooter.wheelP;
     this.wheelI = this.shooter.wheelI;
     this.wheelD = this.shooter.wheelD;
@@ -42,37 +39,33 @@ public class RunFlyWheelContinuous extends Command {
     this.target = this.shooter.CURRENT_SHOOTING_SPEED;
   }
 
-  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     this.wheelController.setSetPoint(this.target);
   }
 
-  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double shooterSpeed = this.wheelController
-        .calcPID(this.shooter.getShooterRPM());
-
-    this.shooter.setFlyWheelMotorVal(shooterSpeed);
+    // double shooterSpeed = this.wheelController
+    // .calcPID(this.shooter.getShooterRPM());
+    //
+    // this.shooter.setFlyWheelMotorVal(shooterSpeed);
+    System.out.println(shooter.getShooterRPM());
+    this.shooter.setFlyWheelMotorVal(this.shooter.CURRENT_SHOOTING_SPEED);
   }
 
-  // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
     return false;
   }
 
-  // Called once after isFinished returns true
   @Override
   protected void end() {
     this.shooter.stopFlyWheel();
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-
+    end();
   }
 }
