@@ -19,10 +19,10 @@ public class Constants {
     public final static int TOGGLE_WINCH_PORT = 0;
     public final static int TOGGLE_FLYWHEEL_PORT = 4;
     public final static int RUN_INDEXWHEEL_PORT = 1;
-    public final static int REVERSE_INDEXWHEEL_PORT = 0;
+    public final static int REVERSE_INDEXWHEEL_PORT = 2;
     public final static int TOGGLE_GEAR_PORT = 5;
     public final static int RUN_INTAKE_PORT = 1;
-    public final static int REVERSE_INTAKE_PORT = 0;
+    public final static int REVERSE_INTAKE_PORT = 4;
     public static final int INCREASE_SHOOTER_SPEED_PORT = 6;
     public static final int DECREASE_SHOOTER_SPEED_PORT = 2;
   }
@@ -33,7 +33,7 @@ public class Constants {
     public static final int FLY_WHEEL2 = 6;
     public static final int INDEX_WHEEL = 7;
 
-    public final static int HALL_EFFECT_PORT = 8;
+    public final static int HALL_EFFECT_PORT = 9;
   }
 
   public static class DriveTrain {
