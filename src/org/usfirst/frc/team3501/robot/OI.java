@@ -4,6 +4,8 @@ import org.usfirst.frc.team3501.robot.commands.climber.ToggleWinch;
 import org.usfirst.frc.team3501.robot.commands.driving.ToggleGear;
 import org.usfirst.frc.team3501.robot.commands.intake.ReverseIntakeContinuous;
 import org.usfirst.frc.team3501.robot.commands.intake.RunIntakeContinuous;
+import org.usfirst.frc.team3501.robot.commands.shooter.DecreaseShootingSpeed;
+import org.usfirst.frc.team3501.robot.commands.shooter.IncreaseShootingSpeed;
 import org.usfirst.frc.team3501.robot.commands.shooter.ReverseIndexWheelContinuous;
 import org.usfirst.frc.team3501.robot.commands.shooter.RunFlyWheelContinuous;
 import org.usfirst.frc.team3501.robot.commands.shooter.RunIndexWheelContinuous;
@@ -27,19 +29,22 @@ public class OI {
   public static Button runIntake;
   public static Button reverseIntake;
 
+  public static Button increaseShooterSpeed;
+  public static Button decreaseShooterSpeed;
+
   public OI() {
     leftJoystick = new Joystick(Constants.OI.LEFT_STICK_PORT);
     rightJoystick = new Joystick(Constants.OI.RIGHT_STICK_PORT);
 
-    runIndexWheel = new JoystickButton(leftJoystick,
-        Constants.OI.TOGGLE_INDEXWHEEL_PORT);
+    runIndexWheel = new JoystickButton(rightJoystick,
+        Constants.OI.RUN_INDEXWHEEL_PORT);
     runIndexWheel.whileHeld(new RunIndexWheelContinuous());
 
     reverseIndexWheel = new JoystickButton(leftJoystick,
         Constants.OI.REVERSE_INDEXWHEEL_PORT);
     reverseIndexWheel.whileHeld(new ReverseIndexWheelContinuous());
 
-    toggleFlyWheel = new JoystickButton(leftJoystick,
+    toggleFlyWheel = new JoystickButton(rightJoystick,
         Constants.OI.TOGGLE_FLYWHEEL_PORT);
     toggleFlyWheel.toggleWhenPressed(new RunFlyWheelContinuous());
 
@@ -48,7 +53,7 @@ public class OI {
     toggleGear.whenPressed(new ToggleGear());
 
     runIntake = new JoystickButton(leftJoystick,
-        Constants.OI.TOGGLE_INTAKE_PORT);
+        Constants.OI.RUN_INTAKE_PORT);
     runIntake.whileHeld(new RunIntakeContinuous());
 
     reverseIntake = new JoystickButton(leftJoystick,
@@ -58,6 +63,14 @@ public class OI {
     toggleWinch = new JoystickButton(leftJoystick,
         Constants.OI.TOGGLE_WINCH_PORT);
     toggleWinch.whenPressed(new ToggleWinch());
+
+    increaseShooterSpeed = new JoystickButton(leftJoystick,
+        Constants.OI.INCREASE_SHOOTER_SPEED_PORT);
+    increaseShooterSpeed.whenPressed(new IncreaseShootingSpeed());
+
+    decreaseShooterSpeed = new JoystickButton(leftJoystick,
+        Constants.OI.DECREASE_SHOOTER_SPEED_PORT);
+    decreaseShooterSpeed.whenPressed(new DecreaseShootingSpeed());
   }
 
   public static OI getOI() {
