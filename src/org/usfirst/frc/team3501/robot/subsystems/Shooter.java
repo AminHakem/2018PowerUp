@@ -13,11 +13,11 @@ public class Shooter extends Subsystem {
   private static HallEffectSensor hallEffect;
   private final CANTalon flyWheel1, flyWheel2, indexWheel;
 
-  public static final double DEFAULT_INDEXING_SPEED = 0;
-  public static final double DEFAULT_SHOOTING_SPEED = 0;
+  public static final double DEFAULT_INDEXING_SPEED = -0.75;
+  public static final double DEFAULT_SHOOTING_SPEED = 0.75;
   public static double CURRENT_SHOOTING_SPEED = DEFAULT_SHOOTING_SPEED;
 
-  public static final double SHOOTING_SPEED_INCREMENT = 0;
+  public static final double SHOOTING_SPEED_INCREMENT = 0.05;
 
   private Shooter() {
     flyWheel1 = new CANTalon(Constants.Shooter.FLY_WHEEL1);
