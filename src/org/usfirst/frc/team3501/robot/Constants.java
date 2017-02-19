@@ -35,8 +35,9 @@ public class Constants {
     public static final int INDEX_WHEEL = 7;
 
     public final static int HALL_EFFECT_PORT = 9;
-    public static final int MODULE_NUMBER = 10, PISTON_FORWARD = 6,
-        PISTON_REVERSE = 5;
+
+    public static final int MODULE_NUMBER = 10, PISTON_FORWARD = 7,
+        PISTON_REVERSE = 8;
     public static final Value HIGH_GEAR = DoubleSolenoid.Value.kForward;
     public static final Value LOW_GEAR = DoubleSolenoid.Value.kReverse;
   }
