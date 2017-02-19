@@ -7,6 +7,8 @@ import org.usfirst.frc.team3501.robot.utils.PIDController;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Shooter extends Subsystem {
@@ -25,12 +27,17 @@ public class Shooter extends Subsystem {
   private double targetShootingSpeed = DEFAULT_SHOOTING_SPEED;
   private double currentShooterMotorValue = 0;
 
+  private final DoubleSolenoid piston;
+
   private Shooter() {
     flyWheel1 = new CANTalon(Constants.Shooter.FLY_WHEEL1);
     flyWheel2 = new CANTalon(Constants.Shooter.FLY_WHEEL2);
     indexWheel = new CANTalon(Constants.Shooter.INDEX_WHEEL);
 
     hallEffect = new HallEffectSensor(Constants.Shooter.HALL_EFFECT_PORT, 1);
+
+    piston = new DoubleSolenoid(Constants.DriveTrain.MODULE_NUMBER,
+        Constants.Shooter.PISTON_FORWARD, Constants.Shooter.PISTON_REVERSE);
   }
 
   /**
@@ -139,5 +146,21 @@ public class Shooter extends Subsystem {
     this.wheelController.setMinDoneCycles(3);
     this.wheelController.setSetPoint(this.targetShootingSpeed);
     this.currentShooterMotorValue = 0;
+  }
+
+  public Value getPistonValue() {
+    return piston.get();
+  }
+
+  public void setHighGear() {
+    changeGear(Constants.Shooter.HIGH_GEAR);
+  }
+
+  public void setLowGear() {
+    changeGear(Constants.Shooter.LOW_GEAR);
+  }
+
+  private void changeGear(DoubleSolenoid.Value gear) {
+    piston.set(gear);
   }
 }
