@@ -1,8 +1,10 @@
 package org.usfirst.frc.team3501.robot.commands.shooter;
 
+import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.Shooter;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -19,6 +21,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class RunIndexWheelContinuous extends Command {
   private Shooter shooter = Robot.getShooter();
+  private Timer t = new Timer();
 
   /**
    * See JavaDoc comment in class for details
@@ -29,10 +32,19 @@ public class RunIndexWheelContinuous extends Command {
 
   @Override
   protected void initialize() {
+    t.reset();
   }
 
   @Override
   protected void execute() {
+    if (t.get() % 1 == 0) {
+      if (Shooter.getShooter().getPistonValue() == Constants.Shooter.LOW_GEAR) {
+        Shooter.getShooter().setHighGear();
+      } else {
+        Shooter.getShooter().setLowGear();
+      }
+    }
+
     double shooterSpeed = shooter.getShooterRPM();
     double targetShooterSpeed = shooter.getTargetShootingSpeed();
     double threshold = shooter.getRPMThreshold();
