@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3501.robot.subsystems;
 
 import org.usfirst.frc.team3501.robot.Constants;
+import org.usfirst.frc.team3501.robot.MathLib;
 import org.usfirst.frc.team3501.robot.utils.HallEffectSensor;
 
 import com.ctre.CANTalon;
@@ -8,12 +9,12 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Shooter extends Subsystem {
-  public double wheelP = 0, wheelI = 0, wheelD = -0;
+  public double wheelP = 0.0003, wheelI = 0, wheelD = -0.00004;
   private static Shooter shooter;
   private static HallEffectSensor hallEffect;
   private final CANTalon flyWheel1, flyWheel2, indexWheel;
 
-  public static final double DEFAULT_INDEXING_SPEED = -0.75;
+  public static final double DEFAULT_INDEXING_SPEED = -1.0;
   public static final double DEFAULT_SHOOTING_SPEED = 0.75;
   public static double CURRENT_SHOOTING_SPEED = DEFAULT_SHOOTING_SPEED;
 
@@ -49,7 +50,8 @@ public class Shooter extends Subsystem {
    * @param val
    *          motor value from -1 to 1(fastest forward)
    */
-  public void setFlyWheelMotorVal(final double val) {
+  public void setFlyWheelMotorVal(double val) {
+    val = MathLib.restrictToRange(val, 0.0, 1.0);
     flyWheel1.set(val);
     flyWheel2.set(val);
   }
@@ -68,7 +70,8 @@ public class Shooter extends Subsystem {
    * @param val
    *          motor value from -1 to 1(fastest forward)
    */
-  public void setIndexWheelMotorVal(final double val) {
+  public void setIndexWheelMotorVal(double val) {
+    val = MathLib.restrictToRange(val, -1.0, 1.0);
     indexWheel.set(val);
   }
 

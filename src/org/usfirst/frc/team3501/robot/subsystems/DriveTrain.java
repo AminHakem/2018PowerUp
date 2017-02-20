@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3501.robot.subsystems;
 
 import org.usfirst.frc.team3501.robot.Constants;
+import org.usfirst.frc.team3501.robot.MathLib;
 import org.usfirst.frc.team3501.robot.commands.driving.JoystickDrive;
 
 import com.ctre.CANTalon;
@@ -13,12 +14,12 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
-  public static double driveP = 0.012, driveI = 0.0011, driveD = -0.002;
+  public static double driveP = 0.006, driveI = 0.0011, driveD = -0.002;
   public static double turnP = 0.004, turnI = 0.0013, turnD = -0.005;
   public static double driveStraightGyroP = 0.01;
 
-  public static final double WHEEL_DIAMETER = 6; // inches
-  public static final int ENCODER_PULSES_PER_REVOLUTION = 256;
+  public static final double WHEEL_DIAMETER = 4; // inches
+  public static final double ENCODER_PULSES_PER_REVOLUTION = 256;
   public static final double INCHES_PER_PULSE = WHEEL_DIAMETER * Math.PI
       / ENCODER_PULSES_PER_REVOLUTION;
 
@@ -75,7 +76,10 @@ public class DriveTrain extends Subsystem {
   }
 
   // DRIVE METHODS
-  public void setMotorValues(final double left, final double right) {
+  public void setMotorValues(double left, double right) {
+    left = MathLib.restrictToRange(left, 0.0, 1.0);
+    right = MathLib.restrictToRange(right, 0.0, 1.0);
+
     frontLeft.set(left);
     rearLeft.set(left);
 

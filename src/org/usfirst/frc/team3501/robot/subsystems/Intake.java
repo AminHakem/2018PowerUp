@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3501.robot.subsystems;
 
 import org.usfirst.frc.team3501.robot.Constants;
+import org.usfirst.frc.team3501.robot.MathLib;
 
 import com.ctre.CANTalon;
 
@@ -44,6 +45,7 @@ public class Intake extends Subsystem {
    *          from -1 to 1
    */
   private void setSpeed(double speed) {
+    speed = MathLib.restrictToRange(speed, -1.0, 1.0);
     intakeWheel.set(speed);
   }
 
