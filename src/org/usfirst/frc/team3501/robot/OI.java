@@ -40,7 +40,7 @@ public class OI {
         Constants.OI.RUN_INDEXWHEEL_PORT);
     runIndexWheel.whileHeld(new RunIndexWheelContinuous());
 
-    reverseIndexWheel = new JoystickButton(leftJoystick,
+    reverseIndexWheel = new JoystickButton(rightJoystick,
         Constants.OI.REVERSE_INDEXWHEEL_PORT);
     reverseIndexWheel.whileHeld(new ReverseIndexWheelContinuous());
 
@@ -52,8 +52,7 @@ public class OI {
         Constants.OI.TOGGLE_GEAR_PORT);
     toggleGear.whenPressed(new ToggleGear());
 
-    runIntake = new JoystickButton(leftJoystick,
-        Constants.OI.RUN_INTAKE_PORT);
+    runIntake = new JoystickButton(leftJoystick, Constants.OI.RUN_INTAKE_PORT);
     runIntake.whileHeld(new RunIntakeContinuous());
 
     reverseIntake = new JoystickButton(leftJoystick,
