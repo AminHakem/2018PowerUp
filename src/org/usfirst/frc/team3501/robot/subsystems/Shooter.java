@@ -9,16 +9,16 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Shooter extends Subsystem {
-  public double wheelP = 0.0003, wheelI = 0, wheelD = -0.00004;
+  public double wheelP = 0.0001, wheelI = 0, wheelD = 0.0004;
   private static Shooter shooter;
   private static HallEffectSensor hallEffect;
   private final CANTalon flyWheel1, flyWheel2, indexWheel;
 
-  public static final double DEFAULT_INDEXING_SPEED = -1.0;
-  public static final double DEFAULT_SHOOTING_SPEED = 0.75;
-  public static double CURRENT_SHOOTING_SPEED = DEFAULT_SHOOTING_SPEED;
+  public static final double DEFAULT_INDEXING_SPEED = -0.75;
+  public static final double DEFAULT_SHOOTING_SPEED = 2700; // rpm
+  private static double CURRENT_SHOOTING_SPEED = DEFAULT_SHOOTING_SPEED;
 
-  public static final double SHOOTING_SPEED_INCREMENT = 0.05;
+  public static final double SHOOTING_SPEED_INCREMENT = 25;
 
   private Shooter() {
     flyWheel1 = new CANTalon(Constants.Shooter.FLY_WHEEL1);

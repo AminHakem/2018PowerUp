@@ -6,8 +6,10 @@ import org.usfirst.frc.team3501.robot.subsystems.Shooter;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
   private static DriveTrain driveTrain;
@@ -56,11 +58,19 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void teleopInit() {
-
   }
 
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    updateSmartDashboard();
+  }
+
+  public void updateSmartDashboard() {
+    SmartDashboard.putNumber("angle", driveTrain.getAngle());
+    SmartDashboard.putNumber("voltage",
+        DriverStation.getInstance().getBatteryVoltage());
+    SmartDashboard.putNumber("rpm", shooter.getShooterRPM());
+    SmartDashboard.putNumber("motor value", shooter.getCurrentShootingSpeed());
   }
 }

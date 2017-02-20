@@ -26,7 +26,7 @@ public class RunFlyWheelContinuous extends Command {
   private double wheelI;
   private double wheelD;
   private double target;
-  double shooterSpeed = 0;
+  private double shooterSpeed = 0;
 
   public RunFlyWheelContinuous() {
     this.wheelP = this.shooter.wheelP;
@@ -37,7 +37,7 @@ public class RunFlyWheelContinuous extends Command {
     this.wheelController.setDoneRange(10);
     this.wheelController.setMaxOutput(1.0);
     this.wheelController.setMinDoneCycles(3);
-    this.target = 2700;
+    this.target = shooter.getCurrentShootingSpeed();
   }
 
   @Override
@@ -50,11 +50,7 @@ public class RunFlyWheelContinuous extends Command {
     double calculatedShooterIncrement = this.wheelController
         .calcPID(this.shooter.getShooterRPM());
     shooterSpeed += calculatedShooterIncrement;
-    if (shooterSpeed > 1.0)
-      this.shooter.setFlyWheelMotorVal(1.0);
-    else
-      this.shooter.setFlyWheelMotorVal(shooterSpeed);
-    // this.shooter.setFlyWheelMotorVal(this.shooter.CURRENT_SHOOTING_SPEED);
+    this.shooter.setFlyWheelMotorVal(shooterSpeed);
   }
 
   @Override

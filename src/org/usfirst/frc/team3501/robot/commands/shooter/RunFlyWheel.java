@@ -23,6 +23,7 @@ public class RunFlyWheel extends Command {
   private double wheelI;
   private double wheelD;
   private double target;
+  private double shooterSpeed = 0;
 
   public RunFlyWheel(double maxTimeOut) {
 
@@ -46,9 +47,9 @@ public class RunFlyWheel extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double shooterSpeed = this.wheelController
+    double calculatedShooterIncrement = this.wheelController
         .calcPID(this.shooter.getShooterRPM());
-
+    shooterSpeed += calculatedShooterIncrement;
     this.shooter.setFlyWheelMotorVal(shooterSpeed);
   }
 
