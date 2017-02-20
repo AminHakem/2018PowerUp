@@ -36,7 +36,7 @@ public class Shooter extends Subsystem {
 
     hallEffect = new HallEffectSensor(Constants.Shooter.HALL_EFFECT_PORT, 1);
 
-    piston = new DoubleSolenoid(Constants.DriveTrain.MODULE_NUMBER,
+    piston = new DoubleSolenoid(Constants.Shooter.MODULE_NUMBER,
         Constants.Shooter.PISTON_FORWARD, Constants.Shooter.PISTON_REVERSE);
   }
 
