@@ -4,6 +4,8 @@ import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
 import org.usfirst.frc.team3501.robot.subsystems.Shooter;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
@@ -19,6 +21,9 @@ public class Robot extends IterativeRobot {
     oi = OI.getOI();
     shooter = Shooter.getShooter();
     intake = Intake.getIntake();
+    CameraServer server = CameraServer.getInstance();
+    UsbCamera climberCam = server.startAutomaticCapture("climbercam", 0);
+    UsbCamera intakeCam = server.startAutomaticCapture("intakecam", 1);
   }
 
   public static DriveTrain getDriveTrain() {
@@ -47,7 +52,6 @@ public class Robot extends IterativeRobot {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
-
   }
 
   @Override
