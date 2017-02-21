@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3501.robot.commands.shooter;
 
 import org.usfirst.frc.team3501.robot.Robot;
+import org.usfirst.frc.team3501.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -12,8 +13,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 
 public class ReverseIndexWheel extends Command {
+  private Shooter shooter = Robot.getShooter();
   private double time;
-  private double motorVal;
 
   /**
    * See JavaDoc comment in class for details
@@ -24,20 +25,18 @@ public class ReverseIndexWheel extends Command {
    *          in seconds, amount of time to run index wheel motor
    */
 
-  public ReverseIndexWheel(double time, double motorVal) {
+  public ReverseIndexWheel(double time) {
     requires(Robot.getDriveTrain());
     this.time = time;
-    this.motorVal = motorVal;
   }
 
   @Override
   protected void initialize() {
-
   }
 
   @Override
   protected void execute() {
-    Robot.getShooter().setIndexWheelMotorVal(-motorVal);
+    shooter.reverseIndexWheel();
 
   }
 
@@ -48,7 +47,7 @@ public class ReverseIndexWheel extends Command {
 
   @Override
   protected void end() {
-    Robot.getShooter().stopIndexWheel();
+    shooter.stopIndexWheel();
 
   }
 

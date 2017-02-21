@@ -39,9 +39,8 @@ public class RunIndexWheel extends Command {
   @Override
   protected void execute() {
     double shooterSpeed = shooter.getShooterRPM();
-    if (shooterSpeed > 0) {
-      shooter.setIndexWheelMotorVal(shooter.DEFAULT_INDEXING_SPEED);
-    }
+    if (shooterSpeed > 0)
+      shooter.runIndexWheel();
   }
 
   // Called once after isFinished returns true

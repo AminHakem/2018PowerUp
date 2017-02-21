@@ -38,7 +38,7 @@ public class ReverseIndexWheelContinuous extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    shooter.setIndexWheelMotorVal(shooter.DEFAULT_INDEXING_SPEED * -1);
+    shooter.reverseIndexWheel();
   }
 
   // Called once after isFinished returns true

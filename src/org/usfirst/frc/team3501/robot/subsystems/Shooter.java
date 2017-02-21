@@ -14,11 +14,11 @@ public class Shooter extends Subsystem {
   private static HallEffectSensor hallEffect;
   private final CANTalon flyWheel1, flyWheel2, indexWheel;
 
-  public static final double DEFAULT_INDEXING_SPEED = -0.75;
-  public static final double DEFAULT_SHOOTING_SPEED = 2700; // rpm
-  private static double CURRENT_SHOOTING_SPEED = DEFAULT_SHOOTING_SPEED;
+  private static final double DEFAULT_INDEXING_SPEED = -0.75;
+  private static final double DEFAULT_SHOOTING_SPEED = 2700; // rpm
+  private static final double SHOOTING_SPEED_INCREMENT = 25;
 
-  public static final double SHOOTING_SPEED_INCREMENT = 25;
+  private double currentShootingSpeed = DEFAULT_SHOOTING_SPEED;
 
   private Shooter() {
     flyWheel1 = new CANTalon(Constants.Shooter.FLY_WHEEL1);
@@ -26,10 +26,6 @@ public class Shooter extends Subsystem {
     indexWheel = new CANTalon(Constants.Shooter.INDEX_WHEEL);
 
     hallEffect = new HallEffectSensor(Constants.Shooter.HALL_EFFECT_PORT, 1);
-  }
-
-  public static HallEffectSensor getHallEffectSensor() {
-    return hallEffect;
   }
 
   /**
@@ -82,14 +78,6 @@ public class Shooter extends Subsystem {
     indexWheel.set(0);
   }
 
-  public double getCurrentShootingSpeed() {
-    return CURRENT_SHOOTING_SPEED;
-  }
-
-  public void setCurrentShootingSpeed(double Value) {
-    CURRENT_SHOOTING_SPEED = Value;
-  }
-
   @Override
   protected void initDefaultCommand() {
 
@@ -97,5 +85,33 @@ public class Shooter extends Subsystem {
 
   public double getShooterRPM() {
     return hallEffect.getRPM();
+  }
+
+  public void setCurrentShootingSpeed(double Value) {
+    currentShootingSpeed = Value;
+  }
+
+  public void decrementCurrentShootingSpeed() {
+    this.currentShootingSpeed -= this.SHOOTING_SPEED_INCREMENT;
+  }
+
+  public void incrementCurrentShootingSpeed() {
+    this.currentShootingSpeed += this.SHOOTING_SPEED_INCREMENT;
+  }
+
+  public void resetCurrentShootingSpeed() {
+    this.currentShootingSpeed = this.DEFAULT_SHOOTING_SPEED;
+  }
+
+  public double getCurrentShootingSpeed() {
+    return currentShootingSpeed;
+  }
+
+  public void reverseIndexWheel() {
+    this.setIndexWheelMotorVal(-DEFAULT_INDEXING_SPEED);
+  }
+
+  public void runIndexWheel() {
+    this.setIndexWheelMotorVal(DEFAULT_INDEXING_SPEED);
   }
 }
