@@ -14,8 +14,10 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
-  public static double driveP = 0.006, driveI = 0.0011, driveD = -0.002;
-  public static double turnP = 0.004, turnI = 0.0013, turnD = -0.005;
+  public static double driveP = 0.012, driveI = 0.0011, driveD = -0.002;
+  public static double smallTurnP = 0.004, smallTurnI = 0.0013,
+      smallTurnD = 0.005;
+  public static double largeTurnP = .003, largeTurnI = .0012, largeTurnD = .006;
   public static double driveStraightGyroP = 0.01;
 
   public static final double WHEEL_DIAMETER = 4; // inches
@@ -77,8 +79,8 @@ public class DriveTrain extends Subsystem {
 
   // DRIVE METHODS
   public void setMotorValues(double left, double right) {
-    left = MathLib.restrictToRange(left, 0.0, 1.0);
-    right = MathLib.restrictToRange(right, 0.0, 1.0);
+    left = MathLib.restrictToRange(left, -1.0, 1.0);
+    right = MathLib.restrictToRange(right, -1.0, 1.0);
 
     frontLeft.set(left);
     rearLeft.set(left);
@@ -183,6 +185,7 @@ public class DriveTrain extends Subsystem {
    * Changes the gear to a DoubleSolenoid.Value
    */
   private void changeGear(DoubleSolenoid.Value gear) {
+    System.out.println(gear);
     leftGearPiston.set(gear);
     rightGearPiston.set(gear);
   }

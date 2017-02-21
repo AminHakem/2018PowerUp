@@ -36,9 +36,15 @@ public class TurnForAngle extends Command {
     this.maxTimeOut = maxTimeOut;
     this.target = Math.abs(angle);
 
-    this.gyroP = driveTrain.turnP;
-    this.gyroI = driveTrain.turnI;
-    this.gyroD = driveTrain.turnD;
+    if (angle > 90) {
+      this.gyroP = driveTrain.largeTurnP;
+      this.gyroI = driveTrain.largeTurnI;
+      this.gyroD = driveTrain.largeTurnD;
+    } else {
+      this.gyroP = driveTrain.smallTurnP;
+      this.gyroI = driveTrain.smallTurnI;
+      this.gyroD = driveTrain.smallTurnD;
+    }
 
     this.gyroController = new PIDController(this.gyroP, this.gyroI, this.gyroD);
     this.gyroController.setDoneRange(1);

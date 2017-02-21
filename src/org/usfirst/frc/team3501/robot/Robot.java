@@ -71,6 +71,6 @@ public class Robot extends IterativeRobot {
     SmartDashboard.putNumber("voltage",
         DriverStation.getInstance().getBatteryVoltage());
     SmartDashboard.putNumber("rpm", shooter.getShooterRPM());
-    SmartDashboard.putNumber("motor value", shooter.getCurrentShootingSpeed());
+    SmartDashboard.putNumber("motor value", shooter.getTargetShootingSpeed());
   }
 }

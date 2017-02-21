@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3501.robot.commands.shooter;
 
-import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.Shooter;
 
@@ -37,20 +36,8 @@ public class RunIndexWheelContinuous extends Command {
     double shooterSpeed = shooter.getShooterRPM();
     double targetShooterSpeed = shooter.getTargetShootingSpeed();
     double threshold = shooter.getRPMThreshold();
-    // if (Math.abs(shooterSpeed - targetShooterSpeed) <= threshold)
-
-    if (timeSinceInitialized() % 0.5 <= 0.02) {
-
-      if (Robot.getDriveTrain()
-          .getLeftGearPistonValue() == Constants.DriveTrain.LOW_GEAR) {
-        System.out.println("shifting to low gear " + timeSinceInitialized());
-        Robot.getDriveTrain().setHighGear();
-      } else {
-        System.out.println("shifting to high gear " + timeSinceInitialized());
-        Robot.getDriveTrain().setLowGear();
-      }
-    }
-    shooter.runIndexWheel();
+    if (Math.abs(shooterSpeed - targetShooterSpeed) <= threshold)
+      shooter.runIndexWheel();
   }
 
   @Override
