@@ -21,7 +21,7 @@ public class DecreaseShootingSpeed extends Command {
 
   @Override
   protected void initialize() {
-    shooter.decrementCurrentShootingSpeed();
+    shooter.decrementTargetShootingSpeed();
   }
 
   @Override

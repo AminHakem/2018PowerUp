@@ -39,7 +39,9 @@ public class RunIndexWheel extends Command {
   @Override
   protected void execute() {
     double shooterSpeed = shooter.getShooterRPM();
-    if (shooterSpeed > 0)
+    double targetShooterSpeed = shooter.getTargetShootingSpeed();
+    double threshold = shooter.getRPMThreshold();
+    if (Math.abs(shooterSpeed - targetShooterSpeed) <= threshold)
       shooter.runIndexWheel();
   }
 

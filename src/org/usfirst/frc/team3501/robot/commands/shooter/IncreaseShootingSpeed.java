@@ -21,7 +21,7 @@ public class IncreaseShootingSpeed extends Command {
 
   @Override
   protected void initialize() {
-    shooter.incrementCurrentShootingSpeed();
+    shooter.incrementTargetShootingSpeed();
   }
 
   @Override

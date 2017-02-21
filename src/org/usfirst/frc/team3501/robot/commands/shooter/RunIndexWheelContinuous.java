@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3501.robot.commands.shooter;
 
+import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.Shooter;
 
@@ -22,35 +23,41 @@ public class RunIndexWheelContinuous extends Command {
 
   /**
    * See JavaDoc comment in class for details
-   *
-   * @param motorVal
-   *          value range from -1 to 1
    */
   public RunIndexWheelContinuous() {
     requires(shooter);
   }
 
-  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
   }
 
-  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
     double shooterSpeed = shooter.getShooterRPM();
-    if (shooterSpeed > 0)
-      shooter.runIndexWheel();
+    double targetShooterSpeed = shooter.getTargetShootingSpeed();
+    double threshold = shooter.getRPMThreshold();
+    // if (Math.abs(shooterSpeed - targetShooterSpeed) <= threshold)
+
+    if (timeSinceInitialized() % 0.5 <= 0.02) {
+
+      if (Robot.getDriveTrain()
+          .getLeftGearPistonValue() == Constants.DriveTrain.LOW_GEAR) {
+        System.out.println("shifting to low gear " + timeSinceInitialized());
+        Robot.getDriveTrain().setHighGear();
+      } else {
+        System.out.println("shifting to high gear " + timeSinceInitialized());
+        Robot.getDriveTrain().setLowGear();
+      }
+    }
+    shooter.runIndexWheel();
   }
 
-  // Called once after isFinished returns true
   @Override
   protected void end() {
     shooter.stopIndexWheel();
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
   @Override
   protected void interrupted() {
     end();

@@ -22,35 +22,18 @@ public class RunFlyWheelContinuous extends Command {
   private Shooter shooter = Robot.getShooter();
 
   private PIDController wheelController;
-  private double wheelP;
-  private double wheelI;
-  private double wheelD;
-  private double target;
-  private double shooterSpeed = 0;
 
   public RunFlyWheelContinuous() {
-    this.wheelP = this.shooter.wheelP;
-    this.wheelI = this.shooter.wheelI;
-    this.wheelD = this.shooter.wheelD;
-    this.wheelController = new PIDController(this.wheelP, this.wheelI,
-        this.wheelD);
-    this.wheelController.setDoneRange(10);
-    this.wheelController.setMaxOutput(1.0);
-    this.wheelController.setMinDoneCycles(3);
-    this.target = shooter.getCurrentShootingSpeed();
   }
 
   @Override
   protected void initialize() {
-    this.wheelController.setSetPoint(this.target);
+    shooter.initializePIDController();
   }
 
   @Override
   protected void execute() {
-    double calculatedShooterIncrement = this.wheelController
-        .calcPID(this.shooter.getShooterRPM());
-    shooterSpeed += calculatedShooterIncrement;
-    this.shooter.setFlyWheelMotorVal(shooterSpeed);
+    shooter.setFlyWheelMotorVal(shooter.calculateShooterSpeed());
   }
 
   @Override

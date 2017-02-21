@@ -20,7 +20,7 @@ public class ResetShootingSpeed extends Command {
 
   @Override
   protected void initialize() {
-    shooter.resetCurrentShootingSpeed();
+    shooter.resetTargetShootingSpeed();
   }
 
   @Override

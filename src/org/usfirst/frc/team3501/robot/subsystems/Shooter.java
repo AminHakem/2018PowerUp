@@ -3,22 +3,27 @@ package org.usfirst.frc.team3501.robot.subsystems;
 import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.MathLib;
 import org.usfirst.frc.team3501.robot.utils.HallEffectSensor;
+import org.usfirst.frc.team3501.robot.utils.PIDController;
 
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Shooter extends Subsystem {
-  public double wheelP = 0.0001, wheelI = 0, wheelD = 0.0004;
+  public double wheelP = 0.00007, wheelI = 0, wheelD = 0.0008;
   private static Shooter shooter;
   private static HallEffectSensor hallEffect;
   private final CANTalon flyWheel1, flyWheel2, indexWheel;
 
-  private static final double DEFAULT_INDEXING_SPEED = -0.75;
+  private PIDController wheelController;
+
+  private static final double RPM_THRESHOLD = 10;
+  private static final double DEFAULT_INDEXING_MOTOR_VALUE = -0.75;
   private static final double DEFAULT_SHOOTING_SPEED = 2700; // rpm
   private static final double SHOOTING_SPEED_INCREMENT = 25;
 
-  private double currentShootingSpeed = DEFAULT_SHOOTING_SPEED;
+  private double targetShootingSpeed = DEFAULT_SHOOTING_SPEED;
+  private double currentShooterMotorValue = 0;
 
   private Shooter() {
     flyWheel1 = new CANTalon(Constants.Shooter.FLY_WHEEL1);
@@ -83,35 +88,56 @@ public class Shooter extends Subsystem {
 
   }
 
+  public double getRPMThreshold() {
+    return RPM_THRESHOLD;
+  }
+
   public double getShooterRPM() {
     return hallEffect.getRPM();
   }
 
-  public void setCurrentShootingSpeed(double Value) {
-    currentShootingSpeed = Value;
+  public void setTargetShootingSpeed(double Value) {
+    targetShootingSpeed = Value;
   }
 
-  public void decrementCurrentShootingSpeed() {
-    this.currentShootingSpeed -= this.SHOOTING_SPEED_INCREMENT;
+  public void decrementTargetShootingSpeed() {
+    this.targetShootingSpeed -= this.SHOOTING_SPEED_INCREMENT;
   }
 
-  public void incrementCurrentShootingSpeed() {
-    this.currentShootingSpeed += this.SHOOTING_SPEED_INCREMENT;
+  public void incrementTargetShootingSpeed() {
+    this.targetShootingSpeed += this.SHOOTING_SPEED_INCREMENT;
   }
 
-  public void resetCurrentShootingSpeed() {
-    this.currentShootingSpeed = this.DEFAULT_SHOOTING_SPEED;
+  public void resetTargetShootingSpeed() {
+    this.targetShootingSpeed = this.DEFAULT_SHOOTING_SPEED;
   }
 
-  public double getCurrentShootingSpeed() {
-    return currentShootingSpeed;
+  public double getTargetShootingSpeed() {
+    return targetShootingSpeed;
   }
 
   public void reverseIndexWheel() {
-    this.setIndexWheelMotorVal(-DEFAULT_INDEXING_SPEED);
+    this.setIndexWheelMotorVal(-DEFAULT_INDEXING_MOTOR_VALUE);
   }
 
   public void runIndexWheel() {
-    this.setIndexWheelMotorVal(DEFAULT_INDEXING_SPEED);
+    this.setIndexWheelMotorVal(DEFAULT_INDEXING_MOTOR_VALUE);
+  }
+
+  public double calculateShooterSpeed() {
+    this.wheelController.setSetPoint(targetShootingSpeed);
+    double calculatedShooterIncrement = this.wheelController
+        .calcPID(this.getShooterRPM());
+    currentShooterMotorValue += calculatedShooterIncrement;
+    return currentShooterMotorValue;
+  }
+
+  public void initializePIDController() {
+    this.wheelController = new PIDController(wheelP, wheelI, wheelD);
+    this.wheelController.setDoneRange(10);
+    this.wheelController.setMaxOutput(1.0);
+    this.wheelController.setMinDoneCycles(3);
+    this.wheelController.setSetPoint(this.targetShootingSpeed);
+    this.currentShooterMotorValue = 0;
   }
 }
