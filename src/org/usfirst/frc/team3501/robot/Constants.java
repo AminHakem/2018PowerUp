@@ -16,7 +16,6 @@ public class Constants {
     public final static int RIGHT_STICK_PORT = 1;
 
     // Need to fill in the port numbers of the following buttons
-    public final static int TOGGLE_WINCH_PORT = 0;
     public final static int TOGGLE_FLYWHEEL_PORT = 4;
     public final static int RUN_INDEXWHEEL_PORT = 1;
     public final static int REVERSE_INDEXWHEEL_PORT = 2;
@@ -25,6 +24,8 @@ public class Constants {
     public final static int REVERSE_INTAKE_PORT = 4;
     public static final int INCREASE_SHOOTER_SPEED_PORT = 6;
     public static final int DECREASE_SHOOTER_SPEED_PORT = 2;
+    public static final int BRAKE_CANTALONS_PORT = 5;
+    public static final int COAST_CANTALONS_PORT = 3;
   }
 
   public static class Shooter {

@@ -29,6 +29,9 @@ public class DriveTrain extends Subsystem {
   public static final double TIME_TO_CLIMB_FOR = 0;
   public static final double CLIMBER_SPEED = 0;
 
+  public static final boolean DRIVE_BRAKE_MODE = true;
+  public static final boolean DRIVE_COAST_MODE = false;
+
   private static DriveTrain driveTrain;
 
   private final CANTalon frontLeft, frontRight, rearLeft, rearRight;
@@ -185,7 +188,6 @@ public class DriveTrain extends Subsystem {
    * Changes the gear to a DoubleSolenoid.Value
    */
   private void changeGear(DoubleSolenoid.Value gear) {
-    System.out.println(gear);
     leftGearPiston.set(gear);
     rightGearPiston.set(gear);
   }
@@ -193,5 +195,13 @@ public class DriveTrain extends Subsystem {
   @Override
   protected void initDefaultCommand() {
     setDefaultCommand(new JoystickDrive());
+  }
+
+  public void setCANTalonsBrakeMode(boolean mode) {
+    frontLeft.enableBrakeMode(mode);
+    rearLeft.enableBrakeMode(mode);
+
+    frontRight.enableBrakeMode(mode);
+    rearRight.enableBrakeMode(mode);
   }
 }

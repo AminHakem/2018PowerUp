@@ -23,9 +23,12 @@ public class Robot extends IterativeRobot {
     oi = OI.getOI();
     shooter = Shooter.getShooter();
     intake = Intake.getIntake();
+
     CameraServer server = CameraServer.getInstance();
     UsbCamera climberCam = server.startAutomaticCapture("climbercam", 0);
     UsbCamera intakeCam = server.startAutomaticCapture("intakecam", 1);
+
+    driveTrain.setCANTalonsBrakeMode(driveTrain.DRIVE_COAST_MODE);
   }
 
   public static DriveTrain getDriveTrain() {
@@ -49,6 +52,7 @@ public class Robot extends IterativeRobot {
   @Override
   public void autonomousInit() {
     driveTrain.setHighGear();
+    driveTrain.setCANTalonsBrakeMode(driveTrain.DRIVE_COAST_MODE);
   }
 
   @Override
@@ -58,19 +62,36 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void teleopInit() {
+    driveTrain.setCANTalonsBrakeMode(driveTrain.DRIVE_COAST_MODE);
   }
 
   @Override
   public void teleopPeriodic() {
+    // driveTrain.printEncoderOutput();
     Scheduler.getInstance().run();
     updateSmartDashboard();
   }
 
+  @Override
+  public void disabledInit() {
+    driveTrain.setCANTalonsBrakeMode(driveTrain.DRIVE_BRAKE_MODE);
+  }
+  //
+  // @Override
+  // public void disabledPeriodic() {
+  // Scheduler.getInstance().add(new RunFlyWheel(2));
+  // }
+
   public void updateSmartDashboard() {
+    SmartDashboard.putNumber("left encode ",
+        driveTrain.getLeftEncoderDistance());
+    SmartDashboard.putNumber("right encoder",
+        driveTrain.getRightEncoderDistance());
     SmartDashboard.putNumber("angle", driveTrain.getAngle());
     SmartDashboard.putNumber("voltage",
         DriverStation.getInstance().getBatteryVoltage());
     SmartDashboard.putNumber("rpm", shooter.getShooterRPM());
-    SmartDashboard.putNumber("motor value", shooter.getTargetShootingSpeed());
+    SmartDashboard.putNumber("target shooting",
+        shooter.getTargetShootingSpeed());
   }
 }

@@ -34,7 +34,7 @@ public class ToggleWinch extends Command {
 
   @Override
   protected boolean isFinished() {
-    return Robot.getOI().toggleWinch.get();
+    return false;
   }
 
   @Override
