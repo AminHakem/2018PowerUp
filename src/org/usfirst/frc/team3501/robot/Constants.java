@@ -36,8 +36,8 @@ public class Constants {
 
     public final static int HALL_EFFECT_PORT = 9;
 
-    public static final int MODULE_NUMBER = 10, PISTON_FORWARD = 7,
-        PISTON_REVERSE = 8;
+    public static final int MODULE_NUMBER = 10, PISTON_FORWARD = 4,
+        PISTON_REVERSE = 5;
     public static final Value HIGH_GEAR = DoubleSolenoid.Value.kForward;
     public static final Value LOW_GEAR = DoubleSolenoid.Value.kReverse;
   }
@@ -45,8 +45,8 @@ public class Constants {
   public static class DriveTrain {
     // GEARS
     public static final int PISTON_MODULE = 10, LEFT_GEAR_PISTON_FORWARD = 0,
-        LEFT_GEAR_PISTON_REVERSE = 1, RIGHT_GEAR_PISTON_FORWARD = 2,
-        RIGHT_GEAR_PISTON_REVERSE = 3;
+        LEFT_GEAR_PISTON_REVERSE = 1, RIGHT_GEAR_PISTON_FORWARD = 3,
+        RIGHT_GEAR_PISTON_REVERSE = 2;
     public static final Value HIGH_GEAR = DoubleSolenoid.Value.kForward;
     public static final Value LOW_GEAR = DoubleSolenoid.Value.kReverse;
 

@@ -34,7 +34,7 @@ public class RunIndexWheelContinuous extends Command {
 
   @Override
   protected void execute() {
-    if (timeSinceInitialized() % 1 == 0) {
+    if (timeSinceInitialized() % 0.5 <= 0.02) {
       if (Shooter.getShooter().getPistonValue() == Constants.Shooter.LOW_GEAR) {
         Shooter.getShooter().setHighGear();
       } else {

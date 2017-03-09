@@ -20,8 +20,8 @@ public class Shooter extends Subsystem {
   private PIDController wheelController;
 
   private static final double RPM_THRESHOLD = 10;
-  private static final double DEFAULT_INDEXING_MOTOR_VALUE = 0.75;
-  private static final double DEFAULT_SHOOTING_SPEED = 2800; // rpm
+  private static final double DEFAULT_INDEXING_MOTOR_VALUE = -0.75;
+  private static final double DEFAULT_SHOOTING_SPEED = 3100; // rpm
   private static final double SHOOTING_SPEED_INCREMENT = 50;
 
   private double targetShootingSpeed = DEFAULT_SHOOTING_SPEED;
