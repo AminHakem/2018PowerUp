@@ -67,7 +67,7 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void teleopPeriodic() {
-    // driveTrain.printEncoderOutput();
+    driveTrain.printEncoderOutput();
     Scheduler.getInstance().run();
     updateSmartDashboard();
   }

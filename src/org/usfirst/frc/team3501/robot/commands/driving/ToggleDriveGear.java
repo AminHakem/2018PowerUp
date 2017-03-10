@@ -13,10 +13,10 @@ import edu.wpi.first.wpilibj.command.Command;
  * post-condition: if the drivetrain is running at high gear, it will be made to
  * run at low gear, and vice versa
  */
-public class ToggleGear extends Command {
+public class ToggleDriveGear extends Command {
   DriveTrain driveTrain = Robot.getDriveTrain();
 
-  public ToggleGear() {
+  public ToggleDriveGear() {
     requires(driveTrain);
   }
 
@@ -27,9 +27,9 @@ public class ToggleGear extends Command {
 
   @Override
   protected void execute() {
-    Value leftGearPistonValue = driveTrain.getLeftGearPistonValue();
-    Value rightGearPistonValue = driveTrain.getRightGearPistonValue();
-    if (leftGearPistonValue == Constants.DriveTrain.LOW_GEAR) {
+    Value leftPistonValue = driveTrain.getLeftDriveTrainPiston();
+    Value rightPistonValue = driveTrain.getRightDriveTrainPiston();
+    if (leftPistonValue == Constants.DriveTrain.REVERSE_PISTON_VALUE) {
       driveTrain.setHighGear();
     } else {
       driveTrain.setLowGear();

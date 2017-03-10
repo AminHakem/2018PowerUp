@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3501.robot.commands.shooter;
 
-import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.Shooter;
 
@@ -34,14 +33,6 @@ public class RunIndexWheelContinuous extends Command {
 
   @Override
   protected void execute() {
-    if (timeSinceInitialized() % 0.5 <= 0.02) {
-      if (Shooter.getShooter().getPistonValue() == Constants.Shooter.LOW_GEAR) {
-        Shooter.getShooter().setHighGear();
-      } else {
-        Shooter.getShooter().setLowGear();
-      }
-    }
-
     double shooterSpeed = shooter.getShooterRPM();
     double targetShooterSpeed = shooter.getTargetShootingSpeed();
     double threshold = shooter.getRPMThreshold();

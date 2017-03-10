@@ -37,7 +37,8 @@ public class DriveTrain extends Subsystem {
   private final CANTalon frontLeft, frontRight, rearLeft, rearRight;
   private final RobotDrive robotDrive;
   private final Encoder leftEncoder, rightEncoder;
-  private final DoubleSolenoid leftGearPiston, rightGearPiston;
+  private final DoubleSolenoid leftDriveTrainPiston, rightDriveTrainPiston;
+  private final DoubleSolenoid gearManipulatorPiston;
 
   private ADXRS450_Gyro imu;
 
@@ -65,12 +66,19 @@ public class DriveTrain extends Subsystem {
     this.imu = new ADXRS450_Gyro(Constants.DriveTrain.GYRO_PORT);
 
     // TODO: Not sure if MODULE_NUMBER should be the same for both
-    leftGearPiston = new DoubleSolenoid(Constants.DriveTrain.PISTON_MODULE,
+    leftDriveTrainPiston = new DoubleSolenoid(
+        Constants.DriveTrain.PISTON_MODULE,
         Constants.DriveTrain.LEFT_GEAR_PISTON_FORWARD,
         Constants.DriveTrain.LEFT_GEAR_PISTON_REVERSE);
-    rightGearPiston = new DoubleSolenoid(Constants.DriveTrain.PISTON_MODULE,
+    rightDriveTrainPiston = new DoubleSolenoid(
+        Constants.DriveTrain.PISTON_MODULE,
         Constants.DriveTrain.RIGHT_GEAR_PISTON_FORWARD,
         Constants.DriveTrain.RIGHT_GEAR_PISTON_REVERSE);
+
+    gearManipulatorPiston = new DoubleSolenoid(
+        Constants.DriveTrain.PISTON_MODULE,
+        Constants.DriveTrain.GEAR_MANIPULATOR_PISTON_FORWARD,
+        Constants.DriveTrain.GEAR_MANIPULATOR_PISTON_REVERSE);
   }
 
   public static DriveTrain getDriveTrain() {
@@ -158,38 +166,50 @@ public class DriveTrain extends Subsystem {
    * @return a value that is the current setpoint for the piston kReverse or
    * KForward
    */
-  public Value getLeftGearPistonValue() {
-    return leftGearPiston.get();
+  public Value getLeftDriveTrainPiston() {
+    return leftDriveTrainPiston.get();
   }
 
   /*
    * @return a value that is the current setpoint for the piston kReverse or
    * KForward
    */
-  public Value getRightGearPistonValue() {
-    return rightGearPiston.get();
+  public Value getRightDriveTrainPiston() {
+    return rightDriveTrainPiston.get();
   }
 
   /*
    * Changes the ball shift gear assembly to high
    */
   public void setHighGear() {
-    changeGear(Constants.DriveTrain.HIGH_GEAR);
+    changeGear(Constants.DriveTrain.FORWARD_PISTON_VALUE);
   }
 
   /*
    * Changes the ball shift gear assembly to low
    */
   public void setLowGear() {
-    changeGear(Constants.DriveTrain.LOW_GEAR);
+    changeGear(Constants.DriveTrain.REVERSE_PISTON_VALUE);
   }
 
   /*
    * Changes the gear to a DoubleSolenoid.Value
    */
   private void changeGear(DoubleSolenoid.Value gear) {
-    leftGearPiston.set(gear);
-    rightGearPiston.set(gear);
+    leftDriveTrainPiston.set(gear);
+    rightDriveTrainPiston.set(gear);
+  }
+
+  public Value getGearManipulatorPistonValue() {
+    return gearManipulatorPiston.get();
+  }
+
+  public void extendGearManipulatorPiston() {
+    gearManipulatorPiston.set(Constants.DriveTrain.FORWARD_PISTON_VALUE);
+  }
+
+  public void retractGearManipulatorPiston() {
+    gearManipulatorPiston.set(Constants.DriveTrain.REVERSE_PISTON_VALUE);
   }
 
   @Override
