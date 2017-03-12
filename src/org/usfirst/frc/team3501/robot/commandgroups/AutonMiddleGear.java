@@ -1,12 +1,9 @@
 
 package org.usfirst.frc.team3501.robot.commandgroups;
 
-import org.usfirst.frc.team3501.robot.Constants.Direction;
 import org.usfirst.frc.team3501.robot.commands.driving.DriveDistance;
-import org.usfirst.frc.team3501.robot.commands.driving.TurnForAngle;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *
@@ -36,20 +33,14 @@ public class AutonMiddleGear extends CommandGroup {
    *          direction to turn after placing gear on peg in order to cross the
    *          baseline. Only Direction.LEFT and Direction.RIGHT will be accepted
    */
-  public AutonMiddleGear(Direction direction) {
+  public AutonMiddleGear() {
     addSequential(new DriveDistance(DISTANCE_TO_PEG, maxTimeOut));
-    addSequential(new WaitCommand(3));
-    addSequential(new DriveDistance(DISTANCE_TO_BACK_OUT, maxTimeOut));
-    addSequential(new TurnForAngle(ANGLE_TO_TURN, direction, maxTimeOut));
-    addSequential(new DriveDistance(THIRD_DISTANCE_TO_TRAVEL, maxTimeOut));
-    addSequential(
-        new TurnForAngle(ANGLE_TO_TURN, oppositeOf(direction), maxTimeOut));
-    addSequential(new DriveDistance(DISTANCE_TO_BASELINE, maxTimeOut));
-  }
-
-  private Direction oppositeOf(Direction direction) {
-    if (direction == Direction.LEFT)
-      return Direction.RIGHT;
-    return Direction.LEFT;
+    // addSequential(new WaitCommand(3));
+    // addSequential(new DriveDistance(DISTANCE_TO_BACK_OUT, maxTimeOut));
+    // addSequential(new TurnForAngle(ANGLE_TO_TURN, direction, maxTimeOut));
+    // addSequential(new DriveDistance(THIRD_DISTANCE_TO_TRAVEL, maxTimeOut));
+    // addSequential(
+    // new TurnForAngle(ANGLE_TO_TURN, oppositeOf(direction), maxTimeOut));
+    // addSequential(new DriveDistance(DISTANCE_TO_BASELINE, maxTimeOut));
   }
 }

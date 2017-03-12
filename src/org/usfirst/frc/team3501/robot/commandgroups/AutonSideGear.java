@@ -34,7 +34,7 @@ public class AutonSideGear extends CommandGroup {
    * inches and 205.7286 inches from the right side of the arena this program
    * chooses which peg to go for based on the starting point
    */
-  public AutonSideGear(String side) {
+  public AutonSideGear(String team, String side) {
     requires(Robot.getDriveTrain());
 
     if (side.equals("BOILER")) {
@@ -42,7 +42,12 @@ public class AutonSideGear extends CommandGroup {
           131.6 - (94.88 - ROBOT_WIDTH / 2 - distanceFromCorner) / Math.sqrt(3)
               - ROBOT_LENGTH / 2,
           5));
-      addSequential(new TurnForAngle(60, Direction.RIGHT, 5));
+
+      if (team.equals("RED"))
+        addSequential(new TurnForAngle(60, Direction.LEFT, 5));
+      else if (team.equals("BLUE"))
+        addSequential(new TurnForAngle(60, Direction.RIGHT, 5));
+
       addSequential(new DriveDistance(
           2 * (94.88 - ROBOT_WIDTH / 2 - distanceFromCorner) / Math.sqrt(3)
               - ROBOT_LENGTH / 2 + 7,
@@ -52,7 +57,12 @@ public class AutonSideGear extends CommandGroup {
           131.6 - (93.13 - ROBOT_WIDTH / 2 - distanceFromCorner) / Math.sqrt(3)
               - ROBOT_LENGTH / 2,
           5));
-      addSequential(new TurnForAngle(60, Direction.LEFT, 5));
+
+      if (team.equals("RED"))
+        addSequential(new TurnForAngle(60, Direction.RIGHT, 5));
+      else if (team.equals("BLUE"))
+        addSequential(new TurnForAngle(60, Direction.LEFT, 5));
+
       addSequential(new DriveDistance(
           2 * (93.13 - ROBOT_WIDTH / 2 - distanceFromCorner) / Math.sqrt(3)
               - ROBOT_LENGTH / 2,

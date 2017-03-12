@@ -8,6 +8,7 @@ import org.usfirst.frc.team3501.robot.commands.intake.ReverseIntakeContinuous;
 import org.usfirst.frc.team3501.robot.commands.intake.RunIntakeContinuous;
 import org.usfirst.frc.team3501.robot.commands.shooter.DecreaseShootingSpeed;
 import org.usfirst.frc.team3501.robot.commands.shooter.IncreaseShootingSpeed;
+import org.usfirst.frc.team3501.robot.commands.shooter.ResetShootingSpeed;
 import org.usfirst.frc.team3501.robot.commands.shooter.ReverseFlyWheelContinuous;
 import org.usfirst.frc.team3501.robot.commands.shooter.ReverseIndexWheelContinuous;
 import org.usfirst.frc.team3501.robot.commands.shooter.RunFlyWheelContinuous;
@@ -36,6 +37,7 @@ public class OI {
 
   public static Button increaseShooterSpeed;
   public static Button decreaseShooterSpeed;
+  public static Button resetShooterSpeed;
 
   public static Button brakeCANTalons;
   public static Button coastCANTalons;
@@ -83,6 +85,10 @@ public class OI {
     decreaseShooterSpeed = new JoystickButton(gamePad,
         Constants.OI.DECREASE_SHOOTER_SPEED_PORT);
     decreaseShooterSpeed.whenPressed(new DecreaseShootingSpeed());
+
+    resetShooterSpeed = new JoystickButton(gamePad,
+        Constants.OI.RESET_SHOOTER_SPEED_PORT);
+    resetShooterSpeed.whenPressed(new ResetShootingSpeed());
 
     brakeCANTalons = new JoystickButton(rightJoystick,
         Constants.OI.BRAKE_CANTALONS_PORT);

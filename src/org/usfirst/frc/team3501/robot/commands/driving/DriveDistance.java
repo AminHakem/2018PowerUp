@@ -52,7 +52,7 @@ public class DriveDistance extends Command {
   @Override
   protected void execute() {
     double xVal = gyroP * (driveTrain.getAngle() - zeroAngle);
-    double yVal = driveController.calcPID(driveTrain.getAvgEncoderDistance());
+    double yVal = driveController.calcPID(driveTrain.getRightEncoderDistance());
 
     double leftDrive = yVal - xVal;
     double rightDrive = yVal + xVal;

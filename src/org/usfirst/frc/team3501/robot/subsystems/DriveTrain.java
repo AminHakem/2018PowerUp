@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
-  public static double driveP = 0.012, driveI = 0.0011, driveD = -0.002;
+  public static double driveP = 0.01, driveI = 0.00115, driveD = -0.002;
   public static double smallTurnP = 0.004, smallTurnI = 0.0013,
       smallTurnD = 0.005;
   public static double largeTurnP = .003, largeTurnI = .0012, largeTurnD = .006;
@@ -101,7 +101,10 @@ public class DriveTrain extends Subsystem {
   }
 
   public void joystickDrive(final double thrust, final double twist) {
-    robotDrive.arcadeDrive(thrust, twist, true);
+    if ((thrust < 0.1 && thrust > -0.1) && (twist < 0.1 && twist > -0.1))
+      robotDrive.arcadeDrive(0, 0, true);
+    else
+      robotDrive.arcadeDrive(thrust, twist, true);
   }
 
   public void stop() {

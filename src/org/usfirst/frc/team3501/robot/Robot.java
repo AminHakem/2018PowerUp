@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3501.robot;
 
+import org.usfirst.frc.team3501.robot.commandgroups.AutonMiddleGear;
+import org.usfirst.frc.team3501.robot.commandgroups.AutonSideGear;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
 import org.usfirst.frc.team3501.robot.subsystems.Shooter;
@@ -8,7 +10,9 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
@@ -17,12 +21,27 @@ public class Robot extends IterativeRobot {
   private static OI oi;
   private static Intake intake;
 
+  Command autonCommand;
+  SendableChooser autonChooser;
+
   @Override
   public void robotInit() {
     driveTrain = DriveTrain.getDriveTrain();
     oi = OI.getOI();
     shooter = Shooter.getShooter();
     intake = Intake.getIntake();
+
+    autonChooser = new SendableChooser();
+    autonChooser.addDefault("Middle Gear", new AutonMiddleGear());
+    autonChooser.addObject("Red Boiler Gear",
+        new AutonSideGear("RED", "BOILER"));
+    autonChooser.addObject("Red Retrieval Gear",
+        new AutonSideGear("RED", "RETRIEVAL"));
+    autonChooser.addObject("Blue Boiler Gear",
+        new AutonSideGear("BLUE", "BOILER"));
+    autonChooser.addObject("Blue Retrieval Gear",
+        new AutonSideGear("BLUE", "RETRIEVAL"));
+    SmartDashboard.putData("Autonomous Chooser", autonChooser);
 
     CameraServer server = CameraServer.getInstance();
     UsbCamera climberCam = server.startAutomaticCapture("climbercam", 0);
@@ -47,12 +66,14 @@ public class Robot extends IterativeRobot {
     return Intake.getIntake();
   }
 
-  // If the gear values do not match in the left and right piston, then they are
-  // both set to high gear
   @Override
   public void autonomousInit() {
-    driveTrain.setHighGear();
+    // driveTrain.setLowGear();
     driveTrain.setCANTalonsBrakeMode(driveTrain.DRIVE_COAST_MODE);
+
+    // autonCommand = (Command) autonChooser.getSelected();
+    // autonCommand = new TimeDrive(1.5, 0.6);
+    // Scheduler.getInstance().add(autonCommand);
   }
 
   @Override
@@ -62,25 +83,15 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void teleopInit() {
+    // driveTrain.setHighGear();
     driveTrain.setCANTalonsBrakeMode(driveTrain.DRIVE_COAST_MODE);
   }
 
   @Override
   public void teleopPeriodic() {
-    driveTrain.printEncoderOutput();
     Scheduler.getInstance().run();
     updateSmartDashboard();
   }
-
-  @Override
-  public void disabledInit() {
-    driveTrain.setCANTalonsBrakeMode(driveTrain.DRIVE_BRAKE_MODE);
-  }
-  //
-  // @Override
-  // public void disabledPeriodic() {
-  // Scheduler.getInstance().add(new RunFlyWheel(2));
-  // }
 
   public void updateSmartDashboard() {
     SmartDashboard.putNumber("left encode ",
