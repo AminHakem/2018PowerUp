@@ -46,9 +46,10 @@ public class Constants {
     public static final int PISTON_MODULE = 10;
     public static final int GEAR_MANIPULATOR_PISTON_FORWARD = 4,
         GEAR_MANIPULATOR_PISTON_REVERSE = 5;
-    public static final int LEFT_GEAR_PISTON_FORWARD = 1,
-        LEFT_GEAR_PISTON_REVERSE = 0, RIGHT_GEAR_PISTON_FORWARD = 3,
-        RIGHT_GEAR_PISTON_REVERSE = 2;
+
+    public static final int DRIVETRAIN_GEAR_FORWARD = 0,
+        DRIVETRAIN_GEAR_REVERSE = 1;
+
     public static final Value FORWARD_PISTON_VALUE = DoubleSolenoid.Value.kForward;
     public static final Value REVERSE_PISTON_VALUE = DoubleSolenoid.Value.kReverse;
 
@@ -69,7 +70,10 @@ public class Constants {
 
   public static class Intake {
     public static final int INTAKE_ROLLER_PORT = 8;
+  }
 
+  public static class Climber {
+    public static final int WINCH_PORT = 0;
   }
 
   public static enum Direction {

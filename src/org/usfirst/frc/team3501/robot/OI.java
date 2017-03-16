@@ -1,7 +1,7 @@
 package org.usfirst.frc.team3501.robot;
 
-import org.usfirst.frc.team3501.robot.commands.driving.BrakeCANTalons;
-import org.usfirst.frc.team3501.robot.commands.driving.CoastCANTalons;
+import org.usfirst.frc.team3501.robot.commands.climber.BrakeCANTalons;
+import org.usfirst.frc.team3501.robot.commands.climber.CoastCANTalons;
 import org.usfirst.frc.team3501.robot.commands.driving.ToggleDriveGear;
 import org.usfirst.frc.team3501.robot.commands.driving.ToggleGearManipulatorPiston;
 import org.usfirst.frc.team3501.robot.commands.intake.ReverseIntakeContinuous;

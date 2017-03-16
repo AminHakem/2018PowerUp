@@ -1,23 +1,23 @@
-package org.usfirst.frc.team3501.robot.commands.driving;
+package org.usfirst.frc.team3501.robot.commands.climber;
 
 import org.usfirst.frc.team3501.robot.Robot;
-import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team3501.robot.subsystems.Climber;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class CoastCANTalons extends Command {
-  private DriveTrain driveTrain = Robot.getDriveTrain();
+public class BrakeCANTalons extends Command {
+  Climber climber = Robot.getClimber();
 
-  public CoastCANTalons() {
-    requires(driveTrain);
+  public BrakeCANTalons() {
+    requires(climber);
   }
 
   @Override
   protected void initialize() {
-    driveTrain.setCANTalonsBrakeMode(driveTrain.DRIVE_COAST_MODE);
+    climber.setCANTalonsBrakeMode(climber.BRAKE_MODE);
   }
 
   @Override

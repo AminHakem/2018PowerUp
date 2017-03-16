@@ -2,6 +2,8 @@ package org.usfirst.frc.team3501.robot;
 
 import org.usfirst.frc.team3501.robot.commandgroups.AutonMiddleGear;
 import org.usfirst.frc.team3501.robot.commandgroups.AutonSideGear;
+import org.usfirst.frc.team3501.robot.commands.driving.TimeDrive;
+import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
 import org.usfirst.frc.team3501.robot.subsystems.Shooter;
@@ -20,6 +22,7 @@ public class Robot extends IterativeRobot {
   private static Shooter shooter;
   private static OI oi;
   private static Intake intake;
+  private static Climber climber;
 
   Command autonCommand;
   SendableChooser autonChooser;
@@ -30,6 +33,7 @@ public class Robot extends IterativeRobot {
     oi = OI.getOI();
     shooter = Shooter.getShooter();
     intake = Intake.getIntake();
+    climber = Climber.getClimber();
 
     autonChooser = new SendableChooser();
     autonChooser.addDefault("Middle Gear", new AutonMiddleGear());
@@ -46,8 +50,6 @@ public class Robot extends IterativeRobot {
     CameraServer server = CameraServer.getInstance();
     UsbCamera climberCam = server.startAutomaticCapture("climbercam", 0);
     UsbCamera intakeCam = server.startAutomaticCapture("intakecam", 1);
-
-    driveTrain.setCANTalonsBrakeMode(driveTrain.DRIVE_COAST_MODE);
   }
 
   public static DriveTrain getDriveTrain() {
@@ -66,14 +68,17 @@ public class Robot extends IterativeRobot {
     return Intake.getIntake();
   }
 
+  public static Climber getClimber() {
+    return Climber.getClimber();
+  }
+
   @Override
   public void autonomousInit() {
-    // driveTrain.setLowGear();
-    driveTrain.setCANTalonsBrakeMode(driveTrain.DRIVE_COAST_MODE);
+    driveTrain.setLowGear();
 
     // autonCommand = (Command) autonChooser.getSelected();
-    // autonCommand = new TimeDrive(1.5, 0.6);
-    // Scheduler.getInstance().add(autonCommand);
+    autonCommand = new TimeDrive(2, 0.6);
+    Scheduler.getInstance().add(autonCommand);
   }
 
   @Override
@@ -83,8 +88,7 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void teleopInit() {
-    // driveTrain.setHighGear();
-    driveTrain.setCANTalonsBrakeMode(driveTrain.DRIVE_COAST_MODE);
+    driveTrain.setHighGear();
   }
 
   @Override

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3501.robot.commands.climber;
 
 import org.usfirst.frc.team3501.robot.Robot;
+import org.usfirst.frc.team3501.robot.subsystems.Climber;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -11,9 +12,10 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class StopWinch extends Command {
+  Climber climber = Robot.getClimber();
 
   public StopWinch() {
-    requires(Robot.getDriveTrain());
+    requires(climber);
   }
 
   @Override
@@ -31,8 +33,7 @@ public class StopWinch extends Command {
 
   @Override
   protected void end() {
-    Robot.getDriveTrain().stop();
-
+    climber.stop();
   }
 
   @Override

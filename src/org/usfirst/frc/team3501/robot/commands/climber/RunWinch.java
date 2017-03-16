@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3501.robot.commands.climber;
 
 import org.usfirst.frc.team3501.robot.Robot;
+import org.usfirst.frc.team3501.robot.subsystems.Climber;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -23,6 +24,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 
 public class RunWinch extends Command {
+  Climber climber = Robot.getClimber();
+
   private double time;
   private double motorVal;
 
@@ -35,7 +38,7 @@ public class RunWinch extends Command {
    *          value range is from -1 to 1
    */
   public RunWinch(double time, double motorVal) {
-    requires(Robot.getDriveTrain());
+    requires(climber);
     this.time = time;
     this.motorVal = motorVal;
   }
@@ -46,8 +49,7 @@ public class RunWinch extends Command {
 
   @Override
   protected void execute() {
-    Robot.getDriveTrain().setMotorValues(motorVal, motorVal);
-
+    climber.setMotorValues(motorVal);
   }
 
   @Override
@@ -57,7 +59,7 @@ public class RunWinch extends Command {
 
   @Override
   protected void end() {
-    Robot.getDriveTrain().stop();
+    climber.stop();
   }
 
   @Override

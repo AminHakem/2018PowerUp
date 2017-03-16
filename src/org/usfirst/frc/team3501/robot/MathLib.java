@@ -92,7 +92,7 @@ public class MathLib {
     }
   }
 
-  public static double limitValue(double val, double max, double min) {
+  public static double limitValue(double val, double min, double max) {
     if (val > max) {
       return max;
     } else if (val < min) {

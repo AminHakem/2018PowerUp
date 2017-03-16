@@ -25,24 +25,16 @@ public class DriveTrain extends Subsystem {
   public static final double INCHES_PER_PULSE = WHEEL_DIAMETER * Math.PI
       / ENCODER_PULSES_PER_REVOLUTION;
 
-  public static final double MAINTAIN_CLIMBED_POSITION = 0;
-  public static final double TIME_TO_CLIMB_FOR = 0;
-  public static final double CLIMBER_SPEED = 0;
-
-  public static final boolean DRIVE_BRAKE_MODE = true;
-  public static final boolean DRIVE_COAST_MODE = false;
-
   private static DriveTrain driveTrain;
 
   private final CANTalon frontLeft, frontRight, rearLeft, rearRight;
   private final RobotDrive robotDrive;
   private final Encoder leftEncoder, rightEncoder;
-  private final DoubleSolenoid leftDriveTrainPiston, rightDriveTrainPiston;
+  private final DoubleSolenoid rightDriveTrainPiston;
+  // private final Solenoid leftDriveTrainPiston;
   private final DoubleSolenoid gearManipulatorPiston;
 
   private ADXRS450_Gyro imu;
-
-  public boolean shouldBeClimbing = false;
 
   private DriveTrain() {
     // MOTOR CONTROLLERS
@@ -66,14 +58,12 @@ public class DriveTrain extends Subsystem {
     this.imu = new ADXRS450_Gyro(Constants.DriveTrain.GYRO_PORT);
 
     // TODO: Not sure if MODULE_NUMBER should be the same for both
-    leftDriveTrainPiston = new DoubleSolenoid(
-        Constants.DriveTrain.PISTON_MODULE,
-        Constants.DriveTrain.LEFT_GEAR_PISTON_FORWARD,
-        Constants.DriveTrain.LEFT_GEAR_PISTON_REVERSE);
+    // leftDriveTrainPiston = new Solenoid(Constants.DriveTrain.PISTON_MODULE,
+    // Constants.DriveTrain.LEFT_GEAR_PISTON_PORT);
     rightDriveTrainPiston = new DoubleSolenoid(
         Constants.DriveTrain.PISTON_MODULE,
-        Constants.DriveTrain.RIGHT_GEAR_PISTON_FORWARD,
-        Constants.DriveTrain.RIGHT_GEAR_PISTON_REVERSE);
+        Constants.DriveTrain.DRIVETRAIN_GEAR_FORWARD,
+        Constants.DriveTrain.DRIVETRAIN_GEAR_REVERSE);
 
     gearManipulatorPiston = new DoubleSolenoid(
         Constants.DriveTrain.PISTON_MODULE,
@@ -169,9 +159,9 @@ public class DriveTrain extends Subsystem {
    * @return a value that is the current setpoint for the piston kReverse or
    * KForward
    */
-  public Value getLeftDriveTrainPiston() {
-    return leftDriveTrainPiston.get();
-  }
+  // public boolean getLeftDriveTrainPiston() {
+  // return leftDriveTrainPiston.get();
+  // }
 
   /*
    * @return a value that is the current setpoint for the piston kReverse or
@@ -199,8 +189,15 @@ public class DriveTrain extends Subsystem {
    * Changes the gear to a DoubleSolenoid.Value
    */
   private void changeGear(DoubleSolenoid.Value gear) {
-    leftDriveTrainPiston.set(gear);
+    System.out.println("shifting to " + gear);
     rightDriveTrainPiston.set(gear);
+    System.out.println("after: " + this.getRightDriveTrainPiston());
+
+    //
+    // if (gear == Constants.DriveTrain.FORWARD_PISTON_VALUE)
+    // leftDriveTrainPiston.set(Constants.DriveTrain.EXTEND_VALUE);
+    // else
+    // leftDriveTrainPiston.set(Constants.DriveTrain.RETRACT_VALUE);
   }
 
   public Value getGearManipulatorPistonValue() {
@@ -218,13 +215,5 @@ public class DriveTrain extends Subsystem {
   @Override
   protected void initDefaultCommand() {
     setDefaultCommand(new JoystickDrive());
-  }
-
-  public void setCANTalonsBrakeMode(boolean mode) {
-    frontLeft.enableBrakeMode(mode);
-    rearLeft.enableBrakeMode(mode);
-
-    frontRight.enableBrakeMode(mode);
-    rearRight.enableBrakeMode(mode);
   }
 }

@@ -20,8 +20,8 @@ public class Shooter extends Subsystem {
   private static final double RPM_THRESHOLD = 10;
   private static final double DEFAULT_INDEXING_MOTOR_VALUE = 0.75;
   private static final double REVERSE_FLYWHEEL_MOTOR_VALUE = -0.75;
-  private static final double DEFAULT_SHOOTING_SPEED = 2700; // rpm
-  private static final double SHOOTING_SPEED_INCREMENT = 50;
+  private static final double DEFAULT_SHOOTING_SPEED = 2875; // rpm
+  private static final double SHOOTING_SPEED_INCREMENT = 25;
 
   private double targetShootingSpeed = DEFAULT_SHOOTING_SPEED;
   private double currentShooterMotorValue = 0;

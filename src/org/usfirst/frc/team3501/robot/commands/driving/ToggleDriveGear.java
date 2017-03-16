@@ -28,11 +28,18 @@ public class ToggleDriveGear extends Command {
   @Override
   protected void execute() {
     Value rightPistonValue = driveTrain.getRightDriveTrainPiston();
+    System.out.println("I think i'm at " + rightPistonValue);
     if (rightPistonValue == Constants.DriveTrain.REVERSE_PISTON_VALUE) {
       driveTrain.setHighGear();
     } else {
       driveTrain.setLowGear();
     }
+    // boolean leftPistonValue = driveTrain.getLeftDriveTrainPiston();
+    // if (leftPistonValue == Constants.DriveTrain.RETRACT_VALUE) {
+    // driveTrain.setHighGear();
+    // } else {
+    // driveTrain.setLowGear();
+    // }
   }
 
   @Override
