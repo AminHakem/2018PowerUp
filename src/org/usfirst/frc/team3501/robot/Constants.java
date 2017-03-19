@@ -31,6 +31,8 @@ public class Constants {
     public static final int DECREASE_SHOOTER_SPEED_PORT = 7;
     public static final int RESET_SHOOTER_SPEED_PORT = 5;
     public static final int TOGGLE_GEAR_MANIPULATOR_PORT = 2;
+
+    public static final int CLIMB_PORT = 0;
   }
 
   public static class Shooter {

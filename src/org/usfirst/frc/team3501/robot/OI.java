@@ -2,6 +2,7 @@ package org.usfirst.frc.team3501.robot;
 
 import org.usfirst.frc.team3501.robot.commands.climber.BrakeCANTalons;
 import org.usfirst.frc.team3501.robot.commands.climber.CoastCANTalons;
+import org.usfirst.frc.team3501.robot.commands.climber.ToggleWinch;
 import org.usfirst.frc.team3501.robot.commands.driving.ToggleDriveGear;
 import org.usfirst.frc.team3501.robot.commands.driving.ToggleGearManipulatorPiston;
 import org.usfirst.frc.team3501.robot.commands.intake.ReverseIntakeContinuous;
@@ -41,6 +42,7 @@ public class OI {
 
   public static Button brakeCANTalons;
   public static Button coastCANTalons;
+  public static Button climb;
 
   public OI() {
     leftJoystick = new Joystick(Constants.OI.LEFT_STICK_PORT);
@@ -97,6 +99,9 @@ public class OI {
     coastCANTalons = new JoystickButton(rightJoystick,
         Constants.OI.COAST_CANTALONS_PORT);
     coastCANTalons.whenPressed(new CoastCANTalons());
+
+    climb = new JoystickButton(leftJoystick, Constants.OI.CLIMB_PORT);
+    climb.whenPressed(new ToggleWinch());
   }
 
   public static OI getOI() {

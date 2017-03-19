@@ -2,7 +2,6 @@ package org.usfirst.frc.team3501.robot.subsystems;
 
 import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.MathLib;
-import org.usfirst.frc.team3501.robot.commands.climber.RunWinchContinuous;
 
 import com.ctre.CANTalon;
 
@@ -14,7 +13,8 @@ public class Climber extends Subsystem {
   public static final boolean BRAKE_MODE = true;
   public static final boolean COAST_MODE = false;
 
-  public static final double CLIMBER_SPEED = 0;
+  public static final double CLIMBER_SPEED = 1.0;
+  public boolean shouldBeClimbing = false;
 
   private CANTalon winch;
 
@@ -43,6 +43,5 @@ public class Climber extends Subsystem {
 
   @Override
   protected void initDefaultCommand() {
-    setDefaultCommand(new RunWinchContinuous());
   }
 }

@@ -97,6 +97,10 @@ public class DriveTrain extends Subsystem {
       robotDrive.arcadeDrive(thrust, twist, true);
   }
 
+  public void tankDrive(double left, double right) {
+    robotDrive.tankDrive(left, right);
+  }
+
   public void stop() {
     setMotorValues(0, 0);
   }
