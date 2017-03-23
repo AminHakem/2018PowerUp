@@ -3,6 +3,7 @@ package org.usfirst.frc.team3501.robot.commands.driving;
 import org.usfirst.frc.team3501.robot.OI;
 import org.usfirst.frc.team3501.robot.Robot;
 
+import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -22,13 +23,15 @@ public class JoystickDrive extends Command {
 
   @Override
   protected void execute() {
-    // final double thrust = OI.rightJoystick.getY();
-    // final double twist = OI.rightJoystick.getTwist();
-    //
-    // Robot.getDriveTrain().joystickDrive(-thrust, -twist);
-    double left = OI.leftJoystick.getY();
-    double right = OI.rightJoystick.getY();
-    Robot.getDriveTrain().tankDrive(left, right);
+    final double thrust = OI.xboxController.getY();
+    final double twist = OI.xboxController.getAxis(AxisType.kZ);
+
+    Robot.getDriveTrain().joystickDrive(-thrust, -twist);
+
+    /*
+     * double left = OI.leftJoystick.getY(); double right =
+     * OI.rightJoystick.getY(); Robot.getDriveTrain().tankDrive(-left, -right);
+     */
   }
 
   @Override

@@ -3,7 +3,8 @@ package org.usfirst.frc.team3501.robot;
 import org.usfirst.frc.team3501.robot.commands.climber.BrakeCANTalons;
 import org.usfirst.frc.team3501.robot.commands.climber.CoastCANTalons;
 import org.usfirst.frc.team3501.robot.commands.climber.ToggleWinch;
-import org.usfirst.frc.team3501.robot.commands.driving.ToggleDriveGear;
+import org.usfirst.frc.team3501.robot.commands.driving.ShiftDriveHighGear;
+import org.usfirst.frc.team3501.robot.commands.driving.ShiftDriveLowGear;
 import org.usfirst.frc.team3501.robot.commands.driving.ToggleGearManipulatorPiston;
 import org.usfirst.frc.team3501.robot.commands.intake.ReverseIntakeContinuous;
 import org.usfirst.frc.team3501.robot.commands.intake.RunIntakeContinuous;
@@ -21,8 +22,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI {
   private static OI oi;
-  public static Joystick leftJoystick;
-  public static Joystick rightJoystick;
+  public static Joystick xboxController;
+  // public static Joystick rightJoystick;
   public static Joystick gamePad;
 
   public static Button runIndexWheel;
@@ -30,7 +31,10 @@ public class OI {
   public static Button toggleFlyWheel;
   public static Button reverseFlyWheel;
 
-  public static Button toggleGear;
+  // public static Button toggleGear;
+  public static Button shiftHigh;
+  public static Button shiftLow;
+
   public static Button toggleGearManipulatorPiston;
 
   public static Button runIntake;
@@ -45,15 +49,15 @@ public class OI {
   public static Button climb;
 
   public OI() {
-    leftJoystick = new Joystick(Constants.OI.LEFT_STICK_PORT);
-    rightJoystick = new Joystick(Constants.OI.RIGHT_STICK_PORT);
+    xboxController = new Joystick(Constants.OI.XBOX_CONTROLLER_PORT);
+    // rightJoystick = new Joystick(Constants.OI.RIGHT_STICK_PORT);
     gamePad = new Joystick(Constants.OI.GAME_PAD_PORT);
 
-    runIndexWheel = new JoystickButton(rightJoystick,
+    runIndexWheel = new JoystickButton(xboxController,
         Constants.OI.RUN_INDEXWHEEL_PORT);
     runIndexWheel.whileHeld(new RunIndexWheelContinuous());
 
-    reverseIndexWheel = new JoystickButton(rightJoystick,
+    reverseIndexWheel = new JoystickButton(xboxController,
         Constants.OI.REVERSE_INDEXWHEEL_PORT);
     reverseIndexWheel.whileHeld(new ReverseIndexWheelContinuous());
 
@@ -65,18 +69,26 @@ public class OI {
         Constants.OI.REVERSE_FLYWHEEL_PORT);
     reverseFlyWheel.whileHeld(new ReverseFlyWheelContinuous());
 
-    toggleGear = new JoystickButton(leftJoystick,
-        Constants.OI.TOGGLE_GEAR_PORT);
-    toggleGear.whenPressed(new ToggleDriveGear());
+    // toggleGear = new JoystickButton(xboxController,
+    // Constants.OI.TOGGLE_GEAR_PORT);
+    // toggleGear.whenPressed(new ToggleDriveGear());
+
+    shiftHigh = new JoystickButton(xboxController,
+        Constants.OI.SHIFT_HIGH_PORT);
+    shiftHigh.whenPressed(new ShiftDriveHighGear());
+
+    shiftLow = new JoystickButton(xboxController, Constants.OI.SHIFT_LOW_PORT);
+    shiftLow.whenPressed(new ShiftDriveLowGear());
 
     toggleGearManipulatorPiston = new JoystickButton(gamePad,
         Constants.OI.TOGGLE_GEAR_MANIPULATOR_PORT);
     toggleGearManipulatorPiston.whenPressed(new ToggleGearManipulatorPiston());
 
-    runIntake = new JoystickButton(leftJoystick, Constants.OI.RUN_INTAKE_PORT);
+    runIntake = new JoystickButton(xboxController,
+        Constants.OI.RUN_INTAKE_PORT);
     runIntake.whileHeld(new RunIntakeContinuous());
 
-    reverseIntake = new JoystickButton(leftJoystick,
+    reverseIntake = new JoystickButton(xboxController,
         Constants.OI.REVERSE_INTAKE_PORT);
     reverseIntake.whileHeld(new ReverseIntakeContinuous());
 
@@ -92,15 +104,15 @@ public class OI {
         Constants.OI.RESET_SHOOTER_SPEED_PORT);
     resetShooterSpeed.whenPressed(new ResetShootingSpeed());
 
-    brakeCANTalons = new JoystickButton(rightJoystick,
+    brakeCANTalons = new JoystickButton(xboxController,
         Constants.OI.BRAKE_CANTALONS_PORT);
     brakeCANTalons.whenPressed(new BrakeCANTalons());
 
-    coastCANTalons = new JoystickButton(rightJoystick,
+    coastCANTalons = new JoystickButton(xboxController,
         Constants.OI.COAST_CANTALONS_PORT);
     coastCANTalons.whenPressed(new CoastCANTalons());
 
-    climb = new JoystickButton(leftJoystick, Constants.OI.CLIMB_PORT);
+    climb = new JoystickButton(xboxController, Constants.OI.CLIMB_PORT);
     climb.whenPressed(new ToggleWinch());
   }
 

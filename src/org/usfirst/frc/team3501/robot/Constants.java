@@ -10,21 +10,28 @@ import edu.wpi.first.wpilibj.SPI;
  * constants for subsystems such as max and min values.
  */
 
+// have two buttons: one for shifting to high gear and the other for shifting to
+// low gear
+
 public class Constants {
   public static class OI {
-    public final static int LEFT_STICK_PORT = 0;
-    public final static int RIGHT_STICK_PORT = 1;
+    public final static int XBOX_CONTROLLER_PORT = 0;
+    // public final static int RIGHT_STICK_PORT = 1;
     public static final int GAME_PAD_PORT = 2;
 
-    public final static int TOGGLE_GEAR_PORT = 5;
-    public final static int RUN_INTAKE_PORT = 1;
-    public final static int REVERSE_INTAKE_PORT = 2;
+    // Xbox Controller Ports
+    // public final static int TOGGLE_GEAR_PORT = 5;
+    public final static int SHIFT_LOW_PORT = 9;
+    public final static int SHIFT_HIGH_PORT = 10;
+    public final static int RUN_INTAKE_PORT = 6;
+    public final static int REVERSE_INTAKE_PORT = 8;
+    public final static int RUN_INDEXWHEEL_PORT = 5;
+    public final static int REVERSE_INDEXWHEEL_PORT = 7;
+    public static final int BRAKE_CANTALONS_PORT = 1;
+    public static final int COAST_CANTALONS_PORT = 3;
+    public static final int CLIMB_PORT = 4;
 
-    public final static int RUN_INDEXWHEEL_PORT = 1;
-    public final static int REVERSE_INDEXWHEEL_PORT = 2;
-    public static final int BRAKE_CANTALONS_PORT = 5;
-    public static final int COAST_CANTALONS_PORT = 6;
-
+    // Game Pad Ports
     public final static int TOGGLE_FLYWHEEL_PORT = 1;
     public static final int REVERSE_FLYWHEEL_PORT = 3;
     public static final int INCREASE_SHOOTER_SPEED_PORT = 8;
@@ -32,7 +39,6 @@ public class Constants {
     public static final int RESET_SHOOTER_SPEED_PORT = 5;
     public static final int TOGGLE_GEAR_MANIPULATOR_PORT = 2;
 
-    public static final int CLIMB_PORT = 0;
   }
 
   public static class Shooter {

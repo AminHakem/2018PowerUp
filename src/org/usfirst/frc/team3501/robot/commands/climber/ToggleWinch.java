@@ -25,6 +25,9 @@ public class ToggleWinch extends Command {
       climber.setMotorValues(climbingSpeed);
     } else {
       climber.setCANTalonsBrakeMode(climber.BRAKE_MODE);
+
+      /* Not sure if should have */
+      climber.stop();
       end();
     }
   }

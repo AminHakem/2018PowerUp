@@ -39,7 +39,7 @@ public class RunWinchContinuous extends Command {
 
   @Override
   protected void execute() {
-    double thrust = OI.leftJoystick.getY();
+    double thrust = OI.xboxController.getY();
     climber.setMotorValues(-thrust);
   }
 

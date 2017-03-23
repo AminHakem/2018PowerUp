@@ -14,7 +14,7 @@ public class Climber extends Subsystem {
   public static final boolean COAST_MODE = false;
 
   public static final double CLIMBER_SPEED = 1.0;
-  public boolean shouldBeClimbing = false;
+  public boolean shouldBeClimbing = true;
 
   private CANTalon winch;
 
