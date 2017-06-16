@@ -20,6 +20,9 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ReverseIndexWheelContinuous extends Command {
   private Shooter shooter = Robot.getShooter();
 
+  private double previousMotorValue = 0;
+  private double targetMotorValue = -shooter.DEFAULT_INDEXING_MOTOR_VALUE;
+
   /**
    * See JavaDoc comment in class for details
    *
@@ -27,7 +30,6 @@ public class ReverseIndexWheelContinuous extends Command {
    *          value range from -1 to 1
    */
   public ReverseIndexWheelContinuous() {
-    requires(shooter);
   }
 
   // Called just before this Command runs the first time
@@ -38,7 +40,9 @@ public class ReverseIndexWheelContinuous extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    shooter.reverseIndexWheel();
+    double motorValue = (6 * previousMotorValue + targetMotorValue) / 7;
+    previousMotorValue = motorValue;
+    shooter.setIndexWheelMotorVal(motorValue);
   }
 
   // Called once after isFinished returns true

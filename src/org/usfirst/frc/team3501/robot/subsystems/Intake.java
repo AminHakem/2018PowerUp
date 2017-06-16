@@ -44,7 +44,7 @@ public class Intake extends Subsystem {
    * @param speed
    *          from -1 to 1
    */
-  private void setSpeed(double speed) {
+  public void setSpeed(double speed) {
     speed = MathLib.restrictToRange(speed, -1.0, 1.0);
     intakeWheel.set(speed);
   }

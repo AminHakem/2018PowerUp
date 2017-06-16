@@ -34,6 +34,7 @@ public class StopWinch extends Command {
   @Override
   protected void end() {
     climber.stop();
+    climber.setCANTalonsBrakeMode(climber.BRAKE_MODE);
   }
 
   @Override

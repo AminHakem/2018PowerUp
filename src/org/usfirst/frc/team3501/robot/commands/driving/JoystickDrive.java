@@ -13,6 +13,9 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class JoystickDrive extends Command {
 
+  double previousThrust = 0;
+  double previousTwist = 0;
+
   public JoystickDrive() {
     requires(Robot.getDriveTrain());
   }
@@ -23,15 +26,16 @@ public class JoystickDrive extends Command {
 
   @Override
   protected void execute() {
-    final double thrust = OI.xboxController.getY();
-    final double twist = OI.xboxController.getAxis(AxisType.kZ);
+    double thrust = OI.xboxController.getY();
+    double twist = OI.xboxController.getAxis(AxisType.kZ);
+
+    thrust = (6 * previousThrust + thrust) / 7;
+    twist = (6 * previousTwist + twist) / 7;
+
+    previousThrust = thrust;
+    previousTwist = twist;
 
     Robot.getDriveTrain().joystickDrive(-thrust, -twist);
-
-    /*
-     * double left = OI.leftJoystick.getY(); double right =
-     * OI.rightJoystick.getY(); Robot.getDriveTrain().tankDrive(-left, -right);
-     */
   }
 
   @Override

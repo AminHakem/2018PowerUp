@@ -37,7 +37,7 @@ public class RunWinch extends Command {
    * @param motorVal
    *          value range is from -1 to 1
    */
-  public RunWinch(double time, double motorVal) {
+  public RunWinch() {
     requires(climber);
     this.time = time;
     this.motorVal = motorVal;
@@ -45,16 +45,18 @@ public class RunWinch extends Command {
 
   @Override
   protected void initialize() {
+    climber.setCANTalonsBrakeMode(climber.COAST_MODE);
   }
 
   @Override
   protected void execute() {
-    climber.setMotorValues(motorVal);
+    climber.setMotorValues(climber.CLIMBER_SPEED);
   }
 
   @Override
   protected boolean isFinished() {
-    return timeSinceInitialized() >= time;
+    // return timeSinceInitialized() >= time;
+    return false;
   }
 
   @Override

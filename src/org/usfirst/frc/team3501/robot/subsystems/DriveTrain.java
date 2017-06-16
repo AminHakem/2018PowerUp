@@ -25,6 +25,9 @@ public class DriveTrain extends Subsystem {
   public static final double INCHES_PER_PULSE = WHEEL_DIAMETER * Math.PI
       / ENCODER_PULSES_PER_REVOLUTION;
 
+  public static final boolean BRAKE_MODE = true;
+  public static final boolean COAST_MODE = false;
+
   private static DriveTrain driveTrain;
 
   private final CANTalon frontLeft, frontRight, rearLeft, rearRight;
@@ -90,11 +93,19 @@ public class DriveTrain extends Subsystem {
     rearRight.set(-right);
   }
 
+  public void setCANTalonsBrakeMode(boolean mode) {
+    frontLeft.enableBrakeMode(mode);
+    frontRight.enableBrakeMode(mode);
+    rearLeft.enableBrakeMode(mode);
+    rearRight.enableBrakeMode(mode);
+  }
+
   public void joystickDrive(final double thrust, final double twist) {
     if ((thrust < 0.1 && thrust > -0.1) && (twist < 0.1 && twist > -0.1))
       robotDrive.arcadeDrive(0, 0, true);
     else
       robotDrive.arcadeDrive(thrust, twist, true);
+    System.out.println(thrust + " " + twist);
   }
 
   public void tankDrive(double left, double right) {

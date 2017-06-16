@@ -2,7 +2,6 @@ package org.usfirst.frc.team3501.robot;
 
 import org.usfirst.frc.team3501.robot.commandgroups.AutonMiddleGear;
 import org.usfirst.frc.team3501.robot.commandgroups.AutonSideGear;
-import org.usfirst.frc.team3501.robot.commands.driving.TimeDrive;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
@@ -77,7 +76,7 @@ public class Robot extends IterativeRobot {
     driveTrain.setLowGear();
 
     // autonCommand = (Command) autonChooser.getSelected();
-    autonCommand = new TimeDrive(2, 0.6);
+    autonCommand = new AutonMiddleGear();
     Scheduler.getInstance().add(autonCommand);
   }
 

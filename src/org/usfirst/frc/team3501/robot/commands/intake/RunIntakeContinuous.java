@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3501.robot.commands.intake;
 
 import org.usfirst.frc.team3501.robot.Robot;
+import org.usfirst.frc.team3501.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -15,11 +16,13 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class RunIntakeContinuous extends Command {
-  // create setter method for speed, use setSpeed method to do end() by setting
-  // speed to 0
+  private Intake intake = Robot.getIntake();
+
+  private double previousMotorValue = 0;
+  private double targetMotorValue = intake.INTAKE_SPEED;
 
   public RunIntakeContinuous() {
-    requires(Robot.getIntake());
+    requires(intake);
   }
 
   @Override
@@ -30,13 +33,14 @@ public class RunIntakeContinuous extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.getIntake().runIntake();
+    double motorValue = (6 * previousMotorValue + targetMotorValue) / 7;
+    previousMotorValue = motorValue;
+    intake.setSpeed(motorValue);
   }
 
   // Called once after isFinished returns true

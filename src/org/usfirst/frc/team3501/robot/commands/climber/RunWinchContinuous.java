@@ -35,6 +35,7 @@ public class RunWinchContinuous extends Command {
 
   @Override
   protected void initialize() {
+    climber.setCANTalonsBrakeMode(climber.COAST_MODE);
   }
 
   @Override

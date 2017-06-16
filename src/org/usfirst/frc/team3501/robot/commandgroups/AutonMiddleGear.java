@@ -1,7 +1,8 @@
 
 package org.usfirst.frc.team3501.robot.commandgroups;
 
-import org.usfirst.frc.team3501.robot.commands.driving.DriveDistance;
+import org.usfirst.frc.team3501.robot.commands.driving.ShiftGearManipulatorPistonLow;
+import org.usfirst.frc.team3501.robot.commands.driving.TimeDrive;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -17,12 +18,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutonMiddleGear extends CommandGroup {
   private static final double DISTANCE_TO_PEG = 91.3 - 32;
-  private static final double DISTANCE_TO_BACK_OUT = -29.75;
-  private static final double THIRD_DISTANCE_TO_TRAVEL = 70;
-  private static final double DISTANCE_TO_BASELINE = 50.5;
-
-  private static final double ANGLE_TO_TURN = 90;
-
   private static final double maxTimeOut = 7;
 
   /***
@@ -34,13 +29,9 @@ public class AutonMiddleGear extends CommandGroup {
    *          baseline. Only Direction.LEFT and Direction.RIGHT will be accepted
    */
   public AutonMiddleGear() {
-    addSequential(new DriveDistance(DISTANCE_TO_PEG, maxTimeOut));
-    // addSequential(new WaitCommand(3));
-    // addSequential(new DriveDistance(DISTANCE_TO_BACK_OUT, maxTimeOut));
-    // addSequential(new TurnForAngle(ANGLE_TO_TURN, direction, maxTimeOut));
-    // addSequential(new DriveDistance(THIRD_DISTANCE_TO_TRAVEL, maxTimeOut));
-    // addSequential(
-    // new TurnForAngle(ANGLE_TO_TURN, oppositeOf(direction), maxTimeOut));
-    // addSequential(new DriveDistance(DISTANCE_TO_BASELINE, maxTimeOut));
+    // addSequential(new DriveDistance(DISTANCE_TO_PEG, maxTimeOut));
+
+    addSequential(new ShiftGearManipulatorPistonLow());
+    addSequential(new TimeDrive(2, 0.6));
   }
 }

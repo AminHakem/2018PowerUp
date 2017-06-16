@@ -16,6 +16,7 @@ public class ToggleWinch extends Command {
 
   @Override
   protected void initialize() {
+    System.out.println("toggled");
   }
 
   @Override
@@ -23,9 +24,11 @@ public class ToggleWinch extends Command {
     if (climber.shouldBeClimbing) {
       climber.setCANTalonsBrakeMode(climber.COAST_MODE);
       climber.setMotorValues(climbingSpeed);
+      System.out.println("climbing");
     } else {
       climber.setCANTalonsBrakeMode(climber.BRAKE_MODE);
 
+      System.out.println("braked");
       /* Not sure if should have */
       climber.stop();
       end();
@@ -40,6 +43,7 @@ public class ToggleWinch extends Command {
   @Override
   protected void end() {
     climber.shouldBeClimbing = !climber.shouldBeClimbing;
+    System.out.println("ended");
   }
 
   @Override

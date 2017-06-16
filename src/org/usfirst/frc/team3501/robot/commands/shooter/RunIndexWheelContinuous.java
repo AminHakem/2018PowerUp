@@ -20,11 +20,13 @@ import edu.wpi.first.wpilibj.command.Command;
 public class RunIndexWheelContinuous extends Command {
   private Shooter shooter = Robot.getShooter();
 
+  private double previousMotorValue = 0;
+  private double targetMotorValue = shooter.DEFAULT_INDEXING_MOTOR_VALUE;
+
   /**
    * See JavaDoc comment in class for details
    */
   public RunIndexWheelContinuous() {
-    requires(shooter);
   }
 
   @Override
@@ -36,8 +38,11 @@ public class RunIndexWheelContinuous extends Command {
     double shooterSpeed = shooter.getShooterRPM();
     double targetShooterSpeed = shooter.getTargetShootingSpeed();
     double threshold = shooter.getRPMThreshold();
-    if (Math.abs(shooterSpeed - targetShooterSpeed) <= threshold)
-      shooter.runIndexWheel();
+    if (Math.abs(shooterSpeed - targetShooterSpeed) <= threshold) {
+      double motorValue = (6 * previousMotorValue + targetMotorValue) / 7;
+      previousMotorValue = motorValue;
+      shooter.setIndexWheelMotorVal(motorValue);
+    }
   }
 
   @Override

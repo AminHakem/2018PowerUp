@@ -2,10 +2,12 @@ package org.usfirst.frc.team3501.robot;
 
 import org.usfirst.frc.team3501.robot.commands.climber.BrakeCANTalons;
 import org.usfirst.frc.team3501.robot.commands.climber.CoastCANTalons;
-import org.usfirst.frc.team3501.robot.commands.climber.ToggleWinch;
+import org.usfirst.frc.team3501.robot.commands.climber.RunWinch;
+import org.usfirst.frc.team3501.robot.commands.climber.StopWinch;
 import org.usfirst.frc.team3501.robot.commands.driving.ShiftDriveHighGear;
 import org.usfirst.frc.team3501.robot.commands.driving.ShiftDriveLowGear;
-import org.usfirst.frc.team3501.robot.commands.driving.ToggleGearManipulatorPiston;
+import org.usfirst.frc.team3501.robot.commands.driving.ShiftGearManipulatorPistonHigh;
+import org.usfirst.frc.team3501.robot.commands.driving.ShiftGearManipulatorPistonLow;
 import org.usfirst.frc.team3501.robot.commands.intake.ReverseIntakeContinuous;
 import org.usfirst.frc.team3501.robot.commands.intake.RunIntakeContinuous;
 import org.usfirst.frc.team3501.robot.commands.shooter.DecreaseShootingSpeed;
@@ -15,6 +17,7 @@ import org.usfirst.frc.team3501.robot.commands.shooter.ReverseFlyWheelContinuous
 import org.usfirst.frc.team3501.robot.commands.shooter.ReverseIndexWheelContinuous;
 import org.usfirst.frc.team3501.robot.commands.shooter.RunFlyWheelContinuous;
 import org.usfirst.frc.team3501.robot.commands.shooter.RunIndexWheelContinuous;
+import org.usfirst.frc.team3501.robot.commands.shooter.StopFlyWheel;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -28,14 +31,15 @@ public class OI {
 
   public static Button runIndexWheel;
   public static Button reverseIndexWheel;
-  public static Button toggleFlyWheel;
+  public static Button runFlyWheel;
+  public static Button stopFlyWheel;
   public static Button reverseFlyWheel;
 
   // public static Button toggleGear;
   public static Button shiftHigh;
   public static Button shiftLow;
 
-  public static Button toggleGearManipulatorPiston;
+  // public static Button toggleGearManipulatorPiston;
 
   public static Button runIntake;
   public static Button reverseIntake;
@@ -47,6 +51,10 @@ public class OI {
   public static Button brakeCANTalons;
   public static Button coastCANTalons;
   public static Button climb;
+  public static Button stopclimb;
+
+  public static Button shiftGearManipulatorPistonHigh;
+  public static Button shiftGearManipulatorPistonLow;
 
   public OI() {
     xboxController = new Joystick(Constants.OI.XBOX_CONTROLLER_PORT);
@@ -61,17 +69,15 @@ public class OI {
         Constants.OI.REVERSE_INDEXWHEEL_PORT);
     reverseIndexWheel.whileHeld(new ReverseIndexWheelContinuous());
 
-    toggleFlyWheel = new JoystickButton(gamePad,
-        Constants.OI.TOGGLE_FLYWHEEL_PORT);
-    toggleFlyWheel.toggleWhenPressed(new RunFlyWheelContinuous());
+    runFlyWheel = new JoystickButton(gamePad, Constants.OI.RUN_FLYWHEEL_PORT);
+    runFlyWheel.whenPressed(new RunFlyWheelContinuous());
+
+    stopFlyWheel = new JoystickButton(gamePad, Constants.OI.STOP_FLYWHEEL_PORT);
+    stopFlyWheel.whenPressed(new StopFlyWheel());
 
     reverseFlyWheel = new JoystickButton(gamePad,
         Constants.OI.REVERSE_FLYWHEEL_PORT);
     reverseFlyWheel.whileHeld(new ReverseFlyWheelContinuous());
-
-    // toggleGear = new JoystickButton(xboxController,
-    // Constants.OI.TOGGLE_GEAR_PORT);
-    // toggleGear.whenPressed(new ToggleDriveGear());
 
     shiftHigh = new JoystickButton(xboxController,
         Constants.OI.SHIFT_HIGH_PORT);
@@ -80,9 +86,22 @@ public class OI {
     shiftLow = new JoystickButton(xboxController, Constants.OI.SHIFT_LOW_PORT);
     shiftLow.whenPressed(new ShiftDriveLowGear());
 
-    toggleGearManipulatorPiston = new JoystickButton(gamePad,
-        Constants.OI.TOGGLE_GEAR_MANIPULATOR_PORT);
-    toggleGearManipulatorPiston.whenPressed(new ToggleGearManipulatorPiston());
+    /*
+     * toggleGearManipulatorPiston = new JoystickButton(gamePad,
+     * Constants.OI.TOGGLE_GEAR_MANIPULATOR_PORT);
+     * toggleGearManipulatorPiston.whenPressed(new
+     * ToggleGearManipulatorPiston());
+     */
+
+    shiftGearManipulatorPistonHigh = new JoystickButton(gamePad,
+        Constants.OI.SHIFT_GEAR_MANIPULATOR_HIGH_PORT);
+    shiftGearManipulatorPistonHigh
+        .whenPressed(new ShiftGearManipulatorPistonHigh());
+
+    shiftGearManipulatorPistonLow = new JoystickButton(gamePad,
+        Constants.OI.SHIFT_GEAR_MANIPULATOR_LOW_PORT);
+    shiftGearManipulatorPistonLow
+        .whenPressed(new ShiftGearManipulatorPistonLow());
 
     runIntake = new JoystickButton(xboxController,
         Constants.OI.RUN_INTAKE_PORT);
@@ -113,7 +132,11 @@ public class OI {
     coastCANTalons.whenPressed(new CoastCANTalons());
 
     climb = new JoystickButton(xboxController, Constants.OI.CLIMB_PORT);
-    climb.whenPressed(new ToggleWinch());
+    climb.whenPressed(new RunWinch());
+
+    stopclimb = new JoystickButton(xboxController,
+        Constants.OI.STOP_CLIMB_PORT);
+    stopclimb.whenPressed(new StopWinch());
   }
 
   public static OI getOI() {

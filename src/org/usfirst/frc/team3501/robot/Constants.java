@@ -16,11 +16,9 @@ import edu.wpi.first.wpilibj.SPI;
 public class Constants {
   public static class OI {
     public final static int XBOX_CONTROLLER_PORT = 0;
-    // public final static int RIGHT_STICK_PORT = 1;
     public static final int GAME_PAD_PORT = 2;
 
     // Xbox Controller Ports
-    // public final static int TOGGLE_GEAR_PORT = 5;
     public final static int SHIFT_LOW_PORT = 9;
     public final static int SHIFT_HIGH_PORT = 10;
     public final static int RUN_INTAKE_PORT = 6;
@@ -30,14 +28,21 @@ public class Constants {
     public static final int BRAKE_CANTALONS_PORT = 1;
     public static final int COAST_CANTALONS_PORT = 3;
     public static final int CLIMB_PORT = 4;
+    public static final int STOP_CLIMB_PORT = 2;
 
     // Game Pad Ports
-    public final static int TOGGLE_FLYWHEEL_PORT = 1;
-    public static final int REVERSE_FLYWHEEL_PORT = 3;
+    public final static int RUN_FLYWHEEL_PORT = 1;
+    public static final int STOP_FLYWHEEL_PORT = 3;
+    public static final int REVERSE_FLYWHEEL_PORT = 4;
     public static final int INCREASE_SHOOTER_SPEED_PORT = 8;
     public static final int DECREASE_SHOOTER_SPEED_PORT = 7;
-    public static final int RESET_SHOOTER_SPEED_PORT = 5;
-    public static final int TOGGLE_GEAR_MANIPULATOR_PORT = 2;
+
+    public static final int RESET_SHOOTER_SPEED_PORT = 2;
+    public static final int SHIFT_GEAR_MANIPULATOR_HIGH_PORT = 6;
+    public static final int SHIFT_GEAR_MANIPULATOR_LOW_PORT = 5;
+
+    // 5 is piston out (gear manipulator)
+    // 6 is piston in (gear manipulator)
 
   }
 

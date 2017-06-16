@@ -24,6 +24,7 @@ public class RunFlyWheelContinuous extends Command {
   private PIDController wheelController;
 
   public RunFlyWheelContinuous() {
+    requires(shooter);
   }
 
   @Override
