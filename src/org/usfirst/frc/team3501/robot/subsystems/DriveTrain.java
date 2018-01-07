@@ -3,39 +3,28 @@ package org.usfirst.frc.team3501.robot.subsystems;
 import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.MathLib;
 import org.usfirst.frc.team3501.robot.commands.driving.JoystickDrive;
-
 import com.ctre.CANTalon;
-
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
   public static double driveP = 0.01, driveI = 0.00115, driveD = -0.002;
-  public static double smallTurnP = 0.004, smallTurnI = 0.0013,
-      smallTurnD = 0.005;
+  public static double smallTurnP = 0.004, smallTurnI = 0.0013, smallTurnD = 0.005;
   public static double largeTurnP = .003, largeTurnI = .0012, largeTurnD = .006;
   public static double driveStraightGyroP = 0.01;
 
   public static final double WHEEL_DIAMETER = 4; // inches
   public static final double ENCODER_PULSES_PER_REVOLUTION = 256;
-  public static final double INCHES_PER_PULSE = WHEEL_DIAMETER * Math.PI
-      / ENCODER_PULSES_PER_REVOLUTION;
-
-  public static final boolean BRAKE_MODE = true;
-  public static final boolean COAST_MODE = false;
+  public static final double INCHES_PER_PULSE =
+      WHEEL_DIAMETER * Math.PI / ENCODER_PULSES_PER_REVOLUTION;
 
   private static DriveTrain driveTrain;
 
   private final CANTalon frontLeft, frontRight, rearLeft, rearRight;
   private final RobotDrive robotDrive;
   private final Encoder leftEncoder, rightEncoder;
-  private final DoubleSolenoid rightDriveTrainPiston;
-  // private final Solenoid leftDriveTrainPiston;
-  private final DoubleSolenoid gearManipulatorPiston;
 
   private ADXRS450_Gyro imu;
 
@@ -59,19 +48,6 @@ public class DriveTrain extends Subsystem {
     robotDrive = new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
 
     this.imu = new ADXRS450_Gyro(Constants.DriveTrain.GYRO_PORT);
-
-    // TODO: Not sure if MODULE_NUMBER should be the same for both
-    // leftDriveTrainPiston = new Solenoid(Constants.DriveTrain.PISTON_MODULE,
-    // Constants.DriveTrain.LEFT_GEAR_PISTON_PORT);
-    rightDriveTrainPiston = new DoubleSolenoid(
-        Constants.DriveTrain.PISTON_MODULE,
-        Constants.DriveTrain.DRIVETRAIN_GEAR_FORWARD,
-        Constants.DriveTrain.DRIVETRAIN_GEAR_REVERSE);
-
-    gearManipulatorPiston = new DoubleSolenoid(
-        Constants.DriveTrain.PISTON_MODULE,
-        Constants.DriveTrain.GEAR_MANIPULATOR_PISTON_FORWARD,
-        Constants.DriveTrain.GEAR_MANIPULATOR_PISTON_REVERSE);
   }
 
   public static DriveTrain getDriveTrain() {
@@ -168,63 +144,6 @@ public class DriveTrain extends Subsystem {
 
   public void resetGyro() {
     this.imu.reset();
-  }
-
-  /*
-   * @return a value that is the current setpoint for the piston kReverse or
-   * KForward
-   */
-  // public boolean getLeftDriveTrainPiston() {
-  // return leftDriveTrainPiston.get();
-  // }
-
-  /*
-   * @return a value that is the current setpoint for the piston kReverse or
-   * KForward
-   */
-  public Value getRightDriveTrainPiston() {
-    return rightDriveTrainPiston.get();
-  }
-
-  /*
-   * Changes the ball shift gear assembly to high
-   */
-  public void setHighGear() {
-    changeGear(Constants.DriveTrain.FORWARD_PISTON_VALUE);
-  }
-
-  /*
-   * Changes the ball shift gear assembly to low
-   */
-  public void setLowGear() {
-    changeGear(Constants.DriveTrain.REVERSE_PISTON_VALUE);
-  }
-
-  /*
-   * Changes the gear to a DoubleSolenoid.Value
-   */
-  private void changeGear(DoubleSolenoid.Value gear) {
-    System.out.println("shifting to " + gear);
-    rightDriveTrainPiston.set(gear);
-    System.out.println("after: " + this.getRightDriveTrainPiston());
-
-    //
-    // if (gear == Constants.DriveTrain.FORWARD_PISTON_VALUE)
-    // leftDriveTrainPiston.set(Constants.DriveTrain.EXTEND_VALUE);
-    // else
-    // leftDriveTrainPiston.set(Constants.DriveTrain.RETRACT_VALUE);
-  }
-
-  public Value getGearManipulatorPistonValue() {
-    return gearManipulatorPiston.get();
-  }
-
-  public void extendGearManipulatorPiston() {
-    gearManipulatorPiston.set(Constants.DriveTrain.FORWARD_PISTON_VALUE);
-  }
-
-  public void retractGearManipulatorPiston() {
-    gearManipulatorPiston.set(Constants.DriveTrain.REVERSE_PISTON_VALUE);
   }
 
   @Override
