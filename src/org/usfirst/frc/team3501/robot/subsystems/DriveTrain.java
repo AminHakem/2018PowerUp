@@ -3,37 +3,40 @@ package org.usfirst.frc.team3501.robot.subsystems;
 import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.MathLib;
 import org.usfirst.frc.team3501.robot.commands.driving.JoystickDrive;
-import com.ctre.CANTalon;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
   public static double driveP = 0.01, driveI = 0.00115, driveD = -0.002;
-  public static double smallTurnP = 0.004, smallTurnI = 0.0013, smallTurnD = 0.005;
+  public static double smallTurnP = 0.004, smallTurnI = 0.0013,
+      smallTurnD = 0.005;
   public static double largeTurnP = .003, largeTurnI = .0012, largeTurnD = .006;
   public static double driveStraightGyroP = 0.01;
 
   public static final double WHEEL_DIAMETER = 4; // inches
   public static final double ENCODER_PULSES_PER_REVOLUTION = 256;
-  public static final double INCHES_PER_PULSE =
-      WHEEL_DIAMETER * Math.PI / ENCODER_PULSES_PER_REVOLUTION;
+  public static final double INCHES_PER_PULSE = WHEEL_DIAMETER * Math.PI
+      / ENCODER_PULSES_PER_REVOLUTION;
 
   private static DriveTrain driveTrain;
 
-  private final CANTalon frontLeft, frontRight, rearLeft, rearRight;
-  private final RobotDrive robotDrive;
+  private final TalonSRX frontLeft, frontRight, rearLeft, rearRight;
   private final Encoder leftEncoder, rightEncoder;
 
   private ADXRS450_Gyro imu;
 
   private DriveTrain() {
     // MOTOR CONTROLLERS
-    frontLeft = new CANTalon(Constants.DriveTrain.FRONT_LEFT);
-    frontRight = new CANTalon(Constants.DriveTrain.FRONT_RIGHT);
-    rearLeft = new CANTalon(Constants.DriveTrain.REAR_LEFT);
-    rearRight = new CANTalon(Constants.DriveTrain.REAR_RIGHT);
+    frontLeft = new TalonSRX(Constants.DriveTrain.FRONT_LEFT);
+    frontRight = new TalonSRX(Constants.DriveTrain.FRONT_RIGHT);
+    rearLeft = new TalonSRX(Constants.DriveTrain.REAR_LEFT);
+    rearRight = new TalonSRX(Constants.DriveTrain.REAR_RIGHT);
 
     // ENCODERS
     leftEncoder = new Encoder(Constants.DriveTrain.ENCODER_LEFT_A,
@@ -43,9 +46,6 @@ public class DriveTrain extends Subsystem {
 
     leftEncoder.setDistancePerPulse(INCHES_PER_PULSE);
     rightEncoder.setDistancePerPulse(INCHES_PER_PULSE);
-
-    // ROBOT DRIVE
-    robotDrive = new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
 
     this.imu = new ADXRS450_Gyro(Constants.DriveTrain.GYRO_PORT);
   }
@@ -62,30 +62,18 @@ public class DriveTrain extends Subsystem {
     left = MathLib.restrictToRange(left, -1.0, 1.0);
     right = MathLib.restrictToRange(right, -1.0, 1.0);
 
-    frontLeft.set(left);
-    rearLeft.set(left);
+    frontLeft.set(ControlMode.PercentOutput, left);
+    rearLeft.set(ControlMode.PercentOutput, left);
 
-    frontRight.set(-right);
-    rearRight.set(-right);
+    frontRight.set(ControlMode.PercentOutput, -right);
+    rearRight.set(ControlMode.PercentOutput, -right);
   }
 
-  public void setCANTalonsBrakeMode(boolean mode) {
-    frontLeft.enableBrakeMode(mode);
-    frontRight.enableBrakeMode(mode);
-    rearLeft.enableBrakeMode(mode);
-    rearRight.enableBrakeMode(mode);
-  }
-
-  public void joystickDrive(final double thrust, final double twist) {
-    if ((thrust < 0.1 && thrust > -0.1) && (twist < 0.1 && twist > -0.1))
-      robotDrive.arcadeDrive(0, 0, true);
-    else
-      robotDrive.arcadeDrive(thrust, twist, true);
-    System.out.println(thrust + " " + twist);
-  }
-
-  public void tankDrive(double left, double right) {
-    robotDrive.tankDrive(left, right);
+  public void setCANTalonsBrake() {
+    frontLeft.setNeutralMode(NeutralMode.Brake);
+    frontRight.setNeutralMode(NeutralMode.Brake);
+    rearLeft.setNeutralMode(NeutralMode.Brake);
+    rearRight.setNeutralMode(NeutralMode.Brake);
   }
 
   public void stop() {
@@ -93,11 +81,13 @@ public class DriveTrain extends Subsystem {
   }
 
   public double getLeftMotorVal() {
-    return (frontLeft.get() + rearLeft.get()) / 2;
+    return (frontLeft.getMotorOutputPercent()
+        + rearLeft.getMotorOutputPercent()) / 2;
   }
 
   public double getRightMotorVal() {
-    return (frontRight.get() + rearRight.get()) / 2;
+    return (frontRight.getMotorOutputPercent()
+        + rearRight.getMotorOutputPercent()) / 2;
   }
 
   // ENCODER METHODS
@@ -113,7 +103,6 @@ public class DriveTrain extends Subsystem {
   public void printEncoderOutput() {
     System.out.println("left: " + getLeftEncoderDistance());
     System.out.println("right: " + getRightEncoderDistance());
-    // System.out.println(getAvgEncoderDistance());
   }
 
   public double getAvgEncoderDistance() {

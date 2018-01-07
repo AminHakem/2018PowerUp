@@ -35,7 +35,7 @@ public class JoystickDrive extends Command {
     previousThrust = thrust;
     previousTwist = twist;
 
-    Robot.getDriveTrain().joystickDrive(-thrust, -twist);
+    // Robot.getDriveTrain().joystickDrive(-thrust, -twist);
   }
 
   @Override
