@@ -23,6 +23,14 @@ public class Constants {
 
   }
 
+  public static class Lift {
+      //INTAKE MOTOR CONTROLLERS
+    public static final int CENTERING_LEFT = 5;
+    public static final int CENTERING_RIGHT = 6;
+    public static final int LIFTING_LEFT = 7;
+    public static final int LIFTING_RIGHT = 8;
+  }
+  
   public static class DriveTrain {
     // MOTOR CONTROLLERS
     public static final int FRONT_LEFT = 1;
@@ -35,6 +43,7 @@ public class Constants {
     public static final int ENCODER_LEFT_B = 0;
     public static final int ENCODER_RIGHT_A = 2;
     public static final int ENCODER_RIGHT_B = 3;
+    
 
     public static final SPI.Port GYRO_PORT = SPI.Port.kOnboardCS0;
   }
