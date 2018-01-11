@@ -46,3 +46,6 @@ dist/
 sysProps.xml
 build.xml
 build.properties
+
+# Mac stuff
+.DS_Store
