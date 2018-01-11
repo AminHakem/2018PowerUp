@@ -5,12 +5,13 @@ import org.usfirst.frc.team3501.robot.MathLib;
 import org.usfirst.frc.team3501.robot.commands.driving.JoystickDrive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class DriveTrain extends Subsystem {
   public static double driveP = 0.01, driveI = 0.00115, driveD = -0.002;
@@ -26,17 +27,19 @@ public class DriveTrain extends Subsystem {
 
   private static DriveTrain driveTrain;
 
-  private final TalonSRX frontLeft, frontRight, rearLeft, rearRight;
+  private final DifferentialDrive robotDrive;
+
+  private final WPI_TalonSRX frontLeft, frontRight, rearLeft, rearRight;
   private final Encoder leftEncoder, rightEncoder;
 
   private ADXRS450_Gyro imu;
 
   private DriveTrain() {
     // MOTOR CONTROLLERS
-    frontLeft = new TalonSRX(Constants.DriveTrain.FRONT_LEFT);
-    frontRight = new TalonSRX(Constants.DriveTrain.FRONT_RIGHT);
-    rearLeft = new TalonSRX(Constants.DriveTrain.REAR_LEFT);
-    rearRight = new TalonSRX(Constants.DriveTrain.REAR_RIGHT);
+    frontLeft = new WPI_TalonSRX(Constants.DriveTrain.FRONT_LEFT);
+    frontRight = new WPI_TalonSRX(Constants.DriveTrain.FRONT_RIGHT);
+    rearLeft = new WPI_TalonSRX(Constants.DriveTrain.REAR_LEFT);
+    rearRight = new WPI_TalonSRX(Constants.DriveTrain.REAR_RIGHT);
 
     // ENCODERS
     leftEncoder = new Encoder(Constants.DriveTrain.ENCODER_LEFT_A,
@@ -46,6 +49,13 @@ public class DriveTrain extends Subsystem {
 
     leftEncoder.setDistancePerPulse(INCHES_PER_PULSE);
     rightEncoder.setDistancePerPulse(INCHES_PER_PULSE);
+
+    SpeedControllerGroup m_left = new SpeedControllerGroup(frontLeft, rearLeft);
+
+    SpeedControllerGroup m_right = new SpeedControllerGroup(frontRight,
+        rearRight);
+
+    robotDrive = new DifferentialDrive(m_left, m_right);
 
     this.imu = new ADXRS450_Gyro(Constants.DriveTrain.GYRO_PORT);
   }
@@ -69,13 +79,6 @@ public class DriveTrain extends Subsystem {
     rearRight.set(ControlMode.PercentOutput, -right);
   }
 
-  public void setCANTalonsBrake() {
-    frontLeft.setNeutralMode(NeutralMode.Brake);
-    frontRight.setNeutralMode(NeutralMode.Brake);
-    rearLeft.setNeutralMode(NeutralMode.Brake);
-    rearRight.setNeutralMode(NeutralMode.Brake);
-  }
-
   public void stop() {
     setMotorValues(0, 0);
   }
@@ -91,7 +94,6 @@ public class DriveTrain extends Subsystem {
   }
 
   // ENCODER METHODS
-
   public double getLeftEncoderDistance() {
     return leftEncoder.getDistance();
   }
