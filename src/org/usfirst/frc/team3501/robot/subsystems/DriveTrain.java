@@ -28,8 +28,7 @@ public class DriveTrain extends Subsystem {
   private final DifferentialDrive robotDrive;
 
   private final WPI_TalonSRX frontLeft, frontRight, rearLeft, rearRight;
-  private final Encoder leftRearEncoder, leftFrontEncoder, rightFrontEncoder,
-      rightRearEncoder;
+  private final Encoder leftEncoder, rightEncoder;
 
   private ADXRS450_Gyro imu;
 
@@ -40,20 +39,14 @@ public class DriveTrain extends Subsystem {
     rearLeft = new WPI_TalonSRX(Constants.DriveTrain.REAR_LEFT);
     rearRight = new WPI_TalonSRX(Constants.DriveTrain.REAR_RIGHT);
 
-    // ENCODERS - check in with electrical for ports
-    leftRearEncoder = new Encoder(Constants.DriveTrain.ENCODER_LEFT_A,
+    // ENCODERS
+    leftEncoder = new Encoder(Constants.DriveTrain.ENCODER_LEFT_A,
         Constants.DriveTrain.ENCODER_LEFT_B, false, Encoder.EncodingType.k4X);
-    leftFrontEncoder = new Encoder(Constants.DriveTrain.ENCODER_LEFT_A,
-        Constants.DriveTrain.ENCODER_LEFT_B, false, Encoder.EncodingType.k4X);
-    rightRearEncoder = new Encoder(Constants.DriveTrain.ENCODER_RIGHT_A,
-        Constants.DriveTrain.ENCODER_RIGHT_B, false, Encoder.EncodingType.k4X);
-    rightFrontEncoder = new Encoder(Constants.DriveTrain.ENCODER_RIGHT_A,
+    rightEncoder = new Encoder(Constants.DriveTrain.ENCODER_RIGHT_A,
         Constants.DriveTrain.ENCODER_RIGHT_B, false, Encoder.EncodingType.k4X);
 
-    leftRearEncoder.setDistancePerPulse(INCHES_PER_PULSE);
-    rightRearEncoder.setDistancePerPulse(INCHES_PER_PULSE);
-    leftFrontEncoder.setDistancePerPulse(INCHES_PER_PULSE);
-    rightFrontEncoder.setDistancePerPulse(INCHES_PER_PULSE);
+    leftEncoder.setDistancePerPulse(INCHES_PER_PULSE);
+    rightEncoder.setDistancePerPulse(INCHES_PER_PULSE);
 
     SpeedControllerGroup m_left = new SpeedControllerGroup(frontLeft, rearLeft);
 
@@ -99,60 +92,38 @@ public class DriveTrain extends Subsystem {
   }
 
   // ENCODER METHODS
-  public double getLeftRearEncoderDistance() {
-    return leftRearEncoder.getDistance();
+  public double getLeftEncoderDistance() {
+    return leftEncoder.getDistance();
   }
 
-  public double getLeftFrontEncoderDistance() {
-    return leftFrontEncoder.getDistance();
-  }
-
-  public double getRightRearEncoderDistance() {
-    return rightRearEncoder.getDistance();
-  }
-
-  public double getRightFrontEncoderDistance() {
-    return rightFrontEncoder.getDistance();
+  public double getRightEncoderDistance() {
+    return rightEncoder.getDistance();
   }
 
   public void printEncoderOutput() {
-    System.out.println("left front: " + getLeftFrontEncoderDistance());
-    System.out.println("left rear: " + getLeftRearEncoderDistance());
-    System.out.println("right front: " + getRightFrontEncoderDistance());
-    System.out.println("right rear: " + getRightRearEncoderDistance());
+    System.out.println("left: " + getLeftEncoderDistance());
+    System.out.println("right: " + getRightEncoderDistance());
   }
 
   public double getAvgEncoderDistance() {
-    return (leftRearEncoder.getDistance() + rightRearEncoder.getDistance()
-        + rightFrontEncoder.getDistance() + leftFrontEncoder.getDistance()) / 4;
+    return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
   }
 
   public void resetEncoders() {
-    leftRearEncoder.reset();
-    leftFrontEncoder.reset();
-    rightRearEncoder.reset();
-    rightFrontEncoder.reset();
+    leftEncoder.reset();
+    rightEncoder.reset();
   }
 
-  public double getLeftRearSpeed() {
-    return leftRearEncoder.getRate();
+  public double getLeftSpeed() {
+    return leftEncoder.getRate();
   }
 
-  public double getLeftFrontSpeed() {
-    return leftFrontEncoder.getRate();
-  }
-
-  public double getRightRearSpeed() {
-    return rightRearEncoder.getRate();
-  }
-
-  public double getRightFrontSpeed() {
-    return rightFrontEncoder.getRate();
+  public double getRightSpeed() {
+    return rightEncoder.getRate();
   }
 
   public double getSpeed() {
-    return (getLeftRearSpeed() + getRightRearSpeed() + getLeftFrontSpeed()
-        + getRightFrontSpeed()) / 4.0;
+    return (getLeftSpeed() + getRightSpeed()) / 2.0;
   }
 
   // ------Gyro------//
