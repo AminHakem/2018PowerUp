@@ -11,92 +11,75 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Elevator extends Subsystem {
-    //
-    //DID NOT INCLUDE GYRO AND WHEEL
-    //
-    private static Elevator Lift;
+    
+    private static Elevator elevator;
  
-    private final TalonSRX liftLeft, liftRight;
-    private final Encoder encoderLeft, encoderRight;
+    private final TalonSRX elevatorTalon;
+    private final Encoder elevatorEncoder;
     private Elevator() {
         //MOTOR CONTROLLERS
-        liftLeft = new TalonSRX(Constants.Lift.LIFT_LEFT);
-        liftRight = new TalonSRX(Constants.Lift.LIFT_RIGHT);
+        elevatorTalon = new TalonSRX(Constants.Elevator.ELEVATOR);
         
         //ENCODERS
-        encoderLeft = new Encoder(Constants.Lift.ELEVATOR_ENCODER_LEFT_A,
-                Constants.Lift.ELEVATOR_ENCODER_LEFT_B, false, Encoder.EncodingType.k4X);
-        encoderRight = new Encoder(Constants.Lift.ELEVATOR_ENCODER_RIGHT_A,
-                Constants.Lift.ELEVATOR_ENCODER_RIGHT_B, false, Encoder.EncodingType.k4X);
+        elevatorEncoder = new Encoder(Constants.Elevator.ELEVATOR_ENCODER_A,
+                Constants.Elevator.ELEVATOR_ENCODER_B, false, Encoder.EncodingType.k4X);
+    
     }
+        
+    public static Elevator getElevator() {
+        if (elevator == null) {
+          elevator = new Elevator();
+        }
+        return elevator;
+      }
     
     // MOTOR METHODS
-    public void setMotorValues(double left, double right) {
-      left = MathLib.restrictToRange(left, -1.0, 1.0);
-      right = MathLib.restrictToRange(right, -1.0, 1.0);
+    public void setMotorValue(double motorVal) {
+      motorVal = MathLib.restrictToRange(motorVal, -1.0, 1.0);
 
-      liftLeft.set(ControlMode.PercentOutput, left);
-      liftRight.set(ControlMode.PercentOutput, -right);
+      elevatorTalon.set(ControlMode.PercentOutput, motorVal);
     }
 
     
     public void setCANTalonsBrake() {
-      liftLeft.setNeutralMode(NeutralMode.Brake);
-      liftRight.setNeutralMode(NeutralMode.Brake);
+      elevatorTalon.setNeutralMode(NeutralMode.Brake);
     }
 
     public void stop() {
-      setMotorValues(0, 0);
+      setMotorValue(0);
     }
 
-    public double getLeftMotorVal() {
-      return (liftLeft.getMotorOutputPercent());
+    public double getMotorVal() {
+      return (elevatorTalon.getMotorOutputPercent());
     }
 
-    public double getRightMotorVal() {
-      return (liftRight.getMotorOutputPercent());
-    }
 
     
     // ENCODER METHODS
 
-    public double getEncoderLeftDistance() {
-      return encoderLeft.getDistance();
+    public double getElevatorEncoderDistance() {
+      return elevatorEncoder.getDistance();
     }
 
-    public double getEncoderRightDistance() {
-      return encoderRight.getDistance();
-    }
 
     public void printEncoderOutput() {
-      System.out.println("left: " + getEncoderLeftDistance());
-      System.out.println("right: " + getEncoderRightDistance());
+      System.out.println("Encoder: " + getElevatorEncoderDistance());
     }
 
-    public double getAvgEncoderDistance() {
-      return (encoderLeft.getDistance() + encoderRight.getDistance()) / 2;
-    }
 
     public void resetEncoders() {
-      encoderLeft.reset();
-      encoderRight.reset();
-    }
-
-    public double getLeftSpeed() {
-      return encoderLeft.getRate();
-    }
-
-    public double getRightSpeed() {
-      return encoderRight.getRate();
+      elevatorEncoder.reset();
     }
 
     public double getSpeed() {
-      return (getLeftSpeed() + getRightSpeed()) / 2.0;
+      return elevatorEncoder.getRate();
     }
+
     
     @Override
     protected void initDefaultCommand() {
         // TODO Auto-generated method stub
         
     }
+   
 }
