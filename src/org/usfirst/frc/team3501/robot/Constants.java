@@ -24,11 +24,16 @@ public class Constants {
   }
 
   public static class Lift {
-      //INTAKE MOTOR CONTROLLERS
-    public static final int CENTERING_LEFT = 5;
-    public static final int CENTERING_RIGHT = 6;
-    public static final int LIFTING_LEFT = 7;
-    public static final int LIFTING_RIGHT = 8;
+    //LIFT MOTOR CONTROLLERS
+    public static final int LIFT_LEFT = 1;
+    public static final int LIFT_RIGHT = 2;
+    
+    //LIFT ENCODERS
+    public static final int ELEVATOR_ENCODER_LEFT_A = 0;
+    public static final int ELEVATOR_ENCODER_LEFT_B = 1;
+    public static final int ELEVATOR_ENCODER_RIGHT_A = 2;
+    public static final int ELEVATOR_ENCODER_RIGHT_B = 1;
+    
   }
   
   public static class DriveTrain {
