@@ -3,10 +3,8 @@ package org.usfirst.frc.team3501.robot.subsystems;
 import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.MathLib;
 import org.usfirst.frc.team3501.robot.commands.driving.JoystickDrive;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -22,15 +20,16 @@ public class DriveTrain extends Subsystem {
 
   public static final double WHEEL_DIAMETER = 4; // inches
   public static final double ENCODER_PULSES_PER_REVOLUTION = 256;
-  public static final double INCHES_PER_PULSE = WHEEL_DIAMETER * Math.PI
-      / ENCODER_PULSES_PER_REVOLUTION;
+  public static final double INCHES_PER_PULSE =
+      WHEEL_DIAMETER * Math.PI / ENCODER_PULSES_PER_REVOLUTION;
 
   private static DriveTrain driveTrain;
 
   private final DifferentialDrive robotDrive;
 
   private final WPI_TalonSRX frontLeft, frontRight, rearLeft, rearRight;
-  private final Encoder leftEncoder, rightEncoder;
+  private final Encoder leftRearEncoder, leftFrontEncoder, rightFrontEncoder,
+      rightRearEncoder;
 
   private ADXRS450_Gyro imu;
 
@@ -41,19 +40,25 @@ public class DriveTrain extends Subsystem {
     rearLeft = new WPI_TalonSRX(Constants.DriveTrain.REAR_LEFT);
     rearRight = new WPI_TalonSRX(Constants.DriveTrain.REAR_RIGHT);
 
-    // ENCODERS
-    leftEncoder = new Encoder(Constants.DriveTrain.ENCODER_LEFT_A,
+    // ENCODERS - check in with electrical for ports
+    leftRearEncoder = new Encoder(Constants.DriveTrain.ENCODER_LEFT_A,
         Constants.DriveTrain.ENCODER_LEFT_B, false, Encoder.EncodingType.k4X);
-    rightEncoder = new Encoder(Constants.DriveTrain.ENCODER_RIGHT_A,
+    leftFrontEncoder = new Encoder(Constants.DriveTrain.ENCODER_LEFT_A,
+        Constants.DriveTrain.ENCODER_LEFT_B, false, Encoder.EncodingType.k4X);
+    rightRearEncoder = new Encoder(Constants.DriveTrain.ENCODER_RIGHT_A,
+        Constants.DriveTrain.ENCODER_RIGHT_B, false, Encoder.EncodingType.k4X);
+    rightFrontEncoder = new Encoder(Constants.DriveTrain.ENCODER_RIGHT_A,
         Constants.DriveTrain.ENCODER_RIGHT_B, false, Encoder.EncodingType.k4X);
 
-    leftEncoder.setDistancePerPulse(INCHES_PER_PULSE);
-    rightEncoder.setDistancePerPulse(INCHES_PER_PULSE);
+    leftRearEncoder.setDistancePerPulse(INCHES_PER_PULSE);
+    rightRearEncoder.setDistancePerPulse(INCHES_PER_PULSE);
+    leftFrontEncoder.setDistancePerPulse(INCHES_PER_PULSE);
+    rightFrontEncoder.setDistancePerPulse(INCHES_PER_PULSE);
 
     SpeedControllerGroup m_left = new SpeedControllerGroup(frontLeft, rearLeft);
 
-    SpeedControllerGroup m_right = new SpeedControllerGroup(frontRight,
-        rearRight);
+    SpeedControllerGroup m_right =
+        new SpeedControllerGroup(frontRight, rearRight);
 
     robotDrive = new DifferentialDrive(m_left, m_right);
 
@@ -94,38 +99,60 @@ public class DriveTrain extends Subsystem {
   }
 
   // ENCODER METHODS
-  public double getLeftEncoderDistance() {
-    return leftEncoder.getDistance();
+  public double getLeftRearEncoderDistance() {
+    return leftRearEncoder.getDistance();
   }
 
-  public double getRightEncoderDistance() {
-    return rightEncoder.getDistance();
+  public double getLeftFrontEncoderDistance() {
+    return leftFrontEncoder.getDistance();
+  }
+
+  public double getRightRearEncoderDistance() {
+    return rightRearEncoder.getDistance();
+  }
+
+  public double getRightFrontEncoderDistance() {
+    return rightFrontEncoder.getDistance();
   }
 
   public void printEncoderOutput() {
-    System.out.println("left: " + getLeftEncoderDistance());
-    System.out.println("right: " + getRightEncoderDistance());
+    System.out.println("left front: " + getLeftFrontEncoderDistance());
+    System.out.println("left rear: " + getLeftRearEncoderDistance());
+    System.out.println("right front: " + getRightFrontEncoderDistance());
+    System.out.println("right rear: " + getRightRearEncoderDistance());
   }
 
   public double getAvgEncoderDistance() {
-    return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
+    return (leftRearEncoder.getDistance() + rightRearEncoder.getDistance()
+        + rightFrontEncoder.getDistance() + leftFrontEncoder.getDistance()) / 4;
   }
 
   public void resetEncoders() {
-    leftEncoder.reset();
-    rightEncoder.reset();
+    leftRearEncoder.reset();
+    leftFrontEncoder.reset();
+    rightRearEncoder.reset();
+    rightFrontEncoder.reset();
   }
 
-  public double getLeftSpeed() {
-    return leftEncoder.getRate();
+  public double getLeftRearSpeed() {
+    return leftRearEncoder.getRate();
   }
 
-  public double getRightSpeed() {
-    return rightEncoder.getRate();
+  public double getLeftFrontSpeed() {
+    return leftFrontEncoder.getRate();
+  }
+
+  public double getRightRearSpeed() {
+    return rightRearEncoder.getRate();
+  }
+
+  public double getRightFrontSpeed() {
+    return rightFrontEncoder.getRate();
   }
 
   public double getSpeed() {
-    return (getLeftSpeed() + getRightSpeed()) / 2.0;
+    return (getLeftRearSpeed() + getRightRearSpeed() + getLeftFrontSpeed()
+        + getRightFrontSpeed()) / 4.0;
   }
 
   // ------Gyro------//
