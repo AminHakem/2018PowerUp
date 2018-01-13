@@ -12,12 +12,18 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class DriveTrain extends Subsystem {
+  /**
+   * Set PID values, need to test mecanum wheels to find them
+   */
   public static double driveP = 0.01, driveI = 0.00115, driveD = -0.002;
   public static double smallTurnP = 0.004, smallTurnI = 0.0013,
       smallTurnD = 0.005;
   public static double largeTurnP = .003, largeTurnI = .0012, largeTurnD = .006;
   public static double driveStraightGyroP = 0.01;
 
+  /**
+   * Need to edit for correct wheel diameter
+   */
   public static final double WHEEL_DIAMETER = 4; // inches
   public static final double ENCODER_PULSES_PER_REVOLUTION = 256;
   public static final double INCHES_PER_PULSE =
@@ -28,7 +34,7 @@ public class DriveTrain extends Subsystem {
   private final DifferentialDrive robotDrive;
 
   private final WPI_TalonSRX frontLeft, frontRight, rearLeft, rearRight;
-  private final Encoder leftEncoder, rightEncoder;
+  private final Encoder frontBackEncoder, rightLeftEncoder;
 
   private ADXRS450_Gyro imu;
 
@@ -40,13 +46,13 @@ public class DriveTrain extends Subsystem {
     rearRight = new WPI_TalonSRX(Constants.DriveTrain.REAR_RIGHT);
 
     // ENCODERS
-    leftEncoder = new Encoder(Constants.DriveTrain.ENCODER_LEFT_A,
+    rightLeftEncoder = new Encoder(Constants.DriveTrain.ENCODER_LEFT_A,
         Constants.DriveTrain.ENCODER_LEFT_B, false, Encoder.EncodingType.k4X);
-    rightEncoder = new Encoder(Constants.DriveTrain.ENCODER_RIGHT_A,
+    frontBackEncoder = new Encoder(Constants.DriveTrain.ENCODER_RIGHT_A,
         Constants.DriveTrain.ENCODER_RIGHT_B, false, Encoder.EncodingType.k4X);
 
-    leftEncoder.setDistancePerPulse(INCHES_PER_PULSE);
-    rightEncoder.setDistancePerPulse(INCHES_PER_PULSE);
+    rightLeftEncoder.setDistancePerPulse(INCHES_PER_PULSE);
+    frontBackEncoder.setDistancePerPulse(INCHES_PER_PULSE);
 
     SpeedControllerGroup m_left = new SpeedControllerGroup(frontLeft, rearLeft);
 
@@ -58,6 +64,10 @@ public class DriveTrain extends Subsystem {
     this.imu = new ADXRS450_Gyro(Constants.DriveTrain.GYRO_PORT);
   }
 
+  /**
+   *
+   * @return driveTrain if one does not already exist
+   */
   public static DriveTrain getDriveTrain() {
     if (driveTrain == null) {
       driveTrain = new DriveTrain();
@@ -66,6 +76,12 @@ public class DriveTrain extends Subsystem {
   }
 
   // DRIVE METHODS
+  /**
+   * Set the motor values to left and right parameters
+   *
+   * @param left
+   * @param right
+   */
   public void setMotorValues(double left, double right) {
     left = MathLib.restrictToRange(left, -1.0, 1.0);
     right = MathLib.restrictToRange(right, -1.0, 1.0);
@@ -77,60 +93,96 @@ public class DriveTrain extends Subsystem {
     rearRight.set(ControlMode.PercentOutput, -right);
   }
 
+  /**
+   * Stop the robot (set motor values to)
+   */
   public void stop() {
     setMotorValues(0, 0);
   }
 
+  /**
+   *
+   * @return average left motor value
+   */
   public double getLeftMotorVal() {
     return (frontLeft.getMotorOutputPercent()
         + rearLeft.getMotorOutputPercent()) / 2;
   }
 
+  /**
+   *
+   * @return average right motor value
+   */
   public double getRightMotorVal() {
     return (frontRight.getMotorOutputPercent()
         + rearRight.getMotorOutputPercent()) / 2;
   }
 
   // ENCODER METHODS
-  public double getLeftEncoderDistance() {
-    return leftEncoder.getDistance();
+  /**
+   * Receives the value for the encoder that controls going left and right
+   *
+   * @return rightLeftEncoder distance
+   */
+
+  public double getRightLeftEncoderDistance() {
+    return rightLeftEncoder.getDistance();
   }
 
-  public double getRightEncoderDistance() {
-    return rightEncoder.getDistance();
+  /**
+   * Receives the value for the encoder that controls going front and back
+   *
+   * @return frontBackEncoder distance
+   */
+
+  public double getFrontBackEncoderDistance() {
+    return frontBackEncoder.getDistance();
   }
 
+  /**
+   * Prints out both distances of the encoders
+   */
   public void printEncoderOutput() {
-    System.out.println("left: " + getLeftEncoderDistance());
-    System.out.println("right: " + getRightEncoderDistance());
+    System.out.println("left/right: " + getRightLeftEncoderDistance());
+    System.out.println("front/back: " + getFrontBackEncoderDistance());
   }
 
-  public double getAvgEncoderDistance() {
-    return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
-  }
-
+  /**
+   * Reset encoder distances to 0
+   */
   public void resetEncoders() {
-    leftEncoder.reset();
-    rightEncoder.reset();
+    rightLeftEncoder.reset();
+    frontBackEncoder.reset();
   }
 
-  public double getLeftSpeed() {
-    return leftEncoder.getRate();
+  /**
+   *
+   * @return rightLeft wheel speed
+   */
+  public double getRightLeftSpeed() {
+    return rightLeftEncoder.getRate();
   }
 
-  public double getRightSpeed() {
-    return rightEncoder.getRate();
-  }
-
-  public double getSpeed() {
-    return (getLeftSpeed() + getRightSpeed()) / 2.0;
+  /**
+   *
+   * @return frontBack wheel speed
+   */
+  public double getFrontBackSpeed() {
+    return frontBackEncoder.getRate();
   }
 
   // ------Gyro------//
+  /**
+   *
+   * @return angle
+   */
   public double getAngle() {
     return this.imu.getAngle();
   }
 
+  /**
+   * resets accumulator
+   */
   public void resetGyro() {
     this.imu.reset();
   }
