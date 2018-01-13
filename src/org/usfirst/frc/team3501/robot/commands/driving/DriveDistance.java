@@ -3,16 +3,14 @@ package org.usfirst.frc.team3501.robot.commands.driving;
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.utils.PIDController;
-
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This command makes the robot drive a specified distance using encoders on the
- * robot and using a feedback loop
+ * This command makes the robot drive a specified distance using encoders on the robot and using a
+ * feedback loop
  *
- * parameters: distance the robot will move in inches motorVal: the motor input
- * to set the motors to
+ * parameters: distance the robot will move in inches motorVal: the motor input to set the motors to
  */
 public class DriveDistance extends Command {
   private DriveTrain driveTrain = Robot.getDriveTrain();
@@ -52,7 +50,8 @@ public class DriveDistance extends Command {
   @Override
   protected void execute() {
     double xVal = gyroP * (driveTrain.getAngle() - zeroAngle);
-    double yVal = driveController.calcPID(driveTrain.getRightEncoderDistance());
+    double yVal =
+        driveController.calcPID(driveTrain.getFrontBackEncoderDistance());
 
     double leftDrive = yVal - xVal;
     double rightDrive = yVal + xVal;
@@ -66,8 +65,7 @@ public class DriveDistance extends Command {
   }
 
   @Override
-  protected void end() {
-  }
+  protected void end() {}
 
   @Override
   protected void interrupted() {

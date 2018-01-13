@@ -4,7 +4,6 @@ import org.usfirst.frc.team3501.robot.commands.driving.TimeDrive;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
-
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -58,8 +57,7 @@ public class Robot extends IterativeRobot {
   }
 
   @Override
-  public void teleopInit() {
-  }
+  public void teleopInit() {}
 
   @Override
   public void teleopPeriodic() {
@@ -68,10 +66,10 @@ public class Robot extends IterativeRobot {
   }
 
   public void updateSmartDashboard() {
-    SmartDashboard.putNumber("left encoder: ",
-        driveTrain.getLeftEncoderDistance());
-    SmartDashboard.putNumber("right encoder: ",
-        driveTrain.getRightEncoderDistance());
+    SmartDashboard.putNumber("right left encoder: ",
+        driveTrain.getRightLeftEncoderDistance());
+    SmartDashboard.putNumber("front back encoder: ",
+        driveTrain.getFrontBackEncoderDistance());
     SmartDashboard.putNumber("angle", driveTrain.getAngle());
   }
 }
