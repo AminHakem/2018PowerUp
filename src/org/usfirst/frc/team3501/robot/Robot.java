@@ -2,6 +2,7 @@ package org.usfirst.frc.team3501.robot;
 
 import org.usfirst.frc.team3501.robot.commands.driving.TimeDrive;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team3501.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -33,6 +34,10 @@ public class Robot extends IterativeRobot {
 
   public static OI getOI() {
     return OI.getOI();
+  }
+
+  public static Intake getIntake() {
+    return Intake.getIntake();
   }
 
   @Override

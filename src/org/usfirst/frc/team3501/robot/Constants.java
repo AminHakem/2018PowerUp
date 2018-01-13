@@ -3,8 +3,10 @@ package org.usfirst.frc.team3501.robot;
 import edu.wpi.first.wpilibj.SPI;
 
 /**
- * The Constants stores constant values for all subsystems. This includes the port values for motors
- * and sensors, as well as important operational constants for subsystems such as max and min
+ * The Constants stores constant values for all subsystems. This includes the
+ * port values for motors
+ * and sensors, as well as important operational constants for subsystems such
+ * as max and min
  * values.
  */
 
@@ -15,6 +17,10 @@ public class Constants {
   public static class OI {
     public final static int XBOX_CONTROLLER_PORT = 0;
     public static final int GAME_PAD_PORT = 2;
+
+    public static final int RUN_INTAKE_PORT = 0;
+    public static int REVERSE_INTAKE_PORT = 0;
+
   }
 
   public static class DriveTrain {
@@ -31,6 +37,13 @@ public class Constants {
     public static final int ENCODER_RIGHT_B = 3;
 
     public static final SPI.Port GYRO_PORT = SPI.Port.kOnboardCS0;
+  }
+
+  public static class Intake {
+    // MOTOR CONTROLLERS
+    public static final int INTAKE_LEFT = 0;
+    public static final int INTAKE_RIGHT = 0;
+
   }
 
   public static enum Direction {
