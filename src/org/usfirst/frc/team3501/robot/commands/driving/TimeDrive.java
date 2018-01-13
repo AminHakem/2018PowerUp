@@ -9,22 +9,27 @@ import edu.wpi.first.wpilibj.command.Command;
  * This commands make the robot drive for a specified time with the motors set
  * at a specified value between 1 and -1
  *
- * parameters:
- * time: how long the robot should drive for - in seconds
- * motorVal: the motor input to set the motors to
+ * parameters: time: how long the robot should drive for - in seconds motorVal:
+ * the motor input to set the motors to
  *
  *
  */
 public class TimeDrive extends Command {
   Timer timer;
-  double motorVal, time;
+  double leftRearMotorVal, rightRearMotorVal, rightFrontMotorVal,
+      leftFrontMotorVal, time;
 
-  public TimeDrive(final double time, final double motorVal) {
+  public TimeDrive(final double time, final double leftRearMotorVal,
+      final double rightRearMotorVal, final double leftFrontMotorVal,
+      final double rightFrontMotorVal) {
     requires(Robot.getDriveTrain());
 
     timer = new Timer();
     this.time = time;
-    this.motorVal = motorVal;
+    this.leftRearMotorVal = leftRearMotorVal;
+    this.rightRearMotorVal = rightRearMotorVal;
+    this.rightFrontMotorVal = rightFrontMotorVal;
+    this.leftFrontMotorVal = leftFrontMotorVal;
   }
 
   @Override
@@ -34,7 +39,8 @@ public class TimeDrive extends Command {
 
   @Override
   protected void execute() {
-    Robot.getDriveTrain().setMotorValues(motorVal, motorVal);
+    Robot.getDriveTrain().setMotorValues(leftFrontMotorVal, leftRearMotorVal,
+        rightFrontMotorVal, rightRearMotorVal);
 
   }
 
