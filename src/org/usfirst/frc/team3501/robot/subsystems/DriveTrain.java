@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
 public class DriveTrain extends Subsystem {
   /**
@@ -31,7 +31,7 @@ public class DriveTrain extends Subsystem {
 
   private static DriveTrain driveTrain;
 
-  private final DifferentialDrive robotDrive;
+  private final MecanumDrive robotDrive;
 
   private final WPI_TalonSRX frontLeft, frontRight, rearLeft, rearRight;
   private final Encoder frontBackEncoder, rightLeftEncoder;
@@ -54,12 +54,13 @@ public class DriveTrain extends Subsystem {
     rightLeftEncoder.setDistancePerPulse(INCHES_PER_PULSE);
     frontBackEncoder.setDistancePerPulse(INCHES_PER_PULSE);
 
-    SpeedControllerGroup m_left = new SpeedControllerGroup(frontLeft, rearLeft);
+    SpeedControllerGroup m_left_rear = new SpeedControllerGroup(rearLeft);
+    SpeedControllerGroup m_left_front = new SpeedControllerGroup(frontLeft);
+    SpeedControllerGroup m_right_rear = new SpeedControllerGroup(rearRight);
+    SpeedControllerGroup m_right_front = new SpeedControllerGroup(frontRight);
 
-    SpeedControllerGroup m_right =
-        new SpeedControllerGroup(frontRight, rearRight);
-
-    robotDrive = new DifferentialDrive(m_left, m_right);
+    robotDrive = new MecanumDrive(m_left_front, m_left_rear, m_right_front,
+        m_right_rear);
 
     this.imu = new ADXRS450_Gyro(Constants.DriveTrain.GYRO_PORT);
   }
@@ -77,46 +78,66 @@ public class DriveTrain extends Subsystem {
 
   // DRIVE METHODS
   /**
-   * Set the motor values to left and right parameters
+   * Set the motor values to user-inputted motor values
    *
-   * @param left
-   * @param right
+   * @param leftFront
+   * @param leftRear
+   * @param rightFront
+   * @param rightRear
    */
-  public void setMotorValues(double left, double right) {
-    left = MathLib.restrictToRange(left, -1.0, 1.0);
-    right = MathLib.restrictToRange(right, -1.0, 1.0);
+  public void setMotorValues(double leftFront, double leftRear,
+      double rightFront, double rightRear) {
+    leftFront = MathLib.restrictToRange(leftFront, -1.0, 1.0);
+    rightFront = MathLib.restrictToRange(rightFront, -1.0, 1.0);
+    leftRear = MathLib.restrictToRange(leftRear, -1.0, 1.0);
+    rightRear = MathLib.restrictToRange(rightRear, -1.0, 1.0);
 
-    frontLeft.set(ControlMode.PercentOutput, left);
-    rearLeft.set(ControlMode.PercentOutput, left);
+    frontLeft.set(ControlMode.PercentOutput, leftFront);
+    rearLeft.set(ControlMode.PercentOutput, leftRear);
 
-    frontRight.set(ControlMode.PercentOutput, -right);
-    rearRight.set(ControlMode.PercentOutput, -right);
+    frontRight.set(ControlMode.PercentOutput, -rightFront);
+    rearRight.set(ControlMode.PercentOutput, -rightRear);
   }
 
   /**
-   * Stop the robot (set motor values to)
+   * Stop the robot (set motor values to 0)
    */
   public void stop() {
-    setMotorValues(0, 0);
+    setMotorValues(0, 0, 0, 0);
   }
 
   /**
    *
-   * @return average left motor value
+   * @return rear left motor value
    */
-  public double getLeftMotorVal() {
-    return (frontLeft.getMotorOutputPercent()
-        + rearLeft.getMotorOutputPercent()) / 2;
+  public double getRearLeftMotorVal() {
+    return (rearLeft.getMotorOutputPercent());
   }
 
   /**
    *
-   * @return average right motor value
+   * @return front left motor value
    */
-  public double getRightMotorVal() {
-    return (frontRight.getMotorOutputPercent()
-        + rearRight.getMotorOutputPercent()) / 2;
+  public double getFrontLeftVal() {
+    return (frontLeft.getMotorOutputPercent());
   }
+
+  /**
+   *
+   * @return rear right motor value
+   */
+  public double getRearRightVal() {
+    return (rearRight.getMotorOutputPercent());
+  }
+
+  /**
+   *
+   * @return front right motor value
+   */
+  public double getFrontRightVal() {
+    return (frontRight.getMotorOutputPercent());
+  }
+
 
   // ENCODER METHODS
   /**

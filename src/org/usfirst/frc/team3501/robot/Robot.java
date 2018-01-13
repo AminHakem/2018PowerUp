@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3501.robot;
 
-import org.usfirst.frc.team3501.robot.commands.driving.TimeDrive;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
@@ -47,8 +46,8 @@ public class Robot extends IterativeRobot {
   @Override
   public void autonomousInit() {
     // autonCommand = (Command) autonChooser.getSelected();
-    autonCommand = new TimeDrive(3, 0.4);
-    Scheduler.getInstance().add(autonCommand);
+    // autonCommand = new TimeDrive(3, 0.4);
+    // Scheduler.getInstance().add(autonCommand);
   }
 
   @Override
@@ -57,12 +56,15 @@ public class Robot extends IterativeRobot {
   }
 
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+
+  }
 
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     updateSmartDashboard();
+    driveTrain.printEncoderOutput();
   }
 
   public void updateSmartDashboard() {
