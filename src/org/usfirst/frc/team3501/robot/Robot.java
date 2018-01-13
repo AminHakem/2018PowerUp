@@ -1,8 +1,10 @@
 package org.usfirst.frc.team3501.robot;
 
+import org.usfirst.frc.team3501.robot.Constants.Elevator;
+import org.usfirst.frc.team3501.robot.Constants.Ramp;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
+
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -43,6 +45,10 @@ public class Robot extends IterativeRobot {
     return Intake.getIntake();
   }
 
+  public static Ramp getRamp() {
+    return Ramp.getRamp();
+  }
+
   @Override
   public void autonomousInit() {
     autonCommand = (Command) autonChooser.getSelected();
@@ -55,7 +61,8 @@ public class Robot extends IterativeRobot {
   }
 
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+  }
 
   @Override
   public void teleopPeriodic() {

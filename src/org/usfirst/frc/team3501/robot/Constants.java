@@ -1,10 +1,14 @@
 package org.usfirst.frc.team3501.robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.SPI;
 
 /**
- * The Constants stores constant values for all subsystems. This includes the port values for motors
- * and sensors, as well as important operational constants for subsystems such as max and min
+ * The Constants stores constant values for all subsystems. This includes the
+ * port values for motors
+ * and sensors, as well as important operational constants for subsystems such
+ * as max and min
  * values.
  */
 
@@ -15,7 +19,7 @@ public class Constants {
   public static class OI {
 
     public static final int RUN_INTAKE_PORT = 0;
-    public static int REVERSE_INTAKE_PORT = 0; 
+    public static int REVERSE_INTAKE_PORT = 0;
     public final static int PS4_CONTROLLER_PORT = 2;
     public static final int GAME_PAD_PORT = 2;
   }
@@ -33,14 +37,14 @@ public class Constants {
     public static final int BOTTOM_POS = 0;
     public static final int TOP_POS = 71; // assumes at max height for robot
     public static final int SWITCH_POS = 19;
-    public static final int SCALE_START_POS = 60; // assumes scale is at its starting position
-    public static final int SCALE_BOTTOM_POS = 48; // assumes scale is at bottom position
+    public static final int SCALE_START_POS = 60; // assumes scale is at its
+                                                  // starting position
+    public static final int SCALE_BOTTOM_POS = 48; // assumes scale is at bottom
+                                                   // position
     // there is no scale_top_pos because exceeds robot max height
-
 
     // PID VALUES
     public static double CLIMB_P = 0.01, CLIMB_I = 0.00115, CLIMB_D = -0.002;
-
   }
 
   public static class DriveTrain {
@@ -56,7 +60,6 @@ public class Constants {
     public static final int ENCODER_RIGHT_A = 2;
     public static final int ENCODER_RIGHT_B = 3;
 
-
     public static final SPI.Port GYRO_PORT = SPI.Port.kOnboardCS0;
   }
 
@@ -64,6 +67,16 @@ public class Constants {
     // MOTOR CONTROLLERS
     public static final int INTAKE_LEFT = 0;
     public static final int INTAKE_RIGHT = 0;
+
+  }
+
+  public static class Ramp {
+    public static final int PISTON_MODULE = 0;
+    public static final int RAMP_RELEASE_FORWARD = 0,
+        RAMP_RELEASE_REVERSE = 1;
+
+    public static final Value FORWARD_PISTON_VALUE = DoubleSolenoid.Value.kForward;
+    public static final Value REVERSE_PISTON_VALUE = DoubleSolenoid.Value.kReverse;
 
   }
 
