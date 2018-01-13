@@ -49,6 +49,10 @@ public class Robot extends IterativeRobot {
     return Ramp.getRamp();
   }
 
+  public static AirBalloon getAirBalloon() {
+    return AirBalloon.getAirBalloon();
+  }
+
   @Override
   public void autonomousInit() {
     autonCommand = (Command) autonChooser.getSelected();

@@ -80,6 +80,12 @@ public class Constants {
 
   }
 
+  public static class AirBalloon {
+    public static final int PISTON_MODULE = 0;
+    public static final int FILL_AIR_BALLOON = 0;
+
+  }
+
   public static enum Direction {
     LEFT, RIGHT, DOWN, UP, FORWARD, BACKWARD;
   }
