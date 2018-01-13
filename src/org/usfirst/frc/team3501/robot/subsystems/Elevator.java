@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Elevator extends Subsystem {
+    //
+    //DID NOT INCLUDE GYRO AND WHEEL
+    //
     private static Elevator Lift;
  
     private final TalonSRX liftLeft, liftRight;
