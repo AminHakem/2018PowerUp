@@ -31,6 +31,17 @@ public class Constants {
     public static final int ELEVATOR_ENCODER_A = 0;
     public static final int ELEVATOR_ENCODER_B = 1;
     
+    //POSITIONS (in inches)
+    public static final int START_POS = 6;
+    public static final int BOTTOM_POS = 0;
+    public static final int TOP_POS = 71; //assumes at max height for robot
+    public static final int SWITCH_POS = 19;
+    public static final int SCALE_POS = 60; //assumes scale is at its starting position
+    
+    //SOLENOID
+    public static final int SOLENOID_RAMP = 1;
+    public static final int SOLENOID_DUMP = 2;
+    
     //PID VALUES
     public static double CLIMB_P = 0.01, CLIMB_I = 0.00115, CLIMB_D = -0.002;
     

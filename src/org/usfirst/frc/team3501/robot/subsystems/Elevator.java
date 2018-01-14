@@ -17,6 +17,7 @@ public class Elevator extends Subsystem {
     private final TalonSRX elevatorTalon;
     private final Encoder elevatorEncoder;
     private Elevator() {
+        
         //MOTOR CONTROLLERS
         elevatorTalon = new TalonSRX(Constants.Elevator.ELEVATOR);
         
