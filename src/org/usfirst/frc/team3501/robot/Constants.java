@@ -23,16 +23,16 @@ public class Constants {
 
   }
 
-  public static class Lift {
+  public static class Elevator {
     //LIFT MOTOR CONTROLLERS
-    public static final int LIFT_LEFT = 1;
-    public static final int LIFT_RIGHT = 2;
+    public static final int ELEVATOR = 1;
     
     //LIFT ENCODERS
-    public static final int ELEVATOR_ENCODER_LEFT_A = 0;
-    public static final int ELEVATOR_ENCODER_LEFT_B = 1;
-    public static final int ELEVATOR_ENCODER_RIGHT_A = 2;
-    public static final int ELEVATOR_ENCODER_RIGHT_B = 1;
+    public static final int ELEVATOR_ENCODER_A = 0;
+    public static final int ELEVATOR_ENCODER_B = 1;
+    
+    //PID VALUES
+    public static double CLIMB_P = 0.01, CLIMB_I = 0.00115, CLIMB_D = -0.002;
     
   }
   
