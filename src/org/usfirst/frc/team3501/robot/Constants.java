@@ -1,7 +1,5 @@
 package org.usfirst.frc.team3501.robot;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.SPI;
 
 /**
@@ -18,6 +16,7 @@ import edu.wpi.first.wpilibj.SPI;
 public class Constants {
   public static class OI {
 
+    // Intake
     public static final int RUN_INTAKE_PORT = 0;
     public static int REVERSE_INTAKE_PORT = 0;
     public final static int PS4_CONTROLLER_PORT = 2;
@@ -45,6 +44,11 @@ public class Constants {
 
     // PID VALUES
     public static double CLIMB_P = 0.01, CLIMB_I = 0.00115, CLIMB_D = -0.002;
+
+    // Climber
+    public static final int LOWER_RIGHT_RAMP = 0;
+    public static final int LOWER_LEFT_RAMP = 0;
+
   }
 
   public static class DriveTrain {
@@ -72,11 +76,7 @@ public class Constants {
 
   public static class Ramp {
     public static final int PISTON_MODULE = 0;
-    public static final int RAMP_RELEASE_FORWARD = 0,
-        RAMP_RELEASE_REVERSE = 1;
-
-    public static final Value FORWARD_PISTON_VALUE = DoubleSolenoid.Value.kForward;
-    public static final Value REVERSE_PISTON_VALUE = DoubleSolenoid.Value.kReverse;
+    public static final int RAMP_RELEASE = 0;
 
   }
 

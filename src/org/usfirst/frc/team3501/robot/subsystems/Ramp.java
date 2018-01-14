@@ -2,7 +2,7 @@ package org.usfirst.frc.team3501.robot.subsystems;
 
 import org.usfirst.frc.team3501.robot.Constants;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -14,13 +14,12 @@ public class Ramp extends Subsystem {
 
   private static Ramp ramp;
 
-  private final DoubleSolenoid dropPiston;
+  private static Solenoid dropPiston;
 
   private Ramp() {
 
-    dropPiston = new DoubleSolenoid(Constants.Ramp.PISTON_MODULE,
-        Constants.Ramp.RAMP_RELEASE_FORWARD,
-        Constants.Ramp.RAMP_RELEASE_REVERSE);
+    dropPiston = new Solenoid(Constants.Ramp.PISTON_MODULE,
+        Constants.Ramp.RAMP_RELEASE);
   }
 
   public static Ramp getRamp() {
@@ -30,8 +29,18 @@ public class Ramp extends Subsystem {
     return ramp;
   }
 
-  public DoubleSolenoid getDropPiston() {
+  public Solenoid getDropPiston() {
     return dropPiston;
+  }
+
+  public static void extendPiston() {
+    boolean on = true;
+    dropPiston.set(on);
+  }
+
+  public static void retractPiston() {
+    boolean off = false;
+    dropPiston.set(off);
   }
 
   @Override

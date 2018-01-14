@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class AirBalloon extends Subsystem {
 
   private static AirBalloon airBalloon;
-  private final Solenoid fillPiston;
+  private static Solenoid fillPiston;
 
   private AirBalloon() {
 
@@ -29,6 +29,16 @@ public class AirBalloon extends Subsystem {
 
   public Solenoid getFillPiston() {
     return fillPiston;
+  }
+
+  public static void extendPiston() {
+    boolean on = true;
+    fillPiston.set(on);
+  }
+
+  public static void retractPiston() {
+    boolean off = false;
+    fillPiston.set(off);
   }
 
   @Override
