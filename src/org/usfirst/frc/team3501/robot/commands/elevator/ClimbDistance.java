@@ -21,7 +21,6 @@ public class ClimbDistance extends Command {
   private Elevator elevator = Robot.getElevator();
   private double maxTimeOut;
   private double target;
-  private double zeroAngle;
   private Preferences prefs;
   private PIDController climbController;
 
@@ -74,5 +73,4 @@ public class ClimbDistance extends Command {
   protected void interrupted() {
     end();
   }
-
 }
