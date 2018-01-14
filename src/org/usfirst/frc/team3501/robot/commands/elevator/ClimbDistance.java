@@ -26,9 +26,9 @@ public class ClimbDistance extends Command {
         this.maxTimeOut = maxTimeOut;
         this.target = distance;
 
-        this.climbP = Constants.Lift.CLIMB_P;
-        this.climbI = Constants.Lift.CLIMB_I;
-        this.climbD = Constants.Lift.CLIMB_D;
+        this.climbP = Constants.Elevator.CLIMB_P;
+        this.climbI = Constants.Elevator.CLIMB_I;
+        this.climbD = Constants.Elevator.CLIMB_D;
         this.climbController = new PIDController(climbP, climbI, climbD);
         this.climbController.setDoneRange(1.0);
         this.climbController.setMaxOutput(1.0);
@@ -36,6 +36,22 @@ public class ClimbDistance extends Command {
       }
 
     //REQUIRES EXECUTE AND INITIALIZE METHODS
+    
+    @Override
+    protected void initialize() {
+      this.elevator.resetEncoders();
+      this.climbController.setSetPoint(this.target);
+    }
+    
+    @Override
+    protected void execute() {
+      
+      double val = climbController.calcPID(elevator.getElevatorEncoderDistance());
+
+      double drive = val;
+      
+      this.elevator.setMotorValue(drive);
+    }
     
     @Override
     protected boolean isFinished() {

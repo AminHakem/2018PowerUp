@@ -2,6 +2,7 @@ package org.usfirst.frc.team3501.robot;
 
 import org.usfirst.frc.team3501.robot.commands.driving.TimeDrive;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.CameraServer;
@@ -26,6 +27,10 @@ public class Robot extends IterativeRobot {
     autonChooser = new SendableChooser();
 
     CameraServer server = CameraServer.getInstance();
+  }
+
+  public static Elevator getElevator() {
+    return Elevator.getElevator();
   }
 
   public static DriveTrain getDriveTrain() {

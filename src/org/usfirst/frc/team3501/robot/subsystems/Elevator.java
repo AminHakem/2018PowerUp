@@ -33,6 +33,7 @@ public class Elevator extends Subsystem {
         return elevator;
       }
     
+    
     // MOTOR METHODS
     public void setMotorValue(double motorVal) {
       motorVal = MathLib.restrictToRange(motorVal, -1.0, 1.0);
