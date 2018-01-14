@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * @author: niyatisriram
- *          Lowers left ramp when Joystick button is pressed
+ *          Lowers right ramp when Joystick button is pressed
  */
 public class DropRightRamp extends Command {
 
