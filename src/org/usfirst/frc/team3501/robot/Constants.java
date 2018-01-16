@@ -75,14 +75,10 @@ public class Constants {
 
   }
 
-  public static class Ramp {
-    public static final int PISTON_MODULE = 0;
-    public static final int RAMP_RELEASE = 0;
-
-  }
-
   public static class Climber {
     public static final int WINCH_SPEED = 0;
+    public static final int PISTON_MODULE = 0;
+    public static final int RAMP_RELEASE = 0;
   }
 
   public static enum Direction {

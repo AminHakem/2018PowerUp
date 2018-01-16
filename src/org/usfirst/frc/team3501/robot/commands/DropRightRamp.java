@@ -1,7 +1,7 @@
 package org.usfirst.frc.team3501.robot.commands;
 
 import org.usfirst.frc.team3501.robot.Robot;
-import org.usfirst.frc.team3501.robot.subsystems.Ramp;
+import org.usfirst.frc.team3501.robot.subsystems.Climber;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -11,10 +11,10 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DropRightRamp extends Command {
 
-  private Ramp ramp = Robot.getRamp();
+  private Climber climber = Robot.getClimber();
 
   public DropRightRamp() {
-    requires(ramp);
+    requires(climber);
   }
 
   @Override
@@ -23,7 +23,7 @@ public class DropRightRamp extends Command {
 
   @Override
   protected void execute() {
-    Ramp.extendPiston();
+    Climber.extendPiston();
   }
 
   @Override
@@ -33,7 +33,7 @@ public class DropRightRamp extends Command {
 
   @Override
   protected void end() {
-    Ramp.retractPiston();
+    Climber.retractPiston();
   }
 
   @Override

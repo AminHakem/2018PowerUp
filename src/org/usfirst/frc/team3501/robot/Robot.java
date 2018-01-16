@@ -46,10 +46,6 @@ public class Robot extends IterativeRobot {
     return Intake.getIntake();
   }
 
-  public static Ramp getRamp() {
-    return Ramp.getRamp();
-  }
-
   public static Climber getClimber() {
     return Climber.getClimber();
   }
