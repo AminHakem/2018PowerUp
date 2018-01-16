@@ -2,6 +2,7 @@ package org.usfirst.frc.team3501.robot;
 
 import org.usfirst.frc.team3501.robot.Constants.Elevator;
 import org.usfirst.frc.team3501.robot.Constants.Ramp;
+import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
 
@@ -47,6 +48,10 @@ public class Robot extends IterativeRobot {
 
   public static Ramp getRamp() {
     return Ramp.getRamp();
+  }
+
+  public static Climber getClimber() {
+    return Climber.getClimber();
   }
 
   @Override

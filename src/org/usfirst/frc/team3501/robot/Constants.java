@@ -48,6 +48,7 @@ public class Constants {
     // Climber
     public static final int LOWER_RIGHT_RAMP = 0;
     public static final int LOWER_LEFT_RAMP = 0;
+    public static final int CLIMBER_WINCH = 0;
 
   }
 
@@ -80,10 +81,8 @@ public class Constants {
 
   }
 
-  public static class AirBalloon {
-    public static final int PISTON_MODULE = 0;
-    public static final int FILL_AIR_BALLOON = 0;
-
+  public static class Climber {
+    public static final int WINCH_SPEED = 0;
   }
 
   public static enum Direction {

@@ -2,6 +2,8 @@ package org.usfirst.frc.team3501.robot;
 
 import org.usfirst.frc.team3501.robot.commands.DropLeftRamp;
 import org.usfirst.frc.team3501.robot.commands.DropRightRamp;
+import org.usfirst.frc.team3501.robot.commands.LiftRobot;
+import org.usfirst.frc.team3501.robot.commands.LowerRobot;
 import org.usfirst.frc.team3501.robot.commands.RunIntake;
 import org.usfirst.frc.team3501.robot.commands.RunOuttake;
 
@@ -21,8 +23,8 @@ public class OI {
   // Climber
   public static Button rightRamp;
   public static Button leftRamp;
-  public static Button rightAirBalloon;
-  public static Button leftAirBalloon;
+  public static Button climbingWinch;
+  public static Button loweringWinch;
 
   public OI() {
     ps4_controller = new Joystick(Constants.OI.PS4_CONTROLLER_PORT);
@@ -45,6 +47,14 @@ public class OI {
 
     leftRamp = new JoystickButton(ps4_controller, Constants.OI.LOWER_LEFT_RAMP);
     leftRamp.whileHeld(new DropLeftRamp());
+
+    climbingWinch = new JoystickButton(xboxController,
+        Constants.OI.CLIMBER_WINCH);
+    climbingWinch.whileHeld(new LiftRobot());
+
+    loweringWinch = new JoystickButton(xboxController,
+        Constants.OI.CLIMBER_WINCH);
+    loweringWinch.whileHeld(new LowerRobot());
 
   }
 
