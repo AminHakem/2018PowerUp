@@ -1,15 +1,10 @@
 package org.usfirst.frc.team3501.robot;
 
-<<<<<<<15183 a1d85be5c495745cd7270da594177903d01
-
-=======
-
 import org.usfirst.frc.team3501.robot.commands.DropLeftRamp;
 import org.usfirst.frc.team3501.robot.commands.DropRightRamp;
-import org.usfirst.frc.team3501.robot.commands.FillLeftAirBalloon;
-import org.usfirst.frc.team3501.robot.commands.FillRightAirBalloon;>>>>>>>add commands to control left and right ramps and air balloons with pistons
 import org.usfirst.frc.team3501.robot.commands.RunIntake;
 import org.usfirst.frc.team3501.robot.commands.RunOuttake;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
