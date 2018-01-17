@@ -16,8 +16,7 @@ public class DriveTrain extends Subsystem {
    * Set PID values, need to test mecanum wheels to find them
    */
   public static double driveP = 0.01, driveI = 0.00115, driveD = -0.002;
-  public static double smallTurnP = 0.004, smallTurnI = 0.0013,
-      smallTurnD = 0.005;
+  public static double smallTurnP = 0.004, smallTurnI = 0.0013, smallTurnD = 0.005;
   public static double largeTurnP = .003, largeTurnI = .0012, largeTurnD = .006;
   public static double driveStraightGyroP = 0.01;
 
@@ -59,8 +58,7 @@ public class DriveTrain extends Subsystem {
     SpeedControllerGroup m_right_rear = new SpeedControllerGroup(rearRight);
     SpeedControllerGroup m_right_front = new SpeedControllerGroup(frontRight);
 
-    robotDrive = new MecanumDrive(m_left_front, m_left_rear, m_right_front,
-        m_right_rear);
+    robotDrive = new MecanumDrive(m_left_front, m_left_rear, m_right_front, m_right_rear);
 
     this.imu = new ADXRS450_Gyro(Constants.DriveTrain.GYRO_PORT);
   }
@@ -85,8 +83,8 @@ public class DriveTrain extends Subsystem {
    * @param rightFront
    * @param rightRear
    */
-  public void setMotorValues(double leftFront, double leftRear,
-      double rightFront, double rightRear) {
+  public void setMotorValues(double leftFront, double leftRear, double rightFront,
+      double rightRear) {
     leftFront = MathLib.restrictToRange(leftFront, -1.0, 1.0);
     rightFront = MathLib.restrictToRange(rightFront, -1.0, 1.0);
     leftRear = MathLib.restrictToRange(leftRear, -1.0, 1.0);
@@ -206,6 +204,15 @@ public class DriveTrain extends Subsystem {
    */
   public void resetGyro() {
     this.imu.reset();
+  }
+
+  public void mecanumDrive(final double thrust, final double twist, final double rotation,
+      final double gyroAngle) {
+    if ((thrust < 0.1 && thrust > -0.1) && (twist < 0.1 && twist > -0.1)
+        && (rotation < 0.1 && rotation > -0.1)) {
+      robotDrive.driveCartesian(0, 0, 0);
+    } else
+      robotDrive.driveCartesian(thrust, twist, rotation, gyroAngle);
   }
 
   @Override
