@@ -2,14 +2,12 @@ package org.usfirst.frc.team3501.robot.commands.driving;
 
 import org.usfirst.frc.team3501.robot.OI;
 import org.usfirst.frc.team3501.robot.Robot;
-
 import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This command will run throughout teleop and listens for joystick inputs to
- * drive the driveTrain. This never finishes until teleop ends. - works in
- * conjunction with OI.java
+ * This command will run throughout teleop and listens for joystick inputs to drive the driveTrain.
+ * This never finishes until teleop ends. - works in conjunction with OI.java
  */
 public class JoystickDrive extends Command {
 
@@ -21,13 +19,14 @@ public class JoystickDrive extends Command {
   }
 
   @Override
-  protected void initialize() {
-  }
+  protected void initialize() {}
 
   @Override
   protected void execute() {
     double thrust = OI.ps4_controller.getY();
     double twist = OI.ps4_controller.getAxis(AxisType.kZ);
+    double rotation = OI.ps4_controller.getZ();
+    double gyroAngle = OI.ps4_controller.getDirectionDegrees();
 
     thrust = (6 * previousThrust + thrust) / 7;
     twist = (6 * previousTwist + twist) / 7;
@@ -35,7 +34,7 @@ public class JoystickDrive extends Command {
     previousThrust = thrust;
     previousTwist = twist;
 
-    // Robot.getDriveTrain().joystickDrive(-thrust, -twist);
+    Robot.getDriveTrain().mecanumDrive(-thrust, -twist, rotation, gyroAngle);
   }
 
   @Override
@@ -49,6 +48,5 @@ public class JoystickDrive extends Command {
   }
 
   @Override
-  protected void interrupted() {
-  }
+  protected void interrupted() {}
 }
