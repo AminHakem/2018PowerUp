@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.SPI;
 
 public class Constants {
   public static class OI {
-    public final static int XBOX_CONTROLLER_PORT = 0;
+    public final static int PS4_CONTROLLER_PORT = 0;
     public static final int GAME_PAD_PORT = 2;
 
     public static final int RUN_INTAKE_PORT = 0;

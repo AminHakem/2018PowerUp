@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI {
   private static OI oi;
-  public static Joystick xboxController;
+  public static Joystick ps4_controller;
   public static Joystick gamePad;
 
   // Intake
@@ -17,7 +17,7 @@ public class OI {
   public static Button runIntakeBackward;
 
   public OI() {
-    xboxController = new Joystick(Constants.OI.XBOX_CONTROLLER_PORT);
+    ps4_controller = new Joystick(Constants.OI.PS4_CONTROLLER_PORT);
     gamePad = new Joystick(Constants.OI.GAME_PAD_PORT);
 
     runIntakeForward = new JoystickButton(xboxController,

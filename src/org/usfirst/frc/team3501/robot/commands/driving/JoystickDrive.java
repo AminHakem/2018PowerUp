@@ -26,8 +26,8 @@ public class JoystickDrive extends Command {
 
   @Override
   protected void execute() {
-    double thrust = OI.xboxController.getY();
-    double twist = OI.xboxController.getAxis(AxisType.kZ);
+    double thrust = OI.ps4_controller.getY();
+    double twist = OI.ps4_controller.getAxis(AxisType.kZ);
 
     thrust = (6 * previousThrust + thrust) / 7;
     twist = (6 * previousTwist + twist) / 7;
