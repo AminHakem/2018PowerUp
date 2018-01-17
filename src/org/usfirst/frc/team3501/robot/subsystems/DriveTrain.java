@@ -1,9 +1,7 @@
 package org.usfirst.frc.team3501.robot.subsystems;
 
 import org.usfirst.frc.team3501.robot.Constants;
-import org.usfirst.frc.team3501.robot.MathLib;
 import org.usfirst.frc.team3501.robot.commands.driving.JoystickDrive;
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
@@ -75,33 +73,33 @@ public class DriveTrain extends Subsystem {
   }
 
   // DRIVE METHODS
-  /**
-   * Set the motor values to user-inputted motor values
-   *
-   * @param leftFront
-   * @param leftRear
-   * @param rightFront
-   * @param rightRear
-   */
-  public void setMotorValues(double leftFront, double leftRear, double rightFront,
-      double rightRear) {
-    leftFront = MathLib.restrictToRange(leftFront, -1.0, 1.0);
-    rightFront = MathLib.restrictToRange(rightFront, -1.0, 1.0);
-    leftRear = MathLib.restrictToRange(leftRear, -1.0, 1.0);
-    rightRear = MathLib.restrictToRange(rightRear, -1.0, 1.0);
-
-    frontLeft.set(ControlMode.PercentOutput, leftFront);
-    rearLeft.set(ControlMode.PercentOutput, leftRear);
-
-    frontRight.set(ControlMode.PercentOutput, -rightFront);
-    rearRight.set(ControlMode.PercentOutput, -rightRear);
-  }
+  // /**
+  // * Set the motor values to user-inputted motor values
+  // *
+  // * @param leftFront
+  // * @param leftRear
+  // * @param rightFront
+  // * @param rightRear
+  // */
+  // public void setMotorValues(double leftFront, double leftRear, double rightFront,
+  // double rightRear) {
+  // leftFront = MathLib.restrictToRange(leftFront, -1.0, 1.0);
+  // rightFront = MathLib.restrictToRange(rightFront, -1.0, 1.0);
+  // leftRear = MathLib.restrictToRange(leftRear, -1.0, 1.0);
+  // rightRear = MathLib.restrictToRange(rightRear, -1.0, 1.0);
+  //
+  // frontLeft.set(ControlMode.PercentOutput, leftFront);
+  // rearLeft.set(ControlMode.PercentOutput, leftRear);
+  //
+  // frontRight.set(ControlMode.PercentOutput, -rightFront);
+  // rearRight.set(ControlMode.PercentOutput, -rightRear);
+  // }
 
   /**
    * Stop the robot (set motor values to 0)
    */
   public void stop() {
-    setMotorValues(0, 0, 0, 0);
+    // setMotorValues(0, 0, 0, 0);
   }
 
   /**
@@ -206,6 +204,15 @@ public class DriveTrain extends Subsystem {
     this.imu.reset();
   }
 
+  /**
+   * Mecanum Drive - takes in the ySpeed, xSpeed, Z Rotation, and Gyro Angle as parameters and
+   * enters those arguments in the driveCartesian method
+   * 
+   * @param thrust
+   * @param twist
+   * @param rotation
+   * @param gyroAngle
+   */
   public void mecanumDrive(final double thrust, final double twist, final double rotation,
       final double gyroAngle) {
     if ((thrust < 0.1 && thrust > -0.1) && (twist < 0.1 && twist > -0.1)

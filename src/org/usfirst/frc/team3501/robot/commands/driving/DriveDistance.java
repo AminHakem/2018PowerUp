@@ -16,7 +16,7 @@ public class DriveDistance extends Command {
   private DriveTrain driveTrain = Robot.getDriveTrain();
   private double maxTimeOut;
   private double target;
-  private double zeroAngle;
+  private double angle;
   private Preferences prefs;
   private PIDController driveController;
 
@@ -25,10 +25,11 @@ public class DriveDistance extends Command {
   private double driveD;
   private double gyroP;
 
-  public DriveDistance(double distance, double maxTimeOut) {
+  public DriveDistance(double distance, double angle, double maxTimeOut) {
     requires(driveTrain);
     this.maxTimeOut = maxTimeOut;
     this.target = distance;
+    this.angle = angle;
 
     this.driveP = driveTrain.driveP;
     this.driveI = driveTrain.driveI;
@@ -44,24 +45,33 @@ public class DriveDistance extends Command {
   protected void initialize() {
     this.driveTrain.resetEncoders();
     this.driveController.setSetPoint(this.target);
-    this.zeroAngle = driveTrain.getAngle();
+    this.angle += driveTrain.getAngle();
   }
 
   @Override
   protected void execute() {
-    double xVal = gyroP * (driveTrain.getAngle() - zeroAngle);
-    double yVal =
-        driveController.calcPID(driveTrain.getFrontBackEncoderDistance());
+    double xSpeed = Math.cos(driveTrain.getAngle());
+    double ySpeed = Math.sin(driveTrain.getAngle());
 
-    double leftDrive = yVal - xVal;
-    double rightDrive = yVal + xVal;
-    this.driveTrain.setMotorValues(leftDrive, rightDrive);
+
+    // double xVal = gyroP * (driveTrain.getAngle() - zeroAngle);
+    // double yVal =
+    // driveController.calcPID(driveTrain.getFrontBackEncoderDistance());
+
+    double xleftFrontVal = driveController.calcPID(driveTrain.getFrontLeftVal());
+    double xleftRearVal = driveController.calcPID(driveTrain.getRearLeftMotorVal());
+    double xrightFrontVal = driveController.calcPID(driveTrain.getFrontRightVal());
+    double xrightRearVal = driveController.calcPID(driveTrain.getFrontBackEncoderDistance());
+
+
+    // double leftDrive = yVal - xVal;
+    // double rightDrive = yVal + xVal;
+    // this.driveTrain.setMotorValues(leftDrive, rightDrive);
   }
 
   @Override
   protected boolean isFinished() {
-    return timeSinceInitialized() >= maxTimeOut
-        || this.driveController.isDone();
+    return timeSinceInitialized() >= maxTimeOut || this.driveController.isDone();
   }
 
   @Override
