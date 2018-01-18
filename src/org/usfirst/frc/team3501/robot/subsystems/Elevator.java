@@ -14,6 +14,8 @@ public class Elevator extends Subsystem {
     
     private static Elevator elevator;
  
+    //PID VALUES ARE FOUND IN CONSTANTS.JAVA
+    
     private final TalonSRX elevatorTalon;
     private final Encoder elevatorEncoder;
     private Elevator() {
@@ -32,7 +34,7 @@ public class Elevator extends Subsystem {
           elevator = new Elevator();
         }
         return elevator;
-      }
+     }
     
     
     // MOTOR METHODS
