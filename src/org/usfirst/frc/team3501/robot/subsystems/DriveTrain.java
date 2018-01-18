@@ -31,7 +31,8 @@ public class DriveTrain extends Subsystem {
 
   private final WPI_TalonSRX frontLeft, frontRight, rearLeft, rearRight;
   private final Encoder frontBackEncoder, rightLeftEncoder;
-
+  
+  
   private ADXRS450_Gyro imu;
 
   private DriveTrain() {
@@ -75,7 +76,7 @@ public class DriveTrain extends Subsystem {
    * Stop the robot (set motor values to 0)
    */
   public void stop() {
-    mecanumDrive(0, 0, 0, 0);
+    robotDrive.driveCartesian(0, 0, 0, 0);
   }
 
 
@@ -157,12 +158,16 @@ public class DriveTrain extends Subsystem {
    * @param rotation
    * @param gyroAngle
    */
-  public void mecanumDrive(final double thrust, final double twist, final double rotation) {
+  public void mecanumDrive(final double thrust, final double twist, final double rotation, final boolean fieldOriented) {
     if ((thrust < 0.1 && thrust > -0.1) && (twist < 0.1 && twist > -0.1)
         && (rotation < 0.1 && rotation > -0.1)) {
-      robotDrive.driveCartesian(0, 0, 0);
+      robotDrive.stopMotor();
     } else
-      robotDrive.driveCartesian(thrust, twist, rotation, imu.getAngle());
+      if(fieldOriented) {
+    	  robotDrive.driveCartesian(thrust, twist, rotation, imu.getAngle());
+      }else {
+    	  robotDrive.driveCartesian(thrust, twist, rotation);
+      }
   }
 
   @Override

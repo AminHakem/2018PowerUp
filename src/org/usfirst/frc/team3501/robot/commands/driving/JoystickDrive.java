@@ -12,7 +12,7 @@ public class JoystickDrive extends Command {
 
   double previousThrust = 0;
   double previousTwist = 0;
-
+  boolean fieldOriented = true;
   public JoystickDrive() {
     requires(Robot.getDriveTrain());
   }
@@ -25,15 +25,14 @@ public class JoystickDrive extends Command {
     double thrust = OI.ps4_controller.getY();
     double twist = OI.ps4_controller.getX();
     double rotation = OI.ps4_controller.getZ();
-    double gyroAngle = OI.ps4_controller.getDirectionDegrees();
-
+   
     thrust = (6 * previousThrust + thrust) / 7;
     twist = (6 * previousTwist + twist) / 7;
 
     previousThrust = thrust;
     previousTwist = twist;
 
-    Robot.getDriveTrain().mecanumDrive(-thrust, -twist, rotation, gyroAngle);
+    Robot.getDriveTrain().mecanumDrive(-thrust, -twist, rotation);
   }
 
   @Override
