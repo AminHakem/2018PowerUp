@@ -1,7 +1,10 @@
 package org.usfirst.frc.team3501.robot.commands.driving;
 
+import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.OI;
 import org.usfirst.frc.team3501.robot.Robot;
+
+import edu.wpi.first.wpilibj.Joystick.ButtonType;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -25,7 +28,7 @@ public class JoystickDrive extends Command {
     double thrust = OI.ps4_controller.getY();
     double twist = OI.ps4_controller.getX();
     double rotation = OI.ps4_controller.getZ();
-   
+    fieldOriented = OI.ps4_controller.getRawButtonPressed(Constants.OI.CONTROLLER_BUTTON_PS);
     thrust = (6 * previousThrust + thrust) / 7;
     twist = (6 * previousTwist + twist) / 7;
 
