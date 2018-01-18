@@ -52,13 +52,13 @@ public class DriveDistance extends Command {
   protected void execute() {
     double xSpeed = Math.cos(driveTrain.getAngle());
     double ySpeed = Math.sin(driveTrain.getAngle());
+    angle += driveTrain.getAngle();
 
     // double xVal = gyroP * (driveTrain.getAngle() - zeroAngle);
     // double yVal =
     // driveController.calcPID(driveTrain.getFrontBackEncoderDistance());
 
-
-    this.driveTrain.mecanumDrive(ySpeed, xSpeed, rotation, gyroAngle);
+    this.driveTrain.mecanumDrive(ySpeed, xSpeed, 0, angle);
   }
 
   @Override
