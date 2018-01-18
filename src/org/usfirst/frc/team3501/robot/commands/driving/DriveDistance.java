@@ -58,7 +58,7 @@ public class DriveDistance extends Command {
     // double yVal =
     // driveController.calcPID(driveTrain.getFrontBackEncoderDistance());
 
-    this.driveTrain.mecanumDrive(ySpeed, xSpeed, 0, angle);
+    this.driveTrain.mecanumDrive(ySpeed, xSpeed, 0, true);
   }
 
   @Override
