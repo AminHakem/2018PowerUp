@@ -2,7 +2,6 @@ package org.usfirst.frc.team3501.robot.commands.driving;
 
 import org.usfirst.frc.team3501.robot.OI;
 import org.usfirst.frc.team3501.robot.Robot;
-import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -24,7 +23,7 @@ public class JoystickDrive extends Command {
   @Override
   protected void execute() {
     double thrust = OI.ps4_controller.getY();
-    double twist = OI.ps4_controller.getAxis(AxisType.kZ);
+    double twist = OI.ps4_controller.getX();
     double rotation = OI.ps4_controller.getZ();
     double gyroAngle = OI.ps4_controller.getDirectionDegrees();
 

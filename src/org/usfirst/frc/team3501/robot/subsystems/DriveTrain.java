@@ -72,66 +72,11 @@ public class DriveTrain extends Subsystem {
     return driveTrain;
   }
 
-  // DRIVE METHODS
-  // /**
-  // * Set the motor values to user-inputted motor values
-  // *
-  // * @param leftFront
-  // * @param leftRear
-  // * @param rightFront
-  // * @param rightRear
-  // */
-  // public void setMotorValues(double leftFront, double leftRear, double rightFront,
-  // double rightRear) {
-  // leftFront = MathLib.restrictToRange(leftFront, -1.0, 1.0);
-  // rightFront = MathLib.restrictToRange(rightFront, -1.0, 1.0);
-  // leftRear = MathLib.restrictToRange(leftRear, -1.0, 1.0);
-  // rightRear = MathLib.restrictToRange(rightRear, -1.0, 1.0);
-  //
-  // frontLeft.set(ControlMode.PercentOutput, leftFront);
-  // rearLeft.set(ControlMode.PercentOutput, leftRear);
-  //
-  // frontRight.set(ControlMode.PercentOutput, -rightFront);
-  // rearRight.set(ControlMode.PercentOutput, -rightRear);
-  // }
-
   /**
    * Stop the robot (set motor values to 0)
    */
   public void stop() {
-    // setMotorValues(0, 0, 0, 0);
-  }
-
-  /**
-   *
-   * @return rear left motor value
-   */
-  public double getRearLeftMotorVal() {
-    return (rearLeft.getMotorOutputPercent());
-  }
-
-  /**
-   *
-   * @return front left motor value
-   */
-  public double getFrontLeftVal() {
-    return (frontLeft.getMotorOutputPercent());
-  }
-
-  /**
-   *
-   * @return rear right motor value
-   */
-  public double getRearRightVal() {
-    return (rearRight.getMotorOutputPercent());
-  }
-
-  /**
-   *
-   * @return front right motor value
-   */
-  public double getFrontRightVal() {
-    return (frontRight.getMotorOutputPercent());
+    mecanumDrive(0, 0, 0, 0);
   }
 
 

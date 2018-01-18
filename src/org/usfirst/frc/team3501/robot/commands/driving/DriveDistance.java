@@ -53,20 +53,12 @@ public class DriveDistance extends Command {
     double xSpeed = Math.cos(driveTrain.getAngle());
     double ySpeed = Math.sin(driveTrain.getAngle());
 
-
     // double xVal = gyroP * (driveTrain.getAngle() - zeroAngle);
     // double yVal =
     // driveController.calcPID(driveTrain.getFrontBackEncoderDistance());
 
-    double xleftFrontVal = driveController.calcPID(driveTrain.getFrontLeftVal());
-    double xleftRearVal = driveController.calcPID(driveTrain.getRearLeftMotorVal());
-    double xrightFrontVal = driveController.calcPID(driveTrain.getFrontRightVal());
-    double xrightRearVal = driveController.calcPID(driveTrain.getFrontBackEncoderDistance());
 
-
-    // double leftDrive = yVal - xVal;
-    // double rightDrive = yVal + xVal;
-    // this.driveTrain.setMotorValues(leftDrive, rightDrive);
+    this.driveTrain.mecanumDrive(ySpeed, xSpeed, rotation, gyroAngle);
   }
 
   @Override
