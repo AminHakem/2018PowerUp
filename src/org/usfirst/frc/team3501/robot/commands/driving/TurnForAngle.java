@@ -5,16 +5,13 @@ import org.usfirst.frc.team3501.robot.Constants.Direction;
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.utils.PIDController;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This command turns the robot for a specified angle in specified direction -
- * either left or right
+ * This command turns the robot for a specified angle in specified direction - either left or right
  *
- * parameters: angle: the robot will turn - in degrees direction: the robot will
- * turn - either right or left maxTimeOut: the max time this command will be
- * allowed to run on for
+ * parameters: angle: the robot will turn - in degrees direction: the robot will turn - either right
+ * or left maxTimeOut: the max time this command will be allowed to run on for
  */
 public class TurnForAngle extends Command {
   private DriveTrain driveTrain = Robot.getDriveTrain();
@@ -62,8 +59,7 @@ public class TurnForAngle extends Command {
   protected void execute() {
     double xVal = 0;
 
-    xVal = this.gyroController
-        .calcPID(Math.abs(this.driveTrain.getAngle() - this.zeroAngle));
+    xVal = this.gyroController.calcPID(Math.abs(this.driveTrain.getAngle() - this.zeroAngle));
 
     double leftDrive = 0;
     double rightDrive = 0;
@@ -75,7 +71,7 @@ public class TurnForAngle extends Command {
       rightDrive = xVal;
     }
 
-    this.driveTrain.setMotorValues(leftDrive, rightDrive);
+    // this.driveTrain.setMotorValues(leftDrive, rightDrive);
   }
 
   @Override
@@ -84,8 +80,7 @@ public class TurnForAngle extends Command {
   }
 
   @Override
-  protected void end() {
-  }
+  protected void end() {}
 
   @Override
   protected void interrupted() {

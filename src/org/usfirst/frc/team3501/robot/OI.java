@@ -1,8 +1,9 @@
 package org.usfirst.frc.team3501.robot;
 
+
 import org.usfirst.frc.team3501.robot.commands.RunIntake;
 import org.usfirst.frc.team3501.robot.commands.RunOuttake;
-
+import org.usfirst.frc.team3501.robot.commands.driving.DriveDistance;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -19,13 +20,17 @@ public class OI {
   public OI() {
     gamePad = new Joystick(Constants.OI.PS4_CONTROLLER_PORT);
 
-    runIntakeForward = new JoystickButton(gamePad,
-        Constants.OI.RUN_INTAKE_PORT);
+    runIntakeForward = new JoystickButton(gamePad, Constants.OI.RUN_INTAKE_PORT);
     runIntakeForward.whileHeld(new RunOuttake());
 
-    runIntakeBackward = new JoystickButton(gamePad,
-        Constants.OI.REVERSE_INTAKE_PORT);
+    runIntakeBackward = new JoystickButton(gamePad, Constants.OI.REVERSE_INTAKE_PORT);
     runIntakeBackward.whileHeld(new RunIntake());
+
+    ps4_controller = new Joystick(Constants.OI.PS4_CONTROLLER_PORT);
+    // gamePad = new Joystick(Constants.OI.GAME_PAD_PORT);
+
+    JoystickButton driveButton = new JoystickButton(ps4_controller, 1);
+    driveButton.whenPressed(new DriveDistance(50, 0, 5));
 
   }
 

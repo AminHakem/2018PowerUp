@@ -3,8 +3,6 @@ package org.usfirst.frc.team3501.robot.commands.driving;
 import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.OI;
 import org.usfirst.frc.team3501.robot.Robot;
-
-import edu.wpi.first.wpilibj.Joystick.ButtonType;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -16,6 +14,7 @@ public class JoystickDrive extends Command {
   double previousThrust = 0;
   double previousTwist = 0;
   boolean fieldOriented = true;
+
   public JoystickDrive() {
     requires(Robot.getDriveTrain());
   }
@@ -25,17 +24,22 @@ public class JoystickDrive extends Command {
 
   @Override
   protected void execute() {
-    double thrust = OI.ps4_controller.getY();
-    double twist = OI.ps4_controller.getX();
-    double rotation = OI.ps4_controller.getZ();
+    double thrust = Robot.getOI().ps4_controller.getThrottle();
+    System.out.println("Getting thurst value: " + thrust);
+
+    double twist = Robot.getOI().ps4_controller.getX();
+    System.out.println("Getting twist value: " + twist);
+    double rotation = Robot.getOI().ps4_controller.getZ();
+    System.out.println("Getting rotation value: " + rotation);
     fieldOriented = OI.ps4_controller.getRawButtonPressed(Constants.OI.CONTROLLER_BUTTON_PS);
+
     thrust = (6 * previousThrust + thrust) / 7;
     twist = (6 * previousTwist + twist) / 7;
 
     previousThrust = thrust;
     previousTwist = twist;
 
-    Robot.getDriveTrain().mecanumDrive(-thrust, -twist, rotation,fieldOriented);
+    Robot.getDriveTrain().mecanumDrive(-thrust, -twist, rotation, fieldOriented);
   }
 
   @Override
