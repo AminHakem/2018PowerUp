@@ -17,7 +17,6 @@ public class DriveTrain extends Subsystem {
   public static double smallTurnP = 0.004, smallTurnI = 0.0013, smallTurnD = 0.005;
   public static double largeTurnP = .003, largeTurnI = .0012, largeTurnD = .006;
   public static double driveStraightGyroP = 0.01;
-
   /**
    * Need to edit for correct wheel diameter
    */
@@ -158,13 +157,12 @@ public class DriveTrain extends Subsystem {
    * @param rotation
    * @param gyroAngle
    */
-  public void mecanumDrive(final double thrust, final double twist, final double rotation,
-      final double gyroAngle) {
+  public void mecanumDrive(final double thrust, final double twist, final double rotation) {
     if ((thrust < 0.1 && thrust > -0.1) && (twist < 0.1 && twist > -0.1)
         && (rotation < 0.1 && rotation > -0.1)) {
       robotDrive.driveCartesian(0, 0, 0);
     } else
-      robotDrive.driveCartesian(thrust, twist, rotation, gyroAngle);
+      robotDrive.driveCartesian(thrust, twist, rotation, imu.getAngle());
   }
 
   @Override
