@@ -24,22 +24,32 @@ public class JoystickDrive extends Command {
 
   @Override
   protected void execute() {
-    double thrust = Robot.getOI().ps4_controller.getThrottle();
-    System.out.println("Getting thurst value: " + thrust);
 
-    double twist = Robot.getOI().ps4_controller.getX();
-    System.out.println("Getting twist value: " + twist);
-    double rotation = Robot.getOI().ps4_controller.getZ();
-    System.out.println("Getting rotation value: " + rotation);
+    /**
+     * Raw Axis 1 is the left joystick on the Xbox controller with the movement being from top to
+     * bottom. Raw Axis 0 is the left joystick on the Xbox controller with the movement being from
+     * left to right. Raw Axis 4 is the right joystick on the Xbox controller with the movement
+     * being from left to right.
+     * 
+     */
+    double ySpeed = Robot.getOI().ps4_controller.getRawAxis(1);
+    // System.out.println("Getting ySpeed value: " + ySpeed);
+
+    double xSpeed = Robot.getOI().ps4_controller.getRawAxis(0);
+    // System.out.println("Getting xSpeed value: " + xSpeed);
+
+    double rotation = Robot.getOI().ps4_controller.getRawAxis(4);
+    // System.out.println("Getting rotation value: " + rotation);
+
     fieldOriented = OI.ps4_controller.getRawButtonPressed(Constants.OI.CONTROLLER_BUTTON_PS);
 
-    thrust = (6 * previousThrust + thrust) / 7;
-    twist = (6 * previousTwist + twist) / 7;
+    ySpeed = (6 * previousThrust + ySpeed) / 7;
+    xSpeed = (6 * previousTwist + xSpeed) / 7;
 
-    previousThrust = thrust;
-    previousTwist = twist;
+    previousThrust = ySpeed;
+    previousTwist = xSpeed;
 
-    Robot.getDriveTrain().mecanumDrive(-thrust, -twist, rotation, fieldOriented);
+    Robot.getDriveTrain().mecanumDrive(ySpeed, -xSpeed, rotation, fieldOriented);
   }
 
   @Override
