@@ -38,6 +38,7 @@ public class Climber extends Subsystem {
 
   public static void setMotorValues() {
     rightWinch.set(ControlMode.PercentOutput, Constants.Climber.WINCH_SPEED);
+    leftWinch.set(ControlMode.PercentOutput, Constants.Climber.WINCH_SPEED);
   }
 
   public static void setMotorValues(double speed) {
