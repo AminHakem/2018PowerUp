@@ -17,7 +17,7 @@ public class OI {
   public static Button runIntakeBackward;
 
   public OI() {
-    gamePad = new Joystick(Constants.OI.PS4_CONTROLLER_PORT);
+    gamePad = new Joystick(Constants.OI.GAME_PAD_PORT);
 
     runIntakeForward = new JoystickButton(gamePad, Constants.OI.RUN_INTAKE_PORT);
     runIntakeForward.whileHeld(new RunOuttake());
