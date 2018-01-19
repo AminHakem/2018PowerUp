@@ -142,6 +142,19 @@ public class DriveTrain extends Subsystem {
     return this.imu.getAngle();
   }
 
+  /***
+   * Changes the current angle
+   *
+   * @param angle - Positive input increases the current angle and negative input decreases the
+   *        angle
+   */
+  public void adjustAngle(double angle, boolean fieldOriented) {
+    double newAngle = imu.getAngle() + angle;
+    double ySpeed = Math.cos(newAngle);
+    double xSpeed = Math.sin(newAngle);
+    this.mecanumDrive(ySpeed, xSpeed, 0, fieldOriented);
+  }
+
   /**
    * resets accumulator
    */
@@ -152,7 +165,7 @@ public class DriveTrain extends Subsystem {
   /**
    * Mecanum Drive - takes in the ySpeed, xSpeed, Z Rotation, and Gyro Angle as parameters and
    * enters those arguments in the driveCartesian method
-   * 
+   *
    * @param ySpeed
    * @param xSpeed
    * @param rotation
@@ -169,6 +182,7 @@ public class DriveTrain extends Subsystem {
       robotDrive.driveCartesian(ySpeed, xSpeed, rotation);
     }
   }
+
 
   @Override
   protected void initDefaultCommand() {
