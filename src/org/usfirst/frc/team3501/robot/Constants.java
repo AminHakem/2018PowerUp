@@ -46,8 +46,7 @@ public class Constants {
     public static double CLIMB_P = 0.01, CLIMB_I = 0.00115, CLIMB_D = -0.002;
 
     // Climber
-    public static final int LOWER_RIGHT_RAMP = 0;
-    public static final int LOWER_LEFT_RAMP = 0;
+    public static final int LOWER_RAMP = 0;
     public static final int CLIMBER_WINCH = 0;
 
   }

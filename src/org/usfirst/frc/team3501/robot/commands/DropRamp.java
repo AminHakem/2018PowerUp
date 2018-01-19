@@ -7,13 +7,13 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * @author: niyatisriram
- *          Lowers right ramp when Joystick button is pressed
+ *          Lowers ramp when Joystick button is pressed
  */
-public class DropRightRamp extends Command {
+public class DropRamp extends Command {
 
   private Climber climber = Robot.getClimber();
 
-  public DropRightRamp() {
+  public DropRamp() {
     requires(climber);
   }
 
