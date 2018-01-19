@@ -149,10 +149,9 @@ public class DriveTrain extends Subsystem {
    *
    * @param angle - Positive input increases the current angle and negative input decreases the angle
    */
-  public void adjustAngle(double angle, boolean fieldOriented) {
-    double newAngle = imu.getAngle() + angle;
-    double ySpeed = Math.cos(newAngle);
-    double xSpeed = Math.sin(newAngle);
+  public void changeAngle(double angle, boolean fieldOriented) {
+    double ySpeed = Math.cos(angle);
+    double xSpeed = Math.sin(angle);
     this.mecanumDrive(ySpeed, xSpeed, 0, fieldOriented);
   }
 

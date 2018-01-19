@@ -59,21 +59,10 @@ public class TurnForAngle extends Command {
 
   @Override
   protected void execute() {
-    double xVal = 0;
+    double xVal = this.gyroController
+        .calcPID(Math.abs(this.driveTrain.getAngle() - this.zeroAngle));
 
-    // xVal = this.gyroController.calcPID(Math.abs(this.driveTrain.getAngle() - this.zeroAngle));
-
-    // double leftDrive = 0;
-    // double rightDrive = 0;
-    // if (direction == Constants.Direction.RIGHT) {
-    // leftDrive = xVal;
-    // rightDrive = -xVal;
-    // } else if (direction == Constants.Direction.LEFT) {
-    // leftDrive = -xVal;
-    // rightDrive = xVal;
-    // }
-
-    this.driveTrain.adjustAngle(xVal, fieldOriented);
+    this.driveTrain.changeAngle(xVal, fieldOriented);
   }
 
   @Override
