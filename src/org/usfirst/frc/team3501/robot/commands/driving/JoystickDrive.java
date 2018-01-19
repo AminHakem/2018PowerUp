@@ -30,7 +30,7 @@ public class JoystickDrive extends Command {
      * bottom. Raw Axis 0 is the left joystick on the Xbox controller with the movement being from
      * left to right. Raw Axis 4 is the right joystick on the Xbox controller with the movement
      * being from left to right.
-     * 
+     *
      */
     double ySpeed = Robot.getOI().ps4_controller.getRawAxis(1);
     // System.out.println("Getting ySpeed value: " + ySpeed);
@@ -41,7 +41,7 @@ public class JoystickDrive extends Command {
     double rotation = Robot.getOI().ps4_controller.getRawAxis(4);
     // System.out.println("Getting rotation value: " + rotation);
 
-    fieldOriented = OI.ps4_controller.getRawButtonPressed(Constants.OI.CONTROLLER_BUTTON_PS);
+    fieldOriented = OI.ps4_controller.getRawButtonPressed(Constants.OI.PS4_CONTROLLER_PORT);
 
     ySpeed = (6 * previousThrust + ySpeed) / 7;
     xSpeed = (6 * previousTwist + xSpeed) / 7;

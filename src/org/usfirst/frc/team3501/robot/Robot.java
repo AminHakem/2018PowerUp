@@ -1,7 +1,5 @@
 package org.usfirst.frc.team3501.robot;
 
-import org.usfirst.frc.team3501.robot.commands.driving.DriveDistance;
-import org.usfirst.frc.team3501.robot.commands.driving.JoystickDrive;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
@@ -48,7 +46,6 @@ public class Robot extends IterativeRobot {
   @Override
   public void autonomousInit() {
     autonCommand = (Command) autonChooser.getSelected();
-    autonCommand = new DriveDistance(100, 0, 0);
     Scheduler.getInstance().add(autonCommand);
   }
 
@@ -58,16 +55,12 @@ public class Robot extends IterativeRobot {
   }
 
   @Override
-  public void teleopInit() {
-    autonCommand = new JoystickDrive();
-    Scheduler.getInstance().add(autonCommand);
-  }
+  public void teleopInit() {}
 
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     updateSmartDashboard();
-    driveTrain.printEncoderOutput();
   }
 
   public void updateSmartDashboard() {
