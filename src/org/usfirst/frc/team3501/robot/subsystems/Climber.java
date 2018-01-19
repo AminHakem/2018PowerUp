@@ -17,18 +17,16 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Climber extends Subsystem {
 
   private static Climber climber;
-  private static WPI_TalonSRX winch;
+  private static WPI_TalonSRX rightWinch;
+  private static WPI_TalonSRX leftWinch;
   private static Solenoid dropPiston;
 
   private Climber() {
     // MOTOR CONTROLLER
-    winch = new WPI_TalonSRX(Constants.Climber.WINCH_SPEED);
+    rightWinch = new WPI_TalonSRX(Constants.Climber.WINCH_SPEED);
+    leftWinch = new WPI_TalonSRX(Constants.Climber.WINCH_SPEED);
     dropPiston = new Solenoid(Constants.Climber.PISTON_MODULE,
         Constants.Climber.RAMP_RELEASE);
-  }
-
-  public static WPI_TalonSRX getWinch() {
-    return winch;
   }
 
   public static Climber getClimber() {
@@ -39,12 +37,21 @@ public class Climber extends Subsystem {
   }
 
   public static void setMotorValues() {
-    winch.set(ControlMode.PercentOutput, Constants.Climber.WINCH_SPEED);
+    rightWinch.set(ControlMode.PercentOutput, Constants.Climber.WINCH_SPEED);
   }
 
   public static void setMotorValues(double speed) {
     speed = MathLib.restrictToRange(speed, -1.0, 1.0);
-    winch.set(ControlMode.PercentOutput, speed);
+    rightWinch.set(ControlMode.PercentOutput, speed);
+    leftWinch.set(ControlMode.PercentOutput, speed);
+  }
+
+  public static WPI_TalonSRX getRightWinch() {
+    return rightWinch;
+  }
+
+  public static WPI_TalonSRX getLeftWinch() {
+    return leftWinch;
   }
 
   public Solenoid getDropPiston() {
