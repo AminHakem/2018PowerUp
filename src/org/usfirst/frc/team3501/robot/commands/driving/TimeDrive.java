@@ -15,10 +15,12 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class TimeDrive extends Command {
   Timer timer;
-  double leftRearMotorVal, rightRearMotorVal, rightFrontMotorVal, leftFrontMotorVal, time;
+  double leftRearMotorVal, rightRearMotorVal, rightFrontMotorVal,
+      leftFrontMotorVal, time;
 
-  public TimeDrive(final double time, final double leftRearMotorVal, final double rightRearMotorVal,
-      final double leftFrontMotorVal, final double rightFrontMotorVal) {
+  public TimeDrive(final double time, final double leftRearMotorVal,
+      final double rightRearMotorVal, final double leftFrontMotorVal,
+      final double rightFrontMotorVal) {
     requires(Robot.getDriveTrain());
 
     timer = new Timer();

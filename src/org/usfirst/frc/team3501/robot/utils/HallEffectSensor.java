@@ -12,7 +12,7 @@ public class HallEffectSensor {
 
   /**
    * Returns rotations per second(buffered) of hall effect sensor counter
-   * 
+   *
    * @return rotations per second of hall effect counter
    */
   public double getRPS() {
@@ -21,7 +21,7 @@ public class HallEffectSensor {
 
   /**
    * Get the period of the most recent count.
-   * 
+   *
    * @return period of latest count in seconds
    */
   public double getCounterPeriod() {
@@ -30,7 +30,7 @@ public class HallEffectSensor {
 
   /**
    * Returns rotations per minute(buffered) of hall effect sensor counter
-   * 
+   *
    * @return rotations per minute of hall effect sensor
    */
   public double getRPM() {

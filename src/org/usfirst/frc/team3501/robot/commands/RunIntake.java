@@ -2,15 +2,13 @@ package org.usfirst.frc.team3501.robot.commands;
 
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * @author: niyatisriram
  *
- *          this command runs the intake backward, for the purposes of intaking
- *          a cube
- *          wheels roll in, towards robot center
+ *          this command runs the intake backward, for the purposes of intaking a cube wheels roll
+ *          in, towards robot center
  *
  */
 public class RunIntake extends Command {
@@ -23,8 +21,7 @@ public class RunIntake extends Command {
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
-  }
+  protected void initialize() {}
 
   // Called repeatedly when this Command is scheduled to run
   @Override

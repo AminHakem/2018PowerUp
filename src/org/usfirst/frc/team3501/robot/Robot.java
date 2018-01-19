@@ -64,8 +64,10 @@ public class Robot extends IterativeRobot {
   }
 
   public void updateSmartDashboard() {
-    SmartDashboard.putNumber("right left encoder: ", driveTrain.getRightLeftEncoderDistance());
-    SmartDashboard.putNumber("front back encoder: ", driveTrain.getFrontBackEncoderDistance());
+    SmartDashboard.putNumber("right left encoder: ",
+        driveTrain.getRightLeftEncoderDistance());
+    SmartDashboard.putNumber("front back encoder: ",
+        driveTrain.getFrontBackEncoderDistance());
     SmartDashboard.putNumber("angle", driveTrain.getAngle());
   }
 }

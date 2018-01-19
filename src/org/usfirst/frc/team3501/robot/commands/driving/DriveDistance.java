@@ -63,7 +63,8 @@ public class DriveDistance extends Command {
 
   @Override
   protected boolean isFinished() {
-    return timeSinceInitialized() >= maxTimeOut || this.driveController.isDone();
+    return timeSinceInitialized() >= maxTimeOut
+        || this.driveController.isDone();
   }
 
   @Override

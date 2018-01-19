@@ -2,18 +2,15 @@ package org.usfirst.frc.team3501.robot.subsystems;
 
 import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.MathLib;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /****
  *
  * @author niyatisriram
  *
- *         TODO: do not make running intake possible unless
- *         elevator is down and ready for a cube
+ *         TODO: do not make running intake possible unless elevator is down and ready for a cube
  *
  */
 
@@ -58,7 +55,6 @@ public class Intake extends Subsystem {
   }
 
   @Override
-  protected void initDefaultCommand() {
-  }
+  protected void initDefaultCommand() {}
 
 }

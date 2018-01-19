@@ -27,7 +27,8 @@ public class TurnForAngle extends Command {
   private double zeroAngle;
   private boolean fieldOriented;
 
-  public TurnForAngle(double angle, Direction direction, boolean fieldOriented, double maxTimeOut) {
+  public TurnForAngle(double angle, Direction direction, boolean fieldOriented,
+      double maxTimeOut) {
     requires(Robot.getDriveTrain());
     this.direction = direction;
     this.maxTimeOut = maxTimeOut;

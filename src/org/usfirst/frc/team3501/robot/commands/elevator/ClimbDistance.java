@@ -4,16 +4,15 @@ import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import org.usfirst.frc.team3501.robot.utils.PIDController;
-
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This command makes the elevator move a specified distance using encoders on
- * the robot and using a feedback loop
+ * This command makes the elevator move a specified distance using encoders on the robot and using a
+ * feedback loop
  *
- * parameters: distance the elevator will move in inches motorVal: the motor
- * input to set the motors to
+ * parameters: distance the elevator will move in inches motorVal: the motor input to set the motors
+ * to
  */
 
 public class ClimbDistance extends Command {
@@ -66,8 +65,7 @@ public class ClimbDistance extends Command {
   }
 
   @Override
-  protected void end() {
-  }
+  protected void end() {}
 
   @Override
   protected void interrupted() {

@@ -17,16 +17,16 @@ public class OI {
   public static Button runIntakeBackward;
 
   public OI() {
+    ps4_controller = new Joystick(Constants.OI.PS4_CONTROLLER_PORT);
     gamePad = new Joystick(Constants.OI.GAME_PAD_PORT);
 
-    runIntakeForward = new JoystickButton(gamePad, Constants.OI.RUN_INTAKE_PORT);
+    runIntakeForward =
+        new JoystickButton(gamePad, Constants.OI.RUN_INTAKE_PORT);
     runIntakeForward.whileHeld(new RunOuttake());
 
-    runIntakeBackward = new JoystickButton(gamePad, Constants.OI.REVERSE_INTAKE_PORT);
+    runIntakeBackward =
+        new JoystickButton(gamePad, Constants.OI.REVERSE_INTAKE_PORT);
     runIntakeBackward.whileHeld(new RunIntake());
-
-    ps4_controller = new Joystick(Constants.OI.PS4_CONTROLLER_PORT);
-
   }
 
   public static OI getOI() {
