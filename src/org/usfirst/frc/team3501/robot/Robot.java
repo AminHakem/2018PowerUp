@@ -96,7 +96,6 @@ public class Robot extends IterativeRobot {
     // nothing to do in robotPeriodic
   }
 
-
   @Override
   public void disabledPeriodic() {
     // nothing to do in disabledPeriodic
@@ -106,4 +105,5 @@ public class Robot extends IterativeRobot {
 		// TODO Auto-generated method stub
 		super.disabledInit();
 	}
+
 }
