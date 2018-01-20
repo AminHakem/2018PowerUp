@@ -81,9 +81,20 @@ public class Robot extends IterativeRobot {
     SmartDashboard.putNumber("angle", driveTrain.getAngle());
 
   }
+
   @Override
-	public void disabledInit() {
-		// TODO Auto-generated method stub
+  public void robotPeriodic() {
+    // nothing to do in robotPeriodic
+  }
+
+  @Override
+  public void disabledInit() {
+    // nothing to do in disabledInit
 		super.disabledInit();
-	}
+  }
+
+  @Override
+  public void disabledPeriodic() {
+    // nothing to do in disabledPeriodic
+  }
 }
