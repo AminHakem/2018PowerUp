@@ -15,18 +15,19 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *          Ramp that lifts other robots
  */
 public class Climber extends Subsystem {
-
   private static Climber climber;
   private static WPI_TalonSRX rightWinch;
   private static WPI_TalonSRX leftWinch;
-  private static Solenoid dropPiston;
+  private static Solenoid rampPiston;
+
+  public static final int WINCH_SPEED = 0;
 
   private Climber() {
     // MOTOR CONTROLLER
-    rightWinch = new WPI_TalonSRX(Constants.Climber.WINCH_SPEED);
-    leftWinch = new WPI_TalonSRX(Constants.Climber.WINCH_SPEED);
-    dropPiston = new Solenoid(Constants.Climber.PISTON_MODULE,
-        Constants.Climber.RAMP_RELEASE);
+    rightWinch = new WPI_TalonSRX(Constants.Climber.RIGHT_WINCH);
+    leftWinch = new WPI_TalonSRX(Constants.Climber.LEFT_WINCH);
+    rampPiston = new Solenoid(Constants.Climber.PISTON_MODULE,
+        Constants.Climber.PISTON_CHANNEL);
   }
 
   public static Climber getClimber() {
@@ -36,15 +37,27 @@ public class Climber extends Subsystem {
     return climber;
   }
 
-  public static void setMotorValues() {
-    rightWinch.set(ControlMode.PercentOutput, Constants.Climber.WINCH_SPEED);
-    leftWinch.set(ControlMode.PercentOutput, Constants.Climber.WINCH_SPEED);
+  public static void runAtDefaultSpeed() {
+    rightWinch.set(ControlMode.PercentOutput, WINCH_SPEED);
+    leftWinch.set(ControlMode.PercentOutput, WINCH_SPEED);
   }
 
-  public static void setMotorValues(double speed) {
+  public static void runBothAtSpeed(double speed) {
     speed = MathLib.restrictToRange(speed, -1.0, 1.0);
     rightWinch.set(ControlMode.PercentOutput, speed);
     leftWinch.set(ControlMode.PercentOutput, speed);
+  }
+
+  public static void setRightMotorVal(double speed) {
+    speed = MathLib.restrictToRange(speed, -1.0, 1.0);
+    rightWinch.set(ControlMode.PercentOutput, speed);
+
+  }
+
+  public static void setLeftMotorVal(double speed) {
+    speed = MathLib.restrictToRange(speed, -1.0, 1.0);
+    leftWinch.set(ControlMode.PercentOutput, speed);
+
   }
 
   public static WPI_TalonSRX getRightWinch() {
@@ -56,22 +69,23 @@ public class Climber extends Subsystem {
   }
 
   public Solenoid getDropPiston() {
-    return dropPiston;
+    return rampPiston;
   }
 
   public static void extendPiston() {
     boolean on = true;
-    dropPiston.set(on);
+    rampPiston.set(on);
   }
 
   public static void retractPiston() {
     boolean off = false;
-    dropPiston.set(off);
+    rampPiston.set(off);
 
   }
 
   public static void stop() {
-    setMotorValues(0);
+    setRightMotorVal(0.0);
+    setLeftMotorVal(0.0);
   }
 
   @Override

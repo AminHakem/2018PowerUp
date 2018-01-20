@@ -1,9 +1,8 @@
 package org.usfirst.frc.team3501.robot;
 
-import org.usfirst.frc.team3501.robot.Constants.Elevator;
-import org.usfirst.frc.team3501.robot.Constants.Ramp;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.CameraServer;
@@ -16,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
   private static DriveTrain driveTrain;
   private static OI oi;
+  private static Elevator elevator;
 
   Command autonCommand;
   SendableChooser autonChooser;
@@ -24,6 +24,7 @@ public class Robot extends IterativeRobot {
   public void robotInit() {
     driveTrain = DriveTrain.getDriveTrain();
     oi = OI.getOI();
+    elevator = Elevator.getElevator();
 
     autonChooser = new SendableChooser();
 

@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3501.robot.commands;
 
-import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 
@@ -24,7 +23,7 @@ public class LowerRobot extends Command {
 
   @Override
   protected void execute() {
-    Climber.setMotorValues(-Constants.Climber.WINCH_SPEED);
+    Climber.runBothAtSpeed(-Climber.WINCH_SPEED);
   }
 
   @Override

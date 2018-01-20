@@ -23,7 +23,7 @@ public class LiftRobot extends Command {
 
   @Override
   protected void execute() {
-    Climber.setMotorValues();
+    Climber.runAtDefaultSpeed();
   }
 
   @Override

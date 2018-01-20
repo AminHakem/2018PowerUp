@@ -15,12 +15,17 @@ import edu.wpi.first.wpilibj.SPI;
 
 public class Constants {
   public static class OI {
+    public final static int PS4_CONTROLLER_PORT = 2;
+    public static final int GAME_PAD_PORT = 2;
 
     // Intake
     public static final int RUN_INTAKE_PORT = 0;
     public static int REVERSE_INTAKE_PORT = 0;
-    public final static int PS4_CONTROLLER_PORT = 2;
-    public static final int GAME_PAD_PORT = 2;
+
+    // Climber
+    public static final int LOWER_RAMP = 0;
+    public static final int RUN_WINCH_FORWARD = 0;
+    public static final int RUN_WINCH_BACKWARD = 0;
   }
 
   public static class Elevator {
@@ -44,11 +49,6 @@ public class Constants {
 
     // PID VALUES
     public static double CLIMB_P = 0.01, CLIMB_I = 0.00115, CLIMB_D = -0.002;
-
-    // Climber
-    public static final int LOWER_RAMP = 0;
-    public static final int CLIMBER_WINCH = 0;
-
   }
 
   public static class DriveTrain {
@@ -75,9 +75,10 @@ public class Constants {
   }
 
   public static class Climber {
-    public static final int WINCH_SPEED = 0;
     public static final int PISTON_MODULE = 0;
-    public static final int RAMP_RELEASE = 0;
+    public static final int PISTON_CHANNEL = 0;
+    public static final int RIGHT_WINCH = 0;
+    public static final int LEFT_WINCH = 0;
   }
 
   public static enum Direction {

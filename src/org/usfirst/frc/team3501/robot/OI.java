@@ -40,15 +40,15 @@ public class OI {
 
     // Climber
 
-    Ramp = new JoystickButton(xboxController, Constants.OI.LOWER_RAMP);
+    Ramp = new JoystickButton(ps4_controller, Constants.OI.LOWER_RAMP);
     Ramp.whileHeld(new DropRamp());
 
-    climbingWinch = new JoystickButton(xboxController,
-        Constants.OI.CLIMBER_WINCH);
+    climbingWinch = new JoystickButton(ps4_controller,
+        Constants.OI.RUN_WINCH_FORWARD);
     climbingWinch.whileHeld(new LiftRobot());
 
-    loweringWinch = new JoystickButton(xboxController,
-        Constants.OI.CLIMBER_WINCH);
+    loweringWinch = new JoystickButton(ps4_controller,
+        Constants.OI.RUN_WINCH_BACKWARD);
     loweringWinch.whileHeld(new LowerRobot());
 
   }
