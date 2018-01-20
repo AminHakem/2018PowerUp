@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3501.robot;
-
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
+import org.usfirst.frc.team3501.robot.commands.driving.JoystickDrive;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
@@ -16,7 +16,7 @@ public class Robot extends IterativeRobot {
   private static OI oi;
   private static Elevator elevator;
 
-  Command autonCommand;
+  Command autonCommand = new JoystickDrive();
   SendableChooser autonChooser;
 
   @Override
@@ -62,7 +62,9 @@ public class Robot extends IterativeRobot {
   }
 
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+	  Scheduler.getInstance().add(autonCommand);
+  }
 
   @Override
   public void teleopPeriodic() {
@@ -76,4 +78,9 @@ public class Robot extends IterativeRobot {
     SmartDashboard.putNumber("angle", driveTrain.getAngle());
 
   }
+  @Override
+	public void disabledInit() {
+		// TODO Auto-generated method stub
+		super.disabledInit();
+	}
 }
