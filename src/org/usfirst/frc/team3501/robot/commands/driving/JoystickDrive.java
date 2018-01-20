@@ -28,31 +28,31 @@ public class JoystickDrive extends Command {
 
     /**
      * Raw Axis 1 is the left joystick on the Xbox controller with the movement being from top to
-     * bottom. Raw Axis 0 is the left joystick on the Xbox controller with the movement being from left
-     * to right. Raw Axis 4 is the right joystick on the Xbox controller with the movement being from
-     * left to right.
+     * bottom. Raw Axis 0 is the left joystick on the Xbox controller with the movement being from
+     * left to right. Raw Axis 4 is the right joystick on the Xbox controller with the movement
+     * being from left to right.
      *
      */
-    double ySpeed = Robot.getOI().ps4_controller.getRawAxis(1);
-    System.out.println("Getting ySpeed value: " + ySpeed);
+    if (!Robot.getClimber().inJoystickClimb) {
+      double ySpeed = Robot.getOI().ps4_controller.getRawAxis(1);
+      System.out.println("Getting ySpeed value: " + ySpeed);
 
-    double xSpeed = Robot.getOI().ps4_controller.getRawAxis(0);
-    System.out.println("Getting xSpeed value: " + xSpeed);
+      double xSpeed = Robot.getOI().ps4_controller.getRawAxis(0);
+      System.out.println("Getting xSpeed value: " + xSpeed);
 
-    double rotation = Robot.getOI().ps4_controller.getRawAxis(4);
-    System.out.println("Getting rotation value: " + rotation);
+      double rotation = Robot.getOI().ps4_controller.getRawAxis(4);
+      System.out.println("Getting rotation value: " + rotation);
 
-    fieldOriented =
-        OI.ps4_controller.getRawButtonPressed(Constants.OI.PS4_CONTROLLER_PORT);
+      fieldOriented = OI.ps4_controller.getRawButtonPressed(Constants.OI.PS4_CONTROLLER_PORT);
 
-    ySpeed = (3 * previousThrust + ySpeed) / 7;
-    xSpeed = (3 * previousTwist + xSpeed) / 7;
-    rotation = (5*previousRotation +rotation)/7;
-    previousThrust = ySpeed;
-    previousTwist = xSpeed;
-    previousRotation = rotation;
-    Robot.getDriveTrain().mecanumDrive(-xSpeed, ySpeed, rotation,
-        fieldOriented);
+      ySpeed = (3 * previousThrust + ySpeed) / 7;
+      xSpeed = (3 * previousTwist + xSpeed) / 7;
+      rotation = (5 * previousRotation + rotation) / 7;
+      previousThrust = ySpeed;
+      previousTwist = xSpeed;
+      previousRotation = rotation;
+      Robot.getDriveTrain().mecanumDrive(-xSpeed, ySpeed, rotation, fieldOriented);
+    }
   }
 
   @Override

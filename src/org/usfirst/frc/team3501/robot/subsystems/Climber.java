@@ -2,17 +2,14 @@ package org.usfirst.frc.team3501.robot.subsystems;
 
 import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.MathLib;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * @author: niyatisriram
- *          Climber with motors that drive winch to move robot up to climb
- *          Ramp that lifts other robots
+ * @author: niyatisriram Climber with motors that drive winch to move robot up to climb Ramp that
+ *          lifts other robots
  */
 public class Climber extends Subsystem {
   private static Climber climber;
@@ -21,13 +18,13 @@ public class Climber extends Subsystem {
   private static Solenoid rampPiston;
 
   public static final int WINCH_SPEED = 0;
+  public boolean inJoystickClimb = false;
 
   private Climber() {
     // MOTOR CONTROLLER
     rightWinch = new WPI_TalonSRX(Constants.Climber.RIGHT_WINCH);
     leftWinch = new WPI_TalonSRX(Constants.Climber.LEFT_WINCH);
-    rampPiston = new Solenoid(Constants.Climber.PISTON_MODULE,
-        Constants.Climber.PISTON_CHANNEL);
+    rampPiston = new Solenoid(Constants.Climber.PISTON_MODULE, Constants.Climber.PISTON_CHANNEL);
   }
 
   public static Climber getClimber() {

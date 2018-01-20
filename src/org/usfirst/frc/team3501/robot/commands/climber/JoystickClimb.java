@@ -1,36 +1,43 @@
 package org.usfirst.frc.team3501.robot.commands.climber;
 
+import org.usfirst.frc.team3501.robot.Robot;
+import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class JoystickClimb extends Command {
+  Climber climber = Robot.getClimber();
 
-    public JoystickClimb() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    }
+  public JoystickClimb() {
+    requires(climber);
+  }
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    }
+  @Override
+  protected void initialize() {
+    climber.inJoystickClimb = true;
+  }
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    }
+  @Override
+  protected void execute() {
+    double leftSpeed = Robot.getOI().ps4_controller.getRawAxis(1);
+    double rightSpeed = Robot.getOI().ps4_controller.getRawAxis(0);
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false;
-    }
+    climber.setLeftMotorVal(leftSpeed);
+    climber.setRightMotorVal(rightSpeed);
+  }
 
-    // Called once after isFinished returns true
-    protected void end() {
-    }
+  @Override
+  protected boolean isFinished() {
+    return false;
+  }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+  @Override
+  protected void end() {
+    climber.inJoystickClimb = false;
+  }
+
+  @Override
+  protected void interrupted() {}
 }
