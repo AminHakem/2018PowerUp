@@ -13,6 +13,7 @@ public class JoystickDrive extends Command {
 
   double previousThrust = 0;
   double previousTwist = 0;
+  double previousRotation = 0;
   boolean fieldOriented = true;
 
   public JoystickDrive() {
@@ -33,24 +34,24 @@ public class JoystickDrive extends Command {
      *
      */
     double ySpeed = Robot.getOI().ps4_controller.getRawAxis(1);
-    // System.out.println("Getting ySpeed value: " + ySpeed);
+    System.out.println("Getting ySpeed value: " + ySpeed);
 
     double xSpeed = Robot.getOI().ps4_controller.getRawAxis(0);
-    // System.out.println("Getting xSpeed value: " + xSpeed);
+    System.out.println("Getting xSpeed value: " + xSpeed);
 
     double rotation = Robot.getOI().ps4_controller.getRawAxis(4);
-    // System.out.println("Getting rotation value: " + rotation);
+    System.out.println("Getting rotation value: " + rotation);
 
     fieldOriented =
         OI.ps4_controller.getRawButtonPressed(Constants.OI.PS4_CONTROLLER_PORT);
 
-    ySpeed = (6 * previousThrust + ySpeed) / 7;
-    xSpeed = (6 * previousTwist + xSpeed) / 7;
-
+    ySpeed = (3 * previousThrust + ySpeed) / 7;
+    xSpeed = (3 * previousTwist + xSpeed) / 7;
+    rotation = (5*previousRotation +rotation)/7;
     previousThrust = ySpeed;
     previousTwist = xSpeed;
-
-    Robot.getDriveTrain().mecanumDrive(ySpeed, -xSpeed, rotation,
+    previousRotation = rotation;
+    Robot.getDriveTrain().mecanumDrive(-xSpeed, ySpeed, rotation,
         fieldOriented);
   }
 
