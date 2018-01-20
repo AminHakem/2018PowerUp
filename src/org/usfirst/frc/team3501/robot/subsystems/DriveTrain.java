@@ -58,7 +58,18 @@ public class DriveTrain extends Subsystem {
 
     robotDrive = new MecanumDrive(m_left_front, m_left_rear, m_right_front, m_right_rear);
 
-    this.imu = new ADXRS450_Gyro(Constants.DriveTrain.GYRO_PORT);
+
+    try {
+      System.out.println("Ran the Gyro code");
+      this.imu = new ADXRS450_Gyro();
+      this.imu.reset();
+      this.imu.calibrate();
+      // this.imu = new ADXRS450_Gyro(Constants.DriveTrain.GYRO_PORT);
+    } catch (NullPointerException e) {
+      System.out.println("Gyro Null Pointer Exception");
+      this.imu = null;
+    }
+
   }
 
   /**
@@ -139,7 +150,10 @@ public class DriveTrain extends Subsystem {
    * @return angle
    */
   public double getAngle() {
-    return this.imu.getAngle();
+    if (imu != null)
+      return this.imu.getAngle();
+    else
+      return 0;
   }
 
   /***
@@ -176,7 +190,7 @@ public class DriveTrain extends Subsystem {
         && (rotation < 0.1 && rotation > -0.1)) {
       robotDrive.stopMotor();
     } else if (fieldOriented) {
-      robotDrive.driveCartesian(ySpeed, xSpeed, rotation, imu.getAngle());
+      robotDrive.driveCartesian(ySpeed, xSpeed, rotation, this.getAngle());
     } else {
       robotDrive.driveCartesian(ySpeed, xSpeed, rotation);
     }

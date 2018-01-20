@@ -45,9 +45,13 @@ public class DriveDistance extends Command {
   protected void initialize() {
     this.driveTrain.resetEncoders();
     this.driveController.setSetPoint(this.target);
-    this.angle += driveTrain.getAngle();
+    // this.angle += driveTrain.getAngle();
   }
 
+  /***
+   * Gets the x and y speeds using the calculations from the PID Controller, and it plugs in those
+   * values to the built in mecanumDrive method
+   */
   @Override
   protected void execute() {
     // double xSpeed = driveController.calcPID(Math.cos(driveTrain.getAngle()));

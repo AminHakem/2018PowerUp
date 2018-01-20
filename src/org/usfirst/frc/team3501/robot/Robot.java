@@ -24,7 +24,7 @@ public class Robot extends IterativeRobot {
     driveTrain = DriveTrain.getDriveTrain();
     oi = OI.getOI();
     elevator = Elevator.getElevator();
-
+    
     autonChooser = new SendableChooser();
 
     CameraServer server = CameraServer.getInstance();
@@ -33,6 +33,7 @@ public class Robot extends IterativeRobot {
   public static Elevator getElevator() {
     return Elevator.getElevator();
   }
+
 
   public static DriveTrain getDriveTrain() {
     return DriveTrain.getDriveTrain();
@@ -70,7 +71,9 @@ public class Robot extends IterativeRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     updateSmartDashboard();
-  }
+  
+    }
+
 
   public void updateSmartDashboard() {
     SmartDashboard.putNumber("right left encoder: ", driveTrain.getRightLeftEncoderDistance());
