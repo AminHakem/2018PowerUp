@@ -2,12 +2,10 @@ package org.usfirst.frc.team3501.robot.commands.climber;
 
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * @author: niyatisriram
- *          Lowers ramp when Joystick button is pressed
+ * @author: niyatisriram Lowers ramp when Joystick button is pressed
  */
 public class DropRamp extends Command {
 
@@ -18,8 +16,7 @@ public class DropRamp extends Command {
   }
 
   @Override
-  protected void initialize() {
-  }
+  protected void initialize() {}
 
   @Override
   protected void execute() {
@@ -28,7 +25,7 @@ public class DropRamp extends Command {
 
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   @Override
@@ -37,6 +34,5 @@ public class DropRamp extends Command {
   }
 
   @Override
-  protected void interrupted() {
-  }
+  protected void interrupted() {}
 }
