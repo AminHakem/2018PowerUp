@@ -45,6 +45,7 @@ public class DriveDistance extends Command {
   protected void initialize() {
     this.driveTrain.resetEncoders();
     this.driveController.setSetPoint(this.target);
+
   }
 
   /***

@@ -16,6 +16,7 @@ public class Robot extends IterativeRobot {
   private static DriveTrain driveTrain;
   private static OI oi;
   private static Elevator elevator;
+  private int time;
 
   Command autonCommand = new JoystickDrive();
   SendableChooser autonChooser;
@@ -25,6 +26,8 @@ public class Robot extends IterativeRobot {
     driveTrain = DriveTrain.getDriveTrain();
     oi = OI.getOI();
     elevator = Elevator.getElevator();
+
+    time = 0;
 
     autonChooser = new SendableChooser();
 
@@ -73,6 +76,11 @@ public class Robot extends IterativeRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     updateSmartDashboard();
+    time++;
+    if (time % 50 == 0) {
+      System.out.println("Angle:  " + driveTrain.getAngle());
+    }
+
   }
 
 

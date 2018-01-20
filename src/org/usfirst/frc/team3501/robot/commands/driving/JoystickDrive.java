@@ -31,7 +31,8 @@ public class JoystickDrive extends Command {
      *
      */
     if (!Robot.getClimber().inJoystickClimb) {
-      double ySpeed = Robot.getOI().ps4_controller.getRawAxis(1);
+     
+    	  double ySpeed = Robot.getOI().ps4_controller.getRawAxis(1);
       double xSpeed = Robot.getOI().ps4_controller.getRawAxis(0);
       double rotation = Robot.getOI().ps4_controller.getRawAxis(2);
 
@@ -43,6 +44,7 @@ public class JoystickDrive extends Command {
       previousRotation = rotation;
       Robot.getDriveTrain().mecanumDrive(-xSpeed, ySpeed, rotation);
     }
+
   }
 
   @Override

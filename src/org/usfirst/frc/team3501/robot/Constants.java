@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.SPI;
 public class Constants {
   public static class OI {
     // CONTROLLERS
+
     public final static int PS4_CONTROLLER_PORT = 3;
     public static final int GAME_PAD_PORT = 2;
     public static final int TRIANGLE_PORT = 4;
@@ -64,6 +65,9 @@ public class Constants {
     public static final int ENCODER_RIGHT_B = 3;
 
     public static final SPI.Port GYRO_PORT = SPI.Port.kOnboardCS0;
+
+    // public static final SPI.Port GYRO_PORT = SPI.Port.kOnboardCS0;
+    // public static final SPI.Port GYRO_PORT =
   }
 
   public static class Intake {

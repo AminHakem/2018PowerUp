@@ -68,6 +68,17 @@ public class DriveTrain extends Subsystem {
       this.imu = null;
     }
 
+    try {
+      System.out.println("Ran the Gyro code");
+      this.imu = new ADXRS450_Gyro();
+      this.imu.reset();
+      this.imu.calibrate();
+      // this.imu = new ADXRS450_Gyro(Constants.DriveTrain.GYRO_PORT);
+    } catch (NullPointerException e) {
+      System.out.println("Gyro Null Pointer Exception");
+      this.imu = null;
+    }
+
   }
 
   /**
