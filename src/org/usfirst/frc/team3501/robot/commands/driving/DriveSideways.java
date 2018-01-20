@@ -47,10 +47,9 @@ public class DriveSideways extends Command {
 
   @Override
   protected void execute() {
-    double xSpeed = driveController.calcPID(target);
+    double xSpeed = driveController.calcPID(driveTrain.getRightLeftSpeed());
 
-    this.driveTrain.mecanumDrive(driveTrain.getFrontBackSpeed(), xSpeed, 0,
-        true);
+    this.driveTrain.mecanumDrive(0, xSpeed, 0, true);
   }
 
   @Override

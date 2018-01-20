@@ -47,10 +47,9 @@ public class DriveForward extends Command {
 
   @Override
   protected void execute() {
-    double ySpeed = driveController.calcPID(target);
+    double ySpeed = driveController.calcPID(driveTrain.getFrontBackSpeed());
 
-    this.driveTrain.mecanumDrive(ySpeed, driveTrain.getRightLeftSpeed(), 0,
-        true);
+    this.driveTrain.mecanumDrive(ySpeed, 0, 0, true);
   }
 
   @Override

@@ -50,8 +50,10 @@ public class DriveDistance extends Command {
 
   @Override
   protected void execute() {
-    double xSpeed = driveController.calcPID(Math.cos(driveTrain.getAngle()));
-    double ySpeed = driveController.calcPID(Math.sin(driveTrain.getAngle()));
+    // double xSpeed = driveController.calcPID(Math.cos(driveTrain.getAngle()));
+    // double ySpeed = driveController.calcPID(Math.sin(driveTrain.getAngle()));
+    double xSpeed = driveController.calcPID(driveTrain.getRightLeftSpeed());
+    double ySpeed = driveController.calcPID(driveTrain.getFrontBackSpeed());
     angle += driveTrain.getAngle();
 
     this.driveTrain.mecanumDrive(ySpeed, xSpeed, 0, true);
