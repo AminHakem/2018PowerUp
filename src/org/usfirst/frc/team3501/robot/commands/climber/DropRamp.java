@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3501.robot.commands;
+package org.usfirst.frc.team3501.robot.commands.climber;
 
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
@@ -7,13 +7,13 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * @author: niyatisriram
- *          Lifts robot using climbing winch when button is pressed
+ *          Lowers ramp when Joystick button is pressed
  */
-public class LiftRobot extends Command {
+public class DropRamp extends Command {
 
   private Climber climber = Robot.getClimber();
 
-  public LiftRobot() {
+  public DropRamp() {
     requires(climber);
   }
 
@@ -23,7 +23,7 @@ public class LiftRobot extends Command {
 
   @Override
   protected void execute() {
-    Climber.runAtDefaultSpeed();
+    Climber.extendPiston();
   }
 
   @Override
@@ -33,7 +33,7 @@ public class LiftRobot extends Command {
 
   @Override
   protected void end() {
-    Climber.stop();
+    Climber.retractPiston();
   }
 
   @Override

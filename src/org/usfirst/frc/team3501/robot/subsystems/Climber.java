@@ -37,39 +37,24 @@ public class Climber extends Subsystem {
     return climber;
   }
 
-  public static void runAtDefaultSpeed() {
-    rightWinch.set(ControlMode.PercentOutput, WINCH_SPEED);
-    leftWinch.set(ControlMode.PercentOutput, WINCH_SPEED);
-  }
-
-  public static void runBothAtSpeed(double speed) {
-    speed = MathLib.restrictToRange(speed, -1.0, 1.0);
-    rightWinch.set(ControlMode.PercentOutput, speed);
-    leftWinch.set(ControlMode.PercentOutput, speed);
+  public static void runAtDefaultSpeed(String direction) {
+    if (direction.equals("forward")) {
+      rightWinch.set(ControlMode.PercentOutput, WINCH_SPEED);
+      leftWinch.set(ControlMode.PercentOutput, WINCH_SPEED);
+    } else {
+      rightWinch.set(ControlMode.PercentOutput, -WINCH_SPEED);
+      leftWinch.set(ControlMode.PercentOutput, -WINCH_SPEED);
+    }
   }
 
   public static void setRightMotorVal(double speed) {
     speed = MathLib.restrictToRange(speed, -1.0, 1.0);
     rightWinch.set(ControlMode.PercentOutput, speed);
-
   }
 
   public static void setLeftMotorVal(double speed) {
     speed = MathLib.restrictToRange(speed, -1.0, 1.0);
     leftWinch.set(ControlMode.PercentOutput, speed);
-
-  }
-
-  public static WPI_TalonSRX getRightWinch() {
-    return rightWinch;
-  }
-
-  public static WPI_TalonSRX getLeftWinch() {
-    return leftWinch;
-  }
-
-  public Solenoid getDropPiston() {
-    return rampPiston;
   }
 
   public static void extendPiston() {
@@ -90,6 +75,7 @@ public class Climber extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
+
   }
 
 }

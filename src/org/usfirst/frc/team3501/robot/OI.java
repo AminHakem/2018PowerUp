@@ -1,10 +1,11 @@
 package org.usfirst.frc.team3501.robot;
 
-import org.usfirst.frc.team3501.robot.commands.DropRamp;
-import org.usfirst.frc.team3501.robot.commands.LiftRobot;
-import org.usfirst.frc.team3501.robot.commands.LowerRobot;
-import org.usfirst.frc.team3501.robot.commands.RunIntake;
-import org.usfirst.frc.team3501.robot.commands.RunOuttake;
+import org.usfirst.frc.team3501.robot.commands.climber.DropRamp;
+import org.usfirst.frc.team3501.robot.commands.climber.JoystickClimb;
+import org.usfirst.frc.team3501.robot.commands.climber.LiftRobot;
+import org.usfirst.frc.team3501.robot.commands.climber.LowerRobot;
+import org.usfirst.frc.team3501.robot.commands.intake.RunIntake;
+import org.usfirst.frc.team3501.robot.commands.intake.RunOuttake;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -20,9 +21,10 @@ public class OI {
   public static Button runIntakeBackward;
 
   // Climber
-  public static Button Ramp;
+  public static Button dropRamp;
   public static Button climbingWinch;
   public static Button loweringWinch;
+  public static Button toggleJoystickClimb;
 
   public OI() {
     ps4_controller = new Joystick(Constants.OI.PS4_CONTROLLER_PORT);
@@ -31,7 +33,6 @@ public class OI {
     // Intake
     runIntakeForward = new JoystickButton(gamePad,
         Constants.OI.RUN_INTAKE_PORT);
-
     runIntakeForward.whileHeld(new RunOuttake());
 
     runIntakeBackward = new JoystickButton(gamePad,
@@ -39,9 +40,8 @@ public class OI {
     runIntakeBackward.whileHeld(new RunIntake());
 
     // Climber
-
-    Ramp = new JoystickButton(ps4_controller, Constants.OI.LOWER_RAMP);
-    Ramp.whileHeld(new DropRamp());
+    dropRamp = new JoystickButton(ps4_controller, Constants.OI.LOWER_RAMP);
+    dropRamp.whileHeld(new DropRamp());
 
     climbingWinch = new JoystickButton(ps4_controller,
         Constants.OI.RUN_WINCH_FORWARD);
@@ -51,6 +51,9 @@ public class OI {
         Constants.OI.RUN_WINCH_BACKWARD);
     loweringWinch.whileHeld(new LowerRobot());
 
+    toggleJoystickClimb = new JoystickButton(ps4_controller,
+        Constants.OI.TOGGLE_CLIMB);
+    toggleJoystickClimb.toggleWhenPressed(new JoystickClimb());
   }
 
   public static OI getOI() {
