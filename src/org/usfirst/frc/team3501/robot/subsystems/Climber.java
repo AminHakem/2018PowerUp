@@ -60,12 +60,13 @@ public class Climber extends Subsystem {
     leftWinch.set(ControlMode.PercentOutput, speed);
   }
 
-  public static void extendPiston() {
+  public static void runServo() {
     rampPiston.set(SERVO_ANGLE);
   }
 
-  public static void retractPiston() {
+  public static void stopRunningServo() {
     rampPiston.set(0);
+    // find start and stop angles through testing
   }
 
   public static void stop() {
