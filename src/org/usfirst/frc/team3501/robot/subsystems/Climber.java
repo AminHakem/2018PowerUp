@@ -17,6 +17,8 @@ public class Climber extends Subsystem {
   private static WPI_TalonSRX leftWinch;
   private static Solenoid rampPiston;
 
+  private static boolean on = true, off = false;
+
   public static final int WINCH_SPEED = 0;
   public boolean inJoystickClimb = false;
 
@@ -55,14 +57,11 @@ public class Climber extends Subsystem {
   }
 
   public static void extendPiston() {
-    boolean on = true;
     rampPiston.set(on);
   }
 
   public static void retractPiston() {
-    boolean off = false;
     rampPiston.set(off);
-
   }
 
   public static void stop() {
@@ -71,8 +70,5 @@ public class Climber extends Subsystem {
   }
 
   @Override
-  public void initDefaultCommand() {
-
-  }
-
+  public void initDefaultCommand() {}
 }

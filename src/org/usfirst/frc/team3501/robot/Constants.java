@@ -3,10 +3,8 @@ package org.usfirst.frc.team3501.robot;
 import edu.wpi.first.wpilibj.SPI;
 
 /**
- * The Constants stores constant values for all subsystems. This includes the
- * port values for motors
- * and sensors, as well as important operational constants for subsystems such
- * as max and min
+ * The Constants stores constant values for all subsystems. This includes the port values for motors
+ * and sensors, as well as important operational constants for subsystems such as max and min
  * values.
  */
 
@@ -42,10 +40,8 @@ public class Constants {
     public static final int BOTTOM_POS = 0;
     public static final int TOP_POS = 71; // assumes at max height for robot
     public static final int SWITCH_POS = 19;
-    public static final int SCALE_START_POS = 60; // assumes scale is at its
-                                                  // starting position
-    public static final int SCALE_BOTTOM_POS = 48; // assumes scale is at bottom
-                                                   // position
+    public static final int SCALE_START_POS = 60; // assumes scale is at its starting position
+    public static final int SCALE_BOTTOM_POS = 48; // assumes scale is at bottom position
     // there is no scale_top_pos because exceeds robot max height
 
     // PID VALUES
