@@ -18,6 +18,7 @@ public class DriveForward extends Command {
   private double target;
   private Preferences prefs;
   private PIDController driveController;
+  private double zeroAngle;
 
   private double driveP;
   private double driveI;
@@ -43,13 +44,16 @@ public class DriveForward extends Command {
   protected void initialize() {
     this.driveTrain.resetEncoders();
     this.driveController.setSetPoint(this.target);
+    zeroAngle= this.driveTrain.getAngle();
   }
 
   @Override
   protected void execute() {
-    double ySpeed = driveController.calcPID(driveTrain.getFrontBackSpeed());
-
-    this.driveTrain.mecanumDrive(ySpeed, 0, 0, true);
+    double ySpeed = driveController.calcPID(driveTrain.getFrontBackEncoderDistance());
+    double xVal = gyroP * (driveTrain.getAngle() - zeroAngle);
+    
+    
+    this.driveTrain.mecanumDrive(ySpeed, xVal, 0, false);
   }
 
   @Override
