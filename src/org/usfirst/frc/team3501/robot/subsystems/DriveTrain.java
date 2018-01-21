@@ -14,8 +14,7 @@ public class DriveTrain extends Subsystem {
    * Set PID values, need to test mecanum wheels to find them
    */
   public static double driveP = 0.01, driveI = 0.00115, driveD = -0.002;
-  public static double smallTurnP = 0.004, smallTurnI = 0.0013,
-      smallTurnD = 0.005;
+  public static double smallTurnP = 0.004, smallTurnI = 0.0013, smallTurnD = 0.005;
   public static double largeTurnP = .003, largeTurnI = .0012, largeTurnD = .006;
   public static double driveStraightGyroP = 0.01;
   /**
@@ -57,8 +56,7 @@ public class DriveTrain extends Subsystem {
     SpeedControllerGroup m_right_rear = new SpeedControllerGroup(rearRight);
     SpeedControllerGroup m_right_front = new SpeedControllerGroup(frontRight);
 
-    robotDrive = new MecanumDrive(m_left_front, m_left_rear, m_right_front,
-        m_right_rear);
+    robotDrive = new MecanumDrive(m_left_front, m_left_rear, m_right_front, m_right_rear);
 
     this.imu = new ADXRS450_Gyro(Constants.DriveTrain.GYRO_PORT);
   }
@@ -147,7 +145,8 @@ public class DriveTrain extends Subsystem {
   /***
    * Changes the current angle
    *
-   * @param angle - Positive input increases the current angle and negative input decreases the angle
+   * @param angle - Positive input increases the current angle and negative input decreases the
+   *        angle
    */
   public void changeAngle(double angle, boolean fieldOriented) {
     double ySpeed = Math.cos(angle);
@@ -163,16 +162,16 @@ public class DriveTrain extends Subsystem {
   }
 
   /**
-   * Mecanum Drive - takes in the ySpeed, xSpeed, Z Rotation, and Gyro Angle as parameters and enters
-   * those arguments in the driveCartesian method
+   * Mecanum Drive - takes in the ySpeed, xSpeed, Z Rotation, and Gyro Angle as parameters and
+   * enters those arguments in the driveCartesian method
    *
    * @param ySpeed
    * @param xSpeed
    * @param rotation
    * @param if statement
    */
-  public void mecanumDrive(final double ySpeed, final double xSpeed,
-      final double rotation, final boolean fieldOriented) {
+  public void mecanumDrive(final double ySpeed, final double xSpeed, final double rotation,
+      final boolean fieldOriented) {
     if ((ySpeed < 0.1 && ySpeed > -0.1) && (xSpeed < 0.1 && xSpeed > -0.1)
         && (rotation < 0.1 && rotation > -0.1)) {
       robotDrive.stopMotor();
@@ -188,16 +187,20 @@ public class DriveTrain extends Subsystem {
   protected void initDefaultCommand() {
     setDefaultCommand(new JoystickDrive());
   }
+
   public double getFrontLeftMotorPower() {
-	    return this.frontLeft.getMotorOutputPercent();
+    return this.frontLeft.getMotorOutputPercent();
   }
+
   public double getFrontRightMotorPower() {
-	    return this.frontRight.getMotorOutputPercent();
-}
+    return this.frontRight.getMotorOutputPercent();
+  }
+
   public double getRearLeftMotorPower() {
-	    return this.rearLeft.getMotorOutputPercent();
-}
+    return this.rearLeft.getMotorOutputPercent();
+  }
+
   public double getRearRightMotorPower() {
-	    return this.rearRight.getMotorOutputPercent();
-}
+    return this.rearRight.getMotorOutputPercent();
+  }
 }
