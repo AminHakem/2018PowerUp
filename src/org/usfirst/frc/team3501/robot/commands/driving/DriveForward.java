@@ -17,13 +17,11 @@ public class DriveForward extends Command {
   private double maxTimeOut;
   private double target;
   private Preferences prefs;
-  private PIDController driveController;
+  private PIDController driveController, directionController;
   private double zeroAngle;
-
   private double driveP;
   private double driveI;
   private double driveD;
-  private double gyroP;
 
   public DriveForward(double distance, double maxTimeOut) {
     requires(driveTrain);
@@ -33,27 +31,27 @@ public class DriveForward extends Command {
     this.driveP = driveTrain.driveP;
     this.driveI = driveTrain.driveI;
     this.driveD = driveTrain.driveD;
-    this.gyroP = driveTrain.driveStraightGyroP;
     this.driveController = new PIDController(driveP, driveI, driveD);
     this.driveController.setDoneRange(1.0);
     this.driveController.setMaxOutput(1.0);
     this.driveController.setMinDoneCycles(5);
+    this.zeroAngle= this.driveTrain.getAngle();
+    this.directionController = new PIDController(0, 0 , 0);
+    this.directionController.setSetPoint(zeroAngle);
   }
 
   @Override
   protected void initialize() {
     this.driveTrain.resetEncoders();
     this.driveController.setSetPoint(this.target);
-    zeroAngle= this.driveTrain.getAngle();
   }
 
   @Override
   protected void execute() {
     double ySpeed = driveController.calcPID(driveTrain.getFrontBackEncoderDistance());
-    double xVal = gyroP * (driveTrain.getAngle() - zeroAngle);
+    double rVal = directionController.calcPID(driveTrain.getAngle());
     
-    
-    this.driveTrain.mecanumDrive(ySpeed, xVal, 0, false);
+    this.driveTrain.mecanumDrive(ySpeed, 0, rVal, false);
   }
 
   @Override
