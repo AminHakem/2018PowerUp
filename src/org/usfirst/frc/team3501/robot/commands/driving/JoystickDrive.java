@@ -1,7 +1,5 @@
 package org.usfirst.frc.team3501.robot.commands.driving;
 
-import org.usfirst.frc.team3501.robot.Constants;
-import org.usfirst.frc.team3501.robot.OI;
 import org.usfirst.frc.team3501.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -14,7 +12,7 @@ public class JoystickDrive extends Command {
   double previousThrust = 0;
   double previousTwist = 0;
   double previousRotation = 0;
-  boolean fieldOriented = true;
+  boolean fieldOriented = false;
 
   public JoystickDrive() {
     requires(Robot.getDriveTrain());
@@ -40,10 +38,8 @@ public class JoystickDrive extends Command {
       double xSpeed = Robot.getOI().ps4_controller.getRawAxis(0);
       System.out.println("Getting xSpeed value: " + xSpeed);
 
-      double rotation = Robot.getOI().ps4_controller.getRawAxis(4);
+      double rotation = Robot.getOI().ps4_controller.getRawAxis(2);
       System.out.println("Getting rotation value: " + rotation);
-
-      fieldOriented = OI.ps4_controller.getRawButtonPressed(Constants.OI.PS4_CONTROLLER_PORT);
 
       ySpeed = (3 * previousThrust + ySpeed) / 7;
       xSpeed = (3 * previousTwist + xSpeed) / 7;

@@ -188,4 +188,16 @@ public class DriveTrain extends Subsystem {
   protected void initDefaultCommand() {
     setDefaultCommand(new JoystickDrive());
   }
+  public double getFrontLeftMotorPower() {
+	    return this.frontLeft.getMotorOutputPercent();
+  }
+  public double getFrontRightMotorPower() {
+	    return this.frontRight.getMotorOutputPercent();
+}
+  public double getRearLeftMotorPower() {
+	    return this.rearLeft.getMotorOutputPercent();
+}
+  public double getRearRightMotorPower() {
+	    return this.rearRight.getMotorOutputPercent();
+}
 }

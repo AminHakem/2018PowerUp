@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3501.robot;
 
-import org.usfirst.frc.team3501.robot.subsystems.Climber;
+import org.usfirst.frc.team3501.robot.Constants.Climber;
+import org.usfirst.frc.team3501.robot.commands.driving.DriveForward;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
@@ -16,7 +17,7 @@ public class Robot extends IterativeRobot {
   private static OI oi;
   private static Elevator elevator;
 
-  Command autonCommand;
+  Command autonCommand = new DriveForward(36, 10);
   SendableChooser autonChooser;
 
   @Override
@@ -74,5 +75,11 @@ public class Robot extends IterativeRobot {
     SmartDashboard.putNumber("right left encoder: ", driveTrain.getRightLeftEncoderDistance());
     SmartDashboard.putNumber("front back encoder: ", driveTrain.getFrontBackEncoderDistance());
     SmartDashboard.putNumber("angle", driveTrain.getAngle());
+
+    SmartDashboard.putNumber("Front Left Motor power", driveTrain.getFrontLeftMotorPower());
+    SmartDashboard.putNumber("Front Right Motor power", driveTrain.getFrontRightMotorPower());
+    SmartDashboard.putNumber("Rear Left Motor power", driveTrain.getRearLeftMotorPower());
+    SmartDashboard.putNumber("Rear Right Motor power", driveTrain.getRearRightMotorPower());
+
   }
 }

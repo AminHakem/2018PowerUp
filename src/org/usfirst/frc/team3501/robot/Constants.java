@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.SPI;
 
 public class Constants {
   public static class OI {
-    public final static int PS4_CONTROLLER_PORT = 2;
+    public final static int PS4_CONTROLLER_PORT = 3;
     public static final int GAME_PAD_PORT = 2;
 
     // Intake
