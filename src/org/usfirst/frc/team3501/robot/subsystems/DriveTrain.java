@@ -31,6 +31,8 @@ public class DriveTrain extends Subsystem {
 
   private final WPI_TalonSRX frontLeft, frontRight, rearLeft, rearRight;
   private final Encoder frontBackEncoder, rightLeftEncoder;
+  public JoystickDrive joystickDrive;
+  private boolean fieldOriented;
 
 
   private ADXRS450_Gyro imu;
@@ -57,6 +59,8 @@ public class DriveTrain extends Subsystem {
     SpeedControllerGroup m_right_front = new SpeedControllerGroup(frontRight);
 
     robotDrive = new MecanumDrive(m_left_front, m_left_rear, m_right_front, m_right_rear);
+
+    fieldOriented = true;
 
 
     try {
@@ -156,9 +160,9 @@ public class DriveTrain extends Subsystem {
       return 0;
   }
 
-  public double toggleFieldOriented() {
-    double ySpeed = Math.cos(imu.getAngle());
-    double xSpeed = Math.sin(imu.getAngle());
+  public void toggleFieldOriented() {
+    double ySpeed = this.getFrontBackSpeed();
+    double xSpeed = this.getRightLeftSpeed();
     this.mecanumDrive(ySpeed, xSpeed, 0, fieldOriented);
   }
 
@@ -171,6 +175,7 @@ public class DriveTrain extends Subsystem {
   public void changeAngle(double angle, boolean fieldOriented) {
     double ySpeed = Math.cos(angle);
     double xSpeed = Math.sin(angle);
+    this.fieldOriented = fieldOriented;
     this.mecanumDrive(ySpeed, xSpeed, 0, fieldOriented);
   }
 
@@ -196,6 +201,7 @@ public class DriveTrain extends Subsystem {
         && (rotation < 0.1 && rotation > -0.1)) {
       robotDrive.stopMotor();
     }
+    this.fieldOriented = fieldOriented;
     if (fieldOriented) {
       robotDrive.driveCartesian(ySpeed, xSpeed, rotation, this.getAngle());
     } else {
@@ -206,7 +212,13 @@ public class DriveTrain extends Subsystem {
 
   @Override
   protected void initDefaultCommand() {
-    setDefaultCommand(new JoystickDrive());
+    this.joystickDrive = new JoystickDrive();
+    setDefaultCommand(joystickDrive);
+  }
+
+
+  public JoystickDrive getJoystickDrive() {
+    return joystickDrive;
   }
 
   public double getFrontLeftMotorPower() {

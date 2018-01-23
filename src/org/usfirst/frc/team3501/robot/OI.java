@@ -31,7 +31,6 @@ public class OI {
 
   public OI() {
     ps4_controller = new Joystick(Constants.OI.PS4_CONTROLLER_PORT);
-<<<<<<< HEAD
     gamePad = new Joystick(Constants.OI.GAME_PAD_PORT);
 
     // Intake
@@ -53,13 +52,11 @@ public class OI {
 
     toggleJoystickClimb = new JoystickButton(ps4_controller, Constants.OI.TOGGLE_CLIMB);
     toggleJoystickClimb.toggleWhenPressed(new JoystickClimb());
-=======
 
     changeFieldOriented = new JoystickButton(ps4_controller,
-        Constants.OI.CHANGE_FIELD_ORIENTED_PORT);
+        Constants.OI.TRIANGLE_PORT);
     changeFieldOriented.toggleWhenPressed(new ToggleFieldOriented());
 
->>>>>>> Add methods to toggle field oriented
     // gamePad = new Joystick(Constants.OI.GAME_PAD_PORT);
 
     // runIntakeForward =

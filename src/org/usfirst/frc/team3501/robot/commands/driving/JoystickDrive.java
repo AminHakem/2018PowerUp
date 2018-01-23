@@ -37,13 +37,10 @@ public class JoystickDrive extends Command {
 
       double xSpeed = Robot.getOI().ps4_controller.getRawAxis(0);
      // System.out.println("Getting xSpeed value: " + xSpeed);
+      
 
-<<<<<<< HEAD
-      double rotation = Robot.getOI().ps4_controller.getRawAxis(2);
-     // System.out.println("Getting rotation value: " + rotation);
-=======
+
     double rotation = Robot.getOI().ps4_controller.getRawAxis(2);
->>>>>>> Add methods to toggle field oriented
 
       ySpeed = (3 * previousThrust + ySpeed) / 7;
       xSpeed = (3 * previousTwist + xSpeed) / 7;
@@ -67,4 +64,11 @@ public class JoystickDrive extends Command {
 
   @Override
   protected void interrupted() {}
+
+  /***
+   * Toggles the boolean fieldOriented
+   */
+  public void toggleFieldOriented() {
+    fieldOriented = !fieldOriented;
+  }
 }
