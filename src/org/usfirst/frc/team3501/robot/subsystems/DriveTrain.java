@@ -160,11 +160,6 @@ public class DriveTrain extends Subsystem {
       return 0;
   }
 
-  public void toggleFieldOriented() {
-    double ySpeed = this.getFrontBackSpeed();
-    double xSpeed = this.getRightLeftSpeed();
-    this.mecanumDrive(ySpeed, xSpeed, 0, fieldOriented);
-  }
 
   /***
    * Changes the current angle
