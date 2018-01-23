@@ -21,14 +21,13 @@ public class DriveTrain extends Subsystem {
   public static final double ENCODER_PULSES_PER_REVOLUTION = 256;
   public static final double INCHES_PER_PULSE =
       WHEEL_DIAMETER * Math.PI / ENCODER_PULSES_PER_REVOLUTION;
-
-  private boolean fieldOriented;
-
   private static DriveTrain driveTrain;
   private final MecanumDrive robotDrive;
 
   private final WPI_TalonSRX frontLeft, frontRight, rearLeft, rearRight;
   private final Encoder frontBackEncoder, rightLeftEncoder;
+  public JoystickDrive joystickDrive;
+  private boolean fieldOriented;
 
   private ADXRS450_Gyro imu;
 
@@ -55,8 +54,6 @@ public class DriveTrain extends Subsystem {
 
     robotDrive = new MecanumDrive(m_left_front, m_left_rear, m_right_front, m_right_rear);
 
-    fieldOriented = false;
-
     try {
       System.out.println("Ran the Gyro code");
       this.imu = new ADXRS450_Gyro();
@@ -67,17 +64,7 @@ public class DriveTrain extends Subsystem {
       System.out.println("Gyro Null Pointer Exception");
       this.imu = null;
     }
-
-    try {
-      System.out.println("Ran the Gyro code");
-      this.imu = new ADXRS450_Gyro();
-      this.imu.reset();
-      this.imu.calibrate();
-      // this.imu = new ADXRS450_Gyro(Constants.DriveTrain.GYRO_PORT);
-    } catch (NullPointerException e) {
-      System.out.println("Gyro Null Pointer Exception");
-      this.imu = null;
-    }
+    fieldOriented = true;
 
   }
 
@@ -212,7 +199,13 @@ public class DriveTrain extends Subsystem {
 
   @Override
   protected void initDefaultCommand() {
-    setDefaultCommand(new JoystickDrive());
+    this.joystickDrive = new JoystickDrive();
+    setDefaultCommand(joystickDrive);
+  }
+
+
+  public JoystickDrive getJoystickDrive() {
+    return joystickDrive;
   }
 
   public double getFrontLeftMotorPower() {

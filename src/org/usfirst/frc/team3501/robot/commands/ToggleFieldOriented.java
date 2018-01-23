@@ -1,11 +1,15 @@
 package org.usfirst.frc.team3501.robot.commands;
 
-import org.usfirst.frc.team3501.robot.Constants;
-import org.usfirst.frc.team3501.robot.OI;
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.command.Command;
 
+/***
+ * Toggles the FieldOriented boolean in JoystickDrive
+ * 
+ * @author rohanrodrigues
+ *
+ */
 public class ToggleFieldOriented extends Command {
 
   private DriveTrain driveTrain = Robot.getDriveTrain();
@@ -16,26 +20,24 @@ public class ToggleFieldOriented extends Command {
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {}
+  protected void initialize() {
+    System.out.println("Toggle Field Oriented");
+    Robot.getDriveTrain().getJoystickDrive().toggleFieldOriented();
+  }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
-    boolean fieldOriented =
-        OI.ps4_controller.getRawButtonPressed(Constants.OI.PS4_CONTROLLER_PORT);
-  }
+  protected void execute() {}
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true
   @Override
-  protected void end() {
-    Robot.getIntake().stop();
-  }
+  protected void end() {}
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run

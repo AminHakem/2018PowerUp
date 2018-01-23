@@ -45,7 +45,6 @@ public class JoystickDrive extends Command {
       Robot.getDriveTrain().mecanumDrive(-xSpeed, ySpeed, rotation);
     }
 
-
   }
 
   @Override
@@ -60,4 +59,9 @@ public class JoystickDrive extends Command {
 
   @Override
   protected void interrupted() {}
+
+  /***
+   * Toggles the boolean fieldOriented
+   */
+
 }
