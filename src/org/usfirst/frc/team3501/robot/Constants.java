@@ -24,7 +24,13 @@ public class Constants {
     public static final int TOGGLE_CLIMB = 0;
     public static final int RUN_INTAKE_PORT = 2;
     public static int REVERSE_INTAKE_PORT = 2;
+<<<<<<< HEAD
 
+=======
+    public final static int PS4_CONTROLLER_PORT = 3;
+    public static final int GAME_PAD_PORT = 2;
+    public static final int CHANGE_FIELD_ORIENTED_PORT = 4;
+>>>>>>> Add methods to toggle field oriented
   }
 
   public static class Elevator {

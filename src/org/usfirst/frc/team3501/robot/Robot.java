@@ -65,6 +65,7 @@ public class Robot extends IterativeRobot {
   @Override
   public void teleopInit() {
 	  Scheduler.getInstance().add(autonCommand);
+	  driveTrain.resetGyro();
   }
 
   @Override

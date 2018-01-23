@@ -156,6 +156,12 @@ public class DriveTrain extends Subsystem {
       return 0;
   }
 
+  public double toggleFieldOriented() {
+    double ySpeed = Math.cos(imu.getAngle());
+    double xSpeed = Math.sin(imu.getAngle());
+    this.mecanumDrive(ySpeed, xSpeed, 0, fieldOriented);
+  }
+
   /***
    * Changes the current angle
    *
@@ -189,7 +195,8 @@ public class DriveTrain extends Subsystem {
     if ((ySpeed < 0.1 && ySpeed > -0.1) && (xSpeed < 0.1 && xSpeed > -0.1)
         && (rotation < 0.1 && rotation > -0.1)) {
       robotDrive.stopMotor();
-    } else if (fieldOriented) {
+    }
+    if (fieldOriented) {
       robotDrive.driveCartesian(ySpeed, xSpeed, rotation, this.getAngle());
     } else {
       robotDrive.driveCartesian(ySpeed, xSpeed, rotation);

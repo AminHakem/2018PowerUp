@@ -7,6 +7,7 @@ import org.usfirst.frc.team3501.robot.commands.climber.LowerRobot;
 import org.usfirst.frc.team3501.robot.commands.intake.RunIntake;
 import org.usfirst.frc.team3501.robot.commands.intake.RunOuttake;
 
+import org.usfirst.frc.team3501.robot.commands.ToggleFieldOriented;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -15,6 +16,8 @@ public class OI {
   private static OI oi;
   public static Joystick ps4_controller;
   public static Joystick gamePad;
+
+  public static Button changeFieldOriented;
 
   // Intake
   public static Button runIntakeForward;
@@ -28,6 +31,7 @@ public class OI {
 
   public OI() {
     ps4_controller = new Joystick(Constants.OI.PS4_CONTROLLER_PORT);
+<<<<<<< HEAD
     gamePad = new Joystick(Constants.OI.GAME_PAD_PORT);
 
     // Intake
@@ -49,6 +53,13 @@ public class OI {
 
     toggleJoystickClimb = new JoystickButton(ps4_controller, Constants.OI.TOGGLE_CLIMB);
     toggleJoystickClimb.toggleWhenPressed(new JoystickClimb());
+=======
+
+    changeFieldOriented = new JoystickButton(ps4_controller,
+        Constants.OI.CHANGE_FIELD_ORIENTED_PORT);
+    changeFieldOriented.toggleWhenPressed(new ToggleFieldOriented());
+
+>>>>>>> Add methods to toggle field oriented
     // gamePad = new Joystick(Constants.OI.GAME_PAD_PORT);
 
     // runIntakeForward =
