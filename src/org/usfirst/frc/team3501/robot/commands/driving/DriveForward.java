@@ -35,8 +35,9 @@ public class DriveForward extends Command {
     this.driveController.setDoneRange(1.0);
     this.driveController.setMaxOutput(1.0);
     this.driveController.setMinDoneCycles(5);
-    this.zeroAngle= this.driveTrain.getAngle();
-    this.directionController = new PIDController(1, 0 , 0);
+    this.zeroAngle = this.driveTrain.getAngle();
+
+    this.directionController = new PIDController(driveTrain.driveStraightGyroP, 0, 0);
     this.directionController.setSetPoint(zeroAngle);
   }
 
@@ -50,14 +51,13 @@ public class DriveForward extends Command {
   protected void execute() {
     double ySpeed = driveController.calcPID(driveTrain.getFrontBackEncoderDistance());
     double rVal = directionController.calcPID(driveTrain.getAngle());
-    
+
     this.driveTrain.mecanumDrive(ySpeed, 0, rVal, false);
   }
 
   @Override
   protected boolean isFinished() {
-    return timeSinceInitialized() >= maxTimeOut
-        || this.driveController.isDone();
+    return timeSinceInitialized() >= maxTimeOut || this.driveController.isDone();
   }
 
   @Override
