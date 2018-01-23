@@ -22,7 +22,7 @@ public class ToggleFieldOriented extends Command {
   @Override
   protected void initialize() {
     System.out.println("Toggle Field Oriented");
-    Robot.getDriveTrain().getJoystickDrive().toggleFieldOriented();
+    Robot.getDriveTrain().toggleFieldOriented();
   }
 
   // Called repeatedly when this Command is scheduled to run
