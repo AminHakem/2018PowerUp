@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3501.robot;
 
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
+import org.usfirst.frc.team3501.robot.commands.AlignWithCube;
 import org.usfirst.frc.team3501.robot.commands.driving.JoystickDrive;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
@@ -18,7 +19,7 @@ public class Robot extends IterativeRobot {
   private static Elevator elevator;
   private int time;
 
-  Command autonCommand = new JoystickDrive();
+  Command autonCommand = new AlignWithCube();
   SendableChooser autonChooser;
 
   @Override
