@@ -1,0 +1,61 @@
+package org.usfirst.frc.team3501.robot.commands;
+
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+
+import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
+
+public class NetworkThread extends Thread {
+	private DatagramSocket socket;
+	private byte[] buf = new byte[256];
+	private DriveTrain driveTrain;
+	public NetworkThread() {
+	   	try {
+
+				socket = new DatagramSocket(1025);
+
+			} catch (SocketException e1) {
+
+				// TODO Auto-generated catch block
+
+				e1.printStackTrace();
+
+			}
+	   	driveTrain = DriveTrain.getDriveTrain();
+	}
+    public void run(){
+     	DatagramPacket packet = new DatagramPacket(buf, buf.length);
+
+    		try {
+
+    			socket.receive(packet);
+
+    		} catch (IOException e) {
+
+    			// TODO Auto-generated catch block
+
+    			System.out.println("ouch. you didn't get anything!");
+
+    		}
+
+    		InetAddress address = packet.getAddress();
+
+    		int port = packet.getPort();
+
+    		packet = new DatagramPacket(buf, buf.length, address, port);
+
+    		String received = new String(packet.getData(), 0, packet.getLength());
+
+    		received = received.substring(1);
+
+    		int x = Integer.parseInt(received.trim());
+
+    		x = x - 425;
+    		
+    		DriveTrain.setThreadOutput(x);   
+    		}
+   
+  }

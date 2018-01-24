@@ -28,6 +28,7 @@ public class DriveTrain extends Subsystem {
   private final Encoder frontBackEncoder, rightLeftEncoder;
   public JoystickDrive joystickDrive;
   private boolean fieldOriented;
+  private static double threadOutput;
 
   private ADXRS450_Gyro imu;
 
@@ -223,4 +224,14 @@ public class DriveTrain extends Subsystem {
   public double getRearRightMotorPower() {
     return this.rearRight.getMotorOutputPercent();
   }
+  
+  public static double getThreadOutput() {
+		return threadOutput;
+	}
+
+	public static void setThreadOutput(double threadOutput) {
+		DriveTrain.threadOutput = threadOutput;
+	}
+
+
 }
