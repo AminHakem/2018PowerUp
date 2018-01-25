@@ -45,7 +45,6 @@ public class DriveDistance extends Command {
   protected void initialize() {
     this.driveTrain.resetEncoders();
     this.driveController.setSetPoint(this.target);
-    // this.angle += driveTrain.getAngle();
   }
 
   /***
@@ -54,8 +53,6 @@ public class DriveDistance extends Command {
    */
   @Override
   protected void execute() {
-    // double xSpeed = driveController.calcPID(Math.cos(driveTrain.getAngle()));
-    // double ySpeed = driveController.calcPID(Math.sin(driveTrain.getAngle()));
     double xSpeed = driveController.calcPID(driveTrain.getRightLeftSpeed());
     double ySpeed = driveController.calcPID(driveTrain.getFrontBackSpeed());
     angle += driveTrain.getAngle();

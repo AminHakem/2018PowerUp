@@ -55,8 +55,7 @@ public class DriveTrain extends Subsystem {
 
     robotDrive = new MecanumDrive(m_left_front, m_left_rear, m_right_front, m_right_rear);
 
-    fieldOriented = true;
-
+    fieldOriented = false;
 
     try {
       System.out.println("Ran the Gyro code");
@@ -165,7 +164,6 @@ public class DriveTrain extends Subsystem {
   public void changeAngle(double angle) {
     double ySpeed = Math.cos(angle);
     double xSpeed = Math.sin(angle);
-    this.fieldOriented = fieldOriented;
     this.mecanumDrive(ySpeed, xSpeed, 0);
   }
 
