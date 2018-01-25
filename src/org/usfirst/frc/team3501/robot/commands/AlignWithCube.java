@@ -17,7 +17,7 @@ public class AlignWithCube extends Command {
     	
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	this.alignmentController = new PIDController(); //need to tune
+    	this.alignmentController = new PIDController(0.1,0,0); //need to tune
     	thread = new NetworkThread();
     }
 
@@ -34,6 +34,7 @@ public class AlignWithCube extends Command {
     		this.x = DriveTrain.getThreadOutput();
     		double output = (int) alignmentController.calcPID(x);
     		DriveTrain.getDriveTrain().mecanumDrive(0, output, 0);
+    		//System.out.println("Data recieved is:"+x);
     	}
     }
     

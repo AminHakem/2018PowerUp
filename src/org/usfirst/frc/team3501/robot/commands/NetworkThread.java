@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3501.robot.commands;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -47,14 +48,18 @@ public class NetworkThread extends Thread {
 
     		packet = new DatagramPacket(buf, buf.length, address, port);
 
-    		String received = new String(packet.getData(), 0, packet.getLength());
-
-    		received = received.substring(1);
+    		String received = "   ";
+			try {
+				received = new String(packet.getData(), "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
     		int x = Integer.parseInt(received.trim());
 
-    		x = x - 425;
-    		
+
+    		buf = new byte[256];
     		DriveTrain.setThreadOutput(x);   
     		}
    
