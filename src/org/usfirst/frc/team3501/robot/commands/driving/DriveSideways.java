@@ -49,13 +49,12 @@ public class DriveSideways extends Command {
   protected void execute() {
     double xSpeed = driveController.calcPID(driveTrain.getRightLeftSpeed());
 
-    this.driveTrain.mecanumDrive(0, xSpeed, 0, true);
+    this.driveTrain.mecanumDrive(0, xSpeed, 0);
   }
 
   @Override
   protected boolean isFinished() {
-    return timeSinceInitialized() >= maxTimeOut
-        || this.driveController.isDone();
+    return timeSinceInitialized() >= maxTimeOut || this.driveController.isDone();
   }
 
   @Override

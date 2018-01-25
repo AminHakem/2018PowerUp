@@ -13,18 +13,20 @@ import edu.wpi.first.wpilibj.SPI;
 
 public class Constants {
   public static class OI {
+    // CONTROLLERS
+    public final static int PS4_CONTROLLER_PORT = 3;
+    public static final int GAME_PAD_PORT = 2;
+    public static final int TRIANGLE_PORT = 4;
+
+    // Intake
+    public static final int RUN_INTAKE_PORT = 2;
+    public static int REVERSE_INTAKE_PORT = 2;
+
     // Climber
     public static final int LOWER_RAMP = 0;
     public static final int RUN_WINCH_FORWARD = 0;
     public static final int RUN_WINCH_BACKWARD = 0;
     public static final int TOGGLE_CLIMB = 0;
-    public static final int RUN_INTAKE_PORT = 2;
-    public static int REVERSE_INTAKE_PORT = 2;
-
-    //CONTROLLERS
-    public final static int PS4_CONTROLLER_PORT = 3;
-    public static final int GAME_PAD_PORT = 2;
-    public static final int TRIANGLE_PORT = 4;
   }
 
   public static class Elevator {

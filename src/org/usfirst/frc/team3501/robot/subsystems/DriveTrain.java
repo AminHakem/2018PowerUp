@@ -10,30 +10,25 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
 public class DriveTrain extends Subsystem {
-  /**
-   * Set PID values, need to test mecanum wheels to find them
-   */
+  // Set PID values, need to test mecanum wheels to find them
   public static double driveP = 0.01, driveI = 0.00115, driveD = -0.002;
   public static double smallTurnP = 0.004, smallTurnI = 0.0013, smallTurnD = 0.005;
   public static double largeTurnP = .003, largeTurnI = .0012, largeTurnD = .006;
   public static double driveStraightGyroP = 0.01;
-  /**
-   * Need to edit for correct wheel diameter
-   */
+
+  // Need to edit for correct wheel diameter
   public static final double WHEEL_DIAMETER = 4; // inches
   public static final double ENCODER_PULSES_PER_REVOLUTION = 256;
   public static final double INCHES_PER_PULSE =
       WHEEL_DIAMETER * Math.PI / ENCODER_PULSES_PER_REVOLUTION;
 
-  private static DriveTrain driveTrain;
+  private boolean fieldOriented;
 
+  private static DriveTrain driveTrain;
   private final MecanumDrive robotDrive;
 
   private final WPI_TalonSRX frontLeft, frontRight, rearLeft, rearRight;
   private final Encoder frontBackEncoder, rightLeftEncoder;
-  public JoystickDrive joystickDrive;
-  private boolean fieldOriented;
-
 
   private ADXRS450_Gyro imu;
 
@@ -167,11 +162,11 @@ public class DriveTrain extends Subsystem {
    * @param angle - Positive input increases the current angle and negative input decreases the
    *        angle
    */
-  public void changeAngle(double angle, boolean fieldOriented) {
+  public void changeAngle(double angle) {
     double ySpeed = Math.cos(angle);
     double xSpeed = Math.sin(angle);
     this.fieldOriented = fieldOriented;
-    this.mecanumDrive(ySpeed, xSpeed, 0, fieldOriented);
+    this.mecanumDrive(ySpeed, xSpeed, 0);
   }
 
   /**
@@ -190,30 +185,25 @@ public class DriveTrain extends Subsystem {
    * @param rotation
    * @param if statement
    */
-  public void mecanumDrive(final double ySpeed, final double xSpeed, final double rotation,
-      final boolean fieldOriented) {
+  public void mecanumDrive(final double ySpeed, final double xSpeed, final double rotation) {
     if ((ySpeed < 0.1 && ySpeed > -0.1) && (xSpeed < 0.1 && xSpeed > -0.1)
         && (rotation < 0.1 && rotation > -0.1)) {
       robotDrive.stopMotor();
     }
-    this.fieldOriented = fieldOriented;
-    if (fieldOriented) {
+    if (this.fieldOriented) {
       robotDrive.driveCartesian(ySpeed, xSpeed, rotation, this.getAngle());
     } else {
       robotDrive.driveCartesian(ySpeed, xSpeed, rotation);
     }
   }
 
+  public void toggleFieldOriented() {
+    this.fieldOriented = !fieldOriented;
+  }
 
   @Override
   protected void initDefaultCommand() {
-    this.joystickDrive = new JoystickDrive();
-    setDefaultCommand(joystickDrive);
-  }
-
-
-  public JoystickDrive getJoystickDrive() {
-    return joystickDrive;
+    setDefaultCommand(new JoystickDrive());
   }
 
   public double getFrontLeftMotorPower() {

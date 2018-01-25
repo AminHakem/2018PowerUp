@@ -60,13 +60,12 @@ public class DriveDistance extends Command {
     double ySpeed = driveController.calcPID(driveTrain.getFrontBackSpeed());
     angle += driveTrain.getAngle();
 
-    this.driveTrain.mecanumDrive(ySpeed, xSpeed, 0, true);
+    this.driveTrain.mecanumDrive(ySpeed, xSpeed, 0);
   }
 
   @Override
   protected boolean isFinished() {
-    return timeSinceInitialized() >= maxTimeOut
-        || this.driveController.isDone();
+    return timeSinceInitialized() >= maxTimeOut || this.driveController.isDone();
   }
 
   @Override

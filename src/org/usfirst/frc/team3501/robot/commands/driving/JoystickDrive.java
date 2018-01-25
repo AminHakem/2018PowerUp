@@ -12,7 +12,6 @@ public class JoystickDrive extends Command {
   double previousThrust = 0;
   double previousTwist = 0;
   double previousRotation = 0;
-  boolean fieldOriented = false;
 
   public JoystickDrive() {
     requires(Robot.getDriveTrain());
@@ -33,14 +32,8 @@ public class JoystickDrive extends Command {
      */
     if (!Robot.getClimber().inJoystickClimb) {
       double ySpeed = Robot.getOI().ps4_controller.getRawAxis(1);
-     // System.out.println("Getting ySpeed value: " + ySpeed);
-
       double xSpeed = Robot.getOI().ps4_controller.getRawAxis(0);
-     // System.out.println("Getting xSpeed value: " + xSpeed);
-      
-
-
-    double rotation = Robot.getOI().ps4_controller.getRawAxis(2);
+      double rotation = Robot.getOI().ps4_controller.getRawAxis(2);
 
       ySpeed = (3 * previousThrust + ySpeed) / 7;
       xSpeed = (3 * previousTwist + xSpeed) / 7;
@@ -48,7 +41,7 @@ public class JoystickDrive extends Command {
       previousThrust = ySpeed;
       previousTwist = xSpeed;
       previousRotation = rotation;
-      Robot.getDriveTrain().mecanumDrive(-xSpeed, ySpeed, rotation, fieldOriented);
+      Robot.getDriveTrain().mecanumDrive(-xSpeed, ySpeed, rotation);
     }
   }
 
@@ -64,11 +57,4 @@ public class JoystickDrive extends Command {
 
   @Override
   protected void interrupted() {}
-
-  /***
-   * Toggles the boolean fieldOriented
-   */
-  public void toggleFieldOriented() {
-    fieldOriented = !fieldOriented;
-  }
 }

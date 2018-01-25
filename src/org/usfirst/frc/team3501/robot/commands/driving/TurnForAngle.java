@@ -25,15 +25,12 @@ public class TurnForAngle extends Command {
   private double gyroD;
 
   private double zeroAngle;
-  private boolean fieldOriented;
 
-  public TurnForAngle(double angle, Direction direction, boolean fieldOriented,
-      double maxTimeOut) {
+  public TurnForAngle(double angle, Direction direction, double maxTimeOut) {
     requires(Robot.getDriveTrain());
     this.direction = direction;
     this.maxTimeOut = maxTimeOut;
     this.target = Math.abs(angle);
-    this.fieldOriented = fieldOriented;
 
     if (angle > 90) {
       this.gyroP = driveTrain.largeTurnP;
@@ -59,10 +56,10 @@ public class TurnForAngle extends Command {
 
   @Override
   protected void execute() {
-    double xVal = this.gyroController
-        .calcPID(Math.abs(this.driveTrain.getAngle() - this.zeroAngle));
+    double xVal =
+        this.gyroController.calcPID(Math.abs(this.driveTrain.getAngle() - this.zeroAngle));
 
-    this.driveTrain.changeAngle(xVal, fieldOriented);
+    this.driveTrain.changeAngle(xVal);
   }
 
   @Override
