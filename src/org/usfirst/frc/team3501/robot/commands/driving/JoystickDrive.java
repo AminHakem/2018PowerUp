@@ -35,8 +35,8 @@ public class JoystickDrive extends Command {
       double xSpeed = Robot.getOI().ps4_controller.getRawAxis(0);
       double rotation = Robot.getOI().ps4_controller.getRawAxis(2);
 
-      ySpeed = (3 * previousThrust + ySpeed) / 7;
-      xSpeed = (3 * previousTwist + xSpeed) / 7;
+      ySpeed = (6 * previousThrust + ySpeed) / 7;
+      xSpeed = (6 * previousTwist + xSpeed) / 7;
       rotation = (5 * previousRotation + rotation) / 7;
       previousThrust = ySpeed;
       previousTwist = xSpeed;

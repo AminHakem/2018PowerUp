@@ -189,7 +189,7 @@ public class DriveTrain extends Subsystem {
       robotDrive.stopMotor();
     }
     if (this.fieldOriented) {
-      robotDrive.driveCartesian(ySpeed, xSpeed, rotation, this.getAngle());
+      robotDrive.driveCartesian(ySpeed, xSpeed, rotation, -this.getAngle());
     } else {
       robotDrive.driveCartesian(ySpeed, xSpeed, rotation);
     }
