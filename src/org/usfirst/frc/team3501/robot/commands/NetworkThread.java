@@ -28,39 +28,34 @@ public class NetworkThread extends Thread {
 	   	driveTrain = DriveTrain.getDriveTrain();
 	}
     public void run(){
-     	DatagramPacket packet = new DatagramPacket(buf, buf.length);
+     	while(true) {
+    		DatagramPacket packet = new DatagramPacket(buf, buf.length);
 
     		try {
-
     			socket.receive(packet);
-
     		} catch (IOException e) {
-
-    			// TODO Auto-generated catch block
-
     			System.out.println("ouch. you didn't get anything!");
-
     		}
+			//System.out.println("Got it!");
 
     		InetAddress address = packet.getAddress();
 
     		int port = packet.getPort();
 
     		packet = new DatagramPacket(buf, buf.length, address, port);
-
-    		String received = "   ";
+   		String received = "   ";
 			try {
 				received = new String(packet.getData(), "UTF-8");
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
     		int x = Integer.parseInt(received.trim());
-
+    	
 
     		buf = new byte[256];
+    		System.out.println("test: "+x);
     		DriveTrain.setThreadOutput(x);   
     		}
-   
+    }
   }

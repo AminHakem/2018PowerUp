@@ -2,6 +2,8 @@ package org.usfirst.frc.team3501.robot.commands;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.utils.PIDController;
 
+import com.sun.org.apache.bcel.internal.Constants;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -17,8 +19,9 @@ public class AlignWithCube extends Command {
     	
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	this.alignmentController = new PIDController(0.1,0,0); //need to tune
+    	this.alignmentController = new PIDController(DriveTrain.driveP,0,0); //need to tune
     	thread = new NetworkThread();
+    	thread.start();
     }
 
     // Called just before this Command runs the first time
@@ -37,7 +40,7 @@ public class AlignWithCube extends Command {
     		//System.out.println("Data recieved is:"+x);
     	}
     }
-    
+
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	if(this.alignmentController.isDone()) return true;

@@ -193,7 +193,7 @@ public class DriveTrain extends Subsystem {
       robotDrive.driveCartesian(ySpeed, xSpeed, rotation);
     }
   }
-
+  
   public void toggleFieldOriented() {
     this.fieldOriented = !fieldOriented;
   }
@@ -201,7 +201,7 @@ public class DriveTrain extends Subsystem {
   @Override
   protected void initDefaultCommand() {
     this.joystickDrive = new JoystickDrive();
-    setDefaultCommand(joystickDrive);
+   // setDefaultCommand(joystickDrive);
   }
 
 
