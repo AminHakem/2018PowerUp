@@ -50,12 +50,12 @@ public class NetworkThread extends Thread {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-    		int x = Integer.parseInt(received.trim());
+    		int alignmentError = Integer.parseInt(received.trim());
     	
 
     		buf = new byte[256];
-    		System.out.println("test: "+x);
-    		DriveTrain.setThreadOutput(x);   
+    		//System.out.println("test: "+alignmentError);
+    		DriveTrain.setThreadOutput(alignmentError);   
     		}
     }
   }

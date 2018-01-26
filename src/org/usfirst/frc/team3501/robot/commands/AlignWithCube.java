@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class AlignWithCube extends Command {
 	
 	private double alignment;
-	private double x;
+	private double alignmentError;
 	private PIDController alignmentController;
 	private NetworkThread thread;
     public AlignWithCube() {
@@ -34,10 +34,11 @@ public class AlignWithCube extends Command {
     protected void execute() {
     	while(!alignmentController.isDone()) {    		
 
-    		this.x = DriveTrain.getThreadOutput();
-    		double output = (int) alignmentController.calcPID(x);
+   		//this thread will continuously update the threadOutput variable in DriveTrain
+    		this.alignmentError = DriveTrain.getThreadOutput();
+    		double output = alignmentController.calcPIDError(alignmentError);
+
     		DriveTrain.getDriveTrain().mecanumDrive(0, output, 0);
-    		//System.out.println("Data recieved is:"+x);
     	}
     }
 
