@@ -15,13 +15,16 @@ public class AlignWithCube extends Command {
 	private double alignmentError;
 	private PIDController alignmentController;
 	private NetworkThread thread;
-    public AlignWithCube() {
-    	
+    
+	public AlignWithCube() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	this.alignmentController = new PIDController(DriveTrain.driveP,0,0); //need to tune
     	thread = new NetworkThread();
+    System.out.println(this.getClass().getName()+" thread initialized");
     	thread.start();
+        System.out.println(this.getClass().getName()+" thread started");
+
     }
 
     // Called just before this Command runs the first time
@@ -37,14 +40,16 @@ public class AlignWithCube extends Command {
    		//this thread will continuously update the threadOutput variable in DriveTrain
     		this.alignmentError = DriveTrain.getThreadOutput();
     		double output = alignmentController.calcPIDError(alignmentError);
-
     		DriveTrain.getDriveTrain().mecanumDrive(0, output, 0);
+
     	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(this.alignmentController.isDone()) return true;
+    	if(this.alignmentController.isDone()) {
+    		return true;
+    	}
     	return false;
     }
 

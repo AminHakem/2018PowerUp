@@ -19,8 +19,8 @@ public class Robot extends IterativeRobot {
   private static OI oi;
   private static Elevator elevator;
   private int time;
-
-  Command autonCommand = new driveX();
+  Command teleopCommand = new JoystickDrive();
+  Command autonCommand;
   SendableChooser autonChooser;
 
   @Override
@@ -59,19 +59,20 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void autonomousInit() {
-  //  autonCommand = (Command) autonChooser.getSelected();
+	  autonCommand = new AlignWithCube();
     Scheduler.getInstance().add(autonCommand);
   }
 
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+    updateSmartDashboard();
   }
 
   @Override
   public void teleopInit() {
 
-	  //Scheduler.getInstance().add(autonCommand);
+	  Scheduler.getInstance().add(teleopCommand);
     driveTrain.resetGyro();
   }
 
@@ -91,7 +92,10 @@ public class Robot extends IterativeRobot {
     SmartDashboard.putNumber("right left encoder: ", driveTrain.getRightLeftEncoderDistance());
     SmartDashboard.putNumber("front back encoder: ", driveTrain.getFrontBackEncoderDistance());
     SmartDashboard.putNumber("angle", driveTrain.getAngle());
-
+    SmartDashboard.putNumber("Front Left Motor power", driveTrain.getFrontLeftMotorPower());
+    SmartDashboard.putNumber("Front Right Motor power", driveTrain.getFrontRightMotorPower());
+    SmartDashboard.putNumber("Rear Left Motor power", driveTrain.getRearLeftMotorPower());
+    SmartDashboard.putNumber("Rear Right Motor power", driveTrain.getRearRightMotorPower());
   }
 
   @Override

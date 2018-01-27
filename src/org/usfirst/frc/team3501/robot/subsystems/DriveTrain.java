@@ -201,7 +201,7 @@ public class DriveTrain extends Subsystem {
   @Override
   protected void initDefaultCommand() {
     this.joystickDrive = new JoystickDrive();
-   setDefaultCommand(joystickDrive);
+   //setDefaultCommand(joystickDrive);
   }
 
 
@@ -232,6 +232,4 @@ public class DriveTrain extends Subsystem {
 	public static void setThreadOutput(double threadOutput) {
 		DriveTrain.threadOutput = threadOutput;
 	}
-
-
 }

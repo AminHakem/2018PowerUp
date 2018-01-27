@@ -22,7 +22,8 @@ public class driveX extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	driveTrain.mecanumDrive(0.5, 0, 0);
+
+    	driveTrain.mecanumDrive(.2, 0, 0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
