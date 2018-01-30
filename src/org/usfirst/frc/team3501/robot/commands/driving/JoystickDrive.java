@@ -1,6 +1,8 @@
 package org.usfirst.frc.team3501.robot.commands.driving;
 
 import org.usfirst.frc.team3501.robot.Robot;
+
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -11,14 +13,16 @@ public class JoystickDrive extends Command {
 
   double previousThrust = 0;
   double previousTwist = 0;
-  double previousRotation = 0;
-
+  double previousRotation= 0;
+  Joystick joystick;
   public JoystickDrive() {
     requires(Robot.getDriveTrain());
   }
 
   @Override
-  protected void initialize() {}
+  protected void initialize() {
+	  System.out.println("joystick Drive");
+  }
 
   @Override
   protected void execute() {
@@ -44,8 +48,6 @@ public class JoystickDrive extends Command {
       previousRotation = rotation;
       Robot.getDriveTrain().mecanumDrive(-xSpeed, ySpeed, rotation);
     }
-
-
   }
 
   @Override

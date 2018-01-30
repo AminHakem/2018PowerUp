@@ -19,7 +19,7 @@ public class Robot extends IterativeRobot {
   private static OI oi;
   private static Elevator elevator;
   private int time;
-  Command teleopCommand = new JoystickDrive();
+  Command teleopCommand;
   Command autonCommand;
   SendableChooser autonChooser;
 
@@ -71,7 +71,7 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void teleopInit() {
-
+	  teleopCommand= new JoystickDrive();
 	  Scheduler.getInstance().add(teleopCommand);
     driveTrain.resetGyro();
   }

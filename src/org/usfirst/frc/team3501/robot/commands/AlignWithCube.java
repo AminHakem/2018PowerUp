@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3501.robot.commands;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team3501.robot.utils.NetworkThread;
 import org.usfirst.frc.team3501.robot.utils.PIDController;
 
 import com.sun.org.apache.bcel.internal.Constants;
@@ -41,7 +42,6 @@ public class AlignWithCube extends Command {
     		this.alignmentError = DriveTrain.getThreadOutput();
     		double output = alignmentController.calcPIDError(alignmentError);
     		DriveTrain.getDriveTrain().mecanumDrive(0, output, 0);
-
     	}
     }
 

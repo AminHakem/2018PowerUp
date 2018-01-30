@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3501.robot.commands;
+package org.usfirst.frc.team3501.robot.utils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -30,7 +30,7 @@ public class NetworkThread extends Thread {
     public void run(){
     	System.out.println(this.getClass().getName()+" thread  run() started");
      	while(true) {
-        	System.out.println(this.getClass().getName()+" while loop started");
+       // 	System.out.println(this.getClass().getName()+" while loop started");
 
     		DatagramPacket packet = new DatagramPacket(buf, buf.length);
 
@@ -39,7 +39,7 @@ public class NetworkThread extends Thread {
     		} catch (IOException e) {
     			System.out.println("ouch. you didn't get anything!");
     		}
-			System.out.println("Got it!");
+		//	System.out.println("Got it!");
 
     		InetAddress address = packet.getAddress();
 
@@ -57,7 +57,7 @@ public class NetworkThread extends Thread {
     	
 
     		buf = new byte[256];
-    		System.out.println("test: "+alignmentError);
+    	//	System.out.println("test: "+alignmentError);
     		DriveTrain.setThreadOutput(alignmentError);   
     		}
     }
