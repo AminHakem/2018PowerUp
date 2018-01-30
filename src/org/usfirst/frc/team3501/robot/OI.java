@@ -4,9 +4,10 @@ import org.usfirst.frc.team3501.robot.commands.climber.DropRamp;
 import org.usfirst.frc.team3501.robot.commands.climber.JoystickClimb;
 import org.usfirst.frc.team3501.robot.commands.climber.LiftRobot;
 import org.usfirst.frc.team3501.robot.commands.climber.LowerRobot;
-import org.usfirst.frc.team3501.robot.commands.driving.ToggleFieldOriented;
 import org.usfirst.frc.team3501.robot.commands.intake.RunIntake;
 import org.usfirst.frc.team3501.robot.commands.intake.RunOuttake;
+import org.usfirst.frc.team3501.robot.commands.AlignWithCube;
+import org.usfirst.frc.team3501.robot.commands.ToggleFieldOriented;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -17,6 +18,7 @@ public class OI {
   public static Joystick gamePad;
 
   public static Button changeFieldOriented;
+  public static Button alignWithCube;
 
   // Intake
   public static Button runIntakeForward;
@@ -56,6 +58,8 @@ public class OI {
     changeFieldOriented = new JoystickButton(ps4_controller, Constants.OI.TRIANGLE_PORT);
     changeFieldOriented.toggleWhenPressed(new ToggleFieldOriented());
 
+    alignWithCube = new JoystickButton(ps4_controller, Constants.OI.X_BUTTON_PORT);
+    alignWithCube.toggleWhenPressed(new AlignWithCube());
     // gamePad = new Joystick(Constants.OI.GAME_PAD_PORT);
 
     // runIntakeForward =
