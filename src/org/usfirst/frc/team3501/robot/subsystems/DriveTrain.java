@@ -28,7 +28,7 @@ public class DriveTrain extends Subsystem {
   private final Encoder frontBackEncoder, rightLeftEncoder;
   public JoystickDrive joystickDrive;
   private boolean fieldOriented;
-  private static double threadOutput;
+  private double threadOutput;
 
   private ADXRS450_Gyro imu;
 
@@ -65,8 +65,7 @@ public class DriveTrain extends Subsystem {
       System.out.println("Gyro Null Pointer Exception");
       this.imu = null;
     }
-    fieldOriented = true;
-
+    this.fieldOriented = true;
   }
 
   /**
@@ -191,7 +190,7 @@ public class DriveTrain extends Subsystem {
       robotDrive.driveCartesian(ySpeed, xSpeed, rotation, -this.getAngle());
     } else {
       robotDrive.driveCartesian(ySpeed, xSpeed, rotation);
-    }
+         }
   }
   
   public void toggleFieldOriented() {
@@ -206,7 +205,15 @@ public class DriveTrain extends Subsystem {
   }
 
 
-  public JoystickDrive getJoystickDrive() {
+  public boolean isFieldOriented() {
+	return fieldOriented;
+}
+
+public void setFieldOriented(boolean fieldOriented) {
+	this.fieldOriented = fieldOriented;
+}
+
+public JoystickDrive getJoystickDrive() {
     return joystickDrive;
   }
 
@@ -226,11 +233,12 @@ public class DriveTrain extends Subsystem {
     return this.rearRight.getMotorOutputPercent();
   }
   
-  public static double getThreadOutput() {
+  public double getThreadOutput() {
 		return threadOutput;
 	}
 
-	public static void setThreadOutput(double threadOutput) {
-		DriveTrain.threadOutput = threadOutput;
+	public void setThreadOutput(double threadOutput) {
+		this.threadOutput = threadOutput;
 	}
+
 }

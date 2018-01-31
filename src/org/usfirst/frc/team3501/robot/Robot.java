@@ -3,7 +3,6 @@ package org.usfirst.frc.team3501.robot;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.commands.AlignWithCube;
 import org.usfirst.frc.team3501.robot.commands.driving.JoystickDrive;
-import org.usfirst.frc.team3501.robot.commands.driving.driveX;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
@@ -59,7 +58,6 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void autonomousInit() {
-	  autonCommand = new AlignWithCube();
     Scheduler.getInstance().add(autonCommand);
   }
 

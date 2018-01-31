@@ -33,7 +33,6 @@ public class OI {
   public OI() {
     ps4_controller = new Joystick(Constants.OI.PS4_CONTROLLER_PORT);
     gamePad = new Joystick(Constants.OI.GAME_PAD_PORT);
-
     // Intake
     runIntakeForward = new JoystickButton(gamePad, Constants.OI.RUN_INTAKE_PORT);
     runIntakeForward.whileHeld(new RunOuttake());
@@ -55,12 +54,13 @@ public class OI {
     toggleJoystickClimb.toggleWhenPressed(new JoystickClimb());
 
     // Drive Train
-    changeFieldOriented = new JoystickButton(ps4_controller, Constants.OI.TRIANGLE_PORT);
+    
+    changeFieldOriented = new JoystickButton(ps4_controller,Constants.OI.TRIANGLE_PORT);
     changeFieldOriented.toggleWhenPressed(new ToggleFieldOriented());
 
     alignWithCube = new JoystickButton(ps4_controller, Constants.OI.X_BUTTON_PORT);
     alignWithCube.toggleWhenPressed(new AlignWithCube());
-    // gamePad = new Joystick(Constants.OI.GAME_PAD_PORT);
+    
 
     // runIntakeForward =
     // new JoystickButton(gamePad, Constants.OI.RUN_INTAKE_PORT);

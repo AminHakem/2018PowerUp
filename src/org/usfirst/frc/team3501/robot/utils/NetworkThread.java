@@ -6,7 +6,11 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
-
+/**
+ * Thread which will constantly receive alignment values from 
+ * RaspberryPi and update variable in DriveTrain
+ * @author Amin Hakem
+ */
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 
 public class NetworkThread extends Thread {
@@ -58,7 +62,7 @@ public class NetworkThread extends Thread {
 
     		buf = new byte[256];
     	//	System.out.println("test: "+alignmentError);
-    		DriveTrain.setThreadOutput(alignmentError);   
+    		DriveTrain.getDriveTrain().setThreadOutput(alignmentError);   
     		}
     }
   }

@@ -1,4 +1,5 @@
 package org.usfirst.frc.team3501.robot.commands;
+import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.utils.NetworkThread;
 import org.usfirst.frc.team3501.robot.utils.PIDController;
@@ -8,6 +9,11 @@ import com.sun.org.apache.bcel.internal.Constants;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
+ * Command starts a thread which will get values from
+ * RaspberryPi regarding the alignment of a cube
+ * using camera input
+ * Is currently mapped to the X button on controller
+ * @author Amin Hakem
  *
  */
 public class AlignWithCube extends Command {
@@ -18,14 +24,18 @@ public class AlignWithCube extends Command {
 	private NetworkThread thread;
     
 	public AlignWithCube() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	this.alignmentController = new PIDController(DriveTrain.driveP,0,0); //need to tune
+	    requires(Robot.getDriveTrain());
+    	this.alignmentController = new PIDController(DriveTrain.driveP,0,0);  //PID CONSTANTS NEED TUNING
+    	//initialize a thread which will run code to constantly update
+    	//the thread output in DriveTrain
     	thread = new NetworkThread();
-    System.out.println(this.getClass().getName()+" thread initialized");
+    //System.out.println(this.getClass().getName()+" thread initialized");
+    	
     	thread.start();
-        System.out.println(this.getClass().getName()+" thread started");
-
+       // System.out.println(this.getClass().getName()+" thread started");
+    	
+        //RaspberryPi will output 0 when camera is aligned
+        alignmentController.setSetPoint(0);
     }
 
     // Called just before this Command runs the first time
@@ -37,9 +47,9 @@ public class AlignWithCube extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	while(!alignmentController.isDone()) {    		
-
+       // System.out.println(this.getClass().getName()+" command began executing");
    		//this thread will continuously update the threadOutput variable in DriveTrain
-    		this.alignmentError = DriveTrain.getThreadOutput();
+    		this.alignmentError = DriveTrain.getDriveTrain().getThreadOutput();
     		double output = alignmentController.calcPIDError(alignmentError);
     		DriveTrain.getDriveTrain().mecanumDrive(0, output, 0);
     	}

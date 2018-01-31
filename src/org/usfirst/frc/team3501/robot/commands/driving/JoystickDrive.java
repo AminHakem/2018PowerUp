@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3501.robot.commands.driving;
 
 import org.usfirst.frc.team3501.robot.Robot;
+import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
@@ -14,9 +15,12 @@ public class JoystickDrive extends Command {
   double previousThrust = 0;
   double previousTwist = 0;
   double previousRotation= 0;
+  boolean fieldOriented;
   Joystick joystick;
   public JoystickDrive() {
     requires(Robot.getDriveTrain());
+	  joystick = Robot.getOI().ps4_controller;
+
   }
 
   @Override
@@ -26,7 +30,6 @@ public class JoystickDrive extends Command {
 
   @Override
   protected void execute() {
-
     /**
      * Raw Axis 1 is the left joystick on the Xbox controller with the movement being from top to
      * bottom. Raw Axis 0 is the left joystick on the Xbox controller with the movement being from
@@ -48,6 +51,7 @@ public class JoystickDrive extends Command {
       previousRotation = rotation;
       Robot.getDriveTrain().mecanumDrive(-xSpeed, ySpeed, rotation);
     }
+
   }
 
   @Override
@@ -66,5 +70,4 @@ public class JoystickDrive extends Command {
   /***
    * Toggles the boolean fieldOriented
    */
-
 }

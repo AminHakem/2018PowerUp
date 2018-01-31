@@ -21,8 +21,7 @@ public class ToggleFieldOriented extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    System.out.println("Toggle Field Oriented");
-    Robot.getDriveTrain().toggleFieldOriented();
+	  Robot.getDriveTrain().toggleFieldOriented();;
   }
 
   // Called repeatedly when this Command is scheduled to run

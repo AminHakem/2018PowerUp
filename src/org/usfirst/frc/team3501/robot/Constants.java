@@ -30,7 +30,6 @@ public class Constants {
     public static final int RUN_WINCH_FORWARD = 0;
     public static final int RUN_WINCH_BACKWARD = 0;
     public static final int TOGGLE_CLIMB = 0;
-
   }
 
   public static class Elevator {
