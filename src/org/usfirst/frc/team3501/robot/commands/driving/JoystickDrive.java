@@ -2,7 +2,6 @@ package org.usfirst.frc.team3501.robot.commands.driving;
 
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -16,20 +15,23 @@ public class JoystickDrive extends Command {
   double previousTwist = 0;
   double previousRotation= 0;
   boolean fieldOriented;
+  boolean alignedWithCube;
   Joystick joystick;
+
   public JoystickDrive() {
     requires(Robot.getDriveTrain());
-	  joystick = Robot.getOI().ps4_controller;
+    joystick = Robot.getOI().ps4_controller;
 
   }
 
   @Override
   protected void initialize() {
-	  System.out.println("joystick Drive");
+
   }
 
   @Override
   protected void execute() {
+    this.alignedWithCube = DriveTrain.getDriveTrain().isAlignedWithCube();
     /**
      * Raw Axis 1 is the left joystick on the Xbox controller with the movement being from top to
      * bottom. Raw Axis 0 is the left joystick on the Xbox controller with the movement being from
@@ -70,4 +72,13 @@ public class JoystickDrive extends Command {
   /***
    * Toggles the boolean fieldOriented
    */
+
+
+  public void toggleAlignWithCube() {
+    System.out
+        .println(this.getClass() + " toggled ALIGN begin " + alignedWithCube);
+    alignedWithCube = !alignedWithCube;
+    System.out
+        .println(this.getClass() + " toggled ALIGN end " + alignedWithCube);
+  }
 }

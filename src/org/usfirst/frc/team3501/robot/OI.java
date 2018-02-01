@@ -55,12 +55,14 @@ public class OI {
 
     // Drive Train
     
-    changeFieldOriented = new JoystickButton(ps4_controller,Constants.OI.TRIANGLE_PORT);
+    changeFieldOriented = new JoystickButton(ps4_controller,Constants.OI.TRIANGLE_BUTTON_PORT);
     changeFieldOriented.toggleWhenPressed(new ToggleFieldOriented());
 
     alignWithCube = new JoystickButton(ps4_controller, Constants.OI.X_BUTTON_PORT);
     alignWithCube.toggleWhenPressed(new AlignWithCube());
     
+
+    // gamePad = new Joystick(Constants.OI.GAME_PAD_PORT);
 
     // runIntakeForward =
     // new JoystickButton(gamePad, Constants.OI.RUN_INTAKE_PORT);

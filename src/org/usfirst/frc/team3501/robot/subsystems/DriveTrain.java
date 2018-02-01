@@ -27,7 +27,7 @@ public class DriveTrain extends Subsystem {
   private final WPI_TalonSRX frontLeft, frontRight, rearLeft, rearRight;
   private final Encoder frontBackEncoder, rightLeftEncoder;
   public JoystickDrive joystickDrive;
-  private boolean fieldOriented;
+  private boolean fieldOriented, alignedWithCube;
   private double threadOutput;
 
   private ADXRS450_Gyro imu;
@@ -53,8 +53,11 @@ public class DriveTrain extends Subsystem {
     SpeedControllerGroup m_right_rear = new SpeedControllerGroup(rearRight);
     SpeedControllerGroup m_right_front = new SpeedControllerGroup(frontRight);
 
-    robotDrive = new MecanumDrive(m_left_front, m_left_rear, m_right_front, m_right_rear);
+    robotDrive = new MecanumDrive(m_left_front, m_left_rear, m_right_front,
+        m_right_rear);
 
+    fieldOriented = true;
+    alignedWithCube = false;
     try {
       System.out.println("Ran the Gyro code");
       this.imu = new ADXRS450_Gyro();
@@ -66,6 +69,7 @@ public class DriveTrain extends Subsystem {
       this.imu = null;
     }
     this.fieldOriented = true;
+    this.alignedWithCube = false;
   }
 
   /**
@@ -190,55 +194,66 @@ public class DriveTrain extends Subsystem {
       robotDrive.driveCartesian(ySpeed, xSpeed, rotation, -this.getAngle());
     } else {
       robotDrive.driveCartesian(ySpeed, xSpeed, rotation);
-         }
+    }
   }
-  
-  public void toggleFieldOriented() {
-    this.fieldOriented = !fieldOriented;
-  }
-
 
   @Override
   protected void initDefaultCommand() {
     this.joystickDrive = new JoystickDrive();
-   //setDefaultCommand(joystickDrive);
+    setDefaultCommand(joystickDrive);
   }
 
 
   public boolean isFieldOriented() {
-	return fieldOriented;
-}
+    return fieldOriented;
+  }
 
-public void setFieldOriented(boolean fieldOriented) {
-	this.fieldOriented = fieldOriented;
-}
+  public void setFieldOriented(boolean fieldOriented) {
+    this.fieldOriented = fieldOriented;
+  }
 
-public JoystickDrive getJoystickDrive() {
+  public boolean isAlignedWithCube() {
+    return alignedWithCube;
+  }
+
+  public void setAlignedWithCube(boolean alignedWithCube) {
+    this.alignedWithCube = alignedWithCube;
+  }
+
+  public JoystickDrive getJoystickDrive() {
     return joystickDrive;
   }
 
+
+  public double getThreadOutput() {
+    return threadOutput;
+  }
+
+  public void setThreadOutput(double threadOutput) {
+    this.threadOutput = threadOutput;
+  }
+
   public double getFrontLeftMotorPower() {
-    return this.frontLeft.getMotorOutputPercent();
+    return frontLeft.getMotorOutputVoltage();
   }
 
   public double getFrontRightMotorPower() {
-    return this.frontRight.getMotorOutputPercent();
+    return frontRight.getMotorOutputVoltage();
   }
 
   public double getRearLeftMotorPower() {
-    return this.rearLeft.getMotorOutputPercent();
+    return rearLeft.getMotorOutputVoltage();
   }
 
   public double getRearRightMotorPower() {
-    return this.rearRight.getMotorOutputPercent();
+    return rearRight.getMotorOutputVoltage();
   }
-  
-  public double getThreadOutput() {
-		return threadOutput;
-	}
 
-	public void setThreadOutput(double threadOutput) {
-		this.threadOutput = threadOutput;
-	}
+  public void toggleFieldOriented() {
+    this.setFieldOriented(!isFieldOriented());
+  }
 
+  public void toggleAlignedWithCube() {
+    this.setAlignedWithCube(!alignedWithCube);
+  }
 }
