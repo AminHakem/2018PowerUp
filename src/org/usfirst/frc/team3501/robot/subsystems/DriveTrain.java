@@ -181,7 +181,7 @@ public class DriveTrain extends Subsystem {
    * @param ySpeed
    * @param xSpeed
    * @param rotation
-   * @param if statement
+   * @param is fieldOriented or not
    */
   public void mecanumDrive(final double ySpeed, final double xSpeed, final double rotation) {
     if ((ySpeed < 0.1 && ySpeed > -0.1) && (xSpeed < 0.1 && xSpeed > -0.1)
