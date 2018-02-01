@@ -15,8 +15,6 @@ public class DriveTrain extends Subsystem {
   public static double smallTurnP = 0.004, smallTurnI = 0.0013, smallTurnD = 0.005;
   public static double largeTurnP = .003, largeTurnI = .0012, largeTurnD = .006;
   public static double driveStraightGyroP = 0.01;
-
-  // Need to edit for correct wheel diameter
   public static final double WHEEL_DIAMETER = 4; // inches
   public static final double ENCODER_PULSES_PER_REVOLUTION = 256;
   public static final double INCHES_PER_PULSE =
