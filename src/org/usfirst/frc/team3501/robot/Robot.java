@@ -69,8 +69,8 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void teleopInit() {
-	  teleopCommand= new JoystickDrive();
-	  Scheduler.getInstance().add(teleopCommand);
+    teleopCommand = new JoystickDrive();
+    Scheduler.getInstance().add(teleopCommand);
     driveTrain.resetGyro();
   }
 
@@ -90,10 +90,14 @@ public class Robot extends IterativeRobot {
     SmartDashboard.putNumber("right left encoder: ", driveTrain.getRightLeftEncoderDistance());
     SmartDashboard.putNumber("front back encoder: ", driveTrain.getFrontBackEncoderDistance());
     SmartDashboard.putNumber("angle", driveTrain.getAngle());
-    SmartDashboard.putNumber("Front Left Motor power", driveTrain.getFrontLeftMotorPower());
-    SmartDashboard.putNumber("Front Right Motor power", driveTrain.getFrontRightMotorPower());
-    SmartDashboard.putNumber("Rear Left Motor power", driveTrain.getRearLeftMotorPower());
-    SmartDashboard.putNumber("Rear Right Motor power", driveTrain.getRearRightMotorPower());
+    SmartDashboard.putNumber("Front Left Motor power",
+        driveTrain.getFrontLeftMotorPower());
+    SmartDashboard.putNumber("Front Right Motor power",
+        driveTrain.getFrontRightMotorPower());
+    SmartDashboard.putNumber("Rear Left Motor power",
+        driveTrain.getRearLeftMotorPower());
+    SmartDashboard.putNumber("Rear Right Motor power",
+        driveTrain.getRearRightMotorPower());
   }
 
   @Override

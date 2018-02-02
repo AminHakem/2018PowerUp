@@ -49,7 +49,7 @@ public class TurnForAngle extends Command {
 
   @Override
   protected void initialize() {
-    this.driveTrain.resetEncoders();
+    // this.driveTrain.resetEncoders();
     this.gyroController.setSetPoint(this.target);
     this.zeroAngle = driveTrain.getAngle();
   }

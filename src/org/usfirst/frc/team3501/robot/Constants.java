@@ -88,4 +88,5 @@ public class Constants {
 	public static enum Direction {
 		LEFT, RIGHT, DOWN, UP, FORWARD, BACKWARD;
 	}
+
 }
