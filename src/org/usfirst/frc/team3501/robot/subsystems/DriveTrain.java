@@ -4,7 +4,6 @@ import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.commands.driving.JoystickDrive;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
@@ -23,7 +22,7 @@ public class DriveTrain extends Subsystem {
   private final MecanumDrive robotDrive;
 
   private final WPI_TalonSRX frontLeft, frontRight, rearLeft, rearRight;
-  private final Encoder frontBackEncoder, rightLeftEncoder;
+  // private final Encoder frontBackEncoder, rightLeftEncoder;
   public JoystickDrive joystickDrive;
   private boolean fieldOriented, alignedWithCube;
   private double threadOutput;
@@ -38,13 +37,13 @@ public class DriveTrain extends Subsystem {
     rearRight = new WPI_TalonSRX(Constants.DriveTrain.REAR_RIGHT);
 
     // ENCODERS
-    rightLeftEncoder = new Encoder(Constants.DriveTrain.ENCODER_LEFT_A,
-        Constants.DriveTrain.ENCODER_LEFT_B, false, Encoder.EncodingType.k4X);
-    frontBackEncoder = new Encoder(Constants.DriveTrain.ENCODER_RIGHT_A,
-        Constants.DriveTrain.ENCODER_RIGHT_B, false, Encoder.EncodingType.k4X);
+    // rightLeftEncoder = new Encoder(Constants.DriveTrain.ENCODER_LEFT_A,
+    // Constants.DriveTrain.ENCODER_LEFT_B, false, Encoder.EncodingType.k4X);
+    // frontBackEncoder = new Encoder(Constants.DriveTrain.ENCODER_RIGHT_A,
+    // Constants.DriveTrain.ENCODER_RIGHT_B, false, Encoder.EncodingType.k4X);
 
-    rightLeftEncoder.setDistancePerPulse(INCHES_PER_PULSE);
-    frontBackEncoder.setDistancePerPulse(INCHES_PER_PULSE);
+    // rightLeftEncoder.setDistancePerPulse(INCHES_PER_PULSE);
+    // frontBackEncoder.setDistancePerPulse(INCHES_PER_PULSE);
 
     SpeedControllerGroup m_left_rear = new SpeedControllerGroup(rearLeft);
     SpeedControllerGroup m_left_front = new SpeedControllerGroup(frontLeft);
@@ -89,58 +88,58 @@ public class DriveTrain extends Subsystem {
   }
 
 
-  // ENCODER METHODS
-  /**
-   * Receives the value for the encoder that controls going left and right
-   *
-   * @return rightLeftEncoder distance
-   */
+  // // ENCODER METHODS
+  // /**
+  // * Receives the value for the encoder that controls going left and right
+  // *
+  // * @return rightLeftEncoder distance
+  // */
+  //
+  // public double getRightLeftEncoderDistance() {
+  // return rightLeftEncoder.getDistance();
+  // }
+  //
+  // /**
+  // * Receives the value for the encoder that controls going front and back
+  // *
+  // * @return frontBackEncoder distance
+  // */
+  //
+  // public double getFrontBackEncoderDistance() {
+  // return frontBackEncoder.getDistance();
+  // }
+  //
+  // /**
+  // * Prints out both distances of the encoders
+  // */
+  // public void printEncoderOutput() {
+  // System.out.println("left/right: " + getRightLeftEncoderDistance());
+  // System.out.println("front/back: " + getFrontBackEncoderDistance());
+  // }
+  //
+  // /**
+  // * Reset encoder distances to 0
+  // */
+  // public void resetEncoders() {
+  // rightLeftEncoder.reset();
+  // frontBackEncoder.reset();
+  // }
 
-  public double getRightLeftEncoderDistance() {
-    return rightLeftEncoder.getDistance();
-  }
-
-  /**
-   * Receives the value for the encoder that controls going front and back
-   *
-   * @return frontBackEncoder distance
-   */
-
-  public double getFrontBackEncoderDistance() {
-    return frontBackEncoder.getDistance();
-  }
-
-  /**
-   * Prints out both distances of the encoders
-   */
-  public void printEncoderOutput() {
-    System.out.println("left/right: " + getRightLeftEncoderDistance());
-    System.out.println("front/back: " + getFrontBackEncoderDistance());
-  }
-
-  /**
-   * Reset encoder distances to 0
-   */
-  public void resetEncoders() {
-    rightLeftEncoder.reset();
-    frontBackEncoder.reset();
-  }
-
-  /**
-   *
-   * @return rightLeft wheel speed
-   */
-  public double getRightLeftSpeed() {
-    return rightLeftEncoder.getRate();
-  }
-
-  /**
-   *
-   * @return frontBack wheel speed
-   */
-  public double getFrontBackSpeed() {
-    return frontBackEncoder.getRate();
-  }
+  // /**
+  // *
+  // * @return rightLeft wheel speed
+  // */
+  // public double getRightLeftSpeed() {
+  // return rightLeftEncoder.getRate();
+  // }
+  //
+  // /**
+  // *
+  // * @return frontBack wheel speed
+  // */
+  // public double getFrontBackSpeed() {
+  // return frontBackEncoder.getRate();
+  // }
 
   // ------Gyro------//
   /**
