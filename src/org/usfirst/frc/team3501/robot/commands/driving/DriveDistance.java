@@ -59,7 +59,7 @@ public class DriveDistance extends Command {
     angle += driveTrain.getAngle();
 
     this.driveTrain.mecanumDrive(ySpeed, xSpeed, 0);
-  }
+     }
 
   @Override
   protected boolean isFinished() {

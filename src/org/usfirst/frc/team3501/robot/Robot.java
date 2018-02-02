@@ -2,6 +2,7 @@ package org.usfirst.frc.team3501.robot;
 
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.commands.AlignWithCube;
+import org.usfirst.frc.team3501.robot.commands.driving.DriveForward;
 import org.usfirst.frc.team3501.robot.commands.driving.JoystickDrive;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
@@ -58,6 +59,7 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void autonomousInit() {
+    autonCommand = new DriveForward(5, 5);
     Scheduler.getInstance().add(autonCommand);
   }
 
