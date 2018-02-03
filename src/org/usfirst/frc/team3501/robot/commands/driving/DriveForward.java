@@ -5,6 +5,7 @@ import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.utils.PIDController;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This command makes the robot drive a specified distance using encoders on the robot and using a
@@ -50,9 +51,11 @@ public class DriveForward extends Command {
 
   @Override
   protected void execute() {
-    double ySpeed = driveController.calcPID(driveTrain.getFrontBackEncoderDistance()*(48/50));
-    double rVal = directionController.calcPID(driveTrain.getAngle());
-    this.driveTrain.mecanumDrive(0, -ySpeed, rVal);
+    double ySpeed = driveController.calcPID(driveTrain.getFrontBackEncoderDistance()*(48/58));
+    //double rVal = directionController.calcPID(driveTrain.getAngle());
+    //System.out.println();
+    this.driveTrain.mecanumDrive(0, -ySpeed, 0);
+    SmartDashboard.putNumber("PID output",ySpeed);
   }
 
   @Override

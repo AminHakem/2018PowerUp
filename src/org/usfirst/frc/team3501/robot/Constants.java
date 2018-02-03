@@ -18,7 +18,7 @@ public class Constants {
 		public final static int PS4_CONTROLLER_PORT = 3;
 		public static final int GAME_PAD_PORT = 2;
 		public static final int TRIANGLE_BUTTON_PORT = 4;
-		public static final int X_BUTTON_PORT = 1;
+		public static final int X_BUTTON_PORT = 2;
 
 		// Intake
 		public static final int RUN_INTAKE_PORT = 2;
