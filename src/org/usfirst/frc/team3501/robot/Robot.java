@@ -15,7 +15,6 @@ public class Robot extends IterativeRobot {
   private static DriveTrain driveTrain;
   private static OI oi;
   private static Elevator elevator;
-  Command teleopCommand;
   Command autonCommand;
   SendableChooser autonChooser;
 
