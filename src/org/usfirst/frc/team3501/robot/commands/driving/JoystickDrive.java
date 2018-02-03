@@ -13,7 +13,7 @@ public class JoystickDrive extends Command {
 
   double previousThrust = 0;
   double previousTwist = 0;
-  double previousRotation= 0;
+  double previousRotation = 0;
   boolean fieldOriented;
   boolean alignedWithCube;
   Joystick joystick;
@@ -25,23 +25,21 @@ public class JoystickDrive extends Command {
   }
 
   @Override
-  protected void initialize() {
+  protected void initialize() {}
 
-  }
-
+  /**
+   * Raw Axis 1 is the left joystick on the Xbox controller with the movement being from top to
+   * bottom. Raw Axis 0 is the left joystick on the Xbox controller with the movement being from
+   * left to right. Raw Axis 4 is the right joystick on the Xbox controller with the movement being
+   * from left to right.
+   *
+   */
   @Override
   protected void execute() {
     this.alignedWithCube = DriveTrain.getDriveTrain().isAlignedWithCube();
-    /**
-     * Raw Axis 1 is the left joystick on the Xbox controller with the movement being from top to
-     * bottom. Raw Axis 0 is the left joystick on the Xbox controller with the movement being from
-     * left to right. Raw Axis 4 is the right joystick on the Xbox controller with the movement
-     * being from left to right.
-     *
-     */
+
     if (!Robot.getClimber().inJoystickClimb) {
-     
-    	  double ySpeed = Robot.getOI().ps4_controller.getRawAxis(1);
+      double ySpeed = Robot.getOI().ps4_controller.getRawAxis(1);
       double xSpeed = Robot.getOI().ps4_controller.getRawAxis(0);
       double rotation = Robot.getOI().ps4_controller.getRawAxis(2);
 
@@ -68,17 +66,4 @@ public class JoystickDrive extends Command {
 
   @Override
   protected void interrupted() {}
-
-  /***
-   * Toggles the boolean fieldOriented
-   */
-
-
-  public void toggleAlignWithCube() {
-    System.out
-        .println(this.getClass() + " toggled ALIGN begin " + alignedWithCube);
-    alignedWithCube = !alignedWithCube;
-    System.out
-        .println(this.getClass() + " toggled ALIGN end " + alignedWithCube);
-  }
 }

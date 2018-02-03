@@ -41,7 +41,7 @@ public class DriveSideways extends Command {
 
   @Override
   protected void initialize() {
-    // this.driveTrain.resetEncoders();
+    this.driveTrain.resetEncoders();
     this.driveController.setSetPoint(this.target);
   }
 

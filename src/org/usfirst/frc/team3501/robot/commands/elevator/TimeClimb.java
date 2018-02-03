@@ -33,7 +33,6 @@ public class TimeClimb extends Command {
   @Override
   protected void execute() {
     Robot.getElevator().setMotorValue(motorVal);
-
   }
 
   @Override
@@ -50,7 +49,4 @@ public class TimeClimb extends Command {
   protected void interrupted() {
     end();
   }
-
-
-
 }

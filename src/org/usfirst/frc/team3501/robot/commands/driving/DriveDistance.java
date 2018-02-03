@@ -43,9 +43,8 @@ public class DriveDistance extends Command {
 
   @Override
   protected void initialize() {
-    // this.driveTrain.resetEncoders();
+    this.driveTrain.resetEncoders();
     this.driveController.setSetPoint(this.target);
-
   }
 
   /***
@@ -59,7 +58,7 @@ public class DriveDistance extends Command {
     angle += driveTrain.getAngle();
 
     this.driveTrain.mecanumDrive(ySpeed, xSpeed, 0);
-     }
+  }
 
   @Override
   protected boolean isFinished() {

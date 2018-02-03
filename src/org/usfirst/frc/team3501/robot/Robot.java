@@ -1,9 +1,6 @@
 package org.usfirst.frc.team3501.robot;
 
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
-import org.usfirst.frc.team3501.robot.commands.AlignWithCube;
-import org.usfirst.frc.team3501.robot.commands.driving.DriveForward;
-import org.usfirst.frc.team3501.robot.commands.driving.JoystickDrive;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
@@ -18,7 +15,6 @@ public class Robot extends IterativeRobot {
   private static DriveTrain driveTrain;
   private static OI oi;
   private static Elevator elevator;
-  private int time;
   Command teleopCommand;
   Command autonCommand;
   SendableChooser autonChooser;
@@ -29,19 +25,16 @@ public class Robot extends IterativeRobot {
     oi = OI.getOI();
     elevator = Elevator.getElevator();
 
-    time = 0;
-
-    autonChooser = new SendableChooser();
-
+    driveTrain.resetEncoders();
     CameraServer server = CameraServer.getInstance();
 
-    driveTrain.resetEncoders();
+    autonChooser = new SendableChooser();
+    autonCommand = (Command) autonChooser.getSelected();
   }
 
   public static Elevator getElevator() {
     return Elevator.getElevator();
   }
-
 
   public static DriveTrain getDriveTrain() {
     return DriveTrain.getDriveTrain();
@@ -61,9 +54,10 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void autonomousInit() {
-    autonCommand = new DriveForward(20, 5);
-   Scheduler.getInstance().add(autonCommand);
+    driveTrain.resetGyro();
     driveTrain.resetEncoders();
+
+    Scheduler.getInstance().add(autonCommand);
   }
 
   @Override
@@ -73,51 +67,21 @@ public class Robot extends IterativeRobot {
   }
 
   @Override
-  public void teleopInit() {
-    teleopCommand = new JoystickDrive();
-    Scheduler.getInstance().add(teleopCommand);
-    driveTrain.resetGyro();
-  }
+  public void teleopInit() {}
 
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     updateSmartDashboard();
-    time++;
-    if (time % 50 == 0) {
-      System.out.println("Angle:  " + driveTrain.getAngle());
-    }
-
   }
-
 
   public void updateSmartDashboard() {
     SmartDashboard.putNumber("right left encoder: ", driveTrain.getRightLeftEncoderDistance());
     SmartDashboard.putNumber("front back encoder: ", driveTrain.getFrontBackEncoderDistance());
     SmartDashboard.putNumber("angle", driveTrain.getAngle());
-    SmartDashboard.putNumber("Front Left Motor power",
-        driveTrain.getFrontLeftMotorPower());
-    SmartDashboard.putNumber("Front Right Motor power",
-        driveTrain.getFrontRightMotorPower());
-    SmartDashboard.putNumber("Rear Left Motor power",
-        driveTrain.getRearLeftMotorPower());
-    SmartDashboard.putNumber("Rear Right Motor power",
-        driveTrain.getRearRightMotorPower());
+    SmartDashboard.putNumber("Front Left Motor power", driveTrain.getFrontLeftMotorPower());
+    SmartDashboard.putNumber("Front Right Motor power", driveTrain.getFrontRightMotorPower());
+    SmartDashboard.putNumber("Rear Left Motor power", driveTrain.getRearLeftMotorPower());
+    SmartDashboard.putNumber("Rear Right Motor power", driveTrain.getRearRightMotorPower());
   }
-
-  @Override
-  public void robotPeriodic() {
-    // nothing to do in robotPeriodic
-  }
-
-  @Override
-  public void disabledPeriodic() {
-    // nothing to do in disabledPeriodic
-  }
-  @Override
-	public void disabledInit() {
-		// TODO Auto-generated method stub
-		super.disabledInit();
-	}
-
 }

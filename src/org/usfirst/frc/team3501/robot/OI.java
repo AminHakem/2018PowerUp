@@ -4,10 +4,10 @@ import org.usfirst.frc.team3501.robot.commands.climber.DropRamp;
 import org.usfirst.frc.team3501.robot.commands.climber.JoystickClimb;
 import org.usfirst.frc.team3501.robot.commands.climber.LiftRobot;
 import org.usfirst.frc.team3501.robot.commands.climber.LowerRobot;
+import org.usfirst.frc.team3501.robot.commands.driving.AlignWithCube;
+import org.usfirst.frc.team3501.robot.commands.driving.ToggleFieldOriented;
 import org.usfirst.frc.team3501.robot.commands.intake.RunIntake;
 import org.usfirst.frc.team3501.robot.commands.intake.RunOuttake;
-import org.usfirst.frc.team3501.robot.commands.AlignWithCube;
-import org.usfirst.frc.team3501.robot.commands.ToggleFieldOriented;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -17,6 +17,7 @@ public class OI {
   public static Joystick ps4_controller;
   public static Joystick gamePad;
 
+  // Driving
   public static Button changeFieldOriented;
   public static Button alignWithCube;
 
@@ -33,6 +34,7 @@ public class OI {
   public OI() {
     ps4_controller = new Joystick(Constants.OI.PS4_CONTROLLER_PORT);
     gamePad = new Joystick(Constants.OI.GAME_PAD_PORT);
+
     // Intake
     runIntakeForward = new JoystickButton(gamePad, Constants.OI.RUN_INTAKE_PORT);
     runIntakeForward.whileHeld(new RunOuttake());
@@ -54,23 +56,11 @@ public class OI {
     toggleJoystickClimb.toggleWhenPressed(new JoystickClimb());
 
     // Drive Train
-    
-    changeFieldOriented = new JoystickButton(ps4_controller,Constants.OI.TRIANGLE_BUTTON_PORT);
+    changeFieldOriented = new JoystickButton(ps4_controller, Constants.OI.TRIANGLE_BUTTON_PORT);
     changeFieldOriented.toggleWhenPressed(new ToggleFieldOriented());
 
     alignWithCube = new JoystickButton(ps4_controller, Constants.OI.X_BUTTON_PORT);
     alignWithCube.toggleWhenPressed(new AlignWithCube());
-    
-
-    // gamePad = new Joystick(Constants.OI.GAME_PAD_PORT);
-
-    // runIntakeForward =
-    // new JoystickButton(gamePad, Constants.OI.RUN_INTAKE_PORT);
-    // runIntakeForward.whileHeld(new RunOuttake());
-    //
-    // runIntakeBackward =
-    // new JoystickButton(gamePad, Constants.OI.REVERSE_INTAKE_PORT);
-    // runIntakeBackward.whileHeld(new RunIntake());
   }
 
   public static OI getOI() {
