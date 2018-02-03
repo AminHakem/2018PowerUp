@@ -3,9 +3,9 @@ package org.usfirst.frc.team3501.robot;
 import edu.wpi.first.wpilibj.SPI;
 
 /**
- * The Constants stores constant values for all subsystems. This includes the port values for motors
- * and sensors, as well as important operational constants for subsystems such as max and min
- * values.
+ * The Constants stores constant values for all subsystems. This includes the
+ * port values for motors and sensors, as well as important operational
+ * constants for subsystems such as max and min values.
  */
 
 // have two buttons: one for shifting to high gear and the other for shifting to
@@ -42,8 +42,10 @@ public class Constants {
     public static final int BOTTOM_POS = 0;
     public static final int TOP_POS = 71; // assumes at max height for robot
     public static final int SWITCH_POS = 19;
-    public static final int SCALE_START_POS = 60; // assumes scale is at its starting position
-    public static final int SCALE_BOTTOM_POS = 48; // assumes scale is at bottom position
+    public static final int SCALE_START_POS = 60; // assumes scale is at its
+                                                  // starting position
+    public static final int SCALE_BOTTOM_POS = 48; // assumes scale is at bottom
+                                                   // position
     // there is no scale_top_pos because exceeds robot max height
 
     // PID VALUES
@@ -78,6 +80,12 @@ public class Constants {
     public static final int PISTON_CHANNEL = 0;
     public static final int RIGHT_WINCH = 0;
     public static final int LEFT_WINCH = 0;
+  }
+
+  public static class Auton {
+    public static final double SCALE_FACTOR_TESTING = 0.1;
+    public static final boolean AUTON_DEBUGGING = false;
+    public static final boolean INCLUDE_TIME_STAMP = false;
   }
 
   public static enum Direction {
