@@ -2,30 +2,49 @@ package org.usfirst.frc.team3501.robot.subsystems;
 
 import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.MathLib;
+import org.usfirst.frc.team3501.robot.utils.IRSensor;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import edu.wpi.first.wpilibj.Encoder;
+import com.ctre.phoenix.motorcontrol.SensorCollection;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Elevator extends Subsystem {
 
   private static Elevator elevator;
 
-  // PID VALUES ARE FOUND IN CONSTANTS.JAVA
+  // PID VALUES
+  public static double ELEVATOR_P = 0.01, ELEVATOR_I = 0.00115, ELEVATOR_D = -0.002;
 
-  private final TalonSRX elevatorTalon;
-  private final Encoder elevatorEncoder;
+  // IR SENSOR CONSTANTS
+  public static final int DISTANCE_THRESHOLD = 10;
+  // There will be two flags, each telling us the top and bottom bounds of the elevator.
+  // Due to the lag of the elevator, we will need to count the flags so that we stop at the correct
+  // flag
+  public int flagCount = 0;
+  boolean atFlag;
+
+
+  // POSITIONS (in inches)
+  public static final int START_POS = 6;
+  public static final int BOTTOM_POS = 0;
+  public static final int TOP_POS = 71; // assumes at max height for robot
+  public static final int SWITCH_POS = 19;
+  public static final int SCALE_START_POS = 60; // assumes scale is at its starting position
+  public static final int SCALE_BOTTOM_POS = 48; // assumes scale is at bottom position
+  // there is no scale_top_pos because exceeds robot max height
+  private final WPI_TalonSRX elevatorTalon;
+  private final SensorCollection elevatorEncoder;
+  private final IRSensor TopIRSensor, BottomIRSensor;
 
   private Elevator() {
+    elevatorTalon = new WPI_TalonSRX(Constants.Elevator.ELEVATOR);
 
-    // MOTOR CONTROLLERS
-    elevatorTalon = new TalonSRX(Constants.Elevator.ELEVATOR);
-
-    // ENCODERS
-    elevatorEncoder = new Encoder(Constants.Elevator.ELEVATOR_ENCODER_A,
-        Constants.Elevator.ELEVATOR_ENCODER_B, false, Encoder.EncodingType.k4X);
-
+    elevatorEncoder = elevatorTalon.getSensorCollection();
+    TopIRSensor = new IRSensor(Constants.Elevator.IR_SENSOR1);
+    BottomIRSensor = new IRSensor(Constants.Elevator.IR_SENSOR1);
   }
 
   public static Elevator getElevator() {
@@ -35,14 +54,12 @@ public class Elevator extends Subsystem {
     return elevator;
   }
 
-
   // MOTOR METHODS
   public void setMotorValue(double motorVal) {
     motorVal = MathLib.restrictToRange(motorVal, -1.0, 1.0);
 
     elevatorTalon.set(ControlMode.PercentOutput, motorVal);
   }
-
 
   public void setCANTalonsBrake() {
     elevatorTalon.setNeutralMode(NeutralMode.Brake);
@@ -56,28 +73,57 @@ public class Elevator extends Subsystem {
     return (elevatorTalon.getMotorOutputPercent());
   }
 
-
+  public double getDirection() {
+    boolean direction = elevatorTalon.getSensorCollection().isFwdLimitSwitchClosed();
+    if (direction) {
+      return 1;
+    }
+    return -1;
+  }
 
   // ENCODER METHODS
-
-  public double getElevatorEncoderDistance() {
-    return elevatorEncoder.getDistance();
-  }
-
-
-  public void printEncoderOutput() {
-    System.out.println("Encoder: " + getElevatorEncoderDistance());
-  }
-
-
-  public void resetEncoders() {
-    elevatorEncoder.reset();
+  public int getHeight() {
+    return elevatorEncoder.getQuadraturePosition();
   }
 
   public double getSpeed() {
-    return elevatorEncoder.getRate();
+    return elevatorEncoder.getQuadratureVelocity();
   }
 
+  public void resetEncoders() {
+    elevatorEncoder.setQuadraturePosition(0, 3);
+  }
+
+  // IR Sensor METHODS
+  public double getTopIRSensorValue() {
+    return TopIRSensor.getADCValue();
+  }
+
+  public double getBottomIRSensorValue() {
+    return BottomIRSensor.getADCValue();
+  }
+
+  public boolean inBounds() {
+
+    if (TopIRSensor.getIRDistance() <= DISTANCE_THRESHOLD
+        || BottomIRSensor.getIRDistance() <= DISTANCE_THRESHOLD) {
+      if (atFlag == false) {
+        flagCount++;
+      }
+      atFlag = true;
+    } else {
+      atFlag = false;
+    }
+
+    if (flagCount == 2) {
+      flagCount = 0;
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  public void periodicWarning() {}
 
   @Override
   protected void initDefaultCommand() {

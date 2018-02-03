@@ -4,6 +4,7 @@ import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
+
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -55,7 +56,7 @@ public class Robot extends IterativeRobot {
   public void autonomousInit() {
     driveTrain.resetGyro();
     driveTrain.resetEncoders();
-
+    autonCommand = (Command) autonChooser.getSelected();
     Scheduler.getInstance().add(autonCommand);
   }
 
@@ -78,9 +79,9 @@ public class Robot extends IterativeRobot {
     SmartDashboard.putNumber("right left encoder: ", driveTrain.getRightLeftEncoderDistance());
     SmartDashboard.putNumber("front back encoder: ", driveTrain.getFrontBackEncoderDistance());
     SmartDashboard.putNumber("angle", driveTrain.getAngle());
-    SmartDashboard.putNumber("Front Left Motor power", driveTrain.getFrontLeftMotorPower());
-    SmartDashboard.putNumber("Front Right Motor power", driveTrain.getFrontRightMotorPower());
-    SmartDashboard.putNumber("Rear Left Motor power", driveTrain.getRearLeftMotorPower());
-    SmartDashboard.putNumber("Rear Right Motor power", driveTrain.getRearRightMotorPower());
+    SmartDashboard.putNumber("Elevator encoder: ", elevator.getHeight());
+    SmartDashboard.putNumber("Elevator motor speed: ", elevator.getMotorVal());
+    SmartDashboard.putNumber("Elevator Direction: ", elevator.getDirection());
+
   }
 }
