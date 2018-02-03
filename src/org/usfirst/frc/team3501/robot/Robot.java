@@ -61,8 +61,8 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void autonomousInit() {
-    // autonCommand = new DriveForward(10, 5);
-    // Scheduler.getInstance().add(autonCommand);
+    autonCommand = new DriveForward(48, 5);
+    Scheduler.getInstance().add(autonCommand);
     driveTrain.resetEncoders();
   }
 

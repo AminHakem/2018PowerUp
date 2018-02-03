@@ -50,9 +50,9 @@ public class DriveForward extends Command {
 
   @Override
   protected void execute() {
-    double ySpeed = driveController.calcPID(driveTrain.getFrontBackEncoderDistance());
+    double ySpeed = driveController.calcPID(driveTrain.getFrontBackEncoderDistance()*(48/50));
     double rVal = directionController.calcPID(driveTrain.getAngle());
-    this.driveTrain.mecanumDrive(ySpeed, 0, rVal);
+    this.driveTrain.mecanumDrive(0, -ySpeed, rVal);
   }
 
   @Override
