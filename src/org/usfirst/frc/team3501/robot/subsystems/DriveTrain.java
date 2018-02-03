@@ -2,6 +2,7 @@ package org.usfirst.frc.team3501.robot.subsystems;
 
 import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.commands.driving.JoystickDrive;
+import com.ctre.phoenix.motorcontrol.SensorCollection;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -15,14 +16,14 @@ public class DriveTrain extends Subsystem {
   public static double largeTurnP = .003, largeTurnI = .0012, largeTurnD = .006;
   public static double driveStraightGyroP = 0.01;
   public static final double WHEEL_DIAMETER = 4; // inches
-  public static final double ENCODER_PULSES_PER_REVOLUTION = 256;
+  public static final double ENCODER_PULSES_PER_REVOLUTION = 1024;
   public static final double INCHES_PER_PULSE =
       WHEEL_DIAMETER * Math.PI / ENCODER_PULSES_PER_REVOLUTION;
   private static DriveTrain driveTrain;
   private final MecanumDrive robotDrive;
 
   private final WPI_TalonSRX frontLeft, frontRight, rearLeft, rearRight;
-  private final WPI_TalonSRX frontBackEncoder, leftRight;
+  private final SensorCollection frontBackEncoder, leftRightEncoder;
   // private final Encoder frontBackEncoder, rightLeftEncoder;
   public JoystickDrive joystickDrive;
   private boolean fieldOriented, alignedWithCube;
@@ -37,17 +38,15 @@ public class DriveTrain extends Subsystem {
     rearLeft = new WPI_TalonSRX(Constants.DriveTrain.REAR_LEFT);
     rearRight = new WPI_TalonSRX(Constants.DriveTrain.REAR_RIGHT);
 
-    frontBackEncoder =
-        new WPI_TalonSRX(Constants.DriveTrain.FRONT_BACK_ENCODER);
-    leftRight = new WPI_TalonSRX(Constants.DriveTrain.LEFT_RIGHT_ENCODER);
+    frontBackEncoder = rearLeft.getSensorCollection();
+    leftRightEncoder = rearRight.getSensorCollection();
 
     SpeedControllerGroup m_left_rear = new SpeedControllerGroup(rearLeft);
     SpeedControllerGroup m_left_front = new SpeedControllerGroup(frontLeft);
     SpeedControllerGroup m_right_rear = new SpeedControllerGroup(rearRight);
     SpeedControllerGroup m_right_front = new SpeedControllerGroup(frontRight);
 
-    robotDrive = new MecanumDrive(m_left_front, m_left_rear, m_right_front,
-        m_right_rear);
+    robotDrive = new MecanumDrive(m_left_front, m_left_rear, m_right_front, m_right_rear);
 
     fieldOriented = false;
     alignedWithCube = false;
@@ -61,7 +60,7 @@ public class DriveTrain extends Subsystem {
       System.out.println("Gyro Null Pointer Exception");
       this.imu = null;
     }
-    this.fieldOriented = true;
+    this.fieldOriented = false;
     this.alignedWithCube = false;
   }
 
@@ -83,13 +82,18 @@ public class DriveTrain extends Subsystem {
     robotDrive.driveCartesian(0, 0, 0, 0);
   }
 
+  public void resetEncoders() {
+    frontBackEncoder.setQuadraturePosition(0, 3);
+    leftRightEncoder.setQuadraturePosition(0, 3);
+  }
+
 
   /***
    *
    * @return the rightLeft distance
    */
   public double getRightLeftEncoderDistance() {
-    return leftRight.getSensorCollection().getQuadraturePosition();
+    return leftRightEncoder.getQuadraturePosition() * INCHES_PER_PULSE / 4;
   }
 
   /**
@@ -98,14 +102,12 @@ public class DriveTrain extends Subsystem {
    * @return frontBackEncoder distance
    */
   public double getFrontBackEncoderDistance() {
-    return frontBackEncoder.getSensorCollection().getQuadraturePosition();
+    return frontBackEncoder.getQuadraturePosition() * INCHES_PER_PULSE / 4;
   }
 
   public void printEncoderOutput() {
-    System.out.println("front/back: "
-        + frontBackEncoder.getSensorCollection().getQuadratureVelocity());
-    System.out.println("left/right: "
-        + leftRight.getSensorCollection().getQuadratureVelocity());
+    System.out.println("front/back: " + frontBackEncoder.getQuadratureVelocity());
+    System.out.println("left/right: " + leftRightEncoder.getQuadratureVelocity());
   }
 
   /***
@@ -113,7 +115,7 @@ public class DriveTrain extends Subsystem {
    * @return the rightLeft speed
    */
   public double getRightLeftSpeed() {
-    return leftRight.getSensorCollection().getQuadratureVelocity();
+    return leftRightEncoder.getQuadratureVelocity();
   }
 
 
@@ -122,7 +124,7 @@ public class DriveTrain extends Subsystem {
    * @return frontBack wheel speed
    */
   public double getFrontBackSpeed() {
-    return frontBackEncoder.getSensorCollection().getQuadratureVelocity();
+    return frontBackEncoder.getQuadratureVelocity();
   }
 
   // ------Gyro------//

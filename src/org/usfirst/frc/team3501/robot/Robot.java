@@ -34,6 +34,8 @@ public class Robot extends IterativeRobot {
     autonChooser = new SendableChooser();
 
     CameraServer server = CameraServer.getInstance();
+
+    driveTrain.resetEncoders();
   }
 
   public static Elevator getElevator() {
@@ -59,8 +61,9 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void autonomousInit() {
-    autonCommand = new DriveForward(5, 5);
-    Scheduler.getInstance().add(autonCommand);
+    // autonCommand = new DriveForward(10, 5);
+    // Scheduler.getInstance().add(autonCommand);
+    driveTrain.resetEncoders();
   }
 
   @Override
