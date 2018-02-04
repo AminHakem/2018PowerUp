@@ -2,6 +2,7 @@ package org.usfirst.frc.team3501.robot.subsystems;
 
 import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.MathLib;
+import org.usfirst.frc.team3501.robot.utils.IRSensor;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SensorCollection;
@@ -34,10 +35,13 @@ public class Elevator extends Subsystem {
   // there is no scale_top_pos because exceeds robot max height
   private final WPI_TalonSRX elevatorTalon;
   private final SensorCollection elevatorSensor;
+  private final IRSensor irSensor1, irSensor2;
 
   private Elevator() {
     elevatorTalon = new WPI_TalonSRX(Constants.Elevator.ELEVATOR);
     elevatorSensor = elevatorTalon.getSensorCollection();
+    irSensor1 = new IRSensor(Constants.Elevator.IR_SENSOR1);
+    irSensor2 = new IRSensor(Constants.Elevator.IR_SENSOR1);
   }
 
   public static Elevator getElevator() {
@@ -84,11 +88,11 @@ public class Elevator extends Subsystem {
 
   // IR Sensor METHODS
   public double getTopIRSensorValue() {
-    return elevatorTalon.getOutputCurrent();
+    return irSensor1.getADCValue();
   }
 
   public double getBottomIRSensorValue() {
-    return elevatorSensor.getAnalogIn();
+    return irSensor2.getADCValue();
   }
 
   /*

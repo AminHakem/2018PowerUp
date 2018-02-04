@@ -16,11 +16,9 @@ public class IRSensor extends AnalogInput {
   }
 
   public double getIRDistance() {
-    double linMemb = 1;
-    double freeMemb = 1;
-    double k = 0;
+    final double k = 1 / 32;
     double voltage = analogInput.getVoltage();
-    double distance = (1 / (linMemb * voltage + freeMemb)) - k;
+    double distance = voltage * k;
     return distance;
   }
 
