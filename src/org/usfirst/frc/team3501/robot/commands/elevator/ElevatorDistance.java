@@ -5,7 +5,6 @@ import org.usfirst.frc.team3501.robot.Constants.Direction;
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import org.usfirst.frc.team3501.robot.utils.PIDController;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /***
@@ -51,15 +50,15 @@ public class ElevatorDistance extends Command {
 
   @Override
   protected void execute() {
-    double val = elevatorController.calcPID(elevator.getHeight());
+    // double val = elevatorController.calcPID(elevator.getHeight());
 
-    this.elevator.setMotorValue(val);
+    // this.elevator.setMotorValue(val);
   }
 
   @Override
   protected boolean isFinished() {
-    return timeSinceInitialized() >= maxTimeOut || this.elevatorController.isDone()
-        || this.elevator.inBounds() == false;
+    return timeSinceInitialized() >= maxTimeOut || this.elevatorController.isDone();
+    // || this.elevator.inBounds() == false;
   }
 
   @Override

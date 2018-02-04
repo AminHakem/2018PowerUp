@@ -4,7 +4,6 @@ import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.Constants.Direction;
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -26,7 +25,7 @@ public class MoveToTarget extends CommandGroup {
   public MoveToTarget(double targetHeight, double maxTimeOut) {
     this.target = targetHeight;
     this.maxTimeOut = maxTimeOut;
-    this.currentPos = elevator.getHeight();
+    // this.currentPos = elevator.getHeight();
 
     if (targetHeight > currentPos) { // current position is below target, so move upwards
       distance = targetHeight - currentPos;

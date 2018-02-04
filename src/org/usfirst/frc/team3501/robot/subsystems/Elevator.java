@@ -2,13 +2,10 @@ package org.usfirst.frc.team3501.robot.subsystems;
 
 import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.MathLib;
-import org.usfirst.frc.team3501.robot.utils.IRSensor;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SensorCollection;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Elevator extends Subsystem {
@@ -36,15 +33,11 @@ public class Elevator extends Subsystem {
   public static final int SCALE_BOTTOM_POS = 48; // assumes scale is at bottom position
   // there is no scale_top_pos because exceeds robot max height
   private final WPI_TalonSRX elevatorTalon;
-  private final SensorCollection elevatorEncoder;
-  private final IRSensor TopIRSensor, BottomIRSensor;
+  private final SensorCollection elevatorSensor;
 
   private Elevator() {
     elevatorTalon = new WPI_TalonSRX(Constants.Elevator.ELEVATOR);
-
-    elevatorEncoder = elevatorTalon.getSensorCollection();
-    TopIRSensor = new IRSensor(Constants.Elevator.IR_SENSOR1);
-    BottomIRSensor = new IRSensor(Constants.Elevator.IR_SENSOR1);
+    elevatorSensor = elevatorTalon.getSensorCollection();
   }
 
   public static Elevator getElevator() {
@@ -73,55 +66,40 @@ public class Elevator extends Subsystem {
     return (elevatorTalon.getMotorOutputPercent());
   }
 
-  public double getDirection() {
-    boolean direction = elevatorTalon.getSensorCollection().isFwdLimitSwitchClosed();
-    if (direction) {
-      return 1;
-    }
-    return -1;
-  }
-
+  /*
+   * public double getDirection() { boolean direction =
+   * elevatorTalon.getSensorCollection().isFwdLimitSwitchClosed(); if (direction) { return 1; }
+   * return -1; }
+   */
   // ENCODER METHODS
-  public int getHeight() {
-    return elevatorEncoder.getQuadraturePosition();
-  }
-
-  public double getSpeed() {
-    return elevatorEncoder.getQuadratureVelocity();
-  }
-
-  public void resetEncoders() {
-    elevatorEncoder.setQuadraturePosition(0, 3);
-  }
+  /*
+   * public int getHeight() { return elevatorSensor.getQuadraturePosition(); }
+   */
+  /*
+   * public double getSpeed() { return elevatorSensor.getQuadratureVelocity(); }
+   */
+  /*
+   * public void resetEncoders() { elevatorSensor.setQuadraturePosition(0, 3); }
+   */
 
   // IR Sensor METHODS
   public double getTopIRSensorValue() {
-    return TopIRSensor.getADCValue();
+    return elevatorTalon.getOutputCurrent();
   }
 
   public double getBottomIRSensorValue() {
-    return BottomIRSensor.getADCValue();
+    return elevatorSensor.getAnalogIn();
   }
 
-  public boolean inBounds() {
-
-    if (TopIRSensor.getIRDistance() <= DISTANCE_THRESHOLD
-        || BottomIRSensor.getIRDistance() <= DISTANCE_THRESHOLD) {
-      if (atFlag == false) {
-        flagCount++;
-      }
-      atFlag = true;
-    } else {
-      atFlag = false;
-    }
-
-    if (flagCount == 2) {
-      flagCount = 0;
-      return false;
-    } else {
-      return true;
-    }
-  }
+  /*
+   * public boolean inBounds() {
+   * 
+   * if (elevatorSensor.getIRDistance() <= DISTANCE_THRESHOLD || elevatorSensor.getIRDistance() <=
+   * DISTANCE_THRESHOLD) { if (atFlag == false) { flagCount++; } atFlag = true; } else { atFlag =
+   * false; }
+   * 
+   * if (flagCount == 2) { flagCount = 0; return false; } else { return true; } }
+   */
 
   public void periodicWarning() {}
 

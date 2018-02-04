@@ -38,10 +38,6 @@ public class Constants {
     public static final int ELEVATOR_ENCODER_A = 0;
     public static final int ELEVATOR_ENCODER_B = 1;
 
-    // IR SENSOR
-    public static final int IR_SENSOR1 = 1;
-    public static final int IR_SENSOR2 = 4;
-
   }
 
   public static class DriveTrain {
