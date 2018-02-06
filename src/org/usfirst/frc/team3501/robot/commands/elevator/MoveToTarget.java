@@ -48,8 +48,7 @@ public class MoveToTarget extends Command {
 
   @Override
   protected boolean isFinished() {
-    return timeSinceInitialized() >= maxTimeOut || this.elevatorController.isDone()
-        || this.elevator.atIRFlag() == true;
+    return timeSinceInitialized() >= maxTimeOut || this.elevatorController.isDone();
   }
 
   @Override

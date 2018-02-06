@@ -18,8 +18,6 @@ public class Elevator extends Subsystem {
 
   // IR SENSOR CONSTANTS
   public static final int DISTANCE_THRESHOLD = 10;
-  // There are two IRs, the upper and lower bounds. Due to lag, we want to stop once the elevator
-  // has passed both bounds.
   boolean irOne, irTwo;
 
 
@@ -80,47 +78,6 @@ public class Elevator extends Subsystem {
   public void resetEncoders() {
     elevatorSensor.setQuadraturePosition(0, 3);
   }
-
-<<<<<<< fd235fa3ce4cae826007f2f9262941937bb8059c
-  /*
-   * public boolean inBounds() {
-   *
-   * if (elevatorSensor.getIRDistance() <= DISTANCE_THRESHOLD || elevatorSensor.getIRDistance() <=
-   * DISTANCE_THRESHOLD) { if (atFlag == false) { flagCount++; } atFlag = true; } else { atFlag =
-   * false; }
-   *
-   * if (flagCount == 2) { flagCount = 0; return false; } else { return true; } }
-   */
-=======
-  // IR Sensor METHODS
-  public double getTopIRSensorValue() {
-    return irSensor1.getADCValue();
-  }
-
-  public double getBottomIRSensorValue() {
-    return irSensor2.getADCValue();
-  }
-
-  public boolean atIRFlag() {
-    if (irSensor1.getIRDistance() <= DISTANCE_THRESHOLD && irOne == false) {
-      irOne = true;
-      if (irTwo == true) {
-        irOne = false;
-        irTwo = false;
-        return true;
-      }
-    }
-    if (irSensor2.getIRDistance() <= DISTANCE_THRESHOLD && irTwo == false) {
-      irTwo = true;
-      if (irOne == true) {
-        irOne = false;
-        irTwo = false;
-        return true;
-      }
-    }
-    return false;
-  }
->>>>>>> Changed ElevatorDistance to MoveToTarget and inBounds to atIRFlag.
 
   public boolean isAtTop() {
     return !topLimitSwitch.get();
