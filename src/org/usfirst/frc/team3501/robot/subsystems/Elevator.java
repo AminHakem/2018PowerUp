@@ -19,8 +19,6 @@ public class Elevator extends Subsystem {
 
   // IR SENSOR CONSTANTS
   public static final int DISTANCE_THRESHOLD = 10;
-  // There are two IRs, the upper and lower bounds. Due to lag, we want to stop once the elevator
-  // has passed both bounds.
   boolean irOne, irTwo;
 
 
