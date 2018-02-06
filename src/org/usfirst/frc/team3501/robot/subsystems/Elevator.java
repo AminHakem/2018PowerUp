@@ -19,6 +19,10 @@ public class Elevator extends Subsystem {
 
   // IR SENSOR CONSTANTS
   public static final int DISTANCE_THRESHOLD = 10;
+  // There will be two flags, each telling us the top and bottom bounds of the elevator.
+  // Due to the lag of the elevator, we will need to count the flags so that we stop at the correct
+  // flag
+  boolean irOne, irTwo;
 
 
   // POSITIONS (in inches)
@@ -89,6 +93,35 @@ public class Elevator extends Subsystem {
 
   public void resetEncoders() {
     elevatorSensor.setQuadraturePosition(0, 3);
+  }
+
+  // IR Sensor METHODS
+  public double getTopIRSensorValue() {
+    return irOne.getADCValue();
+  }
+
+  public double getBottomIRSensorValue() {
+    return irSensor2.getADCValue();
+  }
+
+  public boolean atIRFlag() {
+    if (irSensor1.getIRDistance() <= DISTANCE_THRESHOLD && irOne == false) {
+      irOne = true;
+      if (irTwo == true) {
+        irOne = false;
+        irTwo = false;
+        return true;
+      }
+    }
+    if (irSensor2.getIRDistance() <= DISTANCE_THRESHOLD && irTwo == false) {
+      irTwo = true;
+      if (irOne == true) {
+        irOne = false;
+        irTwo = false;
+        return true;
+      }
+    }
+    return false;
   }
 
   public boolean isAtTop() {
