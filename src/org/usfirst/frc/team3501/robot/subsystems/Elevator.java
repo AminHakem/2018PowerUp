@@ -18,9 +18,8 @@ public class Elevator extends Subsystem {
 
   // IR SENSOR CONSTANTS
   public static final int DISTANCE_THRESHOLD = 10;
-  // There will be two flags, each telling us the top and bottom bounds of the elevator.
-  // Due to the lag of the elevator, we will need to count the flags so that we stop at the correct
-  // flag
+  // There are two IRs, the upper and lower bounds. Due to lag, we want to stop once the elevator
+  // has passed both bounds.
   boolean irOne, irTwo;
 
 
