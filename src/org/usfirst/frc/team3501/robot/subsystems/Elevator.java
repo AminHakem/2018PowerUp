@@ -18,7 +18,6 @@ public class Elevator extends Subsystem {
 
   // IR SENSOR CONSTANTS
   public static final int DISTANCE_THRESHOLD = 10;
-  boolean irOne, irTwo;
 
 
   // POSITIONS (in inches)
