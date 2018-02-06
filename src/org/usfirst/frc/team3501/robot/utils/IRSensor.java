@@ -8,27 +8,26 @@ public class IRSensor extends AnalogInput {
 
   public IRSensor(int channel) {
     super(channel);
-    analogInput = new AnalogInput(channel);
   }
 
   public double getIRSensorVoltage() {
-    return analogInput.getVoltage();
+    return this.getVoltage();
   }
 
   public double getIRDistance() {
     final double k = 1 / 32;
-    double voltage = analogInput.getVoltage();
+    double voltage = this.getVoltage();
     double distance = voltage * k;
     return distance;
   }
 
   @Override
   public double getVoltage() {
-    return super.getVoltage();
+    return this.getVoltage();
   }
 
   public double getADCValue() {
-    return super.getValue();
+    return this.getValue();
   }
 
 }

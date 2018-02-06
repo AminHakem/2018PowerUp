@@ -39,7 +39,7 @@ public class Constants {
     public static final int ELEVATOR_ENCODER_B = 1;
 
     // IR SENSORS
-    public static final int IR_SENSOR1 = 1;
+    public static final int IR_SENSOR1 = 0;
     public static final int IR_SENSOR2 = 1;
   }
 

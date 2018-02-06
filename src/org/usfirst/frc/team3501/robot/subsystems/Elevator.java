@@ -41,7 +41,7 @@ public class Elevator extends Subsystem {
     elevatorTalon = new WPI_TalonSRX(Constants.Elevator.ELEVATOR);
     elevatorSensor = elevatorTalon.getSensorCollection();
     irSensor1 = new IRSensor(Constants.Elevator.IR_SENSOR1);
-    irSensor2 = new IRSensor(Constants.Elevator.IR_SENSOR1);
+    irSensor2 = new IRSensor(Constants.Elevator.IR_SENSOR2);
   }
 
   public static Elevator getElevator() {
@@ -70,21 +70,27 @@ public class Elevator extends Subsystem {
     return (elevatorTalon.getMotorOutputPercent());
   }
 
-  /*
-   * public double getDirection() { boolean direction =
-   * elevatorTalon.getSensorCollection().isFwdLimitSwitchClosed(); if (direction) { return 1; }
-   * return -1; }
-   */
+
+  public double getDirection() {
+    boolean direction = elevatorTalon.getSensorCollection().isFwdLimitSwitchClosed();
+    if (direction) {
+      return 1;
+    }
+    return -1;
+  }
+
   // ENCODER METHODS
-  /*
-   * public int getHeight() { return elevatorSensor.getQuadraturePosition(); }
-   */
-  /*
-   * public double getSpeed() { return elevatorSensor.getQuadratureVelocity(); }
-   */
-  /*
-   * public void resetEncoders() { elevatorSensor.setQuadraturePosition(0, 3); }
-   */
+  public int getHeight() {
+    return elevatorSensor.getQuadraturePosition();
+  }
+
+  public double getSpeed() {
+    return elevatorSensor.getQuadratureVelocity();
+  }
+
+  public void resetEncoders() {
+    elevatorSensor.setQuadraturePosition(0, 3);
+  }
 
   // IR Sensor METHODS
   public double getTopIRSensorValue() {
@@ -97,11 +103,11 @@ public class Elevator extends Subsystem {
 
   /*
    * public boolean inBounds() {
-   * 
+   *
    * if (elevatorSensor.getIRDistance() <= DISTANCE_THRESHOLD || elevatorSensor.getIRDistance() <=
    * DISTANCE_THRESHOLD) { if (atFlag == false) { flagCount++; } atFlag = true; } else { atFlag =
    * false; }
-   * 
+   *
    * if (flagCount == 2) { flagCount = 0; return false; } else { return true; } }
    */
 

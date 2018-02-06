@@ -55,7 +55,6 @@ public class Robot extends IterativeRobot {
   public void autonomousInit() {
     driveTrain.resetGyro();
     driveTrain.resetEncoders();
-    autonCommand = (Command) autonChooser.getSelected();
     Scheduler.getInstance().add(autonCommand);
   }
 
@@ -78,9 +77,8 @@ public class Robot extends IterativeRobot {
     SmartDashboard.putNumber("right left encoder: ", driveTrain.getRightLeftEncoderDistance());
     SmartDashboard.putNumber("front back encoder: ", driveTrain.getFrontBackEncoderDistance());
     SmartDashboard.putNumber("angle", driveTrain.getAngle());
-    // SmartDashboard.putNumber("Elevator encoder: ", elevator.getHeight());
-    SmartDashboard.putNumber("Elevator motor speed: ", elevator.getMotorVal());
-    // SmartDashboard.putNumber("Elevator Direction: ", elevator.getDirection());
-
+    SmartDashboard.putNumber("Elevator encoder: ", elevator.getHeight());
+    SmartDashboard.putNumber("Top IR Sensor: ", elevator.getTopIRSensorValue());
+    SmartDashboard.putNumber("Bottom IR Sensor: ", elevator.getBottomIRSensorValue());
   }
 }
