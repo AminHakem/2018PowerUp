@@ -1,38 +1,61 @@
 package org.usfirst.frc.team3501.robot.commands.elevator;
 
-import org.usfirst.frc.team3501.robot.Constants;
-import org.usfirst.frc.team3501.robot.Constants.Direction;
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
-import edu.wpi.first.wpilibj.command.CommandGroup;
+import org.usfirst.frc.team3501.robot.utils.PIDController;
+import edu.wpi.first.wpilibj.command.Command;
 
-/**
- * This command makes the elevator move a specified distance using encoders on the robot and using a
- * feedback loop
+/***
+ * This command moves the elevator to a specified target.
  *
- * @param targetHeight: the height the elevator will move to, with respect to ground level
+ * @author Samhita
+ *
+ * @param target: the height the elevator will move to in inches
  * @param maxTimeOut: the maximum time this command will be allowed to run before being cut
  */
-public class MoveToTarget extends CommandGroup {
+
+public class MoveToTarget extends Command {
 
   private Elevator elevator = Robot.getElevator();
-  private double target;
+  private PIDController elevatorController;
+
   private double maxTimeOut;
-  private double currentPos;
-  private double distance;
-  private static Direction direction;
+  private double target;
 
-  public MoveToTarget(double targetHeight, double maxTimeOut) {
-    this.target = targetHeight;
+  public MoveToTarget(double target, double maxTimeOut) {
+    requires(elevator);
     this.maxTimeOut = maxTimeOut;
-    // this.currentPos = elevator.getHeight();
+    this.target = target;
 
-    if (targetHeight > currentPos) { // current position is below target, so move upwards
-      distance = targetHeight - currentPos;
-      addSequential(new ElevatorDistance(distance, Constants.Direction.UP, maxTimeOut));
-    } else if (targetHeight < currentPos) { // current position is above target, so move down
-      distance = currentPos - targetHeight;
-      addSequential(new ElevatorDistance(distance, Constants.Direction.DOWN, maxTimeOut));
-    }
+    this.elevatorController =
+        new PIDController(Elevator.ELEVATOR_P, Elevator.ELEVATOR_I, Elevator.ELEVATOR_D);
+    this.elevatorController.setDoneRange(1.0);
+    this.elevatorController.setMaxOutput(1.0);
+    this.elevatorController.setMinDoneCycles(5);
+  }
+
+  @Override
+  protected void initialize() {
+    this.elevatorController.setSetPoint(this.target);
+  }
+
+  @Override
+  protected void execute() {
+    double val = elevatorController.calcPID(elevator.getHeight());
+    this.elevator.setMotorValue(val);
+  }
+
+  @Override
+  protected boolean isFinished() {
+    return timeSinceInitialized() >= maxTimeOut || this.elevatorController.isDone()
+        || this.elevator.atIRFlag() == true;
+  }
+
+  @Override
+  protected void end() {}
+
+  @Override
+  protected void interrupted() {
+    end();
   }
 }

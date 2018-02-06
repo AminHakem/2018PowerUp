@@ -37,7 +37,7 @@ public class TimeClimb extends Command {
 
   @Override
   protected boolean isFinished() {
-    return timer.get() >= time;
+    return timer.get() >= time || Robot.getElevator().atIRFlag() == true;
   }
 
   @Override

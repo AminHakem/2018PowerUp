@@ -21,8 +21,7 @@ public class Elevator extends Subsystem {
   // There will be two flags, each telling us the top and bottom bounds of the elevator.
   // Due to the lag of the elevator, we will need to count the flags so that we stop at the correct
   // flag
-  public int flagCount = 0;
-  boolean atFlag;
+  boolean irOne, irTwo;
 
 
   // POSITIONS (in inches)
@@ -83,6 +82,7 @@ public class Elevator extends Subsystem {
     elevatorSensor.setQuadraturePosition(0, 3);
   }
 
+<<<<<<< fd235fa3ce4cae826007f2f9262941937bb8059c
   /*
    * public boolean inBounds() {
    *
@@ -92,6 +92,36 @@ public class Elevator extends Subsystem {
    *
    * if (flagCount == 2) { flagCount = 0; return false; } else { return true; } }
    */
+=======
+  // IR Sensor METHODS
+  public double getTopIRSensorValue() {
+    return irSensor1.getADCValue();
+  }
+
+  public double getBottomIRSensorValue() {
+    return irSensor2.getADCValue();
+  }
+
+  public boolean atIRFlag() {
+    if (irSensor1.getIRDistance() <= DISTANCE_THRESHOLD && irOne == false) {
+      irOne = true;
+      if (irTwo == true) {
+        irOne = false;
+        irTwo = false;
+        return true;
+      }
+    }
+    if (irSensor2.getIRDistance() <= DISTANCE_THRESHOLD && irTwo == false) {
+      irTwo = true;
+      if (irOne == true) {
+        irOne = false;
+        irTwo = false;
+        return true;
+      }
+    }
+    return false;
+  }
+>>>>>>> Changed ElevatorDistance to MoveToTarget and inBounds to atIRFlag.
 
   public boolean isAtTop() {
     return !topLimitSwitch.get();
