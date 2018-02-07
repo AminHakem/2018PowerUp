@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3501.robot;
 
-import org.usfirst.frc.team3501.robot.commands.driving.DriveForward;
+import org.usfirst.frc.team3501.robot.Constants.Direction;
+import org.usfirst.frc.team3501.robot.commands.driving.TurnForAngle;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
@@ -56,7 +57,8 @@ public class Robot extends IterativeRobot {
   public void autonomousInit() {
     driveTrain.resetGyro();
     driveTrain.resetEncoders();
-    autonCommand = new DriveForward(50, 5);
+    // autonCommand = new DriveSideways(50, 5);
+    autonCommand = new TurnForAngle(90, Direction.RIGHT, 5);
     Scheduler.getInstance().add(autonCommand);
   }
 
@@ -79,15 +81,26 @@ public class Robot extends IterativeRobot {
   }
 
   public void updateSmartDashboard() {
-    SmartDashboard.putNumber("right left encoder values: ",
-        driveTrain.getRightLeftEncoderDistance());
-    SmartDashboard.putNumber("front back encoder values: ",
-        driveTrain.getFrontBackEncoderDistance());
+   
     SmartDashboard.putNumber("right left encoder values: ", driveTrain.getRightLeftEncoderDistance());
     SmartDashboard.putNumber("front back encoder values: ", driveTrain.getFrontBackEncoderDistance());
     SmartDashboard.putNumber("angle", driveTrain.getAngle());
     SmartDashboard.putNumber("Elevator encoder: ", elevator.getHeight());
     SmartDashboard.putNumber("Top IR Sensor: ", elevator.getTopIRSensorValue());
     SmartDashboard.putNumber("Bottom IR Sensor: ", elevator.getBottomIRSensorValue());
+    SmartDashboard.putNumber("angle", driveTrain.getAngle());
+    // SmartDashboard.putNumber("Elevator encoder: ", elevator.getHeight());
+    SmartDashboard.putNumber("Elevator motor speed: ", elevator.getMotorVal());
+    // SmartDashboard.putNumber("Elevator Direction: ", elevator.getDirection());
+    SmartDashboard.putNumber("front back speed",
+        driveTrain.getFrontBackSpeed());
+    // SmartDashboard.putNumber("Elevator encoder: ", elevator.getHeight());
+    SmartDashboard.putNumber("right left speed: ",
+        driveTrain.getRightLeftSpeed());
+    // SmartDashboard.putNumber("Elevator Direction: ", elevator.getDirection());
+    System.out
+        .println("rightleft: " + driveTrain.getRightLeftEncoderDistance());
+    System.out
+        .println("frontback: " + driveTrain.getFrontBackEncoderDistance());
   }
 }
