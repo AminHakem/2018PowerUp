@@ -40,6 +40,7 @@ public class MoveToTarget extends Command {
 
   @Override
   protected void initialize() {
+    elevator.resetEncoders();
     this.elevatorController.setSetPoint(this.target);
   }
 
