@@ -34,9 +34,9 @@ public class Constants {
     // LIFT MOTOR CONTROLLERS
     public static final int ELEVATOR = 1;
 
-    // LIFT ENCODERS
-    public static final int ELEVATOR_ENCODER_A = 0;
-    public static final int ELEVATOR_ENCODER_B = 1;
+    // // LIFT ENCODERS
+    // public static final int ELEVATOR_ENCODER_A = 0;
+    // public static final int ELEVATOR_ENCODER_B = 1;
 
     // HALL EFFECT LIMIT SENSORS
     public static final int TOP_LIMIT_SWITCH = 0;
