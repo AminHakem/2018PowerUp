@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3501.robot;
 
+import org.usfirst.frc.team3501.robot.commands.driving.DriveForward;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
@@ -55,6 +56,7 @@ public class Robot extends IterativeRobot {
   public void autonomousInit() {
     driveTrain.resetGyro();
     driveTrain.resetEncoders();
+    autonCommand = new DriveForward(50, 5);
     Scheduler.getInstance().add(autonCommand);
   }
 
@@ -71,6 +73,8 @@ public class Robot extends IterativeRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
 
+    System.out.println("rightleft: " + driveTrain.getRightLeftEncoderDistance());
+    System.out.println("frontback: " + driveTrain.getRightLeftEncoderDistance());
     updateSmartDashboard();
   }
 
@@ -79,6 +83,8 @@ public class Robot extends IterativeRobot {
         driveTrain.getRightLeftEncoderDistance());
     SmartDashboard.putNumber("front back encoder values: ",
         driveTrain.getFrontBackEncoderDistance());
+    SmartDashboard.putNumber("right left encoder values: ", driveTrain.getRightLeftEncoderDistance());
+    SmartDashboard.putNumber("front back encoder values: ", driveTrain.getFrontBackEncoderDistance());
     SmartDashboard.putNumber("angle", driveTrain.getAngle());
     SmartDashboard.putNumber("Elevator encoder: ", elevator.getHeight());
     SmartDashboard.putNumber("Top IR Sensor: ", elevator.getTopIRSensorValue());
