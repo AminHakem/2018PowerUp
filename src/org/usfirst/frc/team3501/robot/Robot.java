@@ -70,12 +70,16 @@ public class Robot extends IterativeRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    System.out.println("rightleft: " + driveTrain.getRightLeftEncoderDistance());
+    System.out.println("frontback: " + driveTrain.getRightLeftEncoderDistance());
     updateSmartDashboard();
   }
 
   public void updateSmartDashboard() {
-    SmartDashboard.putNumber("right left encoder: ", driveTrain.getRightLeftEncoderDistance());
-    SmartDashboard.putNumber("front back encoder: ", driveTrain.getFrontBackEncoderDistance());
+    SmartDashboard.putNumber("right left encoder values: ",
+        driveTrain.getRightLeftEncoderDistance());
+    SmartDashboard.putNumber("front back encoder values: ",
+        driveTrain.getFrontBackEncoderDistance());
     SmartDashboard.putNumber("angle", driveTrain.getAngle());
     SmartDashboard.putNumber("Elevator encoder: ", elevator.getHeight());
     SmartDashboard.putNumber("Top IR Sensor: ", elevator.getTopIRSensorValue());

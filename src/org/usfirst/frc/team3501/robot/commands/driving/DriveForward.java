@@ -46,13 +46,14 @@ public class DriveForward extends Command {
     this.driveTrain.resetEncoders();
     this.driveTrain.resetGyro();
     this.driveController.setSetPoint(this.target);
+    System.out.println(this.getName()+" initialized");
   }
 
   @Override
   protected void execute() {
     double ySpeed = driveController.calcPID(driveTrain.getFrontBackEncoderDistance());
     double rVal = directionController.calcPID(driveTrain.getAngle());
-    this.driveTrain.mecanumDrive(ySpeed, 0, rVal);
+    this.driveTrain.mecanumDrive(0, -ySpeed, -rVal);
   }
 
   @Override
@@ -61,7 +62,10 @@ public class DriveForward extends Command {
   }
 
   @Override
-  protected void end() {}
+  protected void end() {
+    System.out.println(this.getName()+" finished");
+
+  }
 
   @Override
   protected void interrupted() {
