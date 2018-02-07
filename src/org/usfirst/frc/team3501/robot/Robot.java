@@ -70,8 +70,7 @@ public class Robot extends IterativeRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    System.out.println("rightleft: " + driveTrain.getRightLeftEncoderDistance());
-    System.out.println("frontback: " + driveTrain.getRightLeftEncoderDistance());
+
     updateSmartDashboard();
   }
 

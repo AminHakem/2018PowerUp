@@ -56,10 +56,10 @@ public class TurnForAngle extends Command {
 
   @Override
   protected void execute() {
-    double xVal =
-        this.gyroController.calcPID(Math.abs(this.driveTrain.getAngle() - this.zeroAngle));
+    double zVal = this.gyroController
+        .calcPID(Math.abs(this.driveTrain.getAngle() - this.zeroAngle));
 
-    this.driveTrain.changeAngle(xVal);
+    this.driveTrain.mecanumDrive(0, 0, zVal);
   }
 
   @Override
