@@ -126,11 +126,11 @@ public class DriveTrain extends Subsystem {
 
   // Encoders
   public double getRightLeftEncoderDistance() {
-    return (48 / 58) * leftRightEncoder.getQuadraturePosition() * INCHES_PER_PULSE / 4;
+    return (48.0 / 58.0) * leftRightEncoder.getQuadraturePosition() * INCHES_PER_PULSE / 4.0;
   }
 
   public double getFrontBackEncoderDistance() {
-    return (48 / 58) * frontBackEncoder.getQuadraturePosition() * INCHES_PER_PULSE / 4;
+    return (48.0 / 58.0) * frontBackEncoder.getQuadraturePosition() * INCHES_PER_PULSE / 4.0;
   }
 
   public void resetEncoders() {
