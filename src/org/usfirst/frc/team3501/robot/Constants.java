@@ -16,7 +16,8 @@ public class Constants {
     // CONTROLLERS
     public final static int PS4_CONTROLLER_PORT = 3;
     public static final int GAME_PAD_PORT = 2;
-    public static final int TRIANGLE_PORT = 4;
+    public static final int TRIANGLE_BUTTON_PORT = 4;
+    public static final int X_BUTTON_PORT = 2;
 
     // Intake
     public static final int RUN_INTAKE_PORT = 2;
@@ -50,6 +51,9 @@ public class Constants {
 
     // PID VALUES
     public static double CLIMB_P = 0.01, CLIMB_I = 0.00115, CLIMB_D = -0.002;
+    // IR SENSORS
+    public static final int IR_SENSOR1 = 0;
+    public static final int IR_SENSOR2 = 1;
   }
 
   public static class DriveTrain {
@@ -72,7 +76,6 @@ public class Constants {
     // MOTOR CONTROLLERS
     public static final int INTAKE_LEFT = 0;
     public static final int INTAKE_RIGHT = 0;
-
   }
 
   public static class Climber {
@@ -91,4 +94,5 @@ public class Constants {
   public static enum Direction {
     LEFT, RIGHT, DOWN, UP, FORWARD, BACKWARD;
   }
+
 }

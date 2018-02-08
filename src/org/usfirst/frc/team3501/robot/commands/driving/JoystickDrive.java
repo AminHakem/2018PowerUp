@@ -1,6 +1,8 @@
 package org.usfirst.frc.team3501.robot.commands.driving;
 
 import org.usfirst.frc.team3501.robot.Robot;
+import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -12,24 +14,30 @@ public class JoystickDrive extends Command {
   double previousThrust = 0;
   double previousTwist = 0;
   double previousRotation = 0;
+  boolean fieldOriented;
+  boolean alignedWithCube;
+  Joystick joystick;
 
   public JoystickDrive() {
     requires(Robot.getDriveTrain());
+    joystick = Robot.getOI().ps4_controller;
+
   }
 
   @Override
   protected void initialize() {}
 
+  /**
+   * Raw Axis 1 is the left joystick on the Xbox controller with the movement being from top to
+   * bottom. Raw Axis 0 is the left joystick on the Xbox controller with the movement being from
+   * left to right. Raw Axis 4 is the right joystick on the Xbox controller with the movement being
+   * from left to right.
+   *
+   */
   @Override
   protected void execute() {
+    this.alignedWithCube = DriveTrain.getDriveTrain().isAlignedWithCube();
 
-    /**
-     * Raw Axis 1 is the left joystick on the Xbox controller with the movement being from top to
-     * bottom. Raw Axis 0 is the left joystick on the Xbox controller with the movement being from
-     * left to right. Raw Axis 4 is the right joystick on the Xbox controller with the movement
-     * being from left to right.
-     *
-     */
     if (!Robot.getClimber().inJoystickClimb) {
       double ySpeed = Robot.getOI().ps4_controller.getRawAxis(1);
       double xSpeed = Robot.getOI().ps4_controller.getRawAxis(0);
@@ -43,6 +51,7 @@ public class JoystickDrive extends Command {
       previousRotation = rotation;
       Robot.getDriveTrain().mecanumDrive(-xSpeed, ySpeed, rotation);
     }
+
   }
 
   @Override

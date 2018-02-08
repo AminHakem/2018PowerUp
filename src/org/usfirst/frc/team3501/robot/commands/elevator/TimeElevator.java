@@ -1,6 +1,10 @@
 package org.usfirst.frc.team3501.robot.commands.elevator;
 
+import org.usfirst.frc.team3501.robot.Constants;
+import org.usfirst.frc.team3501.robot.Constants.Direction;
 import org.usfirst.frc.team3501.robot.Robot;
+import org.usfirst.frc.team3501.robot.subsystems.Elevator;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -13,16 +17,20 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  *
  */
-public class TimeClimb extends Command {
+public class TimeElevator extends Command {
+  private Elevator elevator = Robot.getElevator();
   Timer timer;
   double motorVal, time;
+  Direction direction;
 
-  public TimeClimb(final double time, final double motorVal) {
-    requires(Robot.getDriveTrain());
+  public TimeElevator(final double time, final double motorVal,
+      Direction direction) {
+    requires(elevator);
 
     timer = new Timer();
     this.time = time;
     this.motorVal = motorVal;
+    this.direction = direction;
   }
 
   @Override
@@ -32,17 +40,28 @@ public class TimeClimb extends Command {
 
   @Override
   protected void execute() {
-    Robot.getElevator().setMotorValue(motorVal);
+
+    System.out.println("Executing TimeElevator");
+
+    if (direction == Constants.Direction.DOWN) {
+      motorVal = -motorVal;
+    }
+
+    this.elevator.setMotorValue(motorVal);
+
   }
 
   @Override
   protected boolean isFinished() {
-    return timer.get() >= time;
+    boolean bTimeStatus = timer.get() >= time;
+    System.out.println("Elevator time status" + bTimeStatus);
+    return bTimeStatus;
   }
 
   @Override
   protected void end() {
-    Robot.getElevator().stop();
+    System.out.println("Stopping TimeElevator");
+    this.elevator.stop();
   }
 
   @Override

@@ -15,7 +15,6 @@ public class Robot extends IterativeRobot {
   private static DriveTrain driveTrain;
   private static OI oi;
   private static Elevator elevator;
-
   Command autonCommand;
   SendableChooser autonChooser;
 
@@ -25,15 +24,16 @@ public class Robot extends IterativeRobot {
     oi = OI.getOI();
     elevator = Elevator.getElevator();
 
-    autonChooser = new SendableChooser();
-
+    driveTrain.resetEncoders();
     CameraServer server = CameraServer.getInstance();
+
+    autonChooser = new SendableChooser();
+    autonCommand = (Command) autonChooser.getSelected();
   }
 
   public static Elevator getElevator() {
     return Elevator.getElevator();
   }
-
 
   public static DriveTrain getDriveTrain() {
     return DriveTrain.getDriveTrain();
@@ -53,19 +53,19 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void autonomousInit() {
-    autonCommand = (Command) autonChooser.getSelected();
+    driveTrain.resetGyro();
+    driveTrain.resetEncoders();
     Scheduler.getInstance().add(autonCommand);
   }
 
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+    updateSmartDashboard();
   }
 
   @Override
-  public void teleopInit() {
-    driveTrain.resetGyro();
-  }
+  public void teleopInit() {}
 
   @Override
   public void teleopPeriodic() {
@@ -73,27 +73,12 @@ public class Robot extends IterativeRobot {
     updateSmartDashboard();
   }
 
-
   public void updateSmartDashboard() {
     SmartDashboard.putNumber("right left encoder: ", driveTrain.getRightLeftEncoderDistance());
     SmartDashboard.putNumber("front back encoder: ", driveTrain.getFrontBackEncoderDistance());
     SmartDashboard.putNumber("angle", driveTrain.getAngle());
-
-  }
-
-  @Override
-  public void robotPeriodic() {
-    // nothing to do in robotPeriodic
-  }
-
-  @Override
-  public void disabledInit() {
-    // nothing to do in disabledInit
-    super.disabledInit();
-  }
-
-  @Override
-  public void disabledPeriodic() {
-    // nothing to do in disabledPeriodic
+    SmartDashboard.putNumber("Elevator encoder: ", elevator.getHeight());
+    SmartDashboard.putNumber("Top IR Sensor: ", elevator.getTopIRSensorValue());
+    SmartDashboard.putNumber("Bottom IR Sensor: ", elevator.getBottomIRSensorValue());
   }
 }
