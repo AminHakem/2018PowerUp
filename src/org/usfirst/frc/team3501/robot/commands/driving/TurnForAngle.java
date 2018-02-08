@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * This command turns the robot for a specified angle in specified direction - either left or right
  *
- * parameters: angle: the robot will turn - in degrees direction: the robot will turn - either right
+ * parameters: angle: the robot will turn - negative angle is left positive angle is right
  * or left maxTimeOut: the max time this command will be allowed to run on for
  */
 public class TurnForAngle extends Command {
@@ -28,7 +28,7 @@ public class TurnForAngle extends Command {
   public TurnForAngle(double angle, double maxTimeOut) {
     requires(Robot.getDriveTrain());
     this.maxTimeOut = maxTimeOut;
-    this.target = Math.abs(angle);
+    this.target = angle;
 
     if (angle > 90) {
       this.gyroP = driveTrain.largeTurnP;
@@ -56,7 +56,7 @@ public class TurnForAngle extends Command {
   protected void execute() {
     double zVal = this.gyroController.calcPID(this.driveTrain.getAngle() - this.zeroAngle);
     System.out.println("Angle: "+ driveTrain.getAngle());
-    this.driveTrain.mecanumDrive(0, 0, zVal);
+    this.driveTrain.mecanumDrive(0, 0, -zVal);
   }
 
   @Override
