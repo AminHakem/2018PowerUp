@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class TurnForAngle extends Command {
   private DriveTrain driveTrain = Robot.getDriveTrain();
 
-  Direction direction;
   private double maxTimeOut;
   private PIDController gyroController;
 
@@ -26,9 +25,8 @@ public class TurnForAngle extends Command {
 
   private double zeroAngle;
 
-  public TurnForAngle(double angle, Direction direction, double maxTimeOut) {
+  public TurnForAngle(double angle, double maxTimeOut) {
     requires(Robot.getDriveTrain());
-    this.direction = direction;
     this.maxTimeOut = maxTimeOut;
     this.target = Math.abs(angle);
 
@@ -57,7 +55,7 @@ public class TurnForAngle extends Command {
   @Override
   protected void execute() {
     double zVal = this.gyroController.calcPID(this.driveTrain.getAngle() - this.zeroAngle);
-
+    System.out.println("Angle: "+ driveTrain.getAngle());
     this.driveTrain.mecanumDrive(0, 0, zVal);
   }
 
