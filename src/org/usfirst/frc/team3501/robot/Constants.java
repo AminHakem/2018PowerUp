@@ -3,9 +3,9 @@ package org.usfirst.frc.team3501.robot;
 import edu.wpi.first.wpilibj.SPI;
 
 /**
- * The Constants stores constant values for all subsystems. This includes the
- * port values for motors and sensors, as well as important operational
- * constants for subsystems such as max and min values.
+ * The Constants stores constant values for all subsystems. This includes the port values for motors
+ * and sensors, as well as important operational constants for subsystems such as max and min
+ * values.
  */
 
 // have two buttons: one for shifting to high gear and the other for shifting to
@@ -54,6 +54,9 @@ public class Constants {
     // IR SENSORS
     public static final int IR_SENSOR1 = 0;
     public static final int IR_SENSOR2 = 1;
+
+    public static final int TOP_LIMIT_SWITCH = 0;
+    public static final int BOTTOM_LIMIT_SWITCH = 1;
   }
 
   public static class DriveTrain {

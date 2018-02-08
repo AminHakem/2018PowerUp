@@ -7,6 +7,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SensorCollection;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Elevator extends Subsystem {
@@ -36,12 +37,15 @@ public class Elevator extends Subsystem {
   private final WPI_TalonSRX elevatorTalon;
   private final SensorCollection elevatorSensor;
   private final IRSensor irSensor1, irSensor2;
+  private final DigitalInput topLimitSwitch, bottomLimitSwitch;
 
   private Elevator() {
     elevatorTalon = new WPI_TalonSRX(Constants.Elevator.ELEVATOR);
     elevatorSensor = elevatorTalon.getSensorCollection();
     irSensor1 = new IRSensor(Constants.Elevator.IR_SENSOR1);
     irSensor2 = new IRSensor(Constants.Elevator.IR_SENSOR2);
+    topLimitSwitch = new DigitalInput(Constants.Elevator.TOP_LIMIT_SWITCH);
+    bottomLimitSwitch = new DigitalInput(Constants.Elevator.BOTTOM_LIMIT_SWITCH);
   }
 
   public static Elevator getElevator() {
@@ -110,6 +114,14 @@ public class Elevator extends Subsystem {
    *
    * if (flagCount == 2) { flagCount = 0; return false; } else { return true; } }
    */
+
+  public boolean isAtTop() {
+    return topLimitSwitch.get();
+  }
+
+  public boolean isAtBottom() {
+    return bottomLimitSwitch.get();
+  }
 
   public void periodicWarning() {}
 
