@@ -85,20 +85,21 @@ public class DriveTrain extends Subsystem {
    * Mecanum Drive - takes in the ySpeed, xSpeed, Z Rotation, and Gyro Angle as parameters and
    * enters those arguments in the driveCartesian method
    *
-   * @param ySpeed
-   * @param xSpeed
+   * @param sidewaysSpeed
+   * @param frontbackSpeed
    * @param rotation
    * @param is fieldOriented or not
    */
-  public void mecanumDrive(final double ySpeed, final double xSpeed, final double rotation) {
-    if ((ySpeed < 0.1 && ySpeed > -0.1) && (xSpeed < 0.1 && xSpeed > -0.1)
-        && (rotation < 0.1 && rotation > -0.1)) { // if in dead zone
+  public void mecanumDrive(final double sidewaysSpeed, final double frontbackSpeed,
+      final double rotation) {
+    if ((sidewaysSpeed < 0.1 && sidewaysSpeed > -0.1)
+        && (frontbackSpeed < 0.1 && frontbackSpeed > -0.1) && (rotation < 0.1 && rotation > -0.1)) {
       robotDrive.stopMotor();
     }
     if (this.fieldOriented) {
-      robotDrive.driveCartesian(ySpeed, xSpeed, rotation, -this.getAngle());
+      robotDrive.driveCartesian(-sidewaysSpeed, -frontbackSpeed, -rotation, -this.getAngle());
     } else {
-      robotDrive.driveCartesian(ySpeed, xSpeed, rotation);
+      robotDrive.driveCartesian(-sidewaysSpeed, -frontbackSpeed, -rotation);
     }
   }
 
@@ -127,7 +128,7 @@ public class DriveTrain extends Subsystem {
 
   // Encoders
   public double getRightLeftEncoderDistance() {
-    return (48.0 / 58.0) * leftRightEncoder.getQuadraturePosition() * INCHES_PER_PULSE / 4.0;
+    return -(48.0 / 58.0) * leftRightEncoder.getQuadraturePosition() * INCHES_PER_PULSE / 4.0;
   }
 
   public double getFrontBackEncoderDistance() {
@@ -153,18 +154,6 @@ public class DriveTrain extends Subsystem {
       return this.imu.getAngle();
     else
       return 0;
-  }
-
-  /***
-   * Changes the current angle
-   *
-   * @param angle - Positive input increases the current angle and negative input decreases the
-   *        angle
-   */
-  public void changeAngle(double angle) {
-    double ySpeed = Math.cos(angle);
-    double xSpeed = Math.sin(angle);
-    this.mecanumDrive(ySpeed, xSpeed, 0);
   }
 
   /**

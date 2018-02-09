@@ -4,7 +4,6 @@ import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This command will run throughout teleop and listens for joystick inputs to drive the driveTrain.
@@ -40,7 +39,7 @@ public class JoystickDrive extends Command {
     this.alignedWithCube = DriveTrain.getDriveTrain().isAlignedWithCube();
 
     if (!Robot.getClimber().inJoystickClimb) {
-      double ySpeed = Robot.getOI().ps4_controller.getRawAxis(1);
+      double ySpeed = -Robot.getOI().ps4_controller.getRawAxis(1);
       double xSpeed = Robot.getOI().ps4_controller.getRawAxis(0);
       double rotation = Robot.getOI().ps4_controller.getRawAxis(2);
 
@@ -50,8 +49,7 @@ public class JoystickDrive extends Command {
       previousThrust = ySpeed;
       previousTwist = xSpeed;
       previousRotation = rotation;
-      SmartDashboard.putNumber("RL", -xSpeed);
-      Robot.getDriveTrain().mecanumDrive(-xSpeed, ySpeed, rotation);
+      Robot.getDriveTrain().mecanumDrive(xSpeed, ySpeed, rotation);
     }
 
   }

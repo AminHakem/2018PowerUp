@@ -52,7 +52,7 @@ public class DriveForward extends Command {
   protected void execute() {
     double ySpeed = driveController.calcPID(driveTrain.getFrontBackEncoderDistance());
     double rVal = directionController.calcPID(driveTrain.getAngle());
-    this.driveTrain.mecanumDrive(0, -ySpeed, -rVal);
+    this.driveTrain.mecanumDrive(0, ySpeed, rVal);
   }
 
   @Override

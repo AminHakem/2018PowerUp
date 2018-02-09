@@ -41,14 +41,13 @@ public class AlignWithCube extends Command {
   @Override
   protected void execute() {
     this.alignmentError = DriveTrain.getDriveTrain().getThreadOutput();
-    double output = alignmentController.calcPIDError(alignmentError);
-    DriveTrain.getDriveTrain().mecanumDrive(0, output, 0);
+    double output = alignmentController.calcPID(alignmentError);
+    DriveTrain.getDriveTrain().mecanumDrive(output, 0, 0);
   }
 
   @Override
   protected boolean isFinished() {
     if (this.alignmentController.isDone()) {
-      System.out.println(this.getClass().getName() + " is finished!!");
       Robot.getDriveTrain().toggleAlignedWithCube();
       return true;
     }

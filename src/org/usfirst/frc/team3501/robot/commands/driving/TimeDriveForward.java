@@ -33,7 +33,7 @@ public class TimeDriveForward extends Command {
 
   @Override
   protected void execute() {
-    driveTrain.mecanumDrive(0, -motorVal, 0);
+    driveTrain.mecanumDrive(0, motorVal, 0);
   }
 
   @Override
