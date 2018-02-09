@@ -19,8 +19,7 @@ public class DriveTrain extends Subsystem {
 
   // Set PID values, need to test mecanum wheels to find them
   public static double driveP = 0.006, driveI = 0.00115, driveD = -0.002;
-  public static double smallTurnP = 0.004, smallTurnI = 0.0013,
-      smallTurnD = 0.005;
+  public static double smallTurnP = 0.004, smallTurnI = 0.0013, smallTurnD = 0.005;
   public static double largeTurnP = .003, largeTurnI = .0012, largeTurnD = .006;
   public static double driveStraightGyroP = 0.01;
 
@@ -46,8 +45,7 @@ public class DriveTrain extends Subsystem {
     SpeedControllerGroup m_left_front = new SpeedControllerGroup(frontLeft);
     SpeedControllerGroup m_right_rear = new SpeedControllerGroup(rearRight);
     SpeedControllerGroup m_right_front = new SpeedControllerGroup(frontRight);
-    robotDrive = new MecanumDrive(m_left_front, m_left_rear, m_right_front,
-        m_right_rear);
+    robotDrive = new MecanumDrive(m_left_front, m_left_rear, m_right_front, m_right_rear);
 
     // Encoders
     frontBackEncoder = rearLeft.getSensorCollection();
@@ -83,16 +81,15 @@ public class DriveTrain extends Subsystem {
 
   // Driving / motor methods
   /**
-   * Mecanum Drive - takes in the ySpeed, xSpeed, Z Rotation, and Gyro Angle as parameters and enters
-   * those arguments in the driveCartesian method
+   * Mecanum Drive - takes in the ySpeed, xSpeed, Z Rotation, and Gyro Angle as parameters and
+   * enters those arguments in the driveCartesian method
    *
    * @param ySpeed
    * @param xSpeed
    * @param rotation
    * @param is fieldOriented or not
    */
-  public void mecanumDrive(final double ySpeed, final double xSpeed,
-      final double rotation) {
+  public void mecanumDrive(final double ySpeed, final double xSpeed, final double rotation) {
     if ((ySpeed < 0.1 && ySpeed > -0.1) && (xSpeed < 0.1 && xSpeed > -0.1)
         && (rotation < 0.1 && rotation > -0.1)) { // if in dead zone
       robotDrive.stopMotor();
@@ -136,9 +133,6 @@ public class DriveTrain extends Subsystem {
     return (48.0 / 58.0) * frontBackEncoder.getQuadraturePosition() * INCHES_PER_PULSE / 4.0;
   }
 
-
-  
-
   public void resetEncoders() {
     frontBackEncoder.setQuadraturePosition(0, 3);
     leftRightEncoder.setQuadraturePosition(0, 3);
@@ -163,7 +157,8 @@ public class DriveTrain extends Subsystem {
   /***
    * Changes the current angle
    *
-   * @param angle - Positive input increases the current angle and negative input decreases the angle
+   * @param angle - Positive input increases the current angle and negative input decreases the
+   *        angle
    */
   public void changeAngle(double angle) {
     double ySpeed = Math.cos(angle);

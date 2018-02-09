@@ -1,10 +1,5 @@
 package org.usfirst.frc.team3501.robot;
 
-import org.usfirst.frc.team3501.robot.Constants.Direction;
-import org.usfirst.frc.team3501.robot.commands.driving.DriveForward;
-import org.usfirst.frc.team3501.robot.commands.driving.DriveSideways;
-import org.usfirst.frc.team3501.robot.commands.driving.JoystickDrive;
-import org.usfirst.frc.team3501.robot.commands.driving.TurnForAngle;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
@@ -61,9 +56,6 @@ public class Robot extends IterativeRobot {
   public void autonomousInit() {
     driveTrain.resetGyro();
     driveTrain.resetEncoders();
-   //autonCommand = new DriveSideways(30, 1000);
-    //autonCommand = new DriveForward(50, 5);
-    autonCommand = new TurnForAngle(90, 5);
     Scheduler.getInstance().add(autonCommand);
   }
 
@@ -74,37 +66,33 @@ public class Robot extends IterativeRobot {
   }
 
   @Override
-  public void teleopInit() {
-    teleopCommand = new JoystickDrive();
-    Scheduler.getInstance().add(teleopCommand);
-  }
+  public void teleopInit() {}
 
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-
-    System.out.println("rightleft: " + driveTrain.getRightLeftEncoderDistance());
-    System.out.println("frontback: " + driveTrain.getRightLeftEncoderDistance());
     updateSmartDashboard();
   }
 
   public void updateSmartDashboard() {
-   
-    SmartDashboard.putNumber("right left encoder values: ", driveTrain.getRightLeftEncoderDistance());
-    SmartDashboard.putNumber("front back encoder values: ", driveTrain.getFrontBackEncoderDistance());
+    updateDriving();
+    updateElevator();
+  }
+
+  public void updateDriving() {
+    SmartDashboard.putNumber("front back speed", driveTrain.getFrontBackSpeed());
+    SmartDashboard.putNumber("right left speed: ", driveTrain.getRightLeftSpeed());
+    SmartDashboard.putNumber("right left encoder: ", driveTrain.getRightLeftEncoderDistance());
+    SmartDashboard.putNumber("front back encoder: ", driveTrain.getFrontBackEncoderDistance());
     SmartDashboard.putNumber("angle", driveTrain.getAngle());
+  }
+
+  public void updateElevator() {
     SmartDashboard.putNumber("Elevator encoder: ", elevator.getHeight());
     SmartDashboard.putNumber("Top IR Sensor: ", elevator.getTopIRSensorValue());
     SmartDashboard.putNumber("Bottom IR Sensor: ", elevator.getBottomIRSensorValue());
-    SmartDashboard.putNumber("angle", driveTrain.getAngle());
-    // SmartDashboard.putNumber("Elevator encoder: ", elevator.getHeight());
+    SmartDashboard.putNumber("Elevator encoder: ", elevator.getHeight());
     SmartDashboard.putNumber("Elevator motor speed: ", elevator.getMotorVal());
-    // SmartDashboard.putNumber("Elevator Direction: ", elevator.getDirection());
-    SmartDashboard.putNumber("front back speed",
-        driveTrain.getFrontBackSpeed());
-    // SmartDashboard.putNumber("Elevator encoder: ", elevator.getHeight());
-    SmartDashboard.putNumber("right left speed: ",driveTrain.getRightLeftSpeed());
-    // SmartDashboard.putNumber("Elevator Direction: ", elevator.getDirection());
-    
+    SmartDashboard.putNumber("Elevator Direction: ", elevator.getDirection());
   }
 }

@@ -5,7 +5,6 @@ import org.usfirst.frc.team3501.robot.Constants.Direction;
 import org.usfirst.frc.team3501.robot.MathLib;
 import org.usfirst.frc.team3501.robot.commands.driving.DriveForward;
 import org.usfirst.frc.team3501.robot.commands.driving.TurnForAngle;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class StartRightSwitchRight extends CommandGroup {
@@ -19,17 +18,15 @@ public class StartRightSwitchRight extends CommandGroup {
 
   public StartRightSwitchRight() {
     // move forward 168 in
-    addSequential(
-        new DriveForward(RIGHT_WALL_TO_SWITCH_CUBE_VERTICAL
-            * Constants.Auton.SCALE_FACTOR_TESTING, 16));
+    addSequential(new DriveForward(
+        RIGHT_WALL_TO_SWITCH_CUBE_VERTICAL * Constants.Auton.SCALE_FACTOR_TESTING, 16));
     MathLib.debugPrint("Finished command 1");
     // turn 90 degrees left
-    addSequential(new TurnForAngle(90.0, TURN_LEFT, 3.0));
+    addSequential(new TurnForAngle(-90.0, 3.0));
     MathLib.debugPrint("Finished command 2");
     // move forward 68 inches
-    addSequential(
-        new DriveForward(RIGHT_SWITCH_TO_SWITCH_HORIZONTAL
-            * Constants.Auton.SCALE_FACTOR_TESTING, 1.5));
+    addSequential(new DriveForward(
+        RIGHT_SWITCH_TO_SWITCH_HORIZONTAL * Constants.Auton.SCALE_FACTOR_TESTING, 1.5));
     MathLib.debugPrint("Finished command 3");
     // No elevator yet, waiting for actual elevator command, numbers are
     // hypothetical and are subject to change

@@ -5,7 +5,6 @@ import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.utils.PIDController;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This command makes the robot drive a specified distance using encoders on the robot and using a
@@ -49,16 +48,12 @@ public class DriveSideways extends Command {
   @Override
   protected void execute() {
     double xSpeed = driveController.calcPID(driveTrain.getRightLeftSpeed());
-    System.out.println(this.getName() + "XSpeed: " + xSpeed);
-    System.out.println(this.getName()+" rightleft: " + driveTrain.getRightLeftEncoderDistance());
-    SmartDashboard.putNumber("xSpeed", +xSpeed);
     this.driveTrain.mecanumDrive(xSpeed, 0, 0);
   }
 
   @Override
   protected boolean isFinished() {
-    return timeSinceInitialized() >= maxTimeOut
-  || this.driveController.isDone();
+    return timeSinceInitialized() >= maxTimeOut || this.driveController.isDone();
   }
 
   @Override
