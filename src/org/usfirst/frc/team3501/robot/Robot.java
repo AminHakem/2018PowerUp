@@ -57,7 +57,7 @@ public class Robot extends IterativeRobot {
   public void autonomousInit() {
     driveTrain.resetGyro();
     driveTrain.resetEncoders();
-    autonCommand = new MoveToTarget(5, 3);
+    autonCommand = new MoveToTarget(4, 160);
     Scheduler.getInstance().add(autonCommand);
   }
 
@@ -68,7 +68,10 @@ public class Robot extends IterativeRobot {
   }
 
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+    autonCommand = new MoveToTarget(4, 10);
+    Scheduler.getInstance().add(autonCommand);
+  }
 
   @Override
   public void teleopPeriodic() {
