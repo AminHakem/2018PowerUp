@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3501.robot.commands.driving;
 
 import org.usfirst.frc.team3501.robot.Robot;
+import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -13,22 +14,21 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  *
  */
-public class TimeDrive extends Command {
+public class TimeDriveSideways extends Command {
+  DriveTrain driveTrain = Robot.getDriveTrain();
   Timer timer;
-  double leftRearMotorVal, rightRearMotorVal, rightFrontMotorVal,
-      leftFrontMotorVal, time;
+  double motorVal, time;
 
-  public TimeDrive(final double time, final double leftRearMotorVal,
-      final double rightRearMotorVal, final double leftFrontMotorVal,
-      final double rightFrontMotorVal) {
-    requires(Robot.getDriveTrain());
+  /**
+   * @param time: the time in seconds the robot will move for before stopping
+   * @param motorVal: the power at which the robot motors will move; a positive value will cause the
+   *        robot to move right, and a negative value will cause the robot to move left
+   */
+  public TimeDriveSideways(final double time, final double motorVal) {
+    requires(driveTrain);
 
     timer = new Timer();
     this.time = time;
-    this.leftRearMotorVal = leftRearMotorVal;
-    this.rightRearMotorVal = rightRearMotorVal;
-    this.rightFrontMotorVal = rightFrontMotorVal;
-    this.leftFrontMotorVal = leftFrontMotorVal;
   }
 
   @Override
@@ -38,9 +38,7 @@ public class TimeDrive extends Command {
 
   @Override
   protected void execute() {
-    // Robot.getDriveTrain().setMotorValues(leftFrontMotorVal, leftRearMotorVal,
-    // rightFrontMotorVal, rightRearMotorVal);
-
+    driveTrain.mecanumDrive(motorVal, 0, 0);
   }
 
   @Override

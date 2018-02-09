@@ -19,19 +19,18 @@ public class DriveForward extends Command {
   private Preferences prefs;
   private PIDController driveController, directionController;
   private double zeroAngle;
-  private double driveP;
-  private double driveI;
-  private double driveD;
 
+  /**
+   * @param distance: a positive value will cause the robot to move forwards, and a negative value
+   *        will cause the robot to move backwards
+   * @param maxTimeOut: the max time this command will be allowed to run on for
+   */
   public DriveForward(double distance, double maxTimeOut) {
     requires(driveTrain);
     this.maxTimeOut = maxTimeOut;
     this.target = distance;
-
-    this.driveP = driveTrain.driveP;
-    this.driveI = driveTrain.driveI;
-    this.driveD = driveTrain.driveD;
-    this.driveController = new PIDController(driveP, driveI, driveD);
+    this.driveController = new PIDController(DriveTrain.driveStraightP, DriveTrain.driveStraightI,
+        DriveTrain.driveStraightD);
     this.driveController.setDoneRange(1.0);
     this.driveController.setMaxOutput(1.0);
     this.driveController.setMinDoneCycles(5);

@@ -80,8 +80,6 @@ public class Robot extends IterativeRobot {
   }
 
   public void updateDriving() {
-    SmartDashboard.putNumber("front back speed", driveTrain.getFrontBackSpeed());
-    SmartDashboard.putNumber("right left speed: ", driveTrain.getRightLeftSpeed());
     SmartDashboard.putNumber("right left encoder: ", driveTrain.getRightLeftEncoderDistance());
     SmartDashboard.putNumber("front back encoder: ", driveTrain.getFrontBackEncoderDistance());
     SmartDashboard.putNumber("angle", driveTrain.getAngle());

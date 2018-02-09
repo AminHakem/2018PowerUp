@@ -4,6 +4,7 @@ import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This command will run throughout teleop and listens for joystick inputs to drive the driveTrain.
@@ -49,6 +50,7 @@ public class JoystickDrive extends Command {
       previousThrust = ySpeed;
       previousTwist = xSpeed;
       previousRotation = rotation;
+      SmartDashboard.putNumber("RL", -xSpeed);
       Robot.getDriveTrain().mecanumDrive(-xSpeed, ySpeed, rotation);
     }
 

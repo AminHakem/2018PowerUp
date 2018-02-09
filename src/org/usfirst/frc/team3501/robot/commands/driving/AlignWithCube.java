@@ -21,7 +21,8 @@ public class AlignWithCube extends Command {
 
   public AlignWithCube() {
     requires(Robot.getDriveTrain());
-    alignmentController = new PIDController(DriveTrain.driveP, DriveTrain.driveI, 0);
+    alignmentController =
+        new PIDController(DriveTrain.driveSidewaysP, DriveTrain.driveSidewaysI, 0);
     alignmentController.setDoneRange(5);
 
     // initialize a thread which will run code to constantly update

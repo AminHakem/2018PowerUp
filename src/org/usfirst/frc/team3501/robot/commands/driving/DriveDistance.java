@@ -23,7 +23,6 @@ public class DriveDistance extends Command {
   private double driveP;
   private double driveI;
   private double driveD;
-  private double gyroP;
 
   public DriveDistance(double distance, double angle, double maxTimeOut) {
     requires(driveTrain);
@@ -31,11 +30,8 @@ public class DriveDistance extends Command {
     this.target = distance;
     this.angle = angle;
 
-    this.driveP = driveTrain.driveP;
-    this.driveI = driveTrain.driveI;
-    this.driveD = driveTrain.driveD;
-    this.gyroP = driveTrain.driveStraightGyroP;
-    this.driveController = new PIDController(driveP, driveI, driveD);
+    this.driveController = new PIDController(DriveTrain.driveStraightP, DriveTrain.driveStraightI,
+        DriveTrain.driveStraightD);
     this.driveController.setDoneRange(1.0);
     this.driveController.setMaxOutput(1.0);
     this.driveController.setMinDoneCycles(5);
