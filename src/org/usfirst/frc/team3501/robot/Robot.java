@@ -68,7 +68,6 @@ public class Robot extends IterativeRobot {
   public void autonomousInit() {
     driveTrain.resetGyro();
     driveTrain.resetEncoders();
-    // autonCommand = new MoveToTarget(10, 60);
     Scheduler.getInstance().add(autonCommand);
   }
 
