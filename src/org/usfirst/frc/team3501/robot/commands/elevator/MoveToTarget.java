@@ -24,6 +24,10 @@ public class MoveToTarget extends Command {
   private double target;
   Timer timer;
 
+  /**
+   * @param target the height the elevator will move to in inches
+   * @param maxTimeOut the maximum time this command will be allowed to run before being cut
+   */
   public MoveToTarget(double target, double maxTimeOut) {
     requires(elevator);
     this.maxTimeOut = maxTimeOut;
@@ -47,9 +51,7 @@ public class MoveToTarget extends Command {
   protected void execute() {
     double current = elevator.getHeight();
     double val = elevatorController.calcPID(current);
-    System.out.println("val: " + val);
     this.elevator.setMotorValue(val);
-    System.out.println("motors: " + elevator.getMotorVal());
   }
 
   @Override
