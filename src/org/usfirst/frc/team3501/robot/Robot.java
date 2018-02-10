@@ -95,20 +95,29 @@ public class Robot extends IterativeRobot {
   }
 
   public void updateDriving() {
-    SmartDashboard.putNumber("right left encoder: ", driveTrain.getRightLeftEncoderDistance());
-    SmartDashboard.putNumber("front back encoder: ", driveTrain.getFrontBackEncoderDistance());
+    SmartDashboard.putNumber("right left encoder: ",
+        driveTrain.getRightLeftEncoderDistance());
+    SmartDashboard.putNumber("front back encoder: ",
+        driveTrain.getFrontBackEncoderDistance());
     SmartDashboard.putNumber("angle", driveTrain.getAngle());
   }
 
   public void updateElevator() {
     SmartDashboard.putNumber("Elevator encoder: ", elevator.getHeight());
+
     SmartDashboard.putBoolean("Is elevator at top", elevator.isAtTop());
     SmartDashboard.putBoolean("Is elevator at bottom", elevator.isAtBottom());
+
+    // SmartDashboard.putNumber("Top IR Sensor: ", elevator.getTopIRSensorValue());
+    // SmartDashboard.putNumber("Bottom IR Sensor: ",
+    // elevator.getBottomIRSensorValue());
   }
 
   public void displayCameraFeed() {
-    SmartDashboard.putData("Ramp Camera Feed", (Sendable) cameraServer.getVideo("rampCam"));
+    SmartDashboard.putData("Ramp Camera Feed",
+        (Sendable) cameraServer.getVideo("rampCam"));
 
-    SmartDashboard.putData("Hook Camera Feed", (Sendable) cameraServer.getVideo("hookCam"));
+    SmartDashboard.putData("Hook Camera Feed",
+        (Sendable) cameraServer.getVideo("hookCam"));
   }
 }
