@@ -65,6 +65,10 @@ public class Elevator extends Subsystem {
     elevatorTalon.set(ControlMode.PercentOutput, motorVal);
   }
 
+  public void setCANTalonsCoast() {
+    elevatorTalon.setNeutralMode(NeutralMode.Coast);
+  }
+
   public void setCANTalonsBrake() {
     elevatorTalon.setNeutralMode(NeutralMode.Brake);
   }

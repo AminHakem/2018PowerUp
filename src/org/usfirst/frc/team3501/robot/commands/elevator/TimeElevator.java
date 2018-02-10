@@ -4,7 +4,6 @@ import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.Constants.Direction;
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
-
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -23,8 +22,7 @@ public class TimeElevator extends Command {
   double motorVal, time;
   Direction direction;
 
-  public TimeElevator(final double time, final double motorVal,
-      Direction direction) {
+  public TimeElevator(final double time, final double motorVal, Direction direction) {
     requires(elevator);
 
     timer = new Timer();
@@ -36,12 +34,11 @@ public class TimeElevator extends Command {
   @Override
   protected void initialize() {
     timer.start();
+    this.elevator.setCANTalonsCoast();
   }
 
   @Override
   protected void execute() {
-
-    System.out.println("Executing TimeElevator");
 
     if (direction == Constants.Direction.DOWN) {
       motorVal = -motorVal;
@@ -54,14 +51,13 @@ public class TimeElevator extends Command {
   @Override
   protected boolean isFinished() {
     boolean bTimeStatus = timer.get() >= time;
-    System.out.println("Elevator time status" + bTimeStatus);
-    return bTimeStatus;
+    return bTimeStatus || this.elevator.isAtTop();
   }
 
   @Override
   protected void end() {
-    System.out.println("Stopping TimeElevator");
     this.elevator.stop();
+    this.elevator.setCANTalonsBrake();
   }
 
   @Override

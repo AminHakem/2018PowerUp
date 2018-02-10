@@ -45,6 +45,7 @@ public class MoveToTarget extends Command {
   protected void initialize() {
     this.elevatorController.setSetPoint(this.target);
     timer.start();
+    this.elevator.setCANTalonsCoast();
   }
 
   @Override
@@ -56,12 +57,13 @@ public class MoveToTarget extends Command {
 
   @Override
   protected boolean isFinished() {
-    return this.elevatorController.isDone() || timer.get() >= maxTimeOut;
+    return this.elevatorController.isDone() || timer.get() >= maxTimeOut || this.elevator.isAtTop();
   }
 
   @Override
   protected void end() {
     this.elevator.stop();
+    this.elevator.setCANTalonsBrake();
   }
 
   @Override

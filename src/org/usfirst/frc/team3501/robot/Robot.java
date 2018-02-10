@@ -86,6 +86,9 @@ public class Robot extends IterativeRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     updateSmartDashboard();
+    if (elevator.isAtBottom() == true) {
+      elevator.resetEncoders();
+    }
   }
 
   public void updateSmartDashboard() {
