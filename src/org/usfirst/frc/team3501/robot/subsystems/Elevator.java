@@ -48,7 +48,6 @@ public class Elevator extends Subsystem {
     topLimitSwitch = new DigitalInput(Constants.Elevator.TOP_LIMIT_SWITCH);
     bottomLimitSwitch = new DigitalInput(Constants.Elevator.BOTTOM_LIMIT_SWITCH);
     resetEncoders();
-
     hookPiston = new Solenoid(Constants.Elevator.PISTON_HOOK);
   }
 
@@ -89,35 +88,6 @@ public class Elevator extends Subsystem {
 
   public void resetEncoders() {
     elevatorSensor.setQuadraturePosition(0, 3);
-  }
-
-  // IR Sensor METHODS
-  public double getTopIRSensorValue() {
-    return irOne.getADCValue();
-  }
-
-  public double getBottomIRSensorValue() {
-    return irSensor2.getADCValue();
-  }
-
-  public boolean atIRFlag() {
-    if (irSensor1.getIRDistance() <= DISTANCE_THRESHOLD && irOne == false) {
-      irOne = true;
-      if (irTwo == true) {
-        irOne = false;
-        irTwo = false;
-        return true;
-      }
-    }
-    if (irSensor2.getIRDistance() <= DISTANCE_THRESHOLD && irTwo == false) {
-      irTwo = true;
-      if (irOne == true) {
-        irOne = false;
-        irTwo = false;
-        return true;
-      }
-    }
-    return false;
   }
 
   public boolean isAtTop() {

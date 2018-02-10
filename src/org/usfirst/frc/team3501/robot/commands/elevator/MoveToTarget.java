@@ -3,6 +3,7 @@ package org.usfirst.frc.team3501.robot.commands.elevator;
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import org.usfirst.frc.team3501.robot.utils.PIDController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /***
@@ -21,6 +22,7 @@ public class MoveToTarget extends Command {
 
   private double maxTimeOut;
   private double target;
+  Timer timer;
 
   /**
    * @param target the height the elevator will move to in inches
@@ -30,6 +32,7 @@ public class MoveToTarget extends Command {
     requires(elevator);
     this.maxTimeOut = maxTimeOut;
     this.target = target;
+    timer = new Timer();
 
     this.elevatorController =
         new PIDController(Elevator.ELEVATOR_P, Elevator.ELEVATOR_I, Elevator.ELEVATOR_D);
@@ -40,19 +43,22 @@ public class MoveToTarget extends Command {
 
   @Override
   protected void initialize() {
-    elevator.resetEncoders();
     this.elevatorController.setSetPoint(this.target);
+    timer.start();
   }
 
   @Override
   protected void execute() {
-    double val = elevatorController.calcPID(elevator.getHeight());
+    double current = elevator.getHeight();
+    double val = elevatorController.calcPID(current);
+    System.out.println("val: " + val);
     this.elevator.setMotorValue(val);
+    System.out.println("motors: " + elevator.getMotorVal());
   }
 
   @Override
   protected boolean isFinished() {
-    return timeSinceInitialized() >= maxTimeOut || this.elevatorController.isDone();
+    return this.elevatorController.isDone() || timer.get() >= maxTimeOut;
   }
 
   @Override

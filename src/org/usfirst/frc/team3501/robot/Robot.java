@@ -71,6 +71,7 @@ public class Robot extends IterativeRobot {
     driveTrain.resetEncoders();
     autonCommand = new MoveToTarget(4, 160);
     autonCommand = new MoveToTarget(5, 3);
+    autonCommand = new MoveToTarget(10, 5);
     Scheduler.getInstance().add(autonCommand);
   }
 
@@ -81,10 +82,7 @@ public class Robot extends IterativeRobot {
   }
 
   @Override
-  public void teleopInit() {
-    autonCommand = new MoveToTarget(4, 10);
-    Scheduler.getInstance().add(autonCommand);
-  }
+  public void teleopInit() {}
 
   @Override
   public void teleopPeriodic() {
@@ -110,7 +108,7 @@ public class Robot extends IterativeRobot {
     // SmartDashboard.putNumber("right left encoder: ", driveTrain.getRightLeftEncoderDistance());
     // SmartDashboard.putNumber("front back encoder: ", driveTrain.getFrontBackEncoderDistance());
     // SmartDashboard.putNumber("angle", driveTrain.getAngle());
-    SmartDashboard.putNumber("Elevator encoder: ", elevator.getHeight());
+    // SmartDashboard.putNumber("Elevator encoder: ", elevator.getHeight());
     // SmartDashboard.putNumber("Top IR Sensor: ", elevator.getTopIRSensorValue());
     // SmartDashboard.putNumber("Bottom IR Sensor: ", elevator.getBottomIRSensorValue());
   }
