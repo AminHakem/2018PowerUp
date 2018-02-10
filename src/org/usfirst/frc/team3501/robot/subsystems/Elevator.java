@@ -14,7 +14,7 @@ public class Elevator extends Subsystem {
   private static Elevator elevator;
 
   // PID VALUES
-  public static double ELEVATOR_P = 0.01, ELEVATOR_I = 0.00115, ELEVATOR_D = -0.002;
+  public static double ELEVATOR_P = 0.001, ELEVATOR_I = 0.00115, ELEVATOR_D = -0.002;
 
   // IR SENSOR CONSTANTS
   public static final int DISTANCE_THRESHOLD = 10;
@@ -32,11 +32,19 @@ public class Elevator extends Subsystem {
   private final SensorCollection elevatorSensor;
   private final DigitalInput topLimitSwitch, bottomLimitSwitch;
 
+  // Calibration constants for encoders
+  public static final double MOTOR_DIAMETER = 0.5; // inches
+  public static final double ENCODER_PULSES_PER_REVOLUTION = 1024;
+  public static final double INCHES_PER_PULSE =
+      MOTOR_DIAMETER * Math.PI / ENCODER_PULSES_PER_REVOLUTION;
+  public static final double ELEVATOR_HEIGHT_CONSTANT = 0.0481;
+
   private Elevator() {
     elevatorTalon = new WPI_TalonSRX(Constants.Elevator.ELEVATOR);
     elevatorSensor = elevatorTalon.getSensorCollection();
     topLimitSwitch = new DigitalInput(Constants.Elevator.TOP_LIMIT_SWITCH);
     bottomLimitSwitch = new DigitalInput(Constants.Elevator.BOTTOM_LIMIT_SWITCH);
+    resetEncoders();
   }
 
   public static Elevator getElevator() {
@@ -66,8 +74,8 @@ public class Elevator extends Subsystem {
   }
 
   // ENCODER METHODS
-  public int getHeight() {
-    return elevatorSensor.getQuadraturePosition();
+  public double getHeight() {
+    return ELEVATOR_HEIGHT_CONSTANT * elevatorSensor.getQuadraturePosition() * INCHES_PER_PULSE / 4;
   }
 
   public double getSpeed() {
