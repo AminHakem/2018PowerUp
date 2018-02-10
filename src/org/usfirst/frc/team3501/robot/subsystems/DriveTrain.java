@@ -29,6 +29,9 @@ public class DriveTrain extends Subsystem {
   public static final double ENCODER_PULSES_PER_REVOLUTION = 1024;
   public static final double INCHES_PER_PULSE =
       WHEEL_DIAMETER * Math.PI / ENCODER_PULSES_PER_REVOLUTION;
+  private static final double ENCODER_DIST_CALIBRATION = 48.0 / 58.0;
+  private static final double DEADZONE_RANGE = 0.1;
+  private static final int RESET_ENC_MAXTIMEOUT = 3;
 
   private boolean fieldOriented, alignedWithCube;
   private double threadOutput;
@@ -41,6 +44,7 @@ public class DriveTrain extends Subsystem {
     frontRight = new WPI_TalonSRX(Constants.DriveTrain.FRONT_RIGHT);
     rearLeft = new WPI_TalonSRX(Constants.DriveTrain.REAR_LEFT);
     rearRight = new WPI_TalonSRX(Constants.DriveTrain.REAR_RIGHT);
+
     // Cast talons to speed controllers to instantiate mecanum drive
     SpeedControllerGroup m_left_rear = new SpeedControllerGroup(rearLeft);
     SpeedControllerGroup m_left_front = new SpeedControllerGroup(frontLeft);
@@ -92,8 +96,9 @@ public class DriveTrain extends Subsystem {
    */
   public void mecanumDrive(final double sidewaysSpeed, final double frontbackSpeed,
       final double rotation) {
-    if ((sidewaysSpeed < 0.1 && sidewaysSpeed > -0.1)
-        && (frontbackSpeed < 0.1 && frontbackSpeed > -0.1) && (rotation < 0.1 && rotation > -0.1)) {
+    if ((sidewaysSpeed < DEADZONE_RANGE && sidewaysSpeed > -DEADZONE_RANGE)
+        && (frontbackSpeed < DEADZONE_RANGE && frontbackSpeed > -DEADZONE_RANGE)
+        && (rotation < DEADZONE_RANGE && rotation > -DEADZONE_RANGE)) {
       robotDrive.stopMotor();
     }
     if (this.fieldOriented) {
@@ -128,16 +133,18 @@ public class DriveTrain extends Subsystem {
 
   // Encoders
   public double getRightLeftEncoderDistance() {
-    return -(48.0 / 58.0) * leftRightEncoder.getQuadraturePosition() * INCHES_PER_PULSE / 4.0;
+    return -ENCODER_DIST_CALIBRATION * leftRightEncoder.getQuadraturePosition() * INCHES_PER_PULSE
+        / 4.0;
   }
 
   public double getFrontBackEncoderDistance() {
-    return (48.0 / 58.0) * frontBackEncoder.getQuadraturePosition() * INCHES_PER_PULSE / 4.0;
+    return ENCODER_DIST_CALIBRATION * frontBackEncoder.getQuadraturePosition() * INCHES_PER_PULSE
+        / 4.0;
   }
 
   public void resetEncoders() {
-    frontBackEncoder.setQuadraturePosition(0, 3);
-    leftRightEncoder.setQuadraturePosition(0, 3);
+    frontBackEncoder.setQuadraturePosition(0, RESET_ENC_MAXTIMEOUT);
+    leftRightEncoder.setQuadraturePosition(0, RESET_ENC_MAXTIMEOUT);
   }
 
   public double getRightLeftSpeed() {
