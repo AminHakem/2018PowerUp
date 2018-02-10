@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3501.robot;
 
-import org.usfirst.frc.team3501.robot.commands.elevator.MoveToTarget;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
@@ -69,9 +68,6 @@ public class Robot extends IterativeRobot {
   public void autonomousInit() {
     driveTrain.resetGyro();
     driveTrain.resetEncoders();
-    autonCommand = new MoveToTarget(4, 160);
-    autonCommand = new MoveToTarget(5, 3);
-    autonCommand = new MoveToTarget(10, 5);
     Scheduler.getInstance().add(autonCommand);
   }
 

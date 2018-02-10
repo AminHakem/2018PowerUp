@@ -51,9 +51,7 @@ public class MoveToTarget extends Command {
   protected void execute() {
     double current = elevator.getHeight();
     double val = elevatorController.calcPID(current);
-    System.out.println("val: " + val);
     this.elevator.setMotorValue(val);
-    System.out.println("motors: " + elevator.getMotorVal());
   }
 
   @Override
