@@ -3,9 +3,15 @@ package org.usfirst.frc.team3501.robot;
 import edu.wpi.first.wpilibj.SPI;
 
 /**
+<<<<<<< HEAD
  * The Constants stores constant values for all subsystems. This includes the port values for motors
  * and sensors, as well as important operational constants for subsystems such as max and min
  * values.
+=======
+ * change servo to two pistons The Constants stores constant values for all subsystems. This
+ * includes the port values for motors and sensors, as well as important operational constants for
+ * subsystems such as max and min values.
+>>>>>>> change servo to two pistons
  */
 
 // have two buttons: one for shifting to high gear and the other for shifting to
