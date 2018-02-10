@@ -2,7 +2,6 @@ package org.usfirst.frc.team3501.robot.subsystems;
 
 import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.MathLib;
-import org.usfirst.frc.team3501.robot.utils.IRSensor;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SensorCollection;
@@ -36,14 +35,11 @@ public class Elevator extends Subsystem {
   // there is no scale_top_pos because exceeds robot max height
   private final WPI_TalonSRX elevatorTalon;
   private final SensorCollection elevatorSensor;
-  private final IRSensor irSensor1, irSensor2;
   private final DigitalInput topLimitSwitch, bottomLimitSwitch;
 
   private Elevator() {
     elevatorTalon = new WPI_TalonSRX(Constants.Elevator.ELEVATOR);
     elevatorSensor = elevatorTalon.getSensorCollection();
-    irSensor1 = new IRSensor(Constants.Elevator.IR_SENSOR1);
-    irSensor2 = new IRSensor(Constants.Elevator.IR_SENSOR2);
     topLimitSwitch = new DigitalInput(Constants.Elevator.TOP_LIMIT_SWITCH);
     bottomLimitSwitch = new DigitalInput(Constants.Elevator.BOTTOM_LIMIT_SWITCH);
   }
@@ -74,15 +70,6 @@ public class Elevator extends Subsystem {
     return (elevatorTalon.getMotorOutputPercent());
   }
 
-
-  public double getDirection() {
-    boolean direction = elevatorTalon.getSensorCollection().isFwdLimitSwitchClosed();
-    if (direction) {
-      return 1;
-    }
-    return -1;
-  }
-
   // ENCODER METHODS
   public int getHeight() {
     return elevatorSensor.getQuadraturePosition();
@@ -96,15 +83,6 @@ public class Elevator extends Subsystem {
     elevatorSensor.setQuadraturePosition(0, 3);
   }
 
-  // IR Sensor METHODS
-  public double getTopIRSensorValue() {
-    return irSensor1.getADCValue();
-  }
-
-  public double getBottomIRSensorValue() {
-    return irSensor2.getADCValue();
-  }
-
   /*
    * public boolean inBounds() {
    *
@@ -116,19 +94,16 @@ public class Elevator extends Subsystem {
    */
 
   public boolean isAtTop() {
-    return topLimitSwitch.get();
+    return !topLimitSwitch.get();
   }
 
   public boolean isAtBottom() {
-    return bottomLimitSwitch.get();
+    return !bottomLimitSwitch.get();
   }
 
   public void periodicWarning() {}
 
   @Override
-  protected void initDefaultCommand() {
-    // TODO Auto-generated method stub
-
-  }
+  protected void initDefaultCommand() {}
 
 }

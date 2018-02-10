@@ -87,11 +87,10 @@ public class Robot extends IterativeRobot {
 
   public void updateElevator() {
     SmartDashboard.putNumber("Elevator encoder: ", elevator.getHeight());
-    SmartDashboard.putNumber("Top IR Sensor: ", elevator.getTopIRSensorValue());
-    SmartDashboard.putNumber("Bottom IR Sensor: ", elevator.getBottomIRSensorValue());
     SmartDashboard.putNumber("Elevator encoder: ", elevator.getHeight());
     SmartDashboard.putNumber("Elevator motor speed: ", elevator.getMotorVal());
-    SmartDashboard.putNumber("Elevator Direction: ", elevator.getDirection());
     SmartDashboard.putBoolean("limitSwitch", elevator.isAtTop());
+    SmartDashboard.putBoolean("Is elevator at top", elevator.isAtTop());
+    SmartDashboard.putBoolean("Is elevator at bottom", elevator.isAtBottom());
   }
 }
