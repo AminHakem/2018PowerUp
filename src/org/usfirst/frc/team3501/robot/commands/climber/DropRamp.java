@@ -18,20 +18,20 @@ public class DropRamp extends Command {
   @Override
   protected void initialize() {}
 
-  @Override
-  protected void execute() {
-    Climber.runServo();
-  }
+  // @Override
+  // protected void execute() {
+  // Climber.runServo();
+  // }
 
   @Override
   protected boolean isFinished() {
     return false;
   }
 
-  @Override
-  protected void end() {
-    Climber.stopRunningServo();
-  }
+  // @Override
+  // protected void end() {
+  // Climber.stopRunningServo();
+  // }
 
   @Override
   protected void interrupted() {}

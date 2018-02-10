@@ -4,7 +4,7 @@ import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.MathLib;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -15,7 +15,7 @@ public class Climber extends Subsystem {
   private static Climber climber;
   private static WPI_TalonSRX rightWinch;
   private static WPI_TalonSRX leftWinch;
-  private static Servo rampServo;
+  private static Solenoid rampSolenoid;
 
   private static boolean on = true, off = false;
 
@@ -26,7 +26,7 @@ public class Climber extends Subsystem {
     // MOTOR CONTROLLER
     rightWinch = new WPI_TalonSRX(Constants.Climber.RIGHT_WINCH);
     leftWinch = new WPI_TalonSRX(Constants.Climber.LEFT_WINCH);
-    rampServo = new Servo(Constants.Climber.PISTON_MODULE);
+    rampSolenoid = new Solenoid(Constants.Climber.PISTON_CHANNEL);
   }
 
   public static Climber getClimber() {
@@ -56,13 +56,12 @@ public class Climber extends Subsystem {
     leftWinch.set(ControlMode.PercentOutput, speed);
   }
 
-  public static void runServo() {
-    rampServo.set(SERVO_ANGLE);
+  public static void runPiston() {
+    rampSolenoid.set(true);
   }
 
-  public static void stopRunningServo() {
-    rampServo.set(0);
-    // find start and stop angles through testing
+  public static void stopRunningPiston() {
+    rampSolenoid.set(false);
   }
 
   public static void stop() {
