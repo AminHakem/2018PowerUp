@@ -39,10 +39,10 @@ public class Climber extends Subsystem {
   public static void runAtDefaultSpeed(String direction) {
     if (direction.equals("forward")) {
       rightWinch.set(ControlMode.PercentOutput, WINCH_SPEED);
-      leftWinch.set(ControlMode.PercentOutput, WINCH_SPEED);
+      leftWinch.set(ControlMode.PercentOutput, -WINCH_SPEED);
     } else {
       rightWinch.set(ControlMode.PercentOutput, -WINCH_SPEED);
-      leftWinch.set(ControlMode.PercentOutput, -WINCH_SPEED);
+      leftWinch.set(ControlMode.PercentOutput, WINCH_SPEED);
     }
   }
 
