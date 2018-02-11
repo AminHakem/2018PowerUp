@@ -16,30 +16,41 @@ public class Constants {
     // CONTROLLERS
     public final static int PS4_CONTROLLER_PORT = 3;
     public static final int GAME_PAD_PORT = 2;
-    public static final int TRIANGLE_BUTTON_PORT = 4;
+
+    // Buttons
+    public static final int SQUARE_BUTTON_PORT = 1;
     public static final int X_BUTTON_PORT = 2;
+    public static final int CIRCLE_BUTTON_PORT = 3;
+    public static final int TRIANGLE_BUTTON_PORT = 4;
+
+    // TODO: Confirm with Collin button mapping, then fill in the 1's below (filler number) with
+    // button constants above
+
+    // Drive Train
+    public static final int FIELD_ORIENTED_PORT = 1;
+    public static final int VISION_ALIGN_PORT = 1;
 
     // Intake
-    public static final int RUN_INTAKE_PORT = 2;
-    public static int REVERSE_INTAKE_PORT = 2;
+    public static final int RUN_INTAKE_PORT = 1;
+    public static int REVERSE_INTAKE_PORT = 1;
 
     // Climber
-    public static final int LOWER_RAMP = 0;
-    public static final int RUN_WINCH_FORWARD = 0;
-    public static final int RUN_WINCH_BACKWARD = 0;
-    public static final int TOGGLE_CLIMB = 0;
+    public static final int TOGGLE_PISTON_PORT = 0;
+    public static final int LOWER_RAMP = 1;
+    public static final int RUN_WINCH_FORWARD = 1;
+    public static final int RUN_WINCH_BACKWARD = 1;
+    public static final int TOGGLE_CLIMB = 1;
 
     // Elevator
-    public static final int TOGGLE_PISTON_PORT = 0;
+    public static final int ELEVATOR_TO_SWITCH = 1;
+    public static final int ELEVATOR_TO_SCALE_LOW = 1;
+    public static final int ELEVATOR_TO_SCALE_NEUTRAL = 1;
+    public static final int ELEVATOR_TO_BOTTOM = 1;
   }
 
   public static class Elevator {
     // LIFT MOTOR CONTROLLERS
-    public static final int ELEVATOR = 1;
-
-    // // LIFT ENCODERS
-    // public static final int ELEVATOR_ENCODER_A = 0;
-    // public static final int ELEVATOR_ENCODER_B = 1;
+    public static final int ELEVATOR_MOTOR = 1;
 
     // HALL EFFECT LIMIT SENSORS
     public static final int TOP_LIMIT_SWITCH = 0;

@@ -17,10 +17,6 @@ public class Elevator extends Subsystem {
   // PID VALUES
   public static double ELEVATOR_P = 0.001, ELEVATOR_I = 0.00115, ELEVATOR_D = -0.002;
 
-  // IR SENSOR CONSTANTS
-  public static final int DISTANCE_THRESHOLD = 10;
-
-
   // POSITIONS (in inches)
   public static final int START_POS = 6;
   public static final int BOTTOM_POS = 0;
@@ -30,20 +26,20 @@ public class Elevator extends Subsystem {
   public static final int SCALE_BOTTOM_POS = 48; // assumes scale is at bottom position
   // there is no scale_top_pos because exceeds robot max height
   private final WPI_TalonSRX elevatorTalon;
-  private final SensorCollection elevatorSensor;
+  private final SensorCollection elevatorEncoder;
   private final DigitalInput topLimitSwitch, bottomLimitSwitch;
 
   private Solenoid hookPiston;
 
   // Calibration constants for encoders
-  public static final double MOTOR_CIRCUMFERENCE = 1.273 * Math.PI / 63.0; // inches
+  public static final double MOTOR_CIRCUMFERENCE = 1.18 * Math.PI; // inches
   public static final double ENCODER_PULSES_PER_REVOLUTION = 1024.0;
   public static final double INCHES_PER_PULSE = MOTOR_CIRCUMFERENCE / ENCODER_PULSES_PER_REVOLUTION;
-  public static final double ELEVATOR_HEIGHT_CONSTANT = 0.0481;
+  public static final double ENC_HEIGHT_CONSTANT = 0.0481;
 
   private Elevator() {
-    elevatorTalon = new WPI_TalonSRX(Constants.Elevator.ELEVATOR);
-    elevatorSensor = elevatorTalon.getSensorCollection();
+    elevatorTalon = new WPI_TalonSRX(Constants.Elevator.ELEVATOR_MOTOR);
+    elevatorEncoder = elevatorTalon.getSensorCollection();
     topLimitSwitch = new DigitalInput(Constants.Elevator.TOP_LIMIT_SWITCH);
     bottomLimitSwitch = new DigitalInput(Constants.Elevator.BOTTOM_LIMIT_SWITCH);
     resetEncoders();
@@ -82,15 +78,15 @@ public class Elevator extends Subsystem {
 
   // ENCODER METHODS
   public double getHeight() {
-    return ELEVATOR_HEIGHT_CONSTANT * elevatorSensor.getQuadraturePosition() * INCHES_PER_PULSE / 4;
+    return ENC_HEIGHT_CONSTANT * elevatorEncoder.getQuadraturePosition() * INCHES_PER_PULSE / 4.0;
   }
 
   public double getSpeed() {
-    return elevatorSensor.getQuadratureVelocity();
+    return elevatorEncoder.getQuadratureVelocity();
   }
 
   public void resetEncoders() {
-    elevatorSensor.setQuadraturePosition(0, 3);
+    elevatorEncoder.setQuadraturePosition(0, 3);
   }
 
   public boolean isAtTop() {
