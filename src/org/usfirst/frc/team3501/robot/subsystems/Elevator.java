@@ -36,10 +36,9 @@ public class Elevator extends Subsystem {
   private Solenoid hookPiston;
 
   // Calibration constants for encoders
-  public static final double MOTOR_DIAMETER = 0.5; // inches
-  public static final double ENCODER_PULSES_PER_REVOLUTION = 1024;
-  public static final double INCHES_PER_PULSE =
-      MOTOR_DIAMETER * Math.PI / ENCODER_PULSES_PER_REVOLUTION;
+  public static final double MOTOR_CIRCUMFERENCE = 1.273 * Math.PI / 63.0; // inches
+  public static final double ENCODER_PULSES_PER_REVOLUTION = 1024.0;
+  public static final double INCHES_PER_PULSE = MOTOR_CIRCUMFERENCE / ENCODER_PULSES_PER_REVOLUTION;
   public static final double ELEVATOR_HEIGHT_CONSTANT = 0.0481;
 
   private Elevator() {
