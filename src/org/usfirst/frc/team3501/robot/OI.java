@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3501.robot;
 
+import org.usfirst.frc.team3501.robot.commands.climber.DropRamp;
 import org.usfirst.frc.team3501.robot.commands.climber.LiftRobot;
 import org.usfirst.frc.team3501.robot.commands.climber.LowerRobot;
 import org.usfirst.frc.team3501.robot.commands.driving.AlignWithCube;
@@ -29,6 +30,7 @@ public class OI {
   public static Button climbingWinch;
   public static Button loweringWinch;
   public static Button toggleJoystickClimb;
+  public static Button moveElevator1, moveElevator2;
 
   // Elevator
   public static Button toggleHookPiston;
@@ -44,6 +46,10 @@ public class OI {
     runIntakeBackward = new JoystickButton(gamePad, Constants.OI.REVERSE_INTAKE_PORT);
     runIntakeBackward.whileHeld(new RunIntake());
 
+    // Climber
+    dropRamp = new JoystickButton(ps4_controller, Constants.OI.LOWER_RAMP);
+    dropRamp.whileHeld(new DropRamp());
+
     climbingWinch = new JoystickButton(ps4_controller, Constants.OI.RUN_WINCH_FORWARD);
     climbingWinch.whileHeld(new LiftRobot());
 
@@ -57,8 +63,15 @@ public class OI {
     alignWithCube = new JoystickButton(ps4_controller, Constants.OI.X_BUTTON_PORT);
     alignWithCube.toggleWhenPressed(new AlignWithCube());
 
+    changeFieldOriented = new JoystickButton(ps4_controller, Constants.OI.TRIANGLE_BUTTON_PORT);
+    changeFieldOriented.toggleWhenPressed(new ToggleFieldOriented());
+
+    alignWithCube = new JoystickButton(ps4_controller, Constants.OI.X_BUTTON_PORT);
+    alignWithCube.toggleWhenPressed(new AlignWithCube());
+
     toggleHookPiston = new JoystickButton(ps4_controller, Constants.OI.TOGGLE_PISTON_PORT);
     toggleHookPiston.toggleWhenPressed(new ToggleHookPiston());
+
   }
 
   public static OI getOI() {
