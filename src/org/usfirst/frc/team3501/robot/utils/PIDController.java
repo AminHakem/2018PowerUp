@@ -157,10 +157,11 @@ public class PIDController {
 
   public boolean isDone() {
     double currError = Math.abs(this.previousError);
-
+    
     // close enough to target
     if (currError <= this.doneRange) {
       this.doneCycleCount++;
+      System.out.println("doneCycleCount++: "+this.doneCycleCount+" currentError: "+currError);
     }
     // not close enough to target
     else {

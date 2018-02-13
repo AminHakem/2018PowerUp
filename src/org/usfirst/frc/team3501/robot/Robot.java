@@ -1,6 +1,8 @@
 package org.usfirst.frc.team3501.robot;
 
 import org.usfirst.frc.team3501.robot.commands.driving.DriveForward;
+import org.usfirst.frc.team3501.robot.commands.driving.JoystickDrive;
+import org.usfirst.frc.team3501.robot.commands.driving.TurnForAngle;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
@@ -8,6 +10,7 @@ import org.usfirst.frc.team3501.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -17,7 +20,9 @@ public class Robot extends IterativeRobot {
   private static OI oi;
   private static Elevator elevator;
   Command autonCommand;
+  Command autonCommandTwo;
   Command teleopCommand;
+  CommandGroup driveInLoop;
   SendableChooser autonChooser;
 
   @Override
@@ -57,8 +62,12 @@ public class Robot extends IterativeRobot {
   public void autonomousInit() {
     driveTrain.resetGyro();
     driveTrain.resetEncoders();
-    autonCommand = new DriveForward(50,10);
-    Scheduler.getInstance().add(autonCommand);
+    autonCommand = new DriveForward(40,5);
+    autonCommandTwo = new TurnForAngle(180,5);
+    driveInLoop.addSequential(autonCommand);
+    driveInLoop.addSequential(autonCommandTwo);
+    driveInLoop.addSequential(autonCommand);
+    Scheduler.getInstance().add(driveInLoop);
   }
 
   @Override
@@ -66,9 +75,11 @@ public class Robot extends IterativeRobot {
     Scheduler.getInstance().run();
     updateSmartDashboard();
   }
-
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+    teleopCommand = new JoystickDrive();
+    Scheduler.getInstance().add(teleopCommand);
+  }
 
   @Override
   public void teleopPeriodic() {
