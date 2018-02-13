@@ -29,9 +29,11 @@ public class DriveDistance extends Command {
     this.maxTimeOut = maxTimeOut;
     this.target = distance;
     this.angle = angle;
-
-    this.driveController = new PIDController(DriveTrain.driveStraightP, DriveTrain.driveStraightI,
-        DriveTrain.driveStraightD);
+    if(target <= 20) {
+      this.driveController = new PIDController(DriveTrain.driveStraightPShort, DriveTrain.driveStraightIShort,
+          DriveTrain.driveStraightDShort);
+      }else this.driveController = new PIDController(DriveTrain.driveStraightPLong, DriveTrain.driveStraightILong,
+          DriveTrain.driveStraightDLong);
     this.driveController.setDoneRange(1.0);
     this.driveController.setMaxOutput(1.0);
     this.driveController.setMinDoneCycles(5);

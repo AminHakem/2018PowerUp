@@ -5,6 +5,7 @@ import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.utils.PIDController;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This command makes the robot drive a specified distance using encoders on the robot and using a
@@ -29,8 +30,11 @@ public class DriveForward extends Command {
     requires(driveTrain);
     this.maxTimeOut = maxTimeOut;
     this.target = distance;
-    this.driveController = new PIDController(DriveTrain.driveStraightP, DriveTrain.driveStraightI,
-        DriveTrain.driveStraightD);
+    if(target <= 20) {
+    this.driveController = new PIDController(DriveTrain.driveStraightPShort, DriveTrain.driveStraightIShort,
+        DriveTrain.driveStraightDShort);
+    }else this.driveController = new PIDController(DriveTrain.driveStraightPLong, DriveTrain.driveStraightILong,
+        DriveTrain.driveStraightDLong);
     this.driveController.setDoneRange(1.0);
     this.driveController.setMaxOutput(1.0);
     this.driveController.setMinDoneCycles(5);
@@ -53,6 +57,7 @@ public class DriveForward extends Command {
     double ySpeed = driveController.calcPID(driveTrain.getFrontBackEncoderDistance());
     double rVal = directionController.calcPID(driveTrain.getAngle());
     this.driveTrain.mecanumDrive(0, -ySpeed, -rVal);
+    SmartDashboard.putNumber("ySpeed", ySpeed);
   }
 
   @Override
@@ -61,7 +66,10 @@ public class DriveForward extends Command {
   }
 
   @Override
-  protected void end() {}
+  protected void end() {
+    System.out.println("DriveForward done");
+
+  }
 
   @Override
   protected void interrupted() {
