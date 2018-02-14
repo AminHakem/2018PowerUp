@@ -40,41 +40,33 @@ public class OI {
     gamePad = new Joystick(Constants.OI.GAME_PAD_PORT);
 
     // Intake
-    runIntakeForward =
-        new JoystickButton(gamePad, Constants.OI.RUN_INTAKE_PORT);
+    runIntakeForward = new JoystickButton(gamePad, Constants.OI.RUN_INTAKE_PORT);
     runIntakeForward.whileHeld(new RunOuttake());
 
-    runIntakeBackward =
-        new JoystickButton(gamePad, Constants.OI.REVERSE_INTAKE_PORT);
+    runIntakeBackward = new JoystickButton(gamePad, Constants.OI.REVERSE_INTAKE_PORT);
     runIntakeBackward.whileHeld(new RunIntake());
 
     // Climber
     dropRamp = new JoystickButton(ps4_controller, Constants.OI.LOWER_RAMP);
     dropRamp.whileHeld(new DropRamp());
 
-    climbingWinch =
-        new JoystickButton(ps4_controller, Constants.OI.RUN_WINCH_FORWARD);
+    climbingWinch = new JoystickButton(ps4_controller, Constants.OI.RUN_WINCH_FORWARD);
     climbingWinch.whileHeld(new LiftRobot());
 
-    loweringWinch =
-        new JoystickButton(ps4_controller, Constants.OI.RUN_WINCH_BACKWARD);
+    loweringWinch = new JoystickButton(ps4_controller, Constants.OI.RUN_WINCH_BACKWARD);
     loweringWinch.whileHeld(new LowerRobot());
 
-    toggleJoystickClimb =
-        new JoystickButton(ps4_controller, Constants.OI.TOGGLE_CLIMB);
+    toggleJoystickClimb = new JoystickButton(ps4_controller, Constants.OI.TOGGLE_CLIMB);
     toggleJoystickClimb.toggleWhenPressed(new JoystickClimb());
 
     // Drive Train
-    changeFieldOriented =
-        new JoystickButton(ps4_controller, Constants.OI.TRIANGLE_BUTTON_PORT);
+    changeFieldOriented = new JoystickButton(ps4_controller, Constants.OI.TRIANGLE_BUTTON_PORT);
     changeFieldOriented.toggleWhenPressed(new ToggleFieldOriented());
 
-    alignWithCube =
-        new JoystickButton(ps4_controller, Constants.OI.X_BUTTON_PORT);
+    alignWithCube = new JoystickButton(ps4_controller, Constants.OI.X_BUTTON_PORT);
     alignWithCube.toggleWhenPressed(new AlignWithCube());
 
-    toggleHookPiston =
-        new JoystickButton(ps4_controller, Constants.OI.TOGGLE_PISTON_PORT);
+    toggleHookPiston = new JoystickButton(ps4_controller, Constants.OI.TOGGLE_PISTON_PORT);
     toggleHookPiston.toggleWhenPressed(new ToggleHookPiston());
   }
 
