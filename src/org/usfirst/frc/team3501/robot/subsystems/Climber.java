@@ -21,7 +21,6 @@ public class Climber extends Subsystem {
 
   public static final int WINCH_SPEED = 0;
   private static final double SERVO_ANGLE = 0;
-  public boolean inJoystickClimb = false;
 
   private Climber() {
     // MOTOR CONTROLLER
