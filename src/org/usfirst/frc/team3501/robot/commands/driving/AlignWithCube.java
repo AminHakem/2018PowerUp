@@ -16,8 +16,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class AlignWithCube extends Command {
-	private double alignment;
-	private double alignmentError;
+
 	private PIDController alignmentController;
 	private NetworkThread thread;
 
@@ -42,8 +41,7 @@ public class AlignWithCube extends Command {
 
 	@Override
 	protected void execute() {
-		this.alignmentError = NetworkThread.getBoxPos();
-		double output = alignmentController.calcPID(alignmentError);
+		double output = alignmentController.calcPID(NetworkThread.getBoxPos());
 		DriveTrain.getDriveTrain().mecanumDrive(output, 0, 0);
 	}
 
