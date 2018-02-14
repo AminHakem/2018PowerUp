@@ -7,6 +7,10 @@ import org.usfirst.frc.team3501.robot.utils.NetworkThread;
 import org.usfirst.frc.team3501.robot.utils.PIDController;
 
 /**
+ * Command starts a thread which will get values from RaspberryPi regarding the alignment of a cube
+ * using camera input Is currently mapped to the X button on controller. Uses values from camera
+ * to align itself with the cube by rotating
+ * @author Amin Hakem
  *
  */
 public class AlignWithCubeRotate extends Command {
