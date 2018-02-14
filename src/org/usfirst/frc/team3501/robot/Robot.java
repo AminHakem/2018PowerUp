@@ -87,9 +87,6 @@ public class Robot extends IterativeRobot {
 
   public void updateElevator() {
     SmartDashboard.putNumber("Elevator encoder: ", elevator.getHeight());
-    SmartDashboard.putNumber("Elevator encoder: ", elevator.getHeight());
-    SmartDashboard.putNumber("Elevator motor speed: ", elevator.getMotorVal());
-    SmartDashboard.putBoolean("limitSwitch", elevator.isAtTop());
     SmartDashboard.putBoolean("Is elevator at top", elevator.isAtTop());
     SmartDashboard.putBoolean("Is elevator at bottom", elevator.isAtBottom());
   }
