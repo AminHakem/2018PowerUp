@@ -28,6 +28,9 @@ public class Constants {
     public static final int RUN_WINCH_FORWARD = 0;
     public static final int RUN_WINCH_BACKWARD = 0;
     public static final int TOGGLE_CLIMB = 0;
+
+    // Elevator
+    public static final int TOGGLE_PISTON_PORT = 0;
   }
 
   public static class Elevator {
@@ -41,6 +44,8 @@ public class Constants {
     // HALL EFFECT LIMIT SENSORS
     public static final int TOP_LIMIT_SWITCH = 0;
     public static final int BOTTOM_LIMIT_SWITCH = 1;
+
+    public static final int PISTON_HOOK = 0;
   }
 
   public static class DriveTrain {
