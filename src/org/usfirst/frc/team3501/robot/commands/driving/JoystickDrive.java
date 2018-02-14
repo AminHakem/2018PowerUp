@@ -15,11 +15,11 @@ public class JoystickDrive extends Command {
   double previousTwist = 0;
   double previousRotation = 0;
   boolean fieldOriented;
-  boolean alignedWithCube;
   Joystick joystick;
 
   public JoystickDrive() {
     requires(Robot.getDriveTrain());
+    System.out.println("joystick constructor");
     joystick = Robot.getOI().ps4_controller;
 
   }
@@ -36,8 +36,6 @@ public class JoystickDrive extends Command {
    */
   @Override
   protected void execute() {
-    this.alignedWithCube = DriveTrain.getDriveTrain().isAlignedWithCube();
-
     if (!Robot.getClimber().inJoystickClimb) {
       double ySpeed = -Robot.getOI().ps4_controller.getRawAxis(1);
       double xSpeed = Robot.getOI().ps4_controller.getRawAxis(0);
