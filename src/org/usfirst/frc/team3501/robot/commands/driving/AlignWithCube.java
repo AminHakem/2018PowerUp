@@ -25,32 +25,33 @@ public class AlignWithCube extends Command {
 	public AlignWithCube() {
 		requires(Robot.getDriveTrain());
 		alignmentControllerX = new PIDController(DriveTrain.driveSidewaysP, DriveTrain.driveSidewaysI, 0);
-		alignmentControllerX.setDoneRange(5);
+		alignmentControllerX.setDoneRange(3);
 	
-		alignmentControllerY = new PIDController(DriveTrain.driveSidewaysP, DriveTrain.driveSidewaysI, 0);
-        alignmentControllerY.setDoneRange(5);
-        
+		alignmentControllerY = new PIDController(DriveTrain.driveStraightP, DriveTrain.driveStraightI, 0);
+        alignmentControllerY.setDoneRange(3);
+         
 		// initialize a thread which will run code to constantly update
 		thread = new NetworkThread();
 		thread.start();
-
+        System.out.println("AlignWithCube initialized, thread started");
 		// RaspberryPi will output 0 when camera is aligned
 	}
 
 	@Override
 	protected void initialize() {
 		alignmentControllerX.setSetPoint(0);
-	      alignmentControllerY.setSetPoint(60);
+	      alignmentControllerY.setSetPoint(70);
+	        System.out.println("setpoints set");
 
 	}
 
 	@Override
 	protected void execute() {
+
 		if (NetworkThread.isBoxVisible()) {
 			double outputX = alignmentControllerX.calcPID(NetworkThread.getBoxX());
-			DriveTrain.getDriveTrain().mecanumDrive(-outputX, 0, 0);
 			double outputY = alignmentControllerX.calcPID(NetworkThread.getBoxY());
-            DriveTrain.getDriveTrain().mecanumDrive(0 ,outputY, 0);
+            DriveTrain.getDriveTrain().mecanumDrive(-outputX,-outputY, 0);
 		}
 	}
 
@@ -61,7 +62,7 @@ public class AlignWithCube extends Command {
 
 	@Override
 	protected void end() {
-
+      System.out.println("AlignWithCube finished");
 	}
 
 	@Override

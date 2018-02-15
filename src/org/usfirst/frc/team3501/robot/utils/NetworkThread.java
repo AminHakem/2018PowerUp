@@ -26,7 +26,7 @@ public class NetworkThread extends Thread {
 
 	public NetworkThread() {
 		try {
-			socket = new DatagramSocket(1025);
+			socket = new DatagramSocket(10025);
 		} catch (SocketException e1) {
 			e1.printStackTrace();
 		}
@@ -34,11 +34,12 @@ public class NetworkThread extends Thread {
 
 	@Override
 	public void run() {
-		System.out.println("1");
 		while (true) {
+
 			DatagramPacket packet = new DatagramPacket(buf, buf.length);
 			try {
 				socket.receive(packet);
+
 			} catch (IOException e) {
 				System.out.println("ouch. you didn't get anything!");
 			}
@@ -50,21 +51,24 @@ public class NetworkThread extends Thread {
 			String received = "   ";
 			try {
 				received = new String(packet.getData(), "UTF-8");
+
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
 			buf = new byte[256];
 			String trimmed = received.trim();
+
 			if (!trimmed.equals("")) {
 				int startIndex = trimmed.indexOf("(");
 				int firstCommaIndex = trimmed.indexOf(",");
-				int secondCommaIndex = trimmed.indexOf(",", firstCommaIndex);
+				int secondCommaIndex = trimmed.indexOf(",", firstCommaIndex+1);
 				int endIndex = trimmed.indexOf(")");
-
-				BOX_SHIFT_X = Integer.parseInt(trimmed.substring(startIndex, firstCommaIndex));
-				BOX_SHIFT_Y = Integer.parseInt(trimmed.substring(firstCommaIndex, secondCommaIndex));
-				IS_VISIBLE = trimmed.substring(secondCommaIndex, endIndex).equals("true") ? true : false;
-
+				BOX_SHIFT_X =(int) Double.parseDouble(trimmed.substring(startIndex+1, firstCommaIndex));
+				BOX_SHIFT_Y = 60+(int) Double.parseDouble(trimmed.substring(firstCommaIndex+1, secondCommaIndex));
+				IS_VISIBLE = trimmed.substring(secondCommaIndex+1, endIndex).equals("true");
+				
+				//System.out.print(this.BOX_SHIFT_X + "/t" + this.BOX_SHIFT_Y + "/t" + this.IS_VISIBLE);
+			
 			}
 
 		}
