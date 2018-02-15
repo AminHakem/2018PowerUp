@@ -48,7 +48,7 @@ public class AlignWithCube extends Command {
     //previousThrust = ySpeed;
     
     if (NetworkThread.isBoxVisible()) {
-      double output = alignmentController.calcPID(NetworkThread.getBoxPos());
+      double output = alignmentController.calcPID(NetworkThread.getPos());
       DriveTrain.getDriveTrain().mecanumDrive(-output, 0, 0);
     }
   }

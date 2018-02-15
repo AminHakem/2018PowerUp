@@ -56,14 +56,14 @@ public class NetworkThread extends Thread {
 			buf = new byte[256];
 			String trimmed = received.trim();
 			if (!trimmed.equals("")) {
-				int a = trimmed.indexOf("(");
-				int b = trimmed.indexOf(",");
-				int c = trimmed.indexOf(",", b);
-				int d = trimmed.indexOf(")");
+				int startIndex = trimmed.indexOf("(");
+				int firstCommaIndex = trimmed.indexOf(",");
+				int secondCommaIndex = trimmed.indexOf(",", firstCommaIndex);
+				int endIndex = trimmed.indexOf(")");
 
-				BOX_SHIFT_X = Integer.parseInt(trimmed.substring(a, b));
-				BOX_SHIFT_Y = Integer.parseInt(trimmed.substring(b, c));
-				IS_VISIBLE = trimmed.substring(c, d).equals("true") ? true : false;
+				BOX_SHIFT_X = Integer.parseInt(trimmed.substring(startIndex, firstCommaIndex));
+				BOX_SHIFT_Y = Integer.parseInt(trimmed.substring(firstCommaIndex, secondCommaIndex));
+				IS_VISIBLE = trimmed.substring(secondCommaIndex, endIndex).equals("true") ? true : false;
 
 			}
 
