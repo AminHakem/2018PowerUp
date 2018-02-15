@@ -38,7 +38,7 @@ public class AlignWithCubeRotate extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
       if (NetworkThread.isBoxVisible()) {
-        double output = alignmentController.calcPID(NetworkThread.getBoxPos());
+        double output = alignmentController.calcPID(NetworkThread.getBoxX());
         DriveTrain.getDriveTrain().mecanumDrive(0, 0, -output);
       }
     }
