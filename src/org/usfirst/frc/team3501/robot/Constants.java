@@ -46,6 +46,7 @@ public class Constants {
     public static final int ELEVATOR_TO_SCALE_LOW = TRIANGLE_BUTTON_PORT;
     public static final int ELEVATOR_TO_SCALE_NEUTRAL = 1;
     public static final int ELEVATOR_TO_BOTTOM = 1;
+    public static final double ACCELERATION_CONTROL = 0.3;
   }
 
   public static class Elevator {
