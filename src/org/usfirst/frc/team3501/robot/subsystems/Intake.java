@@ -17,15 +17,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Intake extends Subsystem {
 
   private static Intake intake;
-  private static WPI_TalonSRX rightIntake;
-  private static WPI_TalonSRX leftIntake;
+  private static WPI_TalonSRX intakeTalon;
 
   public double intakeSpeed = 0;
 
   private Intake() {
     // MOTOR CONTROLLERS
-    leftIntake = new WPI_TalonSRX(Constants.Intake.INTAKE_LEFT);
-    rightIntake = new WPI_TalonSRX(Constants.Intake.INTAKE_RIGHT);
+    intakeTalon = new WPI_TalonSRX(Constants.Intake.INTAKE_PORT);
   }
 
   public static Intake getIntake() {
@@ -38,16 +36,7 @@ public class Intake extends Subsystem {
   public static void setMotorValues(double motorSpeed) {
     motorSpeed = MathLib.restrictToRange(motorSpeed, -1.0, 1.0);
 
-    leftIntake.set(ControlMode.PercentOutput, motorSpeed);
-    rightIntake.set(ControlMode.PercentOutput, -motorSpeed);
-  }
-
-  public WPI_TalonSRX getRight() {
-    return rightIntake;
-  }
-
-  public WPI_TalonSRX getLeft() {
-    return leftIntake;
+    intakeTalon.set(ControlMode.PercentOutput, motorSpeed);
   }
 
   public static void stop() {

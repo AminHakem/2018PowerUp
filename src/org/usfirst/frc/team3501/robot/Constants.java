@@ -31,8 +31,8 @@ public class Constants {
     public static final int VISION_ALIGN_PORT = 1;
 
     // Intake
-    public static final int RUN_INTAKE_PORT = 1;
-    public static int REVERSE_INTAKE_PORT = 1;
+    public static final int RUN_INTAKE_PORT = SQUARE_BUTTON_PORT;
+    public static int REVERSE_INTAKE_PORT = X_BUTTON_PORT;
 
     // Climber
     public static final int TOGGLE_PISTON_PORT = 0;
@@ -42,15 +42,15 @@ public class Constants {
     public static final int TOGGLE_CLIMB = 1;
 
     // Elevator
-    public static final int ELEVATOR_TO_SWITCH = 1;
-    public static final int ELEVATOR_TO_SCALE_LOW = 1;
+    public static final int ELEVATOR_TO_SWITCH = CIRCLE_BUTTON_PORT;
+    public static final int ELEVATOR_TO_SCALE_LOW = TRIANGLE_BUTTON_PORT;
     public static final int ELEVATOR_TO_SCALE_NEUTRAL = 1;
     public static final int ELEVATOR_TO_BOTTOM = 1;
   }
 
   public static class Elevator {
     // LIFT MOTOR CONTROLLERS
-    public static final int ELEVATOR_MOTOR = 1;
+    public static final int ELEVATOR_MOTOR = 9;
 
     // HALL EFFECT LIMIT SENSORS
     public static final int TOP_LIMIT_SWITCH = 0;
@@ -62,30 +62,22 @@ public class Constants {
   public static class DriveTrain {
     // MOTOR CONTROLLERS
     public static final int FRONT_LEFT = 5;
-    public static final int FRONT_RIGHT = 2;
-    public static final int REAR_LEFT = 6;
-    public static final int REAR_RIGHT = 3;
-
-    // ENCODERS
-    public static final int ENCODER_LEFT_A = 1;
-    public static final int ENCODER_LEFT_B = 0;
-    public static final int ENCODER_RIGHT_A = 2;
-    public static final int ENCODER_RIGHT_B = 3;
-
+    public static final int FRONT_RIGHT = 7;
+    public static final int REAR_LEFT = 4;
+    public static final int REAR_RIGHT = 1;
     public static final SPI.Port GYRO_PORT = SPI.Port.kOnboardCS0;
   }
 
   public static class Intake {
     // MOTOR CONTROLLERS
-    public static final int INTAKE_LEFT = 0;
-    public static final int INTAKE_RIGHT = 0;
+    public static final int INTAKE_PORT = 8;
   }
 
   public static class Climber {
     public static final int PISTON_MODULE = 0;
     public static final int PISTON_CHANNEL = 0;
-    public static final int RIGHT_WINCH = 0;
-    public static final int LEFT_WINCH = 0;
+    public static final int RIGHT_WINCH = 2;
+    public static final int LEFT_WINCH = 3;
   }
 
   public static class Auton {
