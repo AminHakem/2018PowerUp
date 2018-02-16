@@ -98,6 +98,10 @@ public class Robot extends IterativeRobot {
     SmartDashboard.putNumber("right left encoder: ", driveTrain.getRightLeftEncoderDistance());
     SmartDashboard.putNumber("front back encoder: ", driveTrain.getFrontBackEncoderDistance());
     SmartDashboard.putNumber("angle", driveTrain.getAngle());
+    SmartDashboard.putNumber("rearleft", driveTrain.getRearLeftMotorPower());
+    SmartDashboard.putNumber("rearright", driveTrain.getRearRightMotorPower());
+    SmartDashboard.putNumber("frontleft", driveTrain.getFrontLeftMotorPower());
+    SmartDashboard.putNumber("frontright", driveTrain.getFrontRightMotorPower());
   }
 
   public void updateElevator() {

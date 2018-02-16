@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3501.robot.commands.elevator;
 
-import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import org.usfirst.frc.team3501.robot.utils.PIDController;
@@ -54,8 +53,8 @@ public class MoveToTarget extends Command {
   protected void execute() {
     double current = elevator.getHeight();
     double val = elevatorController.calcPID(current);
-    if (val - prevVal > Constants.OI.ACCELERATION_CONTROL) {
-      this.elevator.setMotorValue(val + Constants.OI.ACCELERATION_CONTROL);
+    if (val - prevVal > Elevator.ACCELERATION_CONTROL) {
+      this.elevator.setMotorValue(val + Elevator.ACCELERATION_CONTROL);
     } else {
       this.elevator.setMotorValue(val);
     }

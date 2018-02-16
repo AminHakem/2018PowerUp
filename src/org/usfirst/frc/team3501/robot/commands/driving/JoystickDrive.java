@@ -4,6 +4,7 @@ import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This command will run throughout teleop and listens for joystick inputs to drive the driveTrain.
@@ -29,9 +30,9 @@ public class JoystickDrive extends Command {
 
   /**
    * Raw Axis 1 is the left joystick on the Xbox controller with the movement being from top to
-   * bottom. Raw Axis 0 is the left joystick on the Xbox controller with the movement being from left
-   * to right. Raw Axis 4 is the right joystick on the Xbox controller with the movement being from
-   * left to right.
+   * bottom. Raw Axis 0 is the left joystick on the Xbox controller with the movement being from
+   * left to right. Raw Axis 4 is the right joystick on the Xbox controller with the movement being
+   * from left to right.
    *
    */
   @Override
@@ -44,12 +45,14 @@ public class JoystickDrive extends Command {
 
     ySpeed = (6 * previousThrust + ySpeed) / 7;
     xSpeed = (6 * previousTwist + xSpeed) / 7;
-    rotation = (5 * previousRotation + rotation) / 7;
+    rotation = (6 * previousRotation + rotation) / 7;
     previousThrust = ySpeed;
     previousTwist = xSpeed;
     previousRotation = rotation;
+    SmartDashboard.putNumber("x", xSpeed);
+    SmartDashboard.putNumber("y", ySpeed);
+    SmartDashboard.putNumber("r", rotation);
     Robot.getDriveTrain().mecanumDrive(xSpeed, ySpeed, rotation);
-
   }
 
   @Override

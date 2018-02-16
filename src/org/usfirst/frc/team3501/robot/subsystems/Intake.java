@@ -19,7 +19,7 @@ public class Intake extends Subsystem {
   private static Intake intake;
   private static WPI_TalonSRX intakeTalon;
 
-  public double intakeSpeed = 0;
+  public double intakeSpeed = 1.0;
 
   private Intake() {
     // MOTOR CONTROLLERS
@@ -36,6 +36,7 @@ public class Intake extends Subsystem {
   public static void setMotorValues(double motorSpeed) {
     motorSpeed = MathLib.restrictToRange(motorSpeed, -1.0, 1.0);
 
+    System.out.println(" to " + motorSpeed);
     intakeTalon.set(ControlMode.PercentOutput, motorSpeed);
   }
 

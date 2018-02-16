@@ -102,9 +102,9 @@ public class DriveTrain extends Subsystem {
       robotDrive.stopMotor();
     }
     if (this.fieldOriented) {
-      robotDrive.driveCartesian(-sidewaysSpeed, -frontbackSpeed, -rotation, -this.getAngle());
+      robotDrive.driveCartesian(sidewaysSpeed, -frontbackSpeed, -rotation, -this.getAngle());
     } else {
-      robotDrive.driveCartesian(-sidewaysSpeed, -frontbackSpeed, -rotation);
+      robotDrive.driveCartesian(sidewaysSpeed, -frontbackSpeed, -rotation);
     }
   }
 

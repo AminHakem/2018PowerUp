@@ -26,12 +26,12 @@ public class Constants {
     public static final int CIRCLE_BUTTON_PORT = 3;
     public static final int TRIANGLE_BUTTON_PORT = 4;
 
-    // TODO: Confirm with Collin button mapping, then fill in the 1's below (filler number) with
+    // TODO: Confirm with Collin button mapping, then fill in the 0's below (filler number) with
     // button constants above
 
     // Drive Train
-    public static final int FIELD_ORIENTED_PORT = 1;
-    public static final int VISION_ALIGN_PORT = 1;
+    public static final int FIELD_ORIENTED_PORT = 0;
+    public static final int VISION_ALIGN_PORT = 0;
 
     // Intake
     public static final int RUN_INTAKE_PORT = SQUARE_BUTTON_PORT;
@@ -39,17 +39,16 @@ public class Constants {
 
     // Climber
     public static final int TOGGLE_PISTON_PORT = 0;
-    public static final int LOWER_RAMP = 1;
-    public static final int RUN_WINCH_FORWARD = 1;
-    public static final int RUN_WINCH_BACKWARD = 1;
-    public static final int TOGGLE_CLIMB = 1;
+    public static final int LOWER_RAMP = 0;
+    public static final int RUN_WINCH_FORWARD = 0;
+    public static final int RUN_WINCH_BACKWARD = 0;
+    public static final int TOGGLE_CLIMB = 0;
 
     // Elevator
     public static final int ELEVATOR_TO_SWITCH = CIRCLE_BUTTON_PORT;
     public static final int ELEVATOR_TO_SCALE_LOW = TRIANGLE_BUTTON_PORT;
-    public static final int ELEVATOR_TO_SCALE_NEUTRAL = 1;
-    public static final int ELEVATOR_TO_BOTTOM = 1;
-    public static final double ACCELERATION_CONTROL = 0.3;
+    public static final int ELEVATOR_TO_SCALE_NEUTRAL = 0;
+    public static final int ELEVATOR_TO_BOTTOM = 0;
   }
 
   public static class Elevator {
