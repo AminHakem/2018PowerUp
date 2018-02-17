@@ -17,8 +17,8 @@ public class DriveSideways extends Command {
   private double maxTimeOut;
   private double target;
   private Preferences prefs;
-  private PIDController driveController;
-  private double gyroP;
+  private PIDController driveController, directionController;
+  private double zeroAngle;
 
   /**
    * @param distance: a positive value will cause the robot to move right, and a negative value will
@@ -29,24 +29,29 @@ public class DriveSideways extends Command {
     requires(driveTrain);
     this.maxTimeOut = maxTimeOut;
     this.target = distance;
-    this.gyroP = driveTrain.driveStraightGyroP;
     this.driveController = new PIDController(DriveTrain.driveSidewaysP, DriveTrain.driveSidewaysI,
         DriveTrain.driveSidewaysD);
     this.driveController.setDoneRange(1.0);
     this.driveController.setMaxOutput(1.0);
     this.driveController.setMinDoneCycles(5);
+
+    this.zeroAngle = this.driveTrain.getAngle();
+    this.directionController = new PIDController(driveTrain.driveStraightGyroP, 0, 0);
+    this.directionController.setSetPoint(zeroAngle);
   }
 
   @Override
   protected void initialize() {
     this.driveTrain.resetEncoders();
+    this.driveTrain.resetGyro();
     this.driveController.setSetPoint(this.target);
   }
 
   @Override
   protected void execute() {
     double xSpeed = driveController.calcPID(driveTrain.getRightLeftEncoderDistance());
-    this.driveTrain.mecanumDrive(xSpeed, 0, 0);
+    double rVal = directionController.calcPID(driveTrain.getAngle());
+    this.driveTrain.mecanumDrive(xSpeed, 0, rVal);
   }
 
   @Override

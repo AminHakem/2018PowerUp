@@ -133,7 +133,7 @@ public class DriveTrain extends Subsystem {
 
   // Encoders
   public double getRightLeftEncoderDistance() {
-    return -ENCODER_DIST_CALIBRATION * leftRightEncoder.getQuadraturePosition() * INCHES_PER_PULSE
+    return ENCODER_DIST_CALIBRATION * leftRightEncoder.getQuadraturePosition() * INCHES_PER_PULSE
         / 4.0;
   }
 

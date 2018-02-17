@@ -45,7 +45,6 @@ public class DriveForward extends Command {
     this.driveTrain.resetEncoders();
     this.driveTrain.resetGyro();
     this.driveController.setSetPoint(this.target);
-    System.out.println(this.getName() + " initialized");
   }
 
   @Override
