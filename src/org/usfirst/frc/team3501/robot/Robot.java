@@ -1,11 +1,13 @@
 package org.usfirst.frc.team3501.robot;
 
+import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchLeft;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.Command;
@@ -34,6 +36,9 @@ public class Robot extends IterativeRobot {
 
     autonChooser = new SendableChooser();
     autonCommand = (Command) autonChooser.getSelected();
+
+    String gameData;
+    gameData = DriverStation.getInstance().getGameSpecificMessage();
 
     CameraServer server = CameraServer.getInstance();
 
@@ -67,6 +72,7 @@ public class Robot extends IterativeRobot {
   public void autonomousInit() {
     driveTrain.resetGyro();
     driveTrain.resetEncoders();
+    autonCommand = new StartLeftSwitchLeft();
     Scheduler.getInstance().add(autonCommand);
   }
 
@@ -109,7 +115,8 @@ public class Robot extends IterativeRobot {
     SmartDashboard.putBoolean("Is elevator at top", elevator.isAtTop());
     SmartDashboard.putBoolean("Is elevator at bottom", elevator.isAtBottom());
 
-    // SmartDashboard.putNumber("Top IR Sensor: ", elevator.getTopIRSensorValue());
+    // SmartDashboard.putNumber("Top IR Sensor: ",
+    // elevator.getTopIRSensorValue());
     // SmartDashboard.putNumber("Bottom IR Sensor: ",
     // elevator.getBottomIRSensorValue());
   }

@@ -4,6 +4,8 @@ import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.MathLib;
 import org.usfirst.frc.team3501.robot.commands.driving.DriveForward;
 import org.usfirst.frc.team3501.robot.commands.driving.TurnForAngle;
+import org.usfirst.frc.team3501.robot.commands.elevator.MoveToTarget;
+import org.usfirst.frc.team3501.robot.commands.intake.RunOuttake;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class StartRightSwitchLeft extends CommandGroup {
@@ -17,6 +19,8 @@ public class StartRightSwitchLeft extends CommandGroup {
   private static final double SCALE_FACTOR_TESTING = 0.1;
 
   public StartRightSwitchLeft() {
+    // did 48 in so it leaves margin for how much distance the cube is dropping
+    addSequential(new MoveToTarget(48, 5));
     // robot drives straight 240 in
     addSequential(new DriveForward(
         RIGHT_BACK_WALL_TO_SWITCH_CUBES * Constants.Auton.SCALE_FACTOR_TESTING, 9.5));
@@ -42,9 +46,8 @@ public class StartRightSwitchLeft extends CommandGroup {
     addSequential(
         new DriveForward(LEFT_SCALE_TO_SCALE * Constants.Auton.SCALE_FACTOR_TESTING, 1.5));
     MathLib.debugPrint("Finished command 6");
+    addSequential(new RunOuttake());
+    addSequential(new MoveToTarget(48, 5));
 
-    // robot drops cube in switch
-    // addSequential(new ClimbDistance(5.0, 7.0));
-    // Doubles in the command are hypothetical, subject to change
   }
 }

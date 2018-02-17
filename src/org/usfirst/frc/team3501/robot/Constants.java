@@ -3,12 +3,13 @@ package org.usfirst.frc.team3501.robot;
 import edu.wpi.first.wpilibj.SPI;
 
 /**
- * <<<<<<< HEAD The Constants stores constant values for all subsystems. This includes the port
- * values for motors and sensors, as well as important operational constants for subsystems such as
- * max and min values. ======= change servo to two pistons The Constants stores constant values for
- * all subsystems. This includes the port values for motors and sensors, as well as important
- * operational constants for subsystems such as max and min values. >>>>>>> change servo to two
- * pistons
+ * <<<<<<< HEAD The Constants stores constant values for all subsystems. This
+ * includes the port values for motors and sensors, as well as important
+ * operational constants for subsystems such as max and min values. =======
+ * change servo to two pistons The Constants stores constant values for all
+ * subsystems. This includes the port values for motors and sensors, as well as
+ * important operational constants for subsystems such as max and min values.
+ * >>>>>>> change servo to two pistons
  */
 
 // have two buttons: one for shifting to high gear and the other for shifting to
@@ -26,7 +27,8 @@ public class Constants {
     public static final int CIRCLE_BUTTON_PORT = 3;
     public static final int TRIANGLE_BUTTON_PORT = 4;
 
-    // TODO: Confirm with Collin button mapping, then fill in the 0's below (filler number) with
+    // TODO: Confirm with Collin button mapping, then fill in the 0's below
+    // (filler number) with
     // button constants above
 
     // Drive Train
@@ -83,7 +85,7 @@ public class Constants {
   }
 
   public static class Auton {
-    public static final double SCALE_FACTOR_TESTING = 0.1;
+    public static final double SCALE_FACTOR_TESTING = 1;
     public static final boolean AUTON_DEBUGGING = false;
     public static final boolean INCLUDE_TIME_STAMP = false;
   }

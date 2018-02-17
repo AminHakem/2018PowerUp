@@ -5,6 +5,8 @@ import org.usfirst.frc.team3501.robot.Constants.Direction;
 import org.usfirst.frc.team3501.robot.MathLib;
 import org.usfirst.frc.team3501.robot.commands.driving.DriveForward;
 import org.usfirst.frc.team3501.robot.commands.driving.TurnForAngle;
+import org.usfirst.frc.team3501.robot.commands.elevator.MoveToTarget;
+import org.usfirst.frc.team3501.robot.commands.intake.RunOuttake;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class StartRightSwitchRight extends CommandGroup {
@@ -17,6 +19,8 @@ public class StartRightSwitchRight extends CommandGroup {
   private static final double SCALE_FACTOR_TESTING = 0.1;
 
   public StartRightSwitchRight() {
+    // did 48 in so it leaves margin for how much distance the cube is dropping
+    addSequential(new MoveToTarget(48, 5));
     // move forward 168 in
     addSequential(new DriveForward(
         RIGHT_WALL_TO_SWITCH_CUBE_VERTICAL * Constants.Auton.SCALE_FACTOR_TESTING, 16));
@@ -28,8 +32,7 @@ public class StartRightSwitchRight extends CommandGroup {
     addSequential(new DriveForward(
         RIGHT_SWITCH_TO_SWITCH_HORIZONTAL * Constants.Auton.SCALE_FACTOR_TESTING, 1.5));
     MathLib.debugPrint("Finished command 3");
-    // No elevator yet, waiting for actual elevator command, numbers are
-    // hypothetical and are subject to change
-    // addSequential(new ClimbDistance(5.0, 7.0));
+    addSequential(new RunOuttake());
+    addSequential(new MoveToTarget(48, 5));
   }
 }
