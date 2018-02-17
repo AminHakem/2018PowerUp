@@ -98,10 +98,7 @@ public class Elevator extends Subsystem {
   }
 
   public void togglePiston() {
-    if (hookPiston.get())
-      this.hookPiston.free();
-    else
-      this.hookPiston.startPulse();
+    hookPiston.set(!hookPiston.get());
   }
 
   public void periodicWarning() {}

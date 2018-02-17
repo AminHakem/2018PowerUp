@@ -56,11 +56,11 @@ public class Climber extends Subsystem {
     leftWinch.set(ControlMode.PercentOutput, speed);
   }
 
-  public static void runPiston() {
+  public static void extendPiston() {
     rampSolenoid.set(true);
   }
 
-  public static void stopRunningPiston() {
+  public static void retractPiston() {
     rampSolenoid.set(false);
   }
 

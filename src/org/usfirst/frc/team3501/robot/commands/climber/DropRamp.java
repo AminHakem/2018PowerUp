@@ -20,18 +20,16 @@ public class DropRamp extends Command {
 
   @Override
   protected void execute() {
-    Climber.runPiston();
+    Climber.retractPiston();
   }
 
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   @Override
-  protected void end() {
-    Climber.stopRunningPiston();
-  }
+  protected void end() {}
 
   @Override
   protected void interrupted() {}
