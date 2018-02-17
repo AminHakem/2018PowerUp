@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3501.robot;
 
+import org.usfirst.frc.team3501.robot.commands.driving.DriveForward;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
@@ -33,8 +34,8 @@ public class Robot extends IterativeRobot {
     driveTrain.resetEncoders();
 
     autonChooser = new SendableChooser();
-    autonCommand = (Command) autonChooser.getSelected();
-
+    // autonCommand = (Command) autonChooser.getSelected();
+    autonCommand = new DriveForward(20, 10);
 
     CameraServer server = CameraServer.getInstance();
 

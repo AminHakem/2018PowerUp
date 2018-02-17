@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class StartLeftSwitchLeft extends CommandGroup {
 
-  public static final double LEFT_TO_CENTER_OF_SWITCH_VERTICAL_DISTANCE = 160.0;
+  public static final double LEFT_TO_CENTER_OF_SWITCH_VERTICAL_DISTANCE = 168.0;
   public static final double HORIZONTAL_DISTANCE_LEFT_SIDE_TO_CENTER_OF_SWITCH = 52.0;
 
   public StartLeftSwitchLeft() {

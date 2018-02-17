@@ -59,7 +59,7 @@ public class Constants {
     public static final int TOP_LIMIT_SWITCH = 0;
     public static final int BOTTOM_LIMIT_SWITCH = 1;
 
-    public static final int PISTON_HOOK = 1;
+    public static final int PISTON_CHANNEL = 1;
   }
 
   public static class DriveTrain {
@@ -77,7 +77,6 @@ public class Constants {
   }
 
   public static class Climber {
-    public static final int PISTON_MODULE = 0;
     public static final int PISTON_CHANNEL = 0;
     public static final int RIGHT_WINCH = 2;
     public static final int LEFT_WINCH = 3;

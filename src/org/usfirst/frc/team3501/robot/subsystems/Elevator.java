@@ -45,7 +45,7 @@ public class Elevator extends Subsystem {
     topLimitSwitch = new DigitalInput(Constants.Elevator.TOP_LIMIT_SWITCH);
     bottomLimitSwitch = new DigitalInput(Constants.Elevator.BOTTOM_LIMIT_SWITCH);
 
-    hookPiston = new Solenoid(Constants.Elevator.PISTON_HOOK);
+    hookPiston = new Solenoid(Constants.Elevator.PISTON_CHANNEL);
 
     this.setCANTalonsBrake();
     this.resetEncoders();
