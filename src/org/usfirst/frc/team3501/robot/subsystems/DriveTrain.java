@@ -193,14 +193,6 @@ public class DriveTrain extends Subsystem {
     this.alignedWithCube = alignedWithCube;
   }
 
-  public double getThreadOutput() {
-    return threadOutput;
-  }
-
-  public void setThreadOutput(double threadOutput) {
-    this.threadOutput = threadOutput;
-  }
-
   public void toggleAlignedWithCube() {
     this.setAlignedWithCube(!alignedWithCube);
   }

@@ -14,22 +14,22 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI {
   private static OI oi;
-  public static Joystick ps4_controller;
-  public static Joystick gamePad;
+  public Joystick ps4_controller;
+  public Joystick gamePad;
 
   // Driving
-  public static Button changeFieldOriented;
-  public static Button alignWithCube;
+  public Button changeFieldOriented;
+  public Button alignWithCube;
 
   // Intake
-  public static Button runIntakeForward;
-  public static Button runIntakeBackward;
+  public Button runIntakeForward;
+  public Button runIntakeBackward;
 
   // Climber
-  public static Button dropRamp;
-  public static Button climbingWinch;
-  public static Button loweringWinch;
-  public static Button toggleJoystickClimb;
+  public Button dropRamp;
+  public Button climbingWinch;
+  public Button loweringWinch;
+  public Button toggleJoystickClimb;
 
   // Elevator
   public static Button moveElevatorToSwitch;
@@ -41,6 +41,7 @@ public class OI {
   public static Button toggleHookPiston;
 
   public OI() {
+    System.out.println("OI constructor");
     ps4_controller = new Joystick(Constants.OI.PS4_CONTROLLER_PORT);
     gamePad = new Joystick(Constants.OI.GAME_PAD_PORT);
 

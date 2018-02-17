@@ -1,10 +1,8 @@
 package org.usfirst.frc.team3501.robot.commands.driving;
 
 import org.usfirst.frc.team3501.robot.Robot;
-import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This command will run throughout teleop and listens for joystick inputs to drive the driveTrain.
@@ -16,7 +14,6 @@ public class JoystickDrive extends Command {
   double previousTwist = 0;
   double previousRotation = 0;
   boolean fieldOriented;
-  boolean alignedWithCube;
   Joystick joystick;
 
   public JoystickDrive() {
@@ -37,8 +34,6 @@ public class JoystickDrive extends Command {
    */
   @Override
   protected void execute() {
-    this.alignedWithCube = DriveTrain.getDriveTrain().isAlignedWithCube();
-
     double ySpeed = -Robot.getOI().ps4_controller.getRawAxis(1);
     double xSpeed = Robot.getOI().ps4_controller.getRawAxis(0);
     double rotation = Robot.getOI().ps4_controller.getRawAxis(2);
@@ -49,9 +44,6 @@ public class JoystickDrive extends Command {
     previousThrust = ySpeed;
     previousTwist = xSpeed;
     previousRotation = rotation;
-    SmartDashboard.putNumber("x", xSpeed);
-    SmartDashboard.putNumber("y", ySpeed);
-    SmartDashboard.putNumber("r", rotation);
     Robot.getDriveTrain().mecanumDrive(xSpeed, ySpeed, rotation);
   }
 

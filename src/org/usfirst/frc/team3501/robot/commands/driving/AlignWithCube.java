@@ -8,54 +8,63 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * Command starts a thread which will get values from RaspberryPi regarding the alignment of a cube
- * using camera input Is currently mapped to the X button on controller
+ * using camera input Is currently mapped to the X button on controller. Uses values from camera to
+ * align itself with the cube by moving horizontally
  *
  * @author Amin Hakem
+ * @author Alexander Ivanov (a bit of help later on;)
  *
  */
 public class AlignWithCube extends Command {
-  private double alignment;
-  private double alignmentError;
-  private PIDController alignmentController;
+
+  private PIDController alignmentControllerX;
+  private PIDController alignmentControllerY;
   private NetworkThread thread;
 
   public AlignWithCube() {
     requires(Robot.getDriveTrain());
-    alignmentController =
+    alignmentControllerX =
         new PIDController(DriveTrain.driveSidewaysP, DriveTrain.driveSidewaysI, 0);
-    alignmentController.setDoneRange(5);
+    alignmentControllerX.setDoneRange(3);
+
+    alignmentControllerY =
+        new PIDController(DriveTrain.driveStraightPShort, DriveTrain.driveStraightIShort, 0);
+    alignmentControllerY.setDoneRange(0.2);
 
     // initialize a thread which will run code to constantly update
     thread = new NetworkThread();
     thread.start();
-
+    System.out.println("AlignWithCube initialized, thread started");
     // RaspberryPi will output 0 when camera is aligned
   }
 
   @Override
   protected void initialize() {
-    alignmentController.setSetPoint(0);
-    thread.run(); // this thread will continuously update the threadOutput variable in DriveTrain
+    alignmentControllerX.setSetPoint(0);
+    alignmentControllerY.setSetPoint(3);
+    System.out.println("setpoints set");
+
   }
 
   @Override
   protected void execute() {
-    this.alignmentError = DriveTrain.getDriveTrain().getThreadOutput();
-    double output = alignmentController.calcPID(alignmentError);
-    DriveTrain.getDriveTrain().mecanumDrive(output, 0, 0);
+
+    if (NetworkThread.isBoxVisible()) {
+      double outputX = alignmentControllerX.calcPID(NetworkThread.getBoxX());
+      double outputY = alignmentControllerX.calcPID(NetworkThread.getBoxSize());
+      DriveTrain.getDriveTrain().mecanumDrive(-outputX / 10, -outputY / 10, 0);
+    }
   }
 
   @Override
   protected boolean isFinished() {
-    if (this.alignmentController.isDone()) {
-      Robot.getDriveTrain().toggleAlignedWithCube();
-      return true;
-    }
-    return false;
+    return this.alignmentControllerX.isDone() && this.alignmentControllerY.isDone();
   }
 
   @Override
-  protected void end() {}
+  protected void end() {
+    System.out.println("AlignWithCube finished");
+  }
 
   @Override
   protected void interrupted() {}
