@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Intake extends Subsystem {
 
   private static Intake intake;
-  private static WPI_TalonSRX intakeTalon;
+  private WPI_TalonSRX intakeTalon;
 
   public double intakeSpeed = 1.0;
 
@@ -33,14 +33,14 @@ public class Intake extends Subsystem {
     return intake;
   }
 
-  public static void setMotorValues(double motorSpeed) {
+  public void setMotorValues(double motorSpeed) {
     motorSpeed = MathLib.restrictToRange(motorSpeed, -1.0, 1.0);
 
     System.out.println(" to " + motorSpeed);
     intakeTalon.set(ControlMode.PercentOutput, motorSpeed);
   }
 
-  public static void stop() {
+  public void stop() {
     setMotorValues(0);
   }
 

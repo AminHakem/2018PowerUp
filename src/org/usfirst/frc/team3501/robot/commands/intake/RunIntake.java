@@ -24,7 +24,7 @@ public class RunIntake extends Command {
 
   @Override
   protected void execute() {
-    Intake.setMotorValues(-intake.intakeSpeed);
+    intake.setMotorValues(-intake.intakeSpeed);
   }
 
   @Override

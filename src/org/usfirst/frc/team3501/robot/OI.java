@@ -62,7 +62,7 @@ public class OI {
     loweringWinch.whileHeld(new LowerRobot());
 
     // Drive Train
-    changeFieldOriented = new JoystickButton(ps4_controller, Constants.OI.TRIANGLE_BUTTON_PORT);
+    changeFieldOriented = new JoystickButton(ps4_controller, Constants.OI.FIELD_ORIENTED_PORT);
     changeFieldOriented.toggleWhenPressed(new ToggleFieldOriented());
 
     alignWithCube = new JoystickButton(ps4_controller, Constants.OI.VISION_ALIGN_PORT);

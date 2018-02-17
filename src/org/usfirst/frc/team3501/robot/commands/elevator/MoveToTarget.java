@@ -67,6 +67,7 @@ public class MoveToTarget extends Command {
 
   @Override
   protected void end() {
+    System.out.println("MoveToTarget ended");
     this.elevator.stop();
   }
 

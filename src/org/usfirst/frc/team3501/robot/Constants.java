@@ -30,7 +30,7 @@ public class Constants {
     // button constants above
 
     // Drive Train
-    public static final int FIELD_ORIENTED_PORT = 0;
+    public static final int FIELD_ORIENTED_PORT = TRIANGLE_BUTTON_PORT;
     public static final int VISION_ALIGN_PORT = 0;
 
     // Intake
