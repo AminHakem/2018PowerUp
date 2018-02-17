@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
   private static OI oi;
   public static Joystick ps4_controller;
-  // public static Joystick gamePad;
+  public static Joystick gamePad;
 
   // Driving
   public static Button changeFieldOriented;
@@ -44,7 +44,7 @@ public class OI {
 
   public OI() {
     ps4_controller = new Joystick(Constants.OI.PS4_CONTROLLER_PORT);
-    // gamePad = new Joystick(Constants.OI.GAME_PAD_PORT);
+    gamePad = new Joystick(Constants.OI.GAME_PAD_PORT);
 
     // Intake
     runIntakeForward = new JoystickButton(ps4_controller, Constants.OI.RUN_INTAKE_PORT);
@@ -62,7 +62,6 @@ public class OI {
 
     loweringWinch = new JoystickButton(ps4_controller, Constants.OI.RUN_WINCH_BACKWARD);
     loweringWinch.whileHeld(new LowerRobot());
-
 
     // Drive Train
     changeFieldOriented = new JoystickButton(ps4_controller, Constants.OI.TRIANGLE_BUTTON_PORT);
