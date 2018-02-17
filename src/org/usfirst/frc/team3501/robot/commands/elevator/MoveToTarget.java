@@ -46,7 +46,6 @@ public class MoveToTarget extends Command {
   protected void initialize() {
     this.elevatorController.setSetPoint(this.target);
     timer.start();
-    this.elevator.setCANTalonsCoast();
   }
 
   @Override
@@ -69,7 +68,6 @@ public class MoveToTarget extends Command {
   @Override
   protected void end() {
     this.elevator.stop();
-    this.elevator.setCANTalonsBrake();
   }
 
   @Override

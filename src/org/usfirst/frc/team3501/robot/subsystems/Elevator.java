@@ -41,10 +41,14 @@ public class Elevator extends Subsystem {
   private Elevator() {
     elevatorTalon = new WPI_TalonSRX(Constants.Elevator.ELEVATOR_MOTOR);
     elevatorEncoder = elevatorTalon.getSensorCollection();
+
     topLimitSwitch = new DigitalInput(Constants.Elevator.TOP_LIMIT_SWITCH);
     bottomLimitSwitch = new DigitalInput(Constants.Elevator.BOTTOM_LIMIT_SWITCH);
-    resetEncoders();
+
     hookPiston = new Solenoid(Constants.Elevator.PISTON_HOOK);
+
+    this.setCANTalonsBrake();
+    this.resetEncoders();
   }
 
   public static Elevator getElevator() {
