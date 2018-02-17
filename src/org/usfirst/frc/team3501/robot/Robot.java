@@ -1,9 +1,11 @@
 package org.usfirst.frc.team3501.robot;
 
+import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchLeft;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
+
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -67,8 +69,28 @@ public class Robot extends IterativeRobot {
   public void autonomousInit() {
     driveTrain.resetGyro();
     driveTrain.resetEncoders();
+    autonCommand = new StartLeftSwitchLeft();
     Scheduler.getInstance().add(autonCommand);
   }
+
+  /*
+   * String gameData; gameData =
+   * DriverStation.getInstance().getGameSpecificMessage(); if(gameData.length()
+   * > 0) { if(gameData.charAt(0) == 'L') { if(autonChooser.getSelected() ==
+   * 'R') { autonCommand = new StartRightSwitchLeft(); } else
+   * if(autonChooser.getSelected() == 'L') { autonCommand = new
+   * StartLeftSwitchLeft(); } else if(autonChooser.getSelected() == 'M') {
+   * autonCommand = new StartMiddleSwitchLeft(); } } else {
+   * if(autonChooser.getSelected() == 'R') { autonCommand = new
+   * StartRightSwitchRight(); } else if(autonChooser.getSelected() == 'L') {
+   * autonCommand = new StartLeftSwitchRight(); } else
+   * if(autonChooser.getSelected() == 'M') { autonCommand = new
+   * StartMiddleSwitchRight(); } } }
+   * 
+   * ======= autonCommand = new CenterToRight();
+   * Scheduler.getInstance().add(autonCommand); >>>>>>>
+   * 05fec533e88c6831621a7e6e477157ea89b816c3 }
+   */
 
   @Override
   public void autonomousPeriodic() {
@@ -77,7 +99,8 @@ public class Robot extends IterativeRobot {
   }
 
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+  }
 
   @Override
   public void teleopPeriodic() {
@@ -94,13 +117,16 @@ public class Robot extends IterativeRobot {
   }
 
   public void updateDriving() {
-    SmartDashboard.putNumber("right left encoder: ", driveTrain.getRightLeftEncoderDistance());
-    SmartDashboard.putNumber("front back encoder: ", driveTrain.getFrontBackEncoderDistance());
+    SmartDashboard.putNumber("right left encoder: ",
+        driveTrain.getRightLeftEncoderDistance());
+    SmartDashboard.putNumber("front back encoder: ",
+        driveTrain.getFrontBackEncoderDistance());
     SmartDashboard.putNumber("angle", driveTrain.getAngle());
     SmartDashboard.putNumber("rearleft", driveTrain.getRearLeftMotorPower());
     SmartDashboard.putNumber("rearright", driveTrain.getRearRightMotorPower());
     SmartDashboard.putNumber("frontleft", driveTrain.getFrontLeftMotorPower());
-    SmartDashboard.putNumber("frontright", driveTrain.getFrontRightMotorPower());
+    SmartDashboard.putNumber("frontright",
+        driveTrain.getFrontRightMotorPower());
   }
 
   public void updateElevator() {
@@ -109,14 +135,17 @@ public class Robot extends IterativeRobot {
     SmartDashboard.putBoolean("Is elevator at top", elevator.isAtTop());
     SmartDashboard.putBoolean("Is elevator at bottom", elevator.isAtBottom());
 
-    // SmartDashboard.putNumber("Top IR Sensor: ", elevator.getTopIRSensorValue());
+    // SmartDashboard.putNumber("Top IR Sensor: ",
+    // elevator.getTopIRSensorValue());
     // SmartDashboard.putNumber("Bottom IR Sensor: ",
     // elevator.getBottomIRSensorValue());
   }
 
   public void displayCameraFeed() {
-    SmartDashboard.putData("Ramp Camera Feed", (Sendable) cameraServer.getVideo("rampCam"));
+    SmartDashboard.putData("Ramp Camera Feed",
+        (Sendable) cameraServer.getVideo("rampCam"));
 
-    SmartDashboard.putData("Hook Camera Feed", (Sendable) cameraServer.getVideo("hookCam"));
+    SmartDashboard.putData("Hook Camera Feed",
+        (Sendable) cameraServer.getVideo("hookCam"));
   }
 }
