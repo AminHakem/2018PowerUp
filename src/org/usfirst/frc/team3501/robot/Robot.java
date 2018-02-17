@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3501.robot;
 
-import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchLeft;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
@@ -11,6 +10,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,7 +20,9 @@ public class Robot extends IterativeRobot {
   private static OI oi;
   private static Elevator elevator;
   Command autonCommand;
+  Command autonCommandTwo;
   Command teleopCommand;
+  CommandGroup driveInLoop;
   SendableChooser autonChooser;
 
   UsbCamera climberCam, intakeCam;
@@ -72,7 +74,6 @@ public class Robot extends IterativeRobot {
   public void autonomousInit() {
     driveTrain.resetGyro();
     driveTrain.resetEncoders();
-    autonCommand = new StartLeftSwitchLeft();
     Scheduler.getInstance().add(autonCommand);
   }
 
@@ -83,7 +84,9 @@ public class Robot extends IterativeRobot {
   }
 
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+    Scheduler.getInstance().add(teleopCommand);
+  }
 
   @Override
   public void teleopPeriodic() {

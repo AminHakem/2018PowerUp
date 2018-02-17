@@ -18,7 +18,8 @@ public class DriveTrain extends Subsystem {
   private final SensorCollection frontBackEncoder, leftRightEncoder;
 
   // Set PID values, need to test mecanum wheels to find them
-  public static double driveStraightP = 0.006, driveStraightI = 0.00115, driveStraightD = -0.002;
+  public static double driveStraightPLong = 0.01, driveStraightILong = 0.00115, driveStraightDLong = -0.004;
+  public static double driveStraightPShort = 0.012, driveStraightIShort = 0.00115, driveStraightDShort = -0.002;
   public static double driveSidewaysP = 0.015, driveSidewaysI = 0.0015, driveSidewaysD = -0.002;
   public static double smallTurnP = 0.004, smallTurnI = 0.0013, smallTurnD = 0.005;
   public static double largeTurnP = .003, largeTurnI = .0012, largeTurnD = .006;

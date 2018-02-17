@@ -29,9 +29,13 @@ public class DriveForward extends Command {
     requires(driveTrain);
     this.maxTimeOut = maxTimeOut;
     this.target = distance;
-    this.driveController = new PIDController(DriveTrain.driveStraightP, DriveTrain.driveStraightI,
-        DriveTrain.driveStraightD);
-    this.driveController.setDoneRange(1.0);
+    if (target <= 20) {
+      this.driveController = new PIDController(DriveTrain.driveStraightPShort,
+          DriveTrain.driveStraightIShort, DriveTrain.driveStraightDShort);
+    } else
+      this.driveController = new PIDController(DriveTrain.driveStraightPLong,
+          DriveTrain.driveStraightILong, DriveTrain.driveStraightDLong);
+    this.driveController.setDoneRange(3.0);
     this.driveController.setMaxOutput(1.0);
     this.driveController.setMinDoneCycles(5);
     this.zeroAngle = this.driveTrain.getAngle();
@@ -60,7 +64,10 @@ public class DriveForward extends Command {
   }
 
   @Override
-  protected void end() {}
+  protected void end() {
+    System.out.println("DriveForward done");
+
+  }
 
   @Override
   protected void interrupted() {
