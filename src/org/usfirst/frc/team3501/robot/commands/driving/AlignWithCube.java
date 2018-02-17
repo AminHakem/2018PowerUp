@@ -52,7 +52,7 @@ public class AlignWithCube extends Command {
     if (NetworkThread.isBoxVisible()) {
       double outputX = alignmentControllerX.calcPID(NetworkThread.getBoxX());
       double outputY = alignmentControllerX.calcPID(NetworkThread.getBoxSize());
-      DriveTrain.getDriveTrain().mecanumDrive(-outputX, -outputY, 0);
+      DriveTrain.getDriveTrain().mecanumDrive(-outputX / 10, -outputY / 10, 0);
     }
   }
 
