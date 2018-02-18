@@ -19,7 +19,6 @@ public class AlignWithCube extends Command {
 
   private PIDController alignmentControllerX;
   private PIDController alignmentControllerY;
-  private NetworkThread thread;
 
   public AlignWithCube() {
     requires(Robot.getDriveTrain());
@@ -30,12 +29,6 @@ public class AlignWithCube extends Command {
     alignmentControllerY =
         new PIDController(DriveTrain.driveStraightPShort, DriveTrain.driveStraightIShort, 0);
     alignmentControllerY.setDoneRange(0.2);
-
-    // initialize a thread which will run code to constantly update
-    thread = new NetworkThread();
-    thread.start();
-    System.out.println("AlignWithCube initialized, thread started");
-    // RaspberryPi will output 0 when camera is aligned
   }
 
   @Override

@@ -4,6 +4,9 @@ import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
+import org.usfirst.frc.team3501.robot.utils.NetworkThread;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -23,8 +26,10 @@ public class Robot extends IterativeRobot {
   CommandGroup driveInLoop;
   SendableChooser autonChooser;
 
-  // UsbCamera climberCam, intakeCam;
-  // CameraServer cameraServer;
+  NetworkThread thread;
+
+  UsbCamera climberCam, intakeCam;
+  CameraServer cameraServer;
 
   @Override
   public void robotInit() {
@@ -32,6 +37,10 @@ public class Robot extends IterativeRobot {
     oi = OI.getOI();
     elevator = Elevator.getElevator();
     LiveWindow.setEnabled(false);
+
+    // initialize a thread which will run code to constantly update
+    thread = new NetworkThread();
+    thread.start();
 
     driveTrain.resetEncoders();
     elevator.resetEncoders();
@@ -102,16 +111,13 @@ public class Robot extends IterativeRobot {
   }
 
   public void updateDriving() {
-    SmartDashboard.putNumber("right left encoder: ",
-        driveTrain.getRightLeftEncoderDistance());
-    SmartDashboard.putNumber("front back encoder: ",
-        driveTrain.getFrontBackEncoderDistance());
+    SmartDashboard.putNumber("right left encoder: ", driveTrain.getRightLeftEncoderDistance());
+    SmartDashboard.putNumber("front back encoder: ", driveTrain.getFrontBackEncoderDistance());
     SmartDashboard.putNumber("angle", driveTrain.getAngle());
     SmartDashboard.putNumber("rearleft", driveTrain.getRearLeftMotorPower());
     SmartDashboard.putNumber("rearright", driveTrain.getRearRightMotorPower());
     SmartDashboard.putNumber("frontleft", driveTrain.getFrontLeftMotorPower());
-    SmartDashboard.putNumber("frontright",
-        driveTrain.getFrontRightMotorPower());
+    SmartDashboard.putNumber("frontright", driveTrain.getFrontRightMotorPower());
   }
 
   public void updateElevator() {
