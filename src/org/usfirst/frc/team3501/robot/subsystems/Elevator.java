@@ -22,7 +22,7 @@ public class Elevator extends Subsystem {
   public static final double ACCELERATION_CONTROL = 0.3;
 
   // POSITIONS (in inches)
-  public static final int START_POS = 6;
+  public static final int START_POS = 0;
   public static final int BOTTOM_POS = 0;
   public static final int TOP_POS = 71; // assumes at max height for robot
   public static final int SWITCH_POS = 19;
@@ -106,6 +106,9 @@ public class Elevator extends Subsystem {
   public void resetEncoders() {
     elevatorEncoder.setQuadraturePosition(0, 3);
   }
+  public void setEncoders(int val) {
+    elevatorEncoder.setQuadraturePosition(val , 3);
+  }
 
   public boolean isAtTop() {
     return !topLimitSwitch.get();
@@ -123,7 +126,7 @@ public class Elevator extends Subsystem {
 
   @Override
   protected void initDefaultCommand() {
-    new MoveToTargetConstant();
+    //new MoveToTargetConstant();
   }
 
   public double getTargetElevatorPos() {

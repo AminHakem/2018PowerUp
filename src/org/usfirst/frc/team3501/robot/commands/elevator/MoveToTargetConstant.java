@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * Set this to the default command for the elevator and then update targetElevatorPos
- * with hte ChangeElevatorTarget
+ * with the ChangeElevatorTarget
  * @author Amin
  *
  */
@@ -18,15 +18,11 @@ public class MoveToTargetConstant extends Command {
   private Elevator elevator = Robot.getElevator();
   private PIDController elevatorController;
 
-  private double target=6;
+  private double target=Elevator.BOTTOM_POS;
   private double prevVal;
   Timer timer;
-  double previousTarget=6;
+  double previousTarget=Elevator.BOTTOM_POS;
 
-  /**
-   * @param target the height the elevator will move to in inches
-   * @param maxTimeOut the maximum time this command will be allowed to run before being cut
-   */
   public MoveToTargetConstant() {
     requires(elevator);
     this.target = elevator.getTargetElevatorPos();
