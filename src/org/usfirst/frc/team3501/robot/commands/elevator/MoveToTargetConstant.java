@@ -20,6 +20,8 @@ public class MoveToTargetConstant extends Command {
   private double prevVal;
   Timer timer;
 
+  double previousTarget;
+
   /**
    * @param target the height the elevator will move to in inches
    * @param maxTimeOut the maximum time this command will be allowed to run before being cut
@@ -43,7 +45,18 @@ public class MoveToTargetConstant extends Command {
 
   @Override
   protected void execute() {
-    this.target = elevator.getTargetElevatorPos();
+    double newTargetElevatorPos = elevator.getTargetElevatorPos();
+    if(newTargetElevatorPos != previousTarget || //within timer for transition)
+    {
+      //start timer for transition
+      this.elevator.setMotorValue(motorVal); // idling motor value
+      newTarget = newTargetElevatorPos;
+      return;
+    }
+    else
+    {
+      this.elevatorController.setSetPoint(this.target);
+    }
     double current = elevator.getHeight();
     double val = elevatorController.calcPID(current);
 
