@@ -7,6 +7,9 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
+ * Set this to the default command for the elevator and then update targetElevatorPos
+ * with hte ChangeElevatorTarget
+ * @author Amin
  *
  */
 public class MoveToTargetConstant extends Command {
@@ -15,18 +18,16 @@ public class MoveToTargetConstant extends Command {
   private Elevator elevator = Robot.getElevator();
   private PIDController elevatorController;
 
-  private double maxTimeOut;
-  private double target;
+  private double target=6;
   private double prevVal;
   Timer timer;
-
-  double previousTarget;
+  double previousTarget=6;
 
   /**
    * @param target the height the elevator will move to in inches
    * @param maxTimeOut the maximum time this command will be allowed to run before being cut
    */
-  public MoveToTargetConstant(double target) {
+  public MoveToTargetConstant() {
     requires(elevator);
     this.target = elevator.getTargetElevatorPos();
 
@@ -40,23 +41,20 @@ public class MoveToTargetConstant extends Command {
   @Override
   protected void initialize() {
     this.elevatorController.setSetPoint(this.target);
+    this.previousTarget = elevator.getTargetElevatorPos();
     timer.start();
   }
 
   @Override
   protected void execute() {
-    double newTargetElevatorPos = elevator.getTargetElevatorPos();
-    if(newTargetElevatorPos != previousTarget || //within timer for transition)
-    {
-      //start timer for transition
-      this.elevator.setMotorValue(motorVal); // idling motor value
-      newTarget = newTargetElevatorPos;
-      return;
+    target = elevator.getTargetElevatorPos();
+    if(target!=previousTarget) {
+      double startTime = timer.get();
+      while(timer.get()<startTime+0.5) {
+        elevator.setMotorValue(0);
+      }
     }
-    else
-    {
-      this.elevatorController.setSetPoint(this.target);
-    }
+    elevatorController.setSetPoint(target);
     double current = elevator.getHeight();
     double val = elevatorController.calcPID(current);
 
@@ -66,7 +64,8 @@ public class MoveToTargetConstant extends Command {
       this.elevator.setMotorValue(val);
     }
     val = prevVal;
-  }
+    this.previousTarget = target;
+}
 
   @Override
   protected boolean isFinished() {
