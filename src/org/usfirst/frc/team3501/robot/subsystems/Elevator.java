@@ -2,6 +2,7 @@ package org.usfirst.frc.team3501.robot.subsystems;
 
 import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.MathLib;
+import org.usfirst.frc.team3501.robot.commands.elevator.SetMotorValue;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SensorCollection;
@@ -15,7 +16,8 @@ public class Elevator extends Subsystem {
   private static Elevator elevator;
 
   // PID VALUES
-  public static double ELEVATOR_P = 0.001, ELEVATOR_I = 0.00115, ELEVATOR_D = -0.002;
+  public static double ELEVATOR_P = 0.001, ELEVATOR_I = 0.00115,
+      ELEVATOR_D = -0.002;
   public static final double ACCELERATION_CONTROL = 0.3;
 
   // POSITIONS (in inches)
@@ -36,17 +38,22 @@ public class Elevator extends Subsystem {
   // Calibration constants for encoders
   public static final double MOTOR_CIRCUMFERENCE = 1.18 * Math.PI; // inches
   public static final double ENCODER_PULSES_PER_REVOLUTION = 1024.0;
-  public static final double INCHES_PER_PULSE = MOTOR_CIRCUMFERENCE / ENCODER_PULSES_PER_REVOLUTION;
+  public static final double INCHES_PER_PULSE =
+      MOTOR_CIRCUMFERENCE / ENCODER_PULSES_PER_REVOLUTION;
   public static final double ENC_HEIGHT_CONSTANT = 0.0481;
+
+  private double targetElevatorPos = 0;
 
   private Elevator() {
     elevatorTalon = new WPI_TalonSRX(Constants.Elevator.ELEVATOR_MOTOR);
-    elevatorEncoderTalon = new WPI_TalonSRX(Constants.Elevator.ELEVATOR_ENCODER_TALON);
+    elevatorEncoderTalon =
+        new WPI_TalonSRX(Constants.Elevator.ELEVATOR_ENCODER_TALON);
 
     elevatorEncoder = elevatorEncoderTalon.getSensorCollection();
 
     topLimitSwitch = new DigitalInput(Constants.Elevator.TOP_LIMIT_SWITCH);
-    bottomLimitSwitch = new DigitalInput(Constants.Elevator.BOTTOM_LIMIT_SWITCH);
+    bottomLimitSwitch =
+        new DigitalInput(Constants.Elevator.BOTTOM_LIMIT_SWITCH);
 
     hookPiston = new Solenoid(Constants.Elevator.PISTON_CHANNEL);
 
@@ -77,6 +84,7 @@ public class Elevator extends Subsystem {
   }
 
   public void stop() {
+    // setMotorValue(0.1);
     setMotorValue(0);
   }
 
@@ -86,7 +94,8 @@ public class Elevator extends Subsystem {
 
   // ENCODER METHODS
   public double getHeight() {
-    return ENC_HEIGHT_CONSTANT * elevatorEncoder.getQuadraturePosition() * INCHES_PER_PULSE / 4.0;
+    return ENC_HEIGHT_CONSTANT * elevatorEncoder.getQuadraturePosition()
+        * INCHES_PER_PULSE / 4.0;
   }
 
   public double getSpeed() {
@@ -112,6 +121,15 @@ public class Elevator extends Subsystem {
   public void periodicWarning() {}
 
   @Override
-  protected void initDefaultCommand() {}
+  protected void initDefaultCommand() {
+    new SetMotorValue(0.2, 10);
+  }
 
+  public double getTargetElevatorPos() {
+    return targetElevatorPos;
+  }
+
+  public void setTargetElavatorPos(double val) {
+    this.targetElevatorPos = val;
+  }
 }

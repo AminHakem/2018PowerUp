@@ -6,16 +6,11 @@ import org.usfirst.frc.team3501.robot.utils.PIDController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
-/***
- * This command moves the elevator to a specified target.
+/**
  *
- * @author Samhita
- *
- * @param target: the height the elevator will move to in inches
- * @param maxTimeOut: the maximum time this command will be allowed to run before being cut
  */
+public class MoveToTargetConstant extends Command {
 
-public class MoveToTarget extends Command {
 
   private Elevator elevator = Robot.getElevator();
   private PIDController elevatorController;
@@ -25,15 +20,15 @@ public class MoveToTarget extends Command {
   private double prevVal;
   Timer timer;
 
+  double previousTarget;
+
   /**
    * @param target the height the elevator will move to in inches
    * @param maxTimeOut the maximum time this command will be allowed to run before being cut
    */
-  public MoveToTarget(double target, double maxTimeOut) {
+  public MoveToTargetConstant(double target) {
     requires(elevator);
-    this.maxTimeOut = maxTimeOut;
-    this.target = target;
-    timer = new Timer();
+    this.target = elevator.getTargetElevatorPos();
 
     this.elevatorController = new PIDController(Elevator.ELEVATOR_P,
         Elevator.ELEVATOR_I, Elevator.ELEVATOR_D);
@@ -50,6 +45,18 @@ public class MoveToTarget extends Command {
 
   @Override
   protected void execute() {
+    double newTargetElevatorPos = elevator.getTargetElevatorPos();
+    if(newTargetElevatorPos != previousTarget || //within timer for transition)
+    {
+      //start timer for transition
+      this.elevator.setMotorValue(motorVal); // idling motor value
+      newTarget = newTargetElevatorPos;
+      return;
+    }
+    else
+    {
+      this.elevatorController.setSetPoint(this.target);
+    }
     double current = elevator.getHeight();
     double val = elevatorController.calcPID(current);
 
@@ -63,8 +70,7 @@ public class MoveToTarget extends Command {
 
   @Override
   protected boolean isFinished() {
-    return this.elevatorController.isDone() || timer.get() >= maxTimeOut
-        || this.elevator.isAtTop();
+    return false;
   }
 
   @Override
