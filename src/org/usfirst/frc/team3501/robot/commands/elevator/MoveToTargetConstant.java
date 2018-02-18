@@ -30,6 +30,7 @@ public class MoveToTargetConstant extends Command {
   public MoveToTargetConstant() {
     requires(elevator);
     this.target = elevator.getTargetElevatorPos();
+    this.previousTarget = target;
 
     this.elevatorController = new PIDController(Elevator.ELEVATOR_P,
         Elevator.ELEVATOR_I, Elevator.ELEVATOR_D);
@@ -53,6 +54,7 @@ public class MoveToTargetConstant extends Command {
       while(timer.get()<startTime+0.5) {
         elevator.setMotorValue(0);
       }
+      this.previousTarget = target;
     }
     elevatorController.setSetPoint(target);
     double current = elevator.getHeight();
@@ -64,7 +66,6 @@ public class MoveToTargetConstant extends Command {
       this.elevator.setMotorValue(val);
     }
     val = prevVal;
-    this.previousTarget = target;
 }
 
   @Override
