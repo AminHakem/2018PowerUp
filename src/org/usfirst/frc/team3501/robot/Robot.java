@@ -4,11 +4,8 @@ import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -26,8 +23,8 @@ public class Robot extends IterativeRobot {
   CommandGroup driveInLoop;
   SendableChooser autonChooser;
 
-  UsbCamera climberCam, intakeCam;
-  CameraServer cameraServer;
+  // UsbCamera climberCam, intakeCam;
+  // CameraServer cameraServer;
 
   @Override
   public void robotInit() {
@@ -35,7 +32,7 @@ public class Robot extends IterativeRobot {
     oi = OI.getOI();
     elevator = Elevator.getElevator();
     LiveWindow.setEnabled(false);
-      
+
     driveTrain.resetEncoders();
     elevator.resetEncoders();
     autonChooser = new SendableChooser();
@@ -44,12 +41,12 @@ public class Robot extends IterativeRobot {
     String gameData;
     gameData = DriverStation.getInstance().getGameSpecificMessage();
 
-    CameraServer server = CameraServer.getInstance();
-
-    UsbCamera rampCam = server.startAutomaticCapture("rampCam", 0);
-    rampCam.setResolution(1024, 1060);
-    UsbCamera hookCam = server.startAutomaticCapture("hookCam", 1);
-    hookCam.setResolution(1024, 1060);
+    // CameraServer server = CameraServer.getInstance();
+    //
+    // UsbCamera rampCam = server.startAutomaticCapture("rampCam", 0);
+    // rampCam.setResolution(1024, 1060);
+    // UsbCamera hookCam = server.startAutomaticCapture("hookCam", 1);
+    // hookCam.setResolution(1024, 1060);
   }
 
   public static Elevator getElevator() {
@@ -105,13 +102,16 @@ public class Robot extends IterativeRobot {
   }
 
   public void updateDriving() {
-    SmartDashboard.putNumber("right left encoder: ", driveTrain.getRightLeftEncoderDistance());
-    SmartDashboard.putNumber("front back encoder: ", driveTrain.getFrontBackEncoderDistance());
+    SmartDashboard.putNumber("right left encoder: ",
+        driveTrain.getRightLeftEncoderDistance());
+    SmartDashboard.putNumber("front back encoder: ",
+        driveTrain.getFrontBackEncoderDistance());
     SmartDashboard.putNumber("angle", driveTrain.getAngle());
     SmartDashboard.putNumber("rearleft", driveTrain.getRearLeftMotorPower());
     SmartDashboard.putNumber("rearright", driveTrain.getRearRightMotorPower());
     SmartDashboard.putNumber("frontleft", driveTrain.getFrontLeftMotorPower());
-    SmartDashboard.putNumber("frontright", driveTrain.getFrontRightMotorPower());
+    SmartDashboard.putNumber("frontright",
+        driveTrain.getFrontRightMotorPower());
   }
 
   public void updateElevator() {
@@ -127,8 +127,10 @@ public class Robot extends IterativeRobot {
   }
 
   public void displayCameraFeed() {
-    SmartDashboard.putData("Ramp Camera Feed", (Sendable) cameraServer.getVideo("rampCam"));
-
-    SmartDashboard.putData("Hook Camera Feed", (Sendable) cameraServer.getVideo("hookCam"));
+    // SmartDashboard.putData("Ramp Camera Feed",
+    // (Sendable) cameraServer.getVideo("rampCam"));
+    //
+    // SmartDashboard.putData("Hook Camera Feed",
+    // (Sendable) cameraServer.getVideo("hookCam"));
   }
 }
