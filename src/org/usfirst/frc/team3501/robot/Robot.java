@@ -4,6 +4,7 @@ import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
+import org.usfirst.frc.team3501.robot.utils.NetworkThread;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -26,6 +27,8 @@ public class Robot extends IterativeRobot {
   CommandGroup driveInLoop;
   SendableChooser autonChooser;
 
+  NetworkThread thread;
+
   UsbCamera climberCam, intakeCam;
   CameraServer cameraServer;
 
@@ -35,7 +38,11 @@ public class Robot extends IterativeRobot {
     oi = OI.getOI();
     elevator = Elevator.getElevator();
     LiveWindow.setEnabled(false);
-      
+
+    // initialize a thread which will run code to constantly update
+    thread = new NetworkThread();
+    thread.start();
+
     driveTrain.resetEncoders();
     elevator.resetEncoders();
     autonChooser = new SendableChooser();
