@@ -26,6 +26,7 @@ public class Constants {
     public static final int X_BUTTON_PORT = 2;
     public static final int CIRCLE_BUTTON_PORT = 3;
     public static final int TRIANGLE_BUTTON_PORT = 4;
+    public static final int L1_BUTTON_PORT = 5;
 
     // TODO: Confirm with Collin button mapping, then fill in the 0's below
     // (filler number) with
@@ -33,11 +34,11 @@ public class Constants {
 
     // Drive Train
     public static final int FIELD_ORIENTED_PORT = TRIANGLE_BUTTON_PORT;
-    public static final int VISION_ALIGN_PORT = 0;
+    public static final int VISION_ALIGN_PORT = X_BUTTON_PORT;
 
     // Intake
     public static final int RUN_INTAKE_PORT = SQUARE_BUTTON_PORT;
-    public static int REVERSE_INTAKE_PORT = X_BUTTON_PORT;
+    public static int REVERSE_INTAKE_PORT = CIRCLE_BUTTON_PORT;
 
     // Climber
     public static final int TOGGLE_PISTON_PORT = 0;
@@ -47,8 +48,8 @@ public class Constants {
     public static final int TOGGLE_CLIMB = 0;
 
     // Elevator
-    public static final int ELEVATOR_TO_SWITCH = CIRCLE_BUTTON_PORT;
-    public static final int ELEVATOR_TO_SCALE_LOW = TRIANGLE_BUTTON_PORT;
+    public static final int ELEVATOR_TO_SWITCH = L1_BUTTON_PORT;
+    public static final int ELEVATOR_TO_SCALE_LOW = 0;
     public static final int ELEVATOR_TO_SCALE_NEUTRAL = 0;
     public static final int ELEVATOR_TO_BOTTOM = 0;
   }
@@ -56,12 +57,14 @@ public class Constants {
   public static class Elevator {
     // LIFT MOTOR CONTROLLERS
     public static final int ELEVATOR_MOTOR = 9;
+    public static final int ELEVATOR_ENCODER_TALON = 2;
 
     // HALL EFFECT LIMIT SENSORS
     public static final int TOP_LIMIT_SWITCH = 0;
     public static final int BOTTOM_LIMIT_SWITCH = 1;
 
     public static final int PISTON_CHANNEL = 1;
+
   }
 
   public static class DriveTrain {

@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -33,9 +34,10 @@ public class Robot extends IterativeRobot {
     driveTrain = DriveTrain.getDriveTrain();
     oi = OI.getOI();
     elevator = Elevator.getElevator();
-
+    LiveWindow.setEnabled(false);
+      
     driveTrain.resetEncoders();
-
+    elevator.resetEncoders();
     autonChooser = new SendableChooser();
     autonCommand = (Command) autonChooser.getSelected();
 
@@ -86,6 +88,9 @@ public class Robot extends IterativeRobot {
   @Override
   public void teleopInit() {
     Scheduler.getInstance().add(teleopCommand);
+    if (elevator.isAtBottom() == true) {
+     // elevator.resetEncoders();
+    }
   }
 
   @Override
@@ -93,7 +98,7 @@ public class Robot extends IterativeRobot {
     Scheduler.getInstance().run();
     updateSmartDashboard();
     if (elevator.isAtBottom() == true) {
-      elevator.resetEncoders();
+     // elevator.resetEncoders();
     }
   }
 

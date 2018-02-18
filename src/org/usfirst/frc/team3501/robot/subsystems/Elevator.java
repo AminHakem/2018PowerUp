@@ -27,6 +27,7 @@ public class Elevator extends Subsystem {
   public static final int SCALE_BOTTOM_POS = 48; // assumes scale is at bottom position
   // there is no scale_top_pos because exceeds robot max height
   private final WPI_TalonSRX elevatorTalon;
+  private final WPI_TalonSRX elevatorEncoderTalon;
   private final SensorCollection elevatorEncoder;
   private final DigitalInput topLimitSwitch, bottomLimitSwitch;
 
@@ -40,7 +41,9 @@ public class Elevator extends Subsystem {
 
   private Elevator() {
     elevatorTalon = new WPI_TalonSRX(Constants.Elevator.ELEVATOR_MOTOR);
-    elevatorEncoder = elevatorTalon.getSensorCollection();
+    elevatorEncoderTalon = new WPI_TalonSRX(Constants.Elevator.ELEVATOR_ENCODER_TALON);
+
+    elevatorEncoder = elevatorEncoderTalon.getSensorCollection();
 
     topLimitSwitch = new DigitalInput(Constants.Elevator.TOP_LIMIT_SWITCH);
     bottomLimitSwitch = new DigitalInput(Constants.Elevator.BOTTOM_LIMIT_SWITCH);
