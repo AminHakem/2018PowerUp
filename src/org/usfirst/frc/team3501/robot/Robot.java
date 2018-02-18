@@ -87,10 +87,7 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void teleopInit() {
-    Scheduler.getInstance().add(teleopCommand);
-    if (elevator.isAtBottom() == true) {
-     // elevator.resetEncoders();
-    }
+
   }
 
   @Override
@@ -98,7 +95,7 @@ public class Robot extends IterativeRobot {
     Scheduler.getInstance().run();
     updateSmartDashboard();
     if (elevator.isAtBottom() == true) {
-     // elevator.resetEncoders();
+      elevator.resetEncoders();
     }
   }
 
