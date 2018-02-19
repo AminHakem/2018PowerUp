@@ -3,6 +3,7 @@ package org.usfirst.frc.team3501.robot.subsystems;
 import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.MathLib;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -26,6 +27,9 @@ public class Climber extends Subsystem {
     // MOTOR CONTROLLER
     rightWinch = new WPI_TalonSRX(Constants.Climber.RIGHT_WINCH);
     leftWinch = new WPI_TalonSRX(Constants.Climber.LEFT_WINCH);
+    rightWinch.setNeutralMode(NeutralMode.Brake);
+    leftWinch.setNeutralMode(NeutralMode.Brake);
+
     rampSolenoid = new Solenoid(Constants.Climber.PISTON_CHANNEL);
   }
 

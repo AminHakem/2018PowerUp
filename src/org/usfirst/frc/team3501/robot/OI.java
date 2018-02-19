@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3501.robot;
 
+import org.usfirst.frc.team3501.robot.Constants.Direction;
+import org.usfirst.frc.team3501.robot.commands.climber.LiftRobot;
 import org.usfirst.frc.team3501.robot.commands.driving.AlignWithCube;
 import org.usfirst.frc.team3501.robot.commands.driving.ToggleFieldOriented;
 import org.usfirst.frc.team3501.robot.commands.elevator.MoveToTarget;
@@ -28,6 +30,10 @@ public class OI {
   public Button climbingWinch;
   public Button loweringWinch;
   public Button toggleJoystickClimb;
+  
+  public Button climbLeft;
+  public Button climbRight;
+  public Button climbBoth;
 
   // Elevator
   public static Button moveElevatorToSwitch;
@@ -82,6 +88,15 @@ public class OI {
 
     moveElevatorToBottom = new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_BOTTOM);
     moveElevatorToBottom.whenPressed(new MoveToTarget(0, 20));
+    
+    climbLeft = new JoystickButton(ps4_controller, 7);
+    climbLeft.whileHeld(new LiftRobot(Direction.LEFT));
+    
+    climbRight = new JoystickButton(ps4_controller, 8);
+    climbRight.whileHeld(new LiftRobot(Direction.RIGHT));
+
+    climbBoth = new JoystickButton(ps4_controller, 6);
+    climbBoth.whileHeld(new LiftRobot(Direction.UP));
   }
 
   public static OI getOI() {

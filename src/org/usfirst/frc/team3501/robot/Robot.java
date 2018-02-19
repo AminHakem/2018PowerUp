@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3501.robot;
 
 import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchLeft;
+import org.usfirst.frc.team3501.robot.commands.climber.LiftRobot;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
