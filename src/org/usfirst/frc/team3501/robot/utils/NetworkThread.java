@@ -21,7 +21,7 @@ public class NetworkThread extends Thread {
 
   private static int BOX_SHIFT_X;
   private static int BOX_SHIFT_Y;
-  private static int BOX_SIZE;
+  private static double BOX_SIZE;
   private static boolean IS_VISIBLE;
 
   public NetworkThread() {
@@ -35,7 +35,7 @@ public class NetworkThread extends Thread {
   @Override
   public void run() {
     while (true) {
-      System.out.print(this.BOX_SHIFT_X + "/t" + this.BOX_SHIFT_Y + "/t" + this.IS_VISIBLE);
+      System.out.println(this.BOX_SHIFT_X + "\t" + this.BOX_SIZE + "\t" + this.IS_VISIBLE);
 
       DatagramPacket packet = new DatagramPacket(buf, buf.length);
       try {
@@ -68,10 +68,8 @@ public class NetworkThread extends Thread {
         BOX_SHIFT_X = (int) Double.parseDouble(trimmed.substring(startIndex + 1, firstCommaIndex));
         BOX_SHIFT_Y =
             60 + (int) Double.parseDouble(trimmed.substring(firstCommaIndex + 1, secondCommaIndex));
-        BOX_SIZE =
-            (int) Double.parseDouble(trimmed.substring(secondCommaIndex + 1, thirdCommaIndex));
+        BOX_SIZE = Double.parseDouble(trimmed.substring(secondCommaIndex + 1, thirdCommaIndex));
         IS_VISIBLE = trimmed.substring(thirdCommaIndex + 1, endIndex).equals("true");
-
 
       }
 
@@ -98,7 +96,7 @@ public class NetworkThread extends Thread {
     return BOX_SHIFT_Y;
   }
 
-  public static int getBoxSize() {
+  public static double getBoxSize() {
     return BOX_SIZE;
   }
 

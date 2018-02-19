@@ -45,6 +45,7 @@ public class Elevator extends Subsystem {
     elevatorEncoderTalon = new WPI_TalonSRX(Constants.Elevator.ELEVATOR_ENCODER_TALON);
 
     elevatorEncoder = elevatorEncoderTalon.getSensorCollection();
+    this.resetEncoders();
 
     topLimitSwitch = new DigitalInput(Constants.Elevator.TOP_LIMIT_SWITCH);
     bottomLimitSwitch = new DigitalInput(Constants.Elevator.BOTTOM_LIMIT_SWITCH);

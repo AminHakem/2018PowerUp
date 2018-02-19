@@ -22,19 +22,17 @@ public class AlignWithCube extends Command {
 
   public AlignWithCube() {
     requires(Robot.getDriveTrain());
-    alignmentControllerX =
-        new PIDController(DriveTrain.driveSidewaysP, DriveTrain.driveSidewaysI, 0);
+    alignmentControllerX = new PIDController(0.012, 0.0011, -0.004);
     alignmentControllerX.setDoneRange(3);
 
-    alignmentControllerY =
-        new PIDController(DriveTrain.driveStraightPShort, DriveTrain.driveStraightIShort, 0);
+    alignmentControllerY = new PIDController(0.2, 0.003, -0.002);
     alignmentControllerY.setDoneRange(0.2);
   }
 
   @Override
   protected void initialize() {
     alignmentControllerX.setSetPoint(0);
-    alignmentControllerY.setSetPoint(3);
+    alignmentControllerY.setSetPoint(1);
     System.out.println("setpoints set");
 
   }
@@ -44,18 +42,19 @@ public class AlignWithCube extends Command {
 
     if (NetworkThread.isBoxVisible()) {
       double outputX = alignmentControllerX.calcPID(NetworkThread.getBoxX());
-      double outputY = alignmentControllerX.calcPID(NetworkThread.getBoxSize());
-      DriveTrain.getDriveTrain().mecanumDrive(-outputX / 10, -outputY / 10, 0);
+      double outputY = alignmentControllerY.calcPID(NetworkThread.getBoxSize());
+      DriveTrain.getDriveTrain().mecanumDrive(-outputX, -outputY, 0);
     }
   }
 
   @Override
   protected boolean isFinished() {
-    return this.alignmentControllerX.isDone() && this.alignmentControllerY.isDone();
+    return false;
   }
 
   @Override
   protected void end() {
+    DriveTrain.getDriveTrain().stop();
     System.out.println("AlignWithCube finished");
   }
 

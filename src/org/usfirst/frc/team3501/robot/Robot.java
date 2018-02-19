@@ -1,7 +1,5 @@
 package org.usfirst.frc.team3501.robot;
 
-import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchLeft;
-import org.usfirst.frc.team3501.robot.commands.climber.LiftRobot;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
@@ -11,8 +9,8 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -23,15 +21,13 @@ public class Robot extends IterativeRobot {
   private static OI oi;
   private static Elevator elevator;
   Command autonCommand;
-  Command autonCommandTwo;
-  Command teleopCommand;
-  CommandGroup driveInLoop;
-  SendableChooser autonChooser;
 
   NetworkThread thread;
 
   UsbCamera climberCam, intakeCam;
   CameraServer cameraServer;
+
+  SendableChooser autonChooser;
 
   @Override
   public void robotInit() {
@@ -44,11 +40,8 @@ public class Robot extends IterativeRobot {
     thread = new NetworkThread();
     thread.start();
 
-    driveTrain.resetEncoders();
-    elevator.resetEncoders();
     autonChooser = new SendableChooser();
     // autonCommand = (Command) autonChooser.getSelected();
-    autonCommand = new StartLeftSwitchLeft();
 
     String gameData;
     gameData = DriverStation.getInstance().getGameSpecificMessage();
@@ -92,12 +85,13 @@ public class Robot extends IterativeRobot {
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
     updateSmartDashboard();
+    if (elevator.isAtBottom() == true) {
+      elevator.resetEncoders();
+    }
   }
 
   @Override
-  public void teleopInit() {
-
-  }
+  public void teleopInit() {}
 
   @Override
   public void teleopPeriodic() {
@@ -125,16 +119,13 @@ public class Robot extends IterativeRobot {
 
   public void updateElevator() {
     SmartDashboard.putNumber("Elevator encoder: ", elevator.getHeight());
-
     SmartDashboard.putBoolean("Is elevator at top", elevator.isAtTop());
     SmartDashboard.putBoolean("Is elevator at bottom", elevator.isAtBottom());
   }
 
   public void displayCameraFeed() {
-    // SmartDashboard.putData("Ramp Camera Feed",
-    // (Sendable) cameraServer.getVideo("rampCam"));
-    //
-    // SmartDashboard.putData("Hook Camera Feed",
-    // (Sendable) cameraServer.getVideo("hookCam"));
+    SmartDashboard.putData("Ramp Camera Feed", (Sendable) cameraServer.getVideo("rampCam"));
+
+    SmartDashboard.putData("Hook Camera Feed", (Sendable) cameraServer.getVideo("hookCam"));
   }
 }

@@ -20,9 +20,9 @@ public class DriveTrain extends Subsystem {
   // Set PID values, need to test mecanum wheels to find them
   public static double driveStraightPLong = 0.01, driveStraightILong = 0.0005,
       driveStraightDLong = -0.005;
-  public static double driveStraightPShort = 0.012, driveStraightIShort = 0.00115,
+  public static double driveStraightPShort = 0.015, driveStraightIShort = 0.00115,
       driveStraightDShort = -0.004;
-  public static double driveSidewaysP = 0.015, driveSidewaysI = 0.0015, driveSidewaysD = -0.002;
+  public static double driveSidewaysP = 0.012, driveSidewaysI = 0.0025, driveSidewaysD = -0.002;
   public static double smallTurnP = 0.004, smallTurnI = 0.0013, smallTurnD = 0.005;
   public static double largeTurnP = .003, largeTurnI = .0012, largeTurnD = .006;
   public static double driveStraightGyroP = 0.01;
@@ -58,6 +58,7 @@ public class DriveTrain extends Subsystem {
     // Encoders
     frontBackEncoder = rearLeft.getSensorCollection();
     leftRightEncoder = rearRight.getSensorCollection();
+    this.resetEncoders();
 
     this.fieldOriented = false;
     this.alignedWithCube = false;
