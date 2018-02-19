@@ -2,6 +2,7 @@ package org.usfirst.frc.team3501.robot;
 
 import org.usfirst.frc.team3501.robot.commands.driving.AlignWithCube;
 import org.usfirst.frc.team3501.robot.commands.driving.ToggleFieldOriented;
+import org.usfirst.frc.team3501.robot.commands.elevator.ChangeElevatorTarget;
 import org.usfirst.frc.team3501.robot.commands.elevator.MoveToTarget;
 import org.usfirst.frc.team3501.robot.commands.intake.RunIntake;
 import org.usfirst.frc.team3501.robot.commands.intake.RunOuttake;
@@ -75,17 +76,16 @@ public class OI {
 
     // Elevator
     moveElevatorToSwitch = new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_SWITCH);
-    moveElevatorToSwitch.whenPressed(new MoveToTarget(Elevator.SWITCH_POS, 20));
+    moveElevatorToSwitch.whenPressed(new ChangeElevatorTarget(Elevator.SWITCH_POS));
     // moveElevatorToScaleLow = new JoystickButton(ps4_controller,
     // Constants.OI.ELEVATOR_TO_SCALE_LOW);
     // moveElevatorToScaleLow.whenPressed(new MoveToTarget(Elevator.SCALE_BOTTOM_POS, 20));
 
-    moveElevatorToScaleNeutral =
-        new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_SCALE_NEUTRAL);
-    moveElevatorToScaleNeutral.whenPressed(new MoveToTarget(Elevator.SCALE_START_POS, 20));
+    moveElevatorToScaleNeutral = new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_SCALE_NEUTRAL);
+    moveElevatorToScaleNeutral.whenPressed(new ChangeElevatorTarget(Elevator.SCALE_START_POS));
 
     moveElevatorToBottom = new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_BOTTOM);
-    moveElevatorToBottom.whenPressed(new MoveToTarget(0, 20));
+    moveElevatorToBottom.whenPressed(new ChangeElevatorTarget(Elevator.BOTTOM_POS));
 
     // climbLeft = new JoystickButton(ps4_controller, 7);
     // climbLeft.whileHeld(new LiftRobot(Direction.LEFT));

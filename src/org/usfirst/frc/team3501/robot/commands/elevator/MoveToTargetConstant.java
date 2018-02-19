@@ -5,6 +5,7 @@ import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import org.usfirst.frc.team3501.robot.utils.PIDController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Set this to the default command for the elevator and then update targetElevatorPos
@@ -27,10 +28,10 @@ public class MoveToTargetConstant extends Command {
     requires(elevator);
     this.target = elevator.getTargetElevatorPos();
     this.previousTarget = target;
-
+    timer = new Timer();
     this.elevatorController = new PIDController(Elevator.ELEVATOR_P,
         Elevator.ELEVATOR_I, Elevator.ELEVATOR_D);
-    this.elevatorController.setDoneRange(1.0);
+    this.elevatorController.setDoneRange(3.0);
     this.elevatorController.setMaxOutput(0.75);
     this.elevatorController.setMinDoneCycles(5);
   }
@@ -55,13 +56,14 @@ public class MoveToTargetConstant extends Command {
     elevatorController.setSetPoint(target);
     double current = elevator.getHeight();
     double val = elevatorController.calcPID(current);
+    double motorVal = val;
 
-    if (val - prevVal > Elevator.ACCELERATION_CONTROL) {
-      this.elevator.setMotorValue(val + Elevator.ACCELERATION_CONTROL);
-    } else {
-      this.elevator.setMotorValue(val);
-    }
-    val = prevVal;
+    if (val - prevVal > Elevator.ACCELERATION_CONTROL)
+      motorVal = prevVal + Elevator.ACCELERATION_CONTROL;
+
+    this.elevator.setMotorValue(motorVal);
+    prevVal = val;
+    SmartDashboard.putNumber("elevator power", motorVal);
 }
 
   @Override

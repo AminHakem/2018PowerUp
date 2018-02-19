@@ -2,6 +2,7 @@ package org.usfirst.frc.team3501.robot.subsystems;
 
 import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.MathLib;
+import org.usfirst.frc.team3501.robot.commands.elevator.MoveToTargetConstant;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SensorCollection;
@@ -38,7 +39,7 @@ public class Elevator extends Subsystem {
   public static final double INCHES_PER_PULSE = MOTOR_CIRCUMFERENCE / ENCODER_PULSES_PER_REVOLUTION;
   public static final double ENC_HEIGHT_CONSTANT = 0.0481;
 
-  private double targetElevatorPos = 6;
+  private double targetElevatorPos = this.BOTTOM_POS;
 
   private Elevator() {
     elevatorTalon = new WPI_TalonSRX(Constants.Elevator.ELEVATOR_MOTOR);
@@ -120,7 +121,7 @@ public class Elevator extends Subsystem {
 
   @Override
   protected void initDefaultCommand() {
-    // new MoveToTargetConstant();
+    this.setDefaultCommand( new MoveToTargetConstant());
   }
 
   public double getTargetElevatorPos() {
