@@ -35,7 +35,7 @@ public class Robot extends IterativeRobot {
     oi = OI.getOI();
     elevator = Elevator.getElevator();
     LiveWindow.setEnabled(false);
-      
+
     driveTrain.resetEncoders();
     elevator.resetEncoders();
     autonChooser = new SendableChooser();
@@ -44,12 +44,12 @@ public class Robot extends IterativeRobot {
     String gameData;
     gameData = DriverStation.getInstance().getGameSpecificMessage();
 
-    CameraServer server = CameraServer.getInstance();
-
-    UsbCamera rampCam = server.startAutomaticCapture("rampCam", 0);
-    rampCam.setResolution(1024, 1060);
-    UsbCamera hookCam = server.startAutomaticCapture("hookCam", 1);
-    hookCam.setResolution(1024, 1060);
+    // CameraServer server = CameraServer.getInstance();
+    //
+    // UsbCamera rampCam = server.startAutomaticCapture("rampCam", 0);
+    // rampCam.setResolution(1024, 1060);
+    // UsbCamera hookCam = server.startAutomaticCapture("hookCam", 1);
+    // hookCam.setResolution(1024, 1060);
   }
 
   public static Elevator getElevator() {

@@ -19,25 +19,21 @@ public class StartLeftSwitchRight extends CommandGroup {
   public static final double ROBOT_LENGTH = 38.0;
   public static final double SCALE = Constants.Auton.SCALE_FACTOR_TESTING;
 
-  public static final double LEFT_WALL_TO_CUBES_VERTICAL = 84;
-  public static final double LEFT_WALL_TO_RIGHT_WALL_HORIZONTAL = 225;
-  public static final double RIGHT_WALL_TO_SWITCH_VERTICAL = 60;
-  public static final double RIGHT_WALL_TO_SWITCH_HORIZONTAL = 42;
+  public static final double TO_CUBES = 84;
+  public static final double LEFT_TO_RIGHT = 225;
+  public static final double TO_SWITCH_VERT = 60;
+  public static final double TO_SWITCH_HORIZ = 42;
 
   public StartLeftSwitchRight() {
     // did 48 in so it leaves margin for how much distance the cube is dropping
     addSequential(new MoveToTarget(48, 5));
-    addSequential(new DriveForward(LEFT_WALL_TO_CUBES_VERTICAL * SCALE, 10));
-    addSequential(new TurnForAngle(90, 3));
-    addSequential(new DriveForward(LEFT_WALL_TO_RIGHT_WALL_HORIZONTAL * SCALE, 9.5));
-    // turn left 90 degrees
-    addSequential(new TurnForAngle(-90, 3));
-    // drive 60 in.
-    addSequential(new DriveForward(RIGHT_WALL_TO_SWITCH_VERTICAL * SCALE, 7.5));
-    // turn 90 degrees left
-    addSequential(new TurnForAngle(-90, 3));
-    // drive 12 in.
-    addSequential(new DriveForward(RIGHT_WALL_TO_SWITCH_HORIZONTAL * SCALE, 4.5));
+    addSequential(new DriveForward((TO_CUBES - ROBOT_LENGTH / 2) * SCALE, 10)); // drive forward
+    addSequential(new TurnForAngle(90, 3)); // turn right
+    addSequential(new DriveForward(LEFT_TO_RIGHT * SCALE, 9.5)); // drive right
+    addSequential(new TurnForAngle(-90, 3)); // turn left
+    addSequential(new DriveForward(TO_SWITCH_VERT * SCALE, 7.5)); // drive forward
+    addSequential(new TurnForAngle(-90, 3)); // turn left
+    addSequential(new DriveForward(TO_SWITCH_HORIZ * SCALE, 4.5)); // drive left
     addSequential(new RunOuttake());
     addSequential(new MoveToTarget(48, 5));
   }

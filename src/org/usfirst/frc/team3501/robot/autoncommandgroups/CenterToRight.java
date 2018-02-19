@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  * @author Ayush Nigade
  */
 public class CenterToRight extends CommandGroup {
+  // TODO: fix dimensions
 
   public static final double ROBOT_LENGTH = 38.0;
   public static final double SCALE = Constants.Auton.SCALE_FACTOR_TESTING;
@@ -26,7 +27,7 @@ public class CenterToRight extends CommandGroup {
 
   public CenterToRight() {
     addSequential(new MoveToTarget(48, 5));
-    addSequential(new DriveForward(TO_CUBES * SCALE, 10));
+    addSequential(new DriveForward((TO_CUBES - ROBOT_LENGTH) * SCALE, 10));
     addSequential(new TurnForAngle(90, 3));
     addSequential(new DriveForward(TO_RIGHT_WALL * SCALE, 9));
     addSequential(new TurnForAngle(-90, 3));
