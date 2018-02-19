@@ -83,7 +83,7 @@ public class Robot extends IterativeRobot {
   public void autonomousInit() {
     driveTrain.resetGyro();
     driveTrain.resetEncoders();
-    autonCommand =new  DriveForward(60,15);
+    autonCommand = new DriveForward(60, 15);
     Scheduler.getInstance().add(autonCommand);
   }
 

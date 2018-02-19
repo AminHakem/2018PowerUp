@@ -36,8 +36,8 @@ public class DriveForward extends Command {
       this.driveController = new PIDController(DriveTrain.driveStraightPLong,
           DriveTrain.driveStraightILong, DriveTrain.driveStraightDLong);
     this.driveController.setDoneRange(2.0);
-    this.driveController.setMaxOutput(0.6);
-    this.driveController.setMinDoneCycles(20);
+    this.driveController.setMaxOutput(0.5);
+    this.driveController.setMinDoneCycles(10);
     this.zeroAngle = this.driveTrain.getAngle();
 
     this.directionController = new PIDController(driveTrain.driveStraightGyroP, 0, 0);

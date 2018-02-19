@@ -9,33 +9,24 @@ import org.usfirst.frc.team3501.robot.commands.intake.RunOuttake;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class StartRightScaleLeft extends CommandGroup {
-  private static final Constants.Direction TURN_RIGHT = Constants.Direction.RIGHT;
-  private static final Constants.Direction TURN_LEFT = Constants.Direction.LEFT;
 
-  public static final double RIGHT_WALL_TO_MIDWAYofSWITCHSCALE = 240;
-  public static final double RIGHT_MIDWAYofSWITCHSCALE_TO_LEFT_MIDWAYofSWITCHSCALE = 264.0;
-  public static final double LEFT_MIDWAYofSWITCHSCALE_TO_SCALE = 58.8;
-  private static final double SCALE_FACTOR_TESTING = 0.1;
+  public static final double ROBOT_LENGTH = 38.0;
+  public static final double SCALE = Constants.Auton.SCALE_FACTOR_TESTING;
+
+  public static final double TO_PLATFORM_ZONE = 240;
+  public static final double THROUGH_PLATFORM_ZONE = 264.0;
+  public static final double TO_NULL_TERRITORY = 58.8;
 
   public StartRightScaleLeft() {
     addSequential(new MoveToTarget(84, 5));
     // robot drives straight 240 in
-    addSequential(new DriveForward(
-        RIGHT_WALL_TO_MIDWAYofSWITCHSCALE * Constants.Auton.SCALE_FACTOR_TESTING, 0));
+    addSequential(new DriveForward(TO_PLATFORM_ZONE * SCALE, 0)); // forward
     MathLib.debugPrint("Finished command 1");
     // robot turns right 90 degrees
-    addSequential(new TurnForAngle(-90.0, 5.0));
-    MathLib.debugPrint("Finished command 2");
-    // Drive straight 264 inwards
-    addSequential(new DriveForward(RIGHT_MIDWAYofSWITCHSCALE_TO_LEFT_MIDWAYofSWITCHSCALE
-        * Constants.Auton.SCALE_FACTOR_TESTING, 0));
-    MathLib.debugPrint("Finished command 3");
-    // robot turns left 90 degrees
-    addSequential(new TurnForAngle(-90.0, 5.0));
-    MathLib.debugPrint("Finished command 4");
-    // robot drives straight 58.8 in
-    addSequential(new DriveForward(
-        LEFT_MIDWAYofSWITCHSCALE_TO_SCALE * Constants.Auton.SCALE_FACTOR_TESTING, 0));
+    addSequential(new TurnForAngle(-90.0, 5.0)); // turn left
+    addSequential(new DriveForward(THROUGH_PLATFORM_ZONE * SCALE, 0)); // left
+    addSequential(new TurnForAngle(-90.0, 5.0)); // turn
+    addSequential(new DriveForward(TO_NULL_TERRITORY * SCALE, 0));
     MathLib.debugPrint("Finished command 5");
     // robot turns left 90 degrees
     addSequential(new TurnForAngle(-90.0, 5.0));
