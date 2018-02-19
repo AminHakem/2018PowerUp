@@ -1,5 +1,11 @@
 package org.usfirst.frc.team3501.robot;
 
+import org.usfirst.frc.team3501.robot.autoncommandgroups.CenterToLeft;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.CenterToRight;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchLeft;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchRight;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.StartRightSwitchLeft;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.StartRightSwitchRight;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
@@ -27,7 +33,9 @@ public class Robot extends IterativeRobot {
   UsbCamera climberCam, intakeCam;
   CameraServer cameraServer;
 
-  SendableChooser autonChooser;
+  SendableChooser<Integer> autonChooser;
+  int autonStartPos;
+  String gameData;
 
   @Override
   public void robotInit() {
@@ -41,17 +49,20 @@ public class Robot extends IterativeRobot {
     thread.start();
 
     autonChooser = new SendableChooser();
-    // autonCommand = (Command) autonChooser.getSelected();
 
-    String gameData;
     gameData = DriverStation.getInstance().getGameSpecificMessage();
 
-    // CameraServer server = CameraServer.getInstance();
-    //
+    CameraServer server = CameraServer.getInstance();
+    autonChooser = new SendableChooser<Integer>();
+    autonChooser.addObject("right", Integer.valueOf(0));
+    autonChooser.addObject("left", Integer.valueOf(1));
+    autonChooser.addObject("middle", Integer.valueOf(2));
+
     // UsbCamera rampCam = server.startAutomaticCapture("rampCam", 0);
     // rampCam.setResolution(1024, 1060);
     // UsbCamera hookCam = server.startAutomaticCapture("hookCam", 1);
     // hookCam.setResolution(1024, 1060);
+    SmartDashboard.putData("Autonomous Selector", autonChooser);
   }
 
   public static Elevator getElevator() {
@@ -78,6 +89,28 @@ public class Robot extends IterativeRobot {
   public void autonomousInit() {
     driveTrain.resetGyro();
     driveTrain.resetEncoders();
+    autonStartPos = autonChooser.getSelected();
+    if (gameData.length() > 0) {
+      if (gameData.charAt(0) == 'L') {
+        switch (autonStartPos) {
+          case 0:
+            autonCommand = new StartRightSwitchLeft();
+          case 1:
+            autonCommand = new StartLeftSwitchLeft();
+          case 2:
+            autonCommand = new CenterToLeft();
+        }
+      } else if (gameData.charAt(0) == 'R') {
+        switch (autonStartPos) {
+          case 0:
+            autonCommand = new StartRightSwitchRight();
+          case 1:
+            autonCommand = new StartLeftSwitchRight();
+          case 2:
+            autonCommand = new CenterToRight();
+        }
+      }
+    }
     Scheduler.getInstance().add(autonCommand);
   }
 
