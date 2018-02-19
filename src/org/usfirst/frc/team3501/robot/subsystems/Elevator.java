@@ -22,7 +22,7 @@ public class Elevator extends Subsystem {
   public static final int BOTTOM_POS = 0;
   public static final int TOP_POS = 71; // assumes at max height for robot
   public static final int SWITCH_POS = 30;
-  public static final int SCALE_START_POS = 60; // assumes scale is at its starting position
+  public static final int SCALE_START_POS = 67; // assumes scale is at its starting position
   public static final int SCALE_BOTTOM_POS = 48; // assumes scale is at bottom position
   // there is no scale_top_pos because exceeds robot max height
   private final WPI_TalonSRX elevatorTalon;

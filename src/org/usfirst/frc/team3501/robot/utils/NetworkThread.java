@@ -35,7 +35,7 @@ public class NetworkThread extends Thread {
   @Override
   public void run() {
     while (true) {
-      System.out.println(this.BOX_SHIFT_X + "\t" + this.BOX_SIZE + "\t" + this.IS_VISIBLE);
+      // System.out.println(this.BOX_SHIFT_X + "\t" + this.BOX_SIZE + "\t" + this.IS_VISIBLE);
 
       DatagramPacket packet = new DatagramPacket(buf, buf.length);
       try {

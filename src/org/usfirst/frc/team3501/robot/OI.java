@@ -79,10 +79,10 @@ public class OI {
     // moveElevatorToScaleLow = new JoystickButton(ps4_controller,
     // Constants.OI.ELEVATOR_TO_SCALE_LOW);
     // moveElevatorToScaleLow.whenPressed(new MoveToTarget(Elevator.SCALE_BOTTOM_POS, 20));
-    //
-    // moveElevatorToScaleNeutral =
-    // new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_SCALE_NEUTRAL);
-    // moveElevatorToScaleNeutral.whenPressed(new MoveToTarget(Elevator.SCALE_START_POS, 20));
+
+    moveElevatorToScaleNeutral =
+        new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_SCALE_NEUTRAL);
+    moveElevatorToScaleNeutral.whenPressed(new MoveToTarget(Elevator.SCALE_START_POS, 20));
 
     moveElevatorToBottom = new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_BOTTOM);
     moveElevatorToBottom.whenPressed(new MoveToTarget(0, 20));

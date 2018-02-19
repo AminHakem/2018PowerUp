@@ -20,12 +20,14 @@ public class AlignWithCube extends Command {
   private PIDController alignmentControllerX;
   private PIDController alignmentControllerY;
 
+  private double time = 0;
+
   public AlignWithCube() {
     requires(Robot.getDriveTrain());
     alignmentControllerX = new PIDController(0.012, 0.0011, -0.004);
     alignmentControllerX.setDoneRange(3);
 
-    alignmentControllerY = new PIDController(0.2, 0.003, -0.002);
+    alignmentControllerY = new PIDController(0.1, 0.003, -0.002);
     alignmentControllerY.setDoneRange(0.2);
   }
 
@@ -34,7 +36,7 @@ public class AlignWithCube extends Command {
     alignmentControllerX.setSetPoint(0);
     alignmentControllerY.setSetPoint(1);
     System.out.println("setpoints set");
-
+    time = 0;
   }
 
   @Override
@@ -45,10 +47,18 @@ public class AlignWithCube extends Command {
       double outputY = alignmentControllerY.calcPID(NetworkThread.getBoxSize());
       DriveTrain.getDriveTrain().mecanumDrive(-outputX, -outputY, 0);
     }
+
+    if (time == 0 && alignmentControllerY.isDone()) {
+      time = timeSinceInitialized();
+      System.out.println("detected   Y: " + NetworkThread.getBoxSize());
+    }
+    System.out.println(time);
   }
 
   @Override
   protected boolean isFinished() {
+    if (time != 0)
+      return timeSinceInitialized() - time > 0.25;
     return false;
   }
 
