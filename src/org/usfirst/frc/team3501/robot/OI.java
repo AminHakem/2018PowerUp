@@ -83,7 +83,7 @@ public class OI {
     moveElevatorToSwitch =
         new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_SWITCH);
     moveElevatorToSwitch
-        .whenPressed(new ChangeElevatorTarget(10));
+        .whenPressed(new MoveToTarget(30,20));
     moveElevatorToScaleLow =
         new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_SCALE_LOW);
     moveElevatorToScaleLow
@@ -96,7 +96,7 @@ public class OI {
 
     moveElevatorToBottom =
         new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_BOTTOM);
-    moveElevatorToBottom.whenPressed(new ChangeElevatorTarget(Elevator.BOTTOM_POS));
+    moveElevatorToBottom.whenPressed(new MoveToTarget(0,20));
   }
 
   public static OI getOI() {

@@ -95,8 +95,8 @@ public class Elevator extends Subsystem {
 
   // ENCODER METHODS
   public double getHeight() {
-    return ENC_HEIGHT_CONSTANT * elevatorEncoder.getQuadraturePosition()
-        * INCHES_PER_PULSE / 4.0;
+    return (ENC_HEIGHT_CONSTANT * elevatorEncoder.getQuadraturePosition()
+        * INCHES_PER_PULSE / 4.0)*(2.0/3.0);
   }
 
   public double getSpeed() {
