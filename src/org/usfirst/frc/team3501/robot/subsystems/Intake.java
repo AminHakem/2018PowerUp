@@ -36,7 +36,6 @@ public class Intake extends Subsystem {
   public void setMotorValues(double motorSpeed) {
     motorSpeed = MathLib.restrictToRange(motorSpeed, -1.0, 1.0);
 
-    System.out.println(" to " + motorSpeed);
     intakeTalon.set(ControlMode.PercentOutput, motorSpeed);
   }
 

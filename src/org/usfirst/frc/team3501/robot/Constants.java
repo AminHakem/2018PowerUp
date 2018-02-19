@@ -60,8 +60,8 @@ public class Constants {
     public static final int ELEVATOR_ENCODER_TALON = 2;
 
     // HALL EFFECT LIMIT SENSORS
-    public static final int TOP_LIMIT_SWITCH = 0;
-    public static final int BOTTOM_LIMIT_SWITCH = 1;
+    public static final int TOP_LIMIT_SWITCH = 1;
+    public static final int BOTTOM_LIMIT_SWITCH = 0;
 
     public static final int PISTON_CHANNEL = 1;
 

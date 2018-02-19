@@ -2,8 +2,6 @@ package org.usfirst.frc.team3501.robot.subsystems;
 
 import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.MathLib;
-import org.usfirst.frc.team3501.robot.commands.elevator.MoveToTargetConstant;
-import org.usfirst.frc.team3501.robot.commands.elevator.SetMotorValue;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SensorCollection;
@@ -17,15 +15,13 @@ public class Elevator extends Subsystem {
   private static Elevator elevator;
 
   // PID VALUES
-  public static double ELEVATOR_P = 0.001, ELEVATOR_I = 0.00115,
-      ELEVATOR_D = -0.002;
+  public static double ELEVATOR_P = 0.03, ELEVATOR_I = 0.00115, ELEVATOR_D = -0.002;
   public static final double ACCELERATION_CONTROL = 0.3;
 
   // POSITIONS (in inches)
-  public static final int START_POS = 0;
   public static final int BOTTOM_POS = 0;
   public static final int TOP_POS = 71; // assumes at max height for robot
-  public static final int SWITCH_POS = 10;
+  public static final int SWITCH_POS = 30;
   public static final int SCALE_START_POS = 60; // assumes scale is at its starting position
   public static final int SCALE_BOTTOM_POS = 48; // assumes scale is at bottom position
   // there is no scale_top_pos because exceeds robot max height
@@ -39,27 +35,23 @@ public class Elevator extends Subsystem {
   // Calibration constants for encoders
   public static final double MOTOR_CIRCUMFERENCE = 1.18 * Math.PI; // inches
   public static final double ENCODER_PULSES_PER_REVOLUTION = 1024.0;
-  public static final double INCHES_PER_PULSE =
-      MOTOR_CIRCUMFERENCE / ENCODER_PULSES_PER_REVOLUTION;
+  public static final double INCHES_PER_PULSE = MOTOR_CIRCUMFERENCE / ENCODER_PULSES_PER_REVOLUTION;
   public static final double ENC_HEIGHT_CONSTANT = 0.0481;
 
   private double targetElevatorPos = 6;
 
   private Elevator() {
     elevatorTalon = new WPI_TalonSRX(Constants.Elevator.ELEVATOR_MOTOR);
-    elevatorEncoderTalon =
-        new WPI_TalonSRX(Constants.Elevator.ELEVATOR_ENCODER_TALON);
+    elevatorEncoderTalon = new WPI_TalonSRX(Constants.Elevator.ELEVATOR_ENCODER_TALON);
 
     elevatorEncoder = elevatorEncoderTalon.getSensorCollection();
 
     topLimitSwitch = new DigitalInput(Constants.Elevator.TOP_LIMIT_SWITCH);
-    bottomLimitSwitch =
-        new DigitalInput(Constants.Elevator.BOTTOM_LIMIT_SWITCH);
+    bottomLimitSwitch = new DigitalInput(Constants.Elevator.BOTTOM_LIMIT_SWITCH);
 
     hookPiston = new Solenoid(Constants.Elevator.PISTON_CHANNEL);
 
     this.setCANTalonsBrake();
-    this.resetEncoders();
   }
 
   public static Elevator getElevator() {
@@ -95,8 +87,8 @@ public class Elevator extends Subsystem {
 
   // ENCODER METHODS
   public double getHeight() {
-    return (ENC_HEIGHT_CONSTANT * elevatorEncoder.getQuadraturePosition()
-        * INCHES_PER_PULSE / 4.0)*(2.0/3.0);
+    return (ENC_HEIGHT_CONSTANT * elevatorEncoder.getQuadraturePosition() * INCHES_PER_PULSE / 4.0)
+        * (2.0 / 3.0);
   }
 
   public double getSpeed() {
@@ -106,8 +98,9 @@ public class Elevator extends Subsystem {
   public void resetEncoders() {
     elevatorEncoder.setQuadraturePosition(0, 3);
   }
+
   public void setEncoders(int val) {
-    elevatorEncoder.setQuadraturePosition(val , 3);
+    elevatorEncoder.setQuadraturePosition(val, 3);
   }
 
   public boolean isAtTop() {
@@ -126,7 +119,7 @@ public class Elevator extends Subsystem {
 
   @Override
   protected void initDefaultCommand() {
-    //new MoveToTargetConstant();
+    // new MoveToTargetConstant();
   }
 
   public double getTargetElevatorPos() {

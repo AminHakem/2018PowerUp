@@ -35,7 +35,7 @@ public class DriveForward extends Command {
     } else
       this.driveController = new PIDController(DriveTrain.driveStraightPLong,
           DriveTrain.driveStraightILong, DriveTrain.driveStraightDLong);
-    this.driveController.setDoneRange(2.0);
+    this.driveController.setDoneRange(10.0);
     this.driveController.setMaxOutput(0.5);
     this.driveController.setMinDoneCycles(10);
     this.zeroAngle = this.driveTrain.getAngle();
@@ -65,8 +65,7 @@ public class DriveForward extends Command {
 
   @Override
   protected void end() {
-    System.out.println("DriveForward done");
-
+    System.out.println("drive: " + timeSinceInitialized());
   }
 
   @Override

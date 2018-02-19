@@ -5,6 +5,7 @@ import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import org.usfirst.frc.team3501.robot.utils.PIDController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /***
  * This command moves the elevator to a specified target.
@@ -34,37 +35,38 @@ public class MoveToTarget extends Command {
     this.maxTimeOut = maxTimeOut;
     this.target = target;
     timer = new Timer();
-
-    this.elevatorController = new PIDController(Elevator.ELEVATOR_P,
-        Elevator.ELEVATOR_I, Elevator.ELEVATOR_D);
-    this.elevatorController.setDoneRange(1.0);
-    this.elevatorController.setMaxOutput(0.75);
-    this.elevatorController.setMinDoneCycles(5);
   }
 
   @Override
   protected void initialize() {
+    this.elevatorController =
+        new PIDController(Elevator.ELEVATOR_P, Elevator.ELEVATOR_I, Elevator.ELEVATOR_D);
+    this.elevatorController.setDoneRange(1.0);
+    this.elevatorController.setMaxOutput(0.75);
+    this.elevatorController.setMinDoneCycles(5);
     this.elevatorController.setSetPoint(this.target);
     timer.start();
+    this.prevVal = 0;
   }
 
   @Override
   protected void execute() {
     double current = elevator.getHeight();
     double val = elevatorController.calcPID(current);
+    double motorVal = val;
 
-    if (val - prevVal > Elevator.ACCELERATION_CONTROL) {
-      this.elevator.setMotorValue(val + Elevator.ACCELERATION_CONTROL);
-    } else {
-      this.elevator.setMotorValue(val);
-    }
-    val = prevVal;
+    if (val - prevVal > Elevator.ACCELERATION_CONTROL)
+      motorVal = prevVal + Elevator.ACCELERATION_CONTROL;
+
+    this.elevator.setMotorValue(motorVal);
+    SmartDashboard.putNumber("motor val", motorVal);
+
+    prevVal = val;
   }
 
   @Override
   protected boolean isFinished() {
-    return this.elevatorController.isDone() || timer.get() >= maxTimeOut
-        || this.elevator.isAtTop();
+    return this.elevatorController.isDone() || timer.get() >= maxTimeOut || this.elevator.isAtTop();
   }
 
   @Override

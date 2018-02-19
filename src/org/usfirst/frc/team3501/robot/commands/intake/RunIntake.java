@@ -29,7 +29,7 @@ public class RunIntake extends Command {
 
   @Override
   protected boolean isFinished() {
-    return false;
+    return timeSinceInitialized() >= 0.5;
   }
 
   @Override

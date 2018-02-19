@@ -18,11 +18,10 @@ public class StartLeftSwitchLeft extends CommandGroup {
   public static final double HORIZ_SWITCH_DIST = 61 - ROBOT_WIDTH / 2;
 
   public StartLeftSwitchLeft() {
-    addSequential(new MoveToTarget(Elevator.SWITCH_POS, 5));
-    addSequential(new DriveForward((VERT_SWITCH_DIST - ROBOT_LENGTH) * SCALE, 15.5));
+    addSequential(new DriveForward((VERT_SWITCH_DIST - ROBOT_LENGTH / 2) * SCALE, 100));
     addSequential(new TurnForAngle(90.0, 5.0));
+    addSequential(new MoveToTarget(Elevator.SWITCH_POS, 20));
     addSequential(new DriveForward((HORIZ_SWITCH_DIST - ROBOT_WIDTH / 2) * SCALE, 6.5));
     addSequential(new RunOuttake());
-    addSequential(new MoveToTarget(Elevator.BOTTOM_POS, 5));
   }
 }

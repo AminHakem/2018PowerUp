@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3501.robot.utils;
 
 import org.usfirst.frc.team3501.robot.MathLib;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class PIDController {
 
@@ -22,8 +23,7 @@ public class PIDController {
     this(0.0, 0.0, 0.0, 0.0, 0.0);
   }
 
-  public PIDController(double p, double i, double d, double eps,
-      double iRange) {
+  public PIDController(double p, double i, double d, double eps, double iRange) {
     this.pConst = p;
     this.iConst = i;
     this.dConst = d;
@@ -39,7 +39,6 @@ public class PIDController {
     this.firstCycle = true;
 
     this.maxOutput = 1.0;
-
   }
 
   public PIDController(double p, double i, double d, double eps) {
@@ -56,8 +55,7 @@ public class PIDController {
     this.dConst = d;
   }
 
-  public void setConstants(double p, double i, double d, double eps,
-      double iRange) {
+  public void setConstants(double p, double i, double d, double eps, double iRange) {
     this.pConst = p;
     this.iConst = i;
     this.dConst = d;
@@ -108,6 +106,7 @@ public class PIDController {
   }
 
   public double calcPIDError(double error) {
+    SmartDashboard.putNumber("error", error);
     double pVal = 0.0;
     double iVal = 0.0;
     double dVal = 0.0;
@@ -145,6 +144,9 @@ public class PIDController {
     dVal = this.dConst * deriv;
 
     // overal PID calc
+    SmartDashboard.putNumber("pval", pVal);
+    SmartDashboard.putNumber("ival", iVal);
+    SmartDashboard.putNumber("dval", dVal);
     double output = pVal + iVal + dVal;
 
     // limit the output
@@ -157,7 +159,7 @@ public class PIDController {
 
   public boolean isDone() {
     double currError = Math.abs(this.previousError);
-    
+
     // close enough to target
     if (currError <= this.doneRange) {
       this.doneCycleCount++;

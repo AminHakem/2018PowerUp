@@ -24,12 +24,12 @@ public class RunOuttake extends Command {
 
   @Override
   protected void execute() {
-    intake.setMotorValues(intake.intakeSpeed);
+    intake.setMotorValues(intake.intakeSpeed / 2);
   }
 
   @Override
   protected boolean isFinished() {
-    return false;
+    return timeSinceInitialized() >= 0.5;
   }
 
   @Override

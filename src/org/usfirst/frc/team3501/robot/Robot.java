@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3501.robot;
 
-import org.usfirst.frc.team3501.robot.commands.driving.DriveForward;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchLeft;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
@@ -46,7 +46,8 @@ public class Robot extends IterativeRobot {
     driveTrain.resetEncoders();
     elevator.resetEncoders();
     autonChooser = new SendableChooser();
-    autonCommand = (Command) autonChooser.getSelected();
+    // autonCommand = (Command) autonChooser.getSelected();
+    autonCommand = new StartLeftSwitchLeft();
 
     String gameData;
     gameData = DriverStation.getInstance().getGameSpecificMessage();
@@ -83,7 +84,6 @@ public class Robot extends IterativeRobot {
   public void autonomousInit() {
     driveTrain.resetGyro();
     driveTrain.resetEncoders();
-    autonCommand = new DriveForward(60, 15);
     Scheduler.getInstance().add(autonCommand);
   }
 
@@ -127,11 +127,6 @@ public class Robot extends IterativeRobot {
 
     SmartDashboard.putBoolean("Is elevator at top", elevator.isAtTop());
     SmartDashboard.putBoolean("Is elevator at bottom", elevator.isAtBottom());
-
-    // SmartDashboard.putNumber("Top IR Sensor: ",
-    // elevator.getTopIRSensorValue());
-    // SmartDashboard.putNumber("Bottom IR Sensor: ",
-    // elevator.getBottomIRSensorValue());
   }
 
   public void displayCameraFeed() {
