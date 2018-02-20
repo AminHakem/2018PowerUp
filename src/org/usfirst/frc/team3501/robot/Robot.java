@@ -6,6 +6,7 @@ import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchLeft;
 import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchRight;
 import org.usfirst.frc.team3501.robot.autoncommandgroups.StartRightSwitchLeft;
 import org.usfirst.frc.team3501.robot.autoncommandgroups.StartRightSwitchRight;
+import org.usfirst.frc.team3501.robot.commands.driving.DriveForward;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
@@ -53,7 +54,6 @@ public class Robot extends IterativeRobot {
     thread.start();
 
     autonChooser = new SendableChooser();
-    gameData = DriverStation.getInstance().getGameSpecificMessage();
 
     CameraServer server = CameraServer.getInstance();
     autonChooser = new SendableChooser<Integer>();
@@ -61,10 +61,10 @@ public class Robot extends IterativeRobot {
     autonChooser.addObject("left", Integer.valueOf(1));
     autonChooser.addObject("middle", Integer.valueOf(2));
 
-    UsbCamera rampCam = server.startAutomaticCapture("rampCam", 0);
-    rampCam.setResolution(1024, 1060);
-    UsbCamera hookCam = server.startAutomaticCapture("hookCam", 1);
-    hookCam.setResolution(1024, 1060);
+    // UsbCamera rampCam = server.startAutomaticCapture("rampCam", 0);
+    // rampCam.setResolution(1024, 1060);
+    // UsbCamera hookCam = server.startAutomaticCapture("hookCam", 1);
+    // hookCam.setResolution(1024, 1060);
     SmartDashboard.putData("Autonomous Selector", autonChooser);
   }
 
@@ -93,15 +93,15 @@ public class Robot extends IterativeRobot {
    driveTrain.resetGyro();
    driveTrain.resetEncoders();
     TimerUtil.startTime();
-
+    gameData = DriverStation.getInstance().getGameSpecificMessage();
     chooseAuton();
+    System.out.println("FMS:"+ gameData+" Command Selected: "+ autonCommand.getName());
    // autonCommand = new StartRightSwitchLeft();
     Scheduler.getInstance().add(autonCommand);
   }
 
   @Override
   public void autonomousPeriodic() {
-    System.out.println("FMS:"+ gameData+" Command Selected: "+ autonCommand.getName());
     Scheduler.getInstance().run();
     updateSmartDashboard();
     if (elevator.isAtBottom() == true)
@@ -127,13 +127,16 @@ public class Robot extends IterativeRobot {
   }
 
   public void updateDriving() {
-    SmartDashboard.putNumber("right left encoder: ", driveTrain.getRightLeftEncoderDistance());
-    SmartDashboard.putNumber("front back encoder: ", driveTrain.getFrontBackEncoderDistance());
+    SmartDashboard.putNumber("right left encoder: ",
+        driveTrain.getRightLeftEncoderDistance());
+    SmartDashboard.putNumber("front back encoder: ",
+        driveTrain.getFrontBackEncoderDistance());
     SmartDashboard.putNumber("angle", driveTrain.getAngle());
     SmartDashboard.putNumber("rearleft", driveTrain.getRearLeftMotorPower());
     SmartDashboard.putNumber("rearright", driveTrain.getRearRightMotorPower());
     SmartDashboard.putNumber("frontleft", driveTrain.getFrontLeftMotorPower());
-    SmartDashboard.putNumber("frontright", driveTrain.getFrontRightMotorPower());
+    SmartDashboard.putNumber("frontright",
+        driveTrain.getFrontRightMotorPower());
   }
 
   public void updateElevator() {
@@ -143,9 +146,11 @@ public class Robot extends IterativeRobot {
   }
 
   public void displayCameraFeed() {
-    SmartDashboard.putData("Ramp Camera Feed", (Sendable) cameraServer.getVideo("rampCam"));
+    SmartDashboard.putData("Ramp Camera Feed",
+        (Sendable) cameraServer.getVideo("rampCam"));
 
-    SmartDashboard.putData("Hook Camera Feed", (Sendable) cameraServer.getVideo("hookCam"));
+    SmartDashboard.putData("Hook Camera Feed",
+        (Sendable) cameraServer.getVideo("hookCam"));
   }
   
   public void chooseAuton() {

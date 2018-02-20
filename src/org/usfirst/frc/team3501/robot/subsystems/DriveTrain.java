@@ -20,11 +20,14 @@ public class DriveTrain extends Subsystem {
   // Set PID values, need to test mecanum wheels to find them
   public static double driveStraightPLong = 0.01, driveStraightILong = 0.0005,
       driveStraightDLong = -0.005;
-  public static double driveStraightPShort = 0.015, driveStraightIShort = 0.00115,
-      driveStraightDShort = -0.004;
-  public static double driveSidewaysPLong = 0.01, driveSidewaysILong = 0.0009, driveSidewaysDLong = -0.005;
-  public static double driveSidewaysPShort = 0.019, driveSidewaysIShort = 0.002, driveSidewaysDShort = -0.001;
-  public static double smallTurnP = 0.008, smallTurnI = 0.0012, smallTurnD = 0.006;
+  public static double driveStraightPShort = 0.015,
+      driveStraightIShort = 0.00115, driveStraightDShort = -0.004;
+  public static double driveSidewaysPLong = 0.01, driveSidewaysILong = 0.0009,
+      driveSidewaysDLong = -0.005;
+  public static double driveSidewaysPShort = 0.019, driveSidewaysIShort = 0.002,
+      driveSidewaysDShort = -0.001;
+  public static double smallTurnP = 0.008, smallTurnI = 0.0012,
+      smallTurnD = 0.006;
   public static double largeTurnP = .003, largeTurnI = .0012, largeTurnD = .006;
   public static double driveStraightGyroP = 0.01;
 
@@ -54,7 +57,8 @@ public class DriveTrain extends Subsystem {
     SpeedControllerGroup m_left_front = new SpeedControllerGroup(frontLeft);
     SpeedControllerGroup m_right_rear = new SpeedControllerGroup(rearRight);
     SpeedControllerGroup m_right_front = new SpeedControllerGroup(frontRight);
-    robotDrive = new MecanumDrive(m_left_front, m_left_rear, m_right_front, m_right_rear);
+    robotDrive = new MecanumDrive(m_left_front, m_left_rear, m_right_front,
+        m_right_rear);
 
     // Encoders
     frontBackEncoder = rearLeft.getSensorCollection();
@@ -91,23 +95,24 @@ public class DriveTrain extends Subsystem {
 
   // Driving / motor methods
   /**
-   * Mecanum Drive - takes in the ySpeed, xSpeed, Z Rotation, and Gyro Angle as parameters and
-   * enters those arguments in the driveCartesian method
+   * Mecanum Drive - takes in the ySpeed, xSpeed, Z Rotation, and Gyro Angle as parameters and enters
+   * those arguments in the driveCartesian method
    *
    * @param sidewaysSpeed
    * @param frontbackSpeed
    * @param rotation
    * @param is fieldOriented or not
    */
-  public void mecanumDrive(final double sidewaysSpeed, final double frontbackSpeed,
-      final double rotation) {
+  public void mecanumDrive(final double sidewaysSpeed,
+      final double frontbackSpeed, final double rotation) {
     if ((sidewaysSpeed < DEADZONE_RANGE && sidewaysSpeed > -DEADZONE_RANGE)
         && (frontbackSpeed < DEADZONE_RANGE && frontbackSpeed > -DEADZONE_RANGE)
         && (rotation < DEADZONE_RANGE && rotation > -DEADZONE_RANGE)) {
       robotDrive.stopMotor();
     }
     if (this.fieldOriented) {
-      robotDrive.driveCartesian(-sidewaysSpeed, -frontbackSpeed, -rotation, -this.getAngle());
+      robotDrive.driveCartesian(-sidewaysSpeed, -frontbackSpeed, -rotation,
+          -this.getAngle());
     } else {
       robotDrive.driveCartesian(-sidewaysSpeed, -frontbackSpeed, -rotation);
     }
@@ -138,13 +143,13 @@ public class DriveTrain extends Subsystem {
 
   // Encoders
   public double getRightLeftEncoderDistance() {
-    return ENCODER_DIST_CALIBRATION * leftRightEncoder.getQuadraturePosition() * INCHES_PER_PULSE
-        / 4.0;
+    return ENCODER_DIST_CALIBRATION * leftRightEncoder.getQuadraturePosition()
+        * INCHES_PER_PULSE / 4.0;
   }
 
   public double getFrontBackEncoderDistance() {
-    return ENCODER_DIST_CALIBRATION * frontBackEncoder.getQuadraturePosition() * INCHES_PER_PULSE
-        / 4.0;
+    return ENCODER_DIST_CALIBRATION * frontBackEncoder.getQuadraturePosition()
+        * INCHES_PER_PULSE / 4.0;
   }
 
   public void resetEncoders() {
@@ -164,8 +169,11 @@ public class DriveTrain extends Subsystem {
   public double getAngle() {
     if (imu != null)
       return this.imu.getAngle();
-    else
+    else {
+      System.out.println("IMU is null");
       return 0;
+    }
+
   }
 
   /**

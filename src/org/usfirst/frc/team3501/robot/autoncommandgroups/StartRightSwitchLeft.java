@@ -15,9 +15,12 @@ public class StartRightSwitchLeft extends CommandGroup {
   public static final double SCALE = Constants.Auton.SCALE_FACTOR_TESTING;
 
   public static final double TO_CUBES = 88;
-  public static final double RIGHT_TO_LEFT = 140;
+  public static final double RIGHT_TO_LEFT = 147;
   public static final double TO_SWITCH_VERT = 55;
 
+  /***
+   * Starts sideways
+   */
   public StartRightSwitchLeft() {
     addSequential(new ChangeElevatorTarget(Elevator.SWITCH_POS));
     addSequential(new DriveSideways((TO_CUBES - ROBOT_LENGTH) * SCALE, 10));
@@ -25,5 +28,6 @@ public class StartRightSwitchLeft extends CommandGroup {
     addSequential(new TurnForAngle(90, 5));
     addSequential(new DriveForward(TO_SWITCH_VERT * SCALE, 7.5));
     addSequential(new RunOuttake());
+    // addSequential(new TurnForAngle(90, 5));
   }
 }
