@@ -70,12 +70,7 @@ public class DriveForward extends Command {
 
   @Override
   protected void end() {
-<<<<<<< HEAD
     TimerUtil.printTime("DriveForward: ");
-=======
-    System.out.println("DriveForward done");
-
->>>>>>> SamhitaVasuShuffleboard
   }
 
   @Override
