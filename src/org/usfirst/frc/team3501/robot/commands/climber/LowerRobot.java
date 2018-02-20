@@ -2,12 +2,10 @@ package org.usfirst.frc.team3501.robot.commands.climber;
 
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * @author: niyatisriram
- *          Lowers robot using climbing winch when button is pressed
+ * @author: niyatisriram Lowers robot using climbing winch when button is pressed
  */
 public class LowerRobot extends Command {
 
@@ -18,12 +16,11 @@ public class LowerRobot extends Command {
   }
 
   @Override
-  protected void initialize() {
-  }
+  protected void initialize() {}
 
   @Override
   protected void execute() {
-    Climber.runAtDefaultSpeed("backward");
+    climber.setMotorValues(-0.375);
   }
 
   @Override
@@ -38,5 +35,6 @@ public class LowerRobot extends Command {
 
   @Override
   protected void interrupted() {
+    end();
   }
 }

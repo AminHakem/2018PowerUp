@@ -27,6 +27,7 @@ public class Constants {
     public static final int TRIANGLE_BUTTON_PORT = 4;
     public static final int L1_BUTTON_PORT = 5;
     public static final int R1_BUTTON_PORT = 6;
+    public static final int L2_BUTTON_PORT = 7;
     public static final int R2_BUTTON_PORT = 8;
 
     // TODO: Confirm with Collin button mapping, then fill in the 0's below
@@ -44,8 +45,8 @@ public class Constants {
     // Climber
     public static final int TOGGLE_PISTON_PORT = 0;
     public static final int LOWER_RAMP = 0;
-    public static final int RUN_WINCH_FORWARD = 0;
-    public static final int RUN_WINCH_BACKWARD = 0;
+    public static final int RUN_WINCH_FORWARD = L2_BUTTON_PORT;
+    public static final int RUN_WINCH_BACKWARD = 14;
     public static final int TOGGLE_CLIMB = 0;
 
     // Elevator

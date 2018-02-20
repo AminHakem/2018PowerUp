@@ -1,7 +1,6 @@
 package org.usfirst.frc.team3501.robot.subsystems;
 
 import org.usfirst.frc.team3501.robot.Constants;
-import org.usfirst.frc.team3501.robot.MathLib;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -40,24 +39,9 @@ public class Climber extends Subsystem {
     return climber;
   }
 
-  public static void runAtDefaultSpeed(String direction) {
-    if (direction.equals("forward")) {
-      rightWinch.set(ControlMode.PercentOutput, WINCH_SPEED);
-      leftWinch.set(ControlMode.PercentOutput, -WINCH_SPEED);
-    } else {
-      rightWinch.set(ControlMode.PercentOutput, -WINCH_SPEED);
-      leftWinch.set(ControlMode.PercentOutput, WINCH_SPEED);
-    }
-  }
-
-  public static void setRightMotorVal(double speed) {
-    speed = MathLib.restrictToRange(speed, -1.0, 1.0);
-    rightWinch.set(ControlMode.PercentOutput, speed);
-  }
-
-  public static void setLeftMotorVal(double speed) {
-    speed = MathLib.restrictToRange(speed, -1.0, 1.0);
-    leftWinch.set(ControlMode.PercentOutput, speed);
+  public static void setMotorValues(double motorVal) {
+    rightWinch.set(ControlMode.PercentOutput, motorVal);
+    leftWinch.set(ControlMode.PercentOutput, motorVal);
   }
 
   public static void extendPiston() {
@@ -69,8 +53,7 @@ public class Climber extends Subsystem {
   }
 
   public static void stop() {
-    setRightMotorVal(0.0);
-    setLeftMotorVal(0.0);
+    setMotorValues(0);
   }
 
   @Override

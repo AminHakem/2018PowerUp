@@ -1,11 +1,6 @@
 package org.usfirst.frc.team3501.robot;
 
-import org.usfirst.frc.team3501.robot.autoncommandgroups.CenterToLeft;
-import org.usfirst.frc.team3501.robot.autoncommandgroups.CenterToRight;
-import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchLeft;
-import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchRight;
 import org.usfirst.frc.team3501.robot.autoncommandgroups.StartRightSwitchLeft;
-import org.usfirst.frc.team3501.robot.autoncommandgroups.StartRightSwitchRight;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
@@ -45,9 +40,9 @@ public class Robot extends IterativeRobot {
     elevator = Elevator.getElevator();
     LiveWindow.setEnabled(false);
 
-    //initialize and start timer Util
-    TimerUtil.startTime();      //DO NOT REMOVE WILL CAUSE ERRORS
-      
+    // initialize and start timer Util
+    TimerUtil.startTime(); // DO NOT REMOVE WILL CAUSE ERRORS
+
     // initialize a thread which will run code to constantly update
     thread = new NetworkThread();
     thread.start();
@@ -94,35 +89,35 @@ public class Robot extends IterativeRobot {
     driveTrain.resetGyro();
     driveTrain.resetEncoders();
     TimerUtil.startTime();
-    
-//    autonStartPos = autonChooser.getSelected();
-//    if (gameData.charAt(0) == 'L') {
-//      if (autonStartPos == 0) {
-//        choice = "StartRightSwitchLeft";
-//        autonCommand = new StartRightSwitchLeft();
-//      } else if (autonStartPos == 1) {
-//        choice = "StartLeftSwitchLeft";
-//        autonCommand = new StartLeftSwitchLeft();
-//      } else if (autonStartPos == 2) {
-//        choice = "StartMiddleSwitchLeft";
-//        autonCommand = new CenterToLeft();
-//      }
-//    } else if (gameData.charAt(0) == 'R') {
-//      if (autonStartPos == 0) {
-//        choice = "StartRightSwitchRight";
-//        autonCommand = new StartRightSwitchRight();
-//      } else if (autonStartPos == 1) {
-//        choice = "StartLeftSwitchRight";
-//        autonCommand = new StartLeftSwitchRight();
-//      } else if (autonStartPos == 2) {
-//        choice = "StartMiddleSwitchRight";
-//        autonCommand = new CenterToRight();
-//      }
-//    }
-    autonCommand = new StartLeftSwitchRight();
+
+    // autonStartPos = autonChooser.getSelected();
+    // if (gameData.charAt(0) == 'L') {
+    // if (autonStartPos == 0) {
+    // choice = "StartRightSwitchLeft";
+    // autonCommand = new StartRightSwitchLeft();
+    // } else if (autonStartPos == 1) {
+    // choice = "StartLeftSwitchLeft";
+    // autonCommand = new StartLeftSwitchLeft();
+    // } else if (autonStartPos == 2) {
+    // choice = "StartMiddleSwitchLeft";
+    // autonCommand = new CenterToLeft();
+    // }
+    // } else if (gameData.charAt(0) == 'R') {
+    // if (autonStartPos == 0) {
+    // choice = "StartRightSwitchRight";
+    // autonCommand = new StartRightSwitchRight();
+    // } else if (autonStartPos == 1) {
+    // choice = "StartLeftSwitchRight";
+    // autonCommand = new StartLeftSwitchRight();
+    // } else if (autonStartPos == 2) {
+    // choice = "StartMiddleSwitchRight";
+    // autonCommand = new CenterToRight();
+    // }
+    // }
+    autonCommand = new StartRightSwitchLeft();
     Scheduler.getInstance().add(autonCommand);
   }
-  
+
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
@@ -147,7 +142,7 @@ public class Robot extends IterativeRobot {
   public void updateSmartDashboard() {
     updateDriving();
     updateElevator();
-//    SmartDashboard.putString("Choice", choice);
+    // SmartDashboard.putString("Choice", choice);
   }
 
   public void updateDriving() {

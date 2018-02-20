@@ -5,7 +5,6 @@ import org.usfirst.frc.team3501.robot.commands.driving.DriveForward;
 import org.usfirst.frc.team3501.robot.commands.driving.DriveSideways;
 import org.usfirst.frc.team3501.robot.commands.driving.TurnForAngle;
 import org.usfirst.frc.team3501.robot.commands.elevator.ChangeElevatorTarget;
-import org.usfirst.frc.team3501.robot.commands.elevator.MoveToTarget;
 import org.usfirst.frc.team3501.robot.commands.intake.RunOuttake;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -28,8 +27,9 @@ public class StartLeftSwitchRight extends CommandGroup {
 
   public StartLeftSwitchRight() {
     addSequential(new ChangeElevatorTarget(Elevator.SWITCH_POS));
-    addSequential(new DriveForward((TO_CUBES - ROBOT_LENGTH) * SCALE, 10));
-    addSequential(new DriveSideways(LEFT_TO_RIGHT * SCALE, 10));
+    addSequential(new DriveSideways(-(TO_CUBES - ROBOT_LENGTH) * SCALE, 10));
+    addSequential(new DriveForward(LEFT_TO_RIGHT * SCALE, 10));
+    addSequential(new TurnForAngle(-90, 5));
     addSequential(new DriveForward(TO_SWITCH_VERT * SCALE, 7.5));
     addSequential(new RunOuttake());
   }
