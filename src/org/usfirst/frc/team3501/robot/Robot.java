@@ -1,10 +1,14 @@
 package org.usfirst.frc.team3501.robot;
 
+import org.usfirst.frc.team3501.robot.autoncommandgroups.CenterToLeft;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.CenterToRight;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchLeft;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
 import org.usfirst.frc.team3501.robot.utils.NetworkThread;
+import org.usfirst.frc.team3501.robot.utils.TimerUtil;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -36,6 +40,9 @@ public class Robot extends IterativeRobot {
     elevator = Elevator.getElevator();
     LiveWindow.setEnabled(false);
 
+    //initialize and start timer Util
+    TimerUtil.startTime();      //DO NOT REMOVE WILL CAUSE ERRORS
+      
     // initialize a thread which will run code to constantly update
     thread = new NetworkThread();
     thread.start();
@@ -78,9 +85,10 @@ public class Robot extends IterativeRobot {
   public void autonomousInit() {
     driveTrain.resetGyro();
     driveTrain.resetEncoders();
+    TimerUtil.startTime();
     Scheduler.getInstance().add(autonCommand);
   }
-
+  
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
@@ -91,7 +99,9 @@ public class Robot extends IterativeRobot {
   }
 
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+    Scheduler.getInstance().removeAll();
+  }
 
   @Override
   public void teleopPeriodic() {

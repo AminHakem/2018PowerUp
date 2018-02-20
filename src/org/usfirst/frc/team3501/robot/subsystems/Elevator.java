@@ -17,7 +17,7 @@ public class Elevator extends Subsystem {
 
   // PID VALUES
   public static double ELEVATOR_P = 0.03, ELEVATOR_I = 0.00115, ELEVATOR_D = -0.002;
-  public static final double ACCELERATION_CONTROL = 0.3;
+  public static final double ACCELERATION_CONTROL = 0.0;
 
   // POSITIONS (in inches)
   public static final int BOTTOM_POS = 0;

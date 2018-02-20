@@ -3,6 +3,7 @@ package org.usfirst.frc.team3501.robot.commands.driving;
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.utils.PIDController;
+import org.usfirst.frc.team3501.robot.utils.TimerUtil;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -42,7 +43,7 @@ public class TurnForAngle extends Command {
     }
 
     this.gyroController = new PIDController(this.gyroP, this.gyroI, this.gyroD);
-    this.gyroController.setDoneRange(1);
+    this.gyroController.setDoneRange(10);
     this.gyroController.setMinDoneCycles(5);
   }
 
@@ -64,7 +65,9 @@ public class TurnForAngle extends Command {
   }
 
   @Override
-  protected void end() {}
+  protected void end() {
+    TimerUtil.printTime("TurnForAngle done: ");
+  }
 
   @Override
   protected void interrupted() {

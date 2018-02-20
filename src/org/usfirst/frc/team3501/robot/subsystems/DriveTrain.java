@@ -22,8 +22,9 @@ public class DriveTrain extends Subsystem {
       driveStraightDLong = -0.005;
   public static double driveStraightPShort = 0.015, driveStraightIShort = 0.00115,
       driveStraightDShort = -0.004;
-  public static double driveSidewaysP = 0.012, driveSidewaysI = 0.0025, driveSidewaysD = -0.002;
-  public static double smallTurnP = 0.004, smallTurnI = 0.0013, smallTurnD = 0.005;
+  public static double driveSidewaysPLong = 0.01, driveSidewaysILong = 0.0009, driveSidewaysDLong = -0.005;
+  public static double driveSidewaysPShort = 0.019, driveSidewaysIShort = 0.002, driveSidewaysDShort = -0.001;
+  public static double smallTurnP = 0.008, smallTurnI = 0.0012, smallTurnD = 0.006;
   public static double largeTurnP = .003, largeTurnI = .0012, largeTurnD = .006;
   public static double driveStraightGyroP = 0.01;
 

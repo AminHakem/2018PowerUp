@@ -3,11 +3,14 @@ package org.usfirst.frc.team3501.robot.commands.elevator;
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import org.usfirst.frc.team3501.robot.utils.PIDController;
+import org.usfirst.frc.team3501.robot.utils.TimerUtil;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /***
+ * DEPRECATED: This code does not have the drifting fix. Use MoveToTargetConstant!!!!!!!!!!!
+ * 
  * This command moves the elevator to a specified target.
  *
  * @author Samhita
@@ -61,7 +64,7 @@ public class MoveToTarget extends Command {
     this.elevator.setMotorValue(motorVal);
     SmartDashboard.putNumber("motor val", motorVal);
 
-    prevVal = val;
+    prevVal = motorVal;
   }
 
   @Override
@@ -72,6 +75,7 @@ public class MoveToTarget extends Command {
   @Override
   protected void end() {
     this.elevator.stop();
+    TimerUtil.printTime("MoveToTarget done: ");
   }
 
   @Override

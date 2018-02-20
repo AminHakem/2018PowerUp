@@ -20,7 +20,7 @@ public class AlignWithCubeRotate extends Command {
     public AlignWithCubeRotate() {
       requires(Robot.getDriveTrain());
       alignmentController =
-          new PIDController(DriveTrain.driveSidewaysP, DriveTrain.driveSidewaysI, 0);
+          new PIDController(DriveTrain.driveSidewaysPLong, DriveTrain.driveSidewaysILong, 0);
       alignmentController.setDoneRange(5);
 
       // initialize a thread which will run code to constantly update

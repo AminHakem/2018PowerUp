@@ -3,6 +3,7 @@ package org.usfirst.frc.team3501.robot.commands.driving;
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.utils.PIDController;
+import org.usfirst.frc.team3501.robot.utils.TimerUtil;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -65,7 +66,7 @@ public class DriveForward extends Command {
 
   @Override
   protected void end() {
-    System.out.println("drive: " + timeSinceInitialized());
+    TimerUtil.printTime("DriveForward: ");
   }
 
   @Override

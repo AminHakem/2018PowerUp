@@ -3,6 +3,7 @@ package org.usfirst.frc.team3501.robot.commands.driving;
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.utils.PIDController;
+import org.usfirst.frc.team3501.robot.utils.TimerUtil;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -17,7 +18,7 @@ public class DriveSideways extends Command {
   private double maxTimeOut;
   private double target;
   private Preferences prefs;
-  private PIDController driveController, directionController;
+  private PIDController driveController, directionController, yController;
   private double zeroAngle;
 
   /**
@@ -29,29 +30,40 @@ public class DriveSideways extends Command {
     requires(driveTrain);
     this.maxTimeOut = maxTimeOut;
     this.target = distance;
-    this.driveController = new PIDController(DriveTrain.driveSidewaysP, DriveTrain.driveSidewaysI,
-        DriveTrain.driveSidewaysD);
-    this.driveController.setDoneRange(1.0);
-    this.driveController.setMaxOutput(1.0);
-    this.driveController.setMinDoneCycles(5);
-
-    this.zeroAngle = this.driveTrain.getAngle();
-    this.directionController = new PIDController(driveTrain.driveStraightGyroP, 0, 0);
-    this.directionController.setSetPoint(zeroAngle);
   }
 
   @Override
   protected void initialize() {
     this.driveTrain.resetEncoders();
     this.driveTrain.resetGyro();
+    this.zeroAngle = this.driveTrain.getAngle();
+    
+    if (target <= 80) 
+      this.driveController = new PIDController(DriveTrain.driveSidewaysPShort,
+          DriveTrain.driveSidewaysIShort, DriveTrain.driveSidewaysDShort);
+    else
+      this.driveController = new PIDController(DriveTrain.driveSidewaysPLong,
+          DriveTrain.driveSidewaysILong, DriveTrain.driveSidewaysDLong);
+    this.driveController.setDoneRange(5.0);
+    this.driveController.setMaxOutput(1.0);
+    this.driveController.setMinDoneCycles(5);
     this.driveController.setSetPoint(this.target);
+
+    this.directionController = new PIDController(driveTrain.driveStraightGyroP, 0, 0);
+    this.directionController.setSetPoint(zeroAngle);
+    
+    this.yController = new PIDController(0.02,0,0);
+    this.yController.setDoneRange(1.0);
+    this.yController.setMinDoneCycles(5);
+    this.yController.setSetPoint(0);
   }
 
   @Override
   protected void execute() {
     double xSpeed = driveController.calcPID(driveTrain.getRightLeftEncoderDistance());
     double rVal = directionController.calcPID(driveTrain.getAngle());
-    this.driveTrain.mecanumDrive(xSpeed, 0, rVal);
+    double ySpeed = yController.calcPID(driveTrain.getFrontBackEncoderDistance());
+    this.driveTrain.mecanumDrive(xSpeed, ySpeed, rVal);
   }
 
   @Override
@@ -60,7 +72,9 @@ public class DriveSideways extends Command {
   }
 
   @Override
-  protected void end() {}
+  protected void end() {
+    TimerUtil.printTime("Drive Sideways done: ");
+  }
 
   @Override
   protected void interrupted() {
