@@ -45,7 +45,8 @@ public class DriveForward extends Command {
     this.driveController.setMinDoneCycles(10);
     this.zeroAngle = this.driveTrain.getAngle();
 
-    this.directionController = new PIDController(driveTrain.driveStraightGyroP, 0, 0);
+    this.directionController =
+        new PIDController(driveTrain.driveStraightGyroP, 0, 0);
     this.directionController.setSetPoint(zeroAngle);
   }
 
@@ -60,13 +61,21 @@ public class DriveForward extends Command {
   @Override
   protected void execute() {
     diff = Math.abs(driveTrain.getFrontBackEncoderDistance() - prevEncoder);
-    if (diff >= 2) {
-      staticCount++;
-    } else
-      staticCount = 0;
-    if (staticCount >= 25)
-      this.end();
-    double ySpeed = driveController.calcPID(driveTrain.getFrontBackEncoderDistance());
+    if (Math.abs(this.target)
+        - Math.abs(driveTrain.getFrontBackEncoderDistance()) <= 0.1 * target) {
+      if (diff <= 1) {
+        staticCount++;
+        System.out.println("*********StaticCount: " + staticCount);
+      } else
+        staticCount = 0;
+      if (staticCount >= 25) {
+        System.out.println(
+            "****************DRIVE FORWARD ENDED DUE TO NO MOVEMENT***************");
+        this.end();
+      }
+    }
+    double ySpeed =
+        driveController.calcPID(driveTrain.getFrontBackEncoderDistance());
     double rVal = directionController.calcPID(driveTrain.getAngle());
     this.driveTrain.mecanumDrive(0, ySpeed, rVal);
     prevEncoder = driveTrain.getFrontBackEncoderDistance();
@@ -74,7 +83,8 @@ public class DriveForward extends Command {
 
   @Override
   protected boolean isFinished() {
-    return timeSinceInitialized() >= maxTimeOut || this.driveController.isDone();
+    return timeSinceInitialized() >= maxTimeOut
+        || this.driveController.isDone();
   }
 
   @Override

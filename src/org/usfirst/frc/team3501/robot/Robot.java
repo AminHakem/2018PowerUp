@@ -1,6 +1,12 @@
 package org.usfirst.frc.team3501.robot;
 
+import org.usfirst.frc.team3501.robot.autoncommandgroups.CenterToLeft;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.CenterToRight;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchLeft;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchRight;
 import org.usfirst.frc.team3501.robot.autoncommandgroups.StartRightSwitchLeft;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.StartRightSwitchRight;
+import org.usfirst.frc.team3501.robot.commands.driving.DriveForward;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
@@ -48,19 +54,16 @@ public class Robot extends IterativeRobot {
     thread.start();
 
     autonChooser = new SendableChooser();
-
-    gameData = DriverStation.getInstance().getGameSpecificMessage();
-
     CameraServer server = CameraServer.getInstance();
     autonChooser = new SendableChooser<Integer>();
     autonChooser.addObject("right", Integer.valueOf(0));
     autonChooser.addObject("left", Integer.valueOf(1));
     autonChooser.addObject("middle", Integer.valueOf(2));
 
-    UsbCamera rampCam = server.startAutomaticCapture("rampCam", 0);
-    rampCam.setResolution(1024, 1060);
-    UsbCamera hookCam = server.startAutomaticCapture("hookCam", 1);
-    hookCam.setResolution(1024, 1060);
+    // UsbCamera rampCam = server.startAutomaticCapture("rampCam", 0);
+    // rampCam.setResolution(1024, 1060);
+    // UsbCamera hookCam = server.startAutomaticCapture("hookCam", 1);
+    // hookCam.setResolution(1024, 1060);
     SmartDashboard.putData("Autonomous Selector", autonChooser);
   }
 
@@ -86,35 +89,38 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void autonomousInit() {
+    gameData = DriverStation.getInstance().getGameSpecificMessage();
+    System.out.println("***********Game Data: " + gameData + "**************");
     driveTrain.resetGyro();
     driveTrain.resetEncoders();
     TimerUtil.startTime();
 
-    // autonStartPos = autonChooser.getSelected();
-    // if (gameData.charAt(0) == 'L') {
-    // if (autonStartPos == 0) {
-    // choice = "StartRightSwitchLeft";
-    // autonCommand = new StartRightSwitchLeft();
-    // } else if (autonStartPos == 1) {
-    // choice = "StartLeftSwitchLeft";
-    // autonCommand = new StartLeftSwitchLeft();
-    // } else if (autonStartPos == 2) {
-    // choice = "StartMiddleSwitchLeft";
-    // autonCommand = new CenterToLeft();
-    // }
-    // } else if (gameData.charAt(0) == 'R') {
-    // if (autonStartPos == 0) {
-    // choice = "StartRightSwitchRight";
-    // autonCommand = new StartRightSwitchRight();
-    // } else if (autonStartPos == 1) {
-    // choice = "StartLeftSwitchRight";
-    // autonCommand = new StartLeftSwitchRight();
-    // } else if (autonStartPos == 2) {
-    // choice = "StartMiddleSwitchRight";
-    // autonCommand = new CenterToRight();
-    // }
-    // }
-    autonCommand = new StartRightSwitchLeft();
+    autonStartPos = autonChooser.getSelected();
+    if (gameData.charAt(0) == 'L') {
+      if (autonStartPos == 0) {
+        choice = "StartRightSwitchLeft";
+        autonCommand = new StartRightSwitchLeft();
+      } else if (autonStartPos == 1) {
+        choice = "StartLeftSwitchLeft";
+        autonCommand = new StartLeftSwitchLeft();
+      } else if (autonStartPos == 2) {
+        choice = "StartMiddleSwitchLeft";
+        autonCommand = new CenterToLeft();
+      }
+    } else if (gameData.charAt(0) == 'R') {
+      if (autonStartPos == 0) {
+        choice = "StartRightSwitchRight";
+        autonCommand = new StartRightSwitchRight();
+      } else if (autonStartPos == 1) {
+        choice = "StartLeftSwitchRight";
+        autonCommand = new StartLeftSwitchRight();
+      } else if (autonStartPos == 2) {
+        choice = "StartMiddleSwitchRight";
+        autonCommand = new CenterToRight();
+      }
+    }
+    autonCommand = new DriveForward(10, 10);
+    System.out.println(autonCommand.getName());
     Scheduler.getInstance().add(autonCommand);
   }
 
@@ -146,13 +152,16 @@ public class Robot extends IterativeRobot {
   }
 
   public void updateDriving() {
-    SmartDashboard.putNumber("right left encoder: ", driveTrain.getRightLeftEncoderDistance());
-    SmartDashboard.putNumber("front back encoder: ", driveTrain.getFrontBackEncoderDistance());
+    SmartDashboard.putNumber("right left encoder: ",
+        driveTrain.getRightLeftEncoderDistance());
+    SmartDashboard.putNumber("front back encoder: ",
+        driveTrain.getFrontBackEncoderDistance());
     SmartDashboard.putNumber("angle", driveTrain.getAngle());
     SmartDashboard.putNumber("rearleft", driveTrain.getRearLeftMotorPower());
     SmartDashboard.putNumber("rearright", driveTrain.getRearRightMotorPower());
     SmartDashboard.putNumber("frontleft", driveTrain.getFrontLeftMotorPower());
-    SmartDashboard.putNumber("frontright", driveTrain.getFrontRightMotorPower());
+    SmartDashboard.putNumber("frontright",
+        driveTrain.getFrontRightMotorPower());
   }
 
   public void updateElevator() {
@@ -162,8 +171,10 @@ public class Robot extends IterativeRobot {
   }
 
   public void displayCameraFeed() {
-    SmartDashboard.putData("Ramp Camera Feed", (Sendable) cameraServer.getVideo("rampCam"));
+    SmartDashboard.putData("Ramp Camera Feed",
+        (Sendable) cameraServer.getVideo("rampCam"));
 
-    SmartDashboard.putData("Hook Camera Feed", (Sendable) cameraServer.getVideo("hookCam"));
+    SmartDashboard.putData("Hook Camera Feed",
+        (Sendable) cameraServer.getVideo("hookCam"));
   }
 }

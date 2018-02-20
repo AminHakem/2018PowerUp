@@ -15,7 +15,7 @@ public class StartRightSwitchRight extends CommandGroup {
   public static final double SCALE = Constants.Auton.SCALE_FACTOR_TESTING;
 
   public static final double VERT_SWITCH_DIST = 150.0;
-  public static final double HORIZ_SWITCH_DIST = 25;
+  public static final double HORIZ_SWITCH_DIST = 30;
 
   public StartRightSwitchRight() {
     addSequential(new ChangeElevatorTarget(Elevator.SWITCH_POS));
