@@ -48,17 +48,16 @@ public class Robot extends IterativeRobot {
     // initialize and start timer Util
     TimerUtil.startTime(); // DO NOT REMOVE WILL CAUSE ERRORS
 
-    // initialize a thread which will run code to constantly update
+    // initialize and start a thread which will run code to constantly update
     thread = new NetworkThread();
     thread.start();
 
     autonChooser = new SendableChooser();
-
     gameData = DriverStation.getInstance().getGameSpecificMessage();
 
     CameraServer server = CameraServer.getInstance();
     autonChooser = new SendableChooser<Integer>();
-    autonChooser.addObject("right", Integer.valueOf(0));
+    autonChooser.addDefault("right", Integer.valueOf(0));
     autonChooser.addObject("left", Integer.valueOf(1));
     autonChooser.addObject("middle", Integer.valueOf(2));
 
@@ -91,17 +90,18 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void autonomousInit() {
-    driveTrain.resetGyro();
-    driveTrain.resetEncoders();
+   driveTrain.resetGyro();
+   driveTrain.resetEncoders();
     TimerUtil.startTime();
 
-   chooseAuton();
-    autonCommand = new StartRightSwitchLeft();
+    chooseAuton();
+   // autonCommand = new StartRightSwitchLeft();
     Scheduler.getInstance().add(autonCommand);
   }
 
   @Override
   public void autonomousPeriodic() {
+    System.out.println("FMS:"+ gameData+" Command Selected: "+ autonCommand.getName());
     Scheduler.getInstance().run();
     updateSmartDashboard();
     if (elevator.isAtBottom() == true)
@@ -124,7 +124,6 @@ public class Robot extends IterativeRobot {
   public void updateSmartDashboard() {
     updateDriving();
     updateElevator();
-    // SmartDashboard.putString("Choice", choice);
   }
 
   public void updateDriving() {
@@ -153,24 +152,18 @@ public class Robot extends IterativeRobot {
      this.autonStartPos = autonChooser.getSelected();
      if (gameData.charAt(0) == 'L') {
      if (autonStartPos == 0) {
-     choice = "StartRightSwitchLeft";
      autonCommand = new StartRightSwitchLeft();
      } else if (autonStartPos == 1) {
-     choice = "StartLeftSwitchLeft";
      autonCommand = new StartLeftSwitchLeft();
      } else if (autonStartPos == 2) {
-     choice = "StartMiddleSwitchLeft";
      autonCommand = new CenterToLeft();
      }
      } else if (gameData.charAt(0) == 'R') {
      if (autonStartPos == 0) {
-     choice = "StartRightSwitchRight";
      autonCommand = new StartRightSwitchRight();
      } else if (autonStartPos == 1) {
-     choice = "StartLeftSwitchRight";
      autonCommand = new StartLeftSwitchRight();
      } else if (autonStartPos == 2) {
-     choice = "StartMiddleSwitchRight";
      autonCommand = new CenterToRight();
      }
      }
