@@ -6,6 +6,7 @@ import org.usfirst.frc.team3501.robot.utils.PIDController;
 import org.usfirst.frc.team3501.robot.utils.TimerUtil;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This command makes the robot drive a specified distance using encoders on the robot and using a
@@ -36,9 +37,9 @@ public class DriveForward extends Command {
     } else
       this.driveController = new PIDController(DriveTrain.driveStraightPLong,
           DriveTrain.driveStraightILong, DriveTrain.driveStraightDLong);
-    this.driveController.setDoneRange(10.0);
-    this.driveController.setMaxOutput(0.5);
-    this.driveController.setMinDoneCycles(10);
+    this.driveController.setDoneRange(1.0);
+    this.driveController.setMaxOutput(1.0);
+    this.driveController.setMinDoneCycles(5);
     this.zeroAngle = this.driveTrain.getAngle();
 
     this.directionController = new PIDController(driveTrain.driveStraightGyroP, 0, 0);
@@ -50,13 +51,16 @@ public class DriveForward extends Command {
     this.driveTrain.resetEncoders();
     this.driveTrain.resetGyro();
     this.driveController.setSetPoint(this.target);
+    System.out.println(this.getName() + " initialized");
   }
 
   @Override
   protected void execute() {
     double ySpeed = driveController.calcPID(driveTrain.getFrontBackEncoderDistance());
     double rVal = directionController.calcPID(driveTrain.getAngle());
-    this.driveTrain.mecanumDrive(0, ySpeed, rVal);
+    this.driveTrain.mecanumDrive(0, -ySpeed, -rVal);
+    SmartDashboard.putNumber("ySpeed", ySpeed);
+
   }
 
   @Override
@@ -66,7 +70,12 @@ public class DriveForward extends Command {
 
   @Override
   protected void end() {
+<<<<<<< HEAD
     TimerUtil.printTime("DriveForward: ");
+=======
+    System.out.println("DriveForward done");
+
+>>>>>>> SamhitaVasuShuffleboard
   }
 
   @Override
