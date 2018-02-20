@@ -20,6 +20,10 @@ public class DriveForward extends Command {
   private Preferences prefs;
   private PIDController driveController, directionController;
   private double zeroAngle;
+  int staticCount = 0;
+  double prevEncoder = 0;
+  double time;
+  double diff;
 
   /**
    * @param distance: a positive value will cause the robot to move forwards, and a negative value
@@ -54,9 +58,17 @@ public class DriveForward extends Command {
 
   @Override
   protected void execute() {
+    diff = Math.abs(driveTrain.getFrontBackEncoderDistance() - prevEncoder);
+    if (diff >= 2) {
+      staticCount++;
+    } else
+      staticCount = 0;
+    if (staticCount >= 25)
+      this.end();
     double ySpeed = driveController.calcPID(driveTrain.getFrontBackEncoderDistance());
     double rVal = directionController.calcPID(driveTrain.getAngle());
     this.driveTrain.mecanumDrive(0, ySpeed, rVal);
+    prevEncoder = driveTrain.getFrontBackEncoderDistance();
   }
 
   @Override
