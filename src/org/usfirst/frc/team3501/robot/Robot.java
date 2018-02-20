@@ -3,6 +3,9 @@ package org.usfirst.frc.team3501.robot;
 import org.usfirst.frc.team3501.robot.autoncommandgroups.CenterToLeft;
 import org.usfirst.frc.team3501.robot.autoncommandgroups.CenterToRight;
 import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchLeft;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchRight;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.StartRightSwitchLeft;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.StartRightSwitchRight;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
@@ -31,7 +34,9 @@ public class Robot extends IterativeRobot {
   UsbCamera climberCam, intakeCam;
   CameraServer cameraServer;
 
-  SendableChooser autonChooser;
+  SendableChooser<Integer> autonChooser;
+  int autonStartPos;
+  String gameData, choice;
 
   @Override
   public void robotInit() {
@@ -48,17 +53,20 @@ public class Robot extends IterativeRobot {
     thread.start();
 
     autonChooser = new SendableChooser();
-    // autonCommand = (Command) autonChooser.getSelected();
 
-    String gameData;
     gameData = DriverStation.getInstance().getGameSpecificMessage();
 
-    // CameraServer server = CameraServer.getInstance();
-    //
-    // UsbCamera rampCam = server.startAutomaticCapture("rampCam", 0);
-    // rampCam.setResolution(1024, 1060);
-    // UsbCamera hookCam = server.startAutomaticCapture("hookCam", 1);
-    // hookCam.setResolution(1024, 1060);
+    CameraServer server = CameraServer.getInstance();
+    autonChooser = new SendableChooser<Integer>();
+    autonChooser.addObject("right", Integer.valueOf(0));
+    autonChooser.addObject("left", Integer.valueOf(1));
+    autonChooser.addObject("middle", Integer.valueOf(2));
+
+    UsbCamera rampCam = server.startAutomaticCapture("rampCam", 0);
+    rampCam.setResolution(1024, 1060);
+    UsbCamera hookCam = server.startAutomaticCapture("hookCam", 1);
+    hookCam.setResolution(1024, 1060);
+    SmartDashboard.putData("Autonomous Selector", autonChooser);
   }
 
   public static Elevator getElevator() {
@@ -86,6 +94,32 @@ public class Robot extends IterativeRobot {
     driveTrain.resetGyro();
     driveTrain.resetEncoders();
     TimerUtil.startTime();
+    
+//    autonStartPos = autonChooser.getSelected();
+//    if (gameData.charAt(0) == 'L') {
+//      if (autonStartPos == 0) {
+//        choice = "StartRightSwitchLeft";
+//        autonCommand = new StartRightSwitchLeft();
+//      } else if (autonStartPos == 1) {
+//        choice = "StartLeftSwitchLeft";
+//        autonCommand = new StartLeftSwitchLeft();
+//      } else if (autonStartPos == 2) {
+//        choice = "StartMiddleSwitchLeft";
+//        autonCommand = new CenterToLeft();
+//      }
+//    } else if (gameData.charAt(0) == 'R') {
+//      if (autonStartPos == 0) {
+//        choice = "StartRightSwitchRight";
+//        autonCommand = new StartRightSwitchRight();
+//      } else if (autonStartPos == 1) {
+//        choice = "StartLeftSwitchRight";
+//        autonCommand = new StartLeftSwitchRight();
+//      } else if (autonStartPos == 2) {
+//        choice = "StartMiddleSwitchRight";
+//        autonCommand = new CenterToRight();
+//      }
+//    }
+    autonCommand = new StartLeftSwitchRight();
     Scheduler.getInstance().add(autonCommand);
   }
   
@@ -93,9 +127,8 @@ public class Robot extends IterativeRobot {
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
     updateSmartDashboard();
-    if (elevator.isAtBottom() == true) {
+    if (elevator.isAtBottom() == true)
       elevator.resetEncoders();
-    }
   }
 
   @Override
@@ -107,14 +140,14 @@ public class Robot extends IterativeRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     updateSmartDashboard();
-    if (elevator.isAtBottom() == true) {
+    if (elevator.isAtBottom() == true)
       elevator.resetEncoders();
-    }
   }
 
   public void updateSmartDashboard() {
     updateDriving();
     updateElevator();
+//    SmartDashboard.putString("Choice", choice);
   }
 
   public void updateDriving() {
