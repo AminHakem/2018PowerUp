@@ -35,7 +35,7 @@ public class Robot extends IterativeRobot {
 
   SendableChooser<Integer> autonChooser;
   int autonStartPos;
-  String gameData;
+  String gameData, choice;
 
   @Override
   public void robotInit() {
@@ -58,10 +58,10 @@ public class Robot extends IterativeRobot {
     autonChooser.addObject("left", Integer.valueOf(1));
     autonChooser.addObject("middle", Integer.valueOf(2));
 
-    // UsbCamera rampCam = server.startAutomaticCapture("rampCam", 0);
-    // rampCam.setResolution(1024, 1060);
-    // UsbCamera hookCam = server.startAutomaticCapture("hookCam", 1);
-    // hookCam.setResolution(1024, 1060);
+    UsbCamera rampCam = server.startAutomaticCapture("rampCam", 0);
+    rampCam.setResolution(1024, 1060);
+    UsbCamera hookCam = server.startAutomaticCapture("hookCam", 1);
+    hookCam.setResolution(1024, 1060);
     SmartDashboard.putData("Autonomous Selector", autonChooser);
   }
 
@@ -90,25 +90,27 @@ public class Robot extends IterativeRobot {
     driveTrain.resetGyro();
     driveTrain.resetEncoders();
     autonStartPos = autonChooser.getSelected();
-    if (gameData.length() > 0) {
-      if (gameData.charAt(0) == 'L') {
-        switch (autonStartPos) {
-          case 0:
-            autonCommand = new StartRightSwitchLeft();
-          case 1:
-            autonCommand = new StartLeftSwitchLeft();
-          case 2:
-            autonCommand = new CenterToLeft();
-        }
-      } else if (gameData.charAt(0) == 'R') {
-        switch (autonStartPos) {
-          case 0:
-            autonCommand = new StartRightSwitchRight();
-          case 1:
-            autonCommand = new StartLeftSwitchRight();
-          case 2:
-            autonCommand = new CenterToRight();
-        }
+    if (gameData.charAt(0) == 'L') {
+      if (autonStartPos == 0) {
+        choice = "StartRightSwitchLeft";
+        autonCommand = new StartRightSwitchLeft();
+      } else if (autonStartPos == 1) {
+        choice = "StartLeftSwitchLeft";
+        autonCommand = new StartLeftSwitchLeft();
+      } else if (autonStartPos == 2) {
+        choice = "StartMiddleSwitchLeft";
+        autonCommand = new CenterToLeft();
+      }
+    } else if (gameData.charAt(0) == 'R') {
+      if (autonStartPos == 0) {
+        choice = "StartRightSwitchRight";
+        autonCommand = new StartRightSwitchRight();
+      } else if (autonStartPos == 1) {
+        choice = "StartLeftSwitchRight";
+        autonCommand = new StartLeftSwitchRight();
+      } else if (autonStartPos == 2) {
+        choice = "StartMiddleSwitchRight";
+        autonCommand = new CenterToRight();
       }
     }
     Scheduler.getInstance().add(autonCommand);
@@ -121,6 +123,7 @@ public class Robot extends IterativeRobot {
     if (elevator.isAtBottom() == true) {
       elevator.resetEncoders();
     }
+
   }
 
   @Override
@@ -138,6 +141,7 @@ public class Robot extends IterativeRobot {
   public void updateSmartDashboard() {
     updateDriving();
     updateElevator();
+    SmartDashboard.putString("Choice", choice);
   }
 
   public void updateDriving() {
