@@ -95,30 +95,31 @@ public class Robot extends IterativeRobot {
     driveTrain.resetEncoders();
     TimerUtil.startTime();
     
-    autonStartPos = autonChooser.getSelected();
-    if (gameData.charAt(0) == 'L') {
-      if (autonStartPos == 0) {
-        choice = "StartRightSwitchLeft";
-        autonCommand = new StartRightSwitchLeft();
-      } else if (autonStartPos == 1) {
-        choice = "StartLeftSwitchLeft";
-        autonCommand = new StartLeftSwitchLeft();
-      } else if (autonStartPos == 2) {
-        choice = "StartMiddleSwitchLeft";
-        autonCommand = new CenterToLeft();
-      }
-    } else if (gameData.charAt(0) == 'R') {
-      if (autonStartPos == 0) {
-        choice = "StartRightSwitchRight";
-        autonCommand = new StartRightSwitchRight();
-      } else if (autonStartPos == 1) {
-        choice = "StartLeftSwitchRight";
-        autonCommand = new StartLeftSwitchRight();
-      } else if (autonStartPos == 2) {
-        choice = "StartMiddleSwitchRight";
-        autonCommand = new CenterToRight();
-      }
-    }
+//    autonStartPos = autonChooser.getSelected();
+//    if (gameData.charAt(0) == 'L') {
+//      if (autonStartPos == 0) {
+//        choice = "StartRightSwitchLeft";
+//        autonCommand = new StartRightSwitchLeft();
+//      } else if (autonStartPos == 1) {
+//        choice = "StartLeftSwitchLeft";
+//        autonCommand = new StartLeftSwitchLeft();
+//      } else if (autonStartPos == 2) {
+//        choice = "StartMiddleSwitchLeft";
+//        autonCommand = new CenterToLeft();
+//      }
+//    } else if (gameData.charAt(0) == 'R') {
+//      if (autonStartPos == 0) {
+//        choice = "StartRightSwitchRight";
+//        autonCommand = new StartRightSwitchRight();
+//      } else if (autonStartPos == 1) {
+//        choice = "StartLeftSwitchRight";
+//        autonCommand = new StartLeftSwitchRight();
+//      } else if (autonStartPos == 2) {
+//        choice = "StartMiddleSwitchRight";
+//        autonCommand = new CenterToRight();
+//      }
+//    }
+    autonCommand = new StartLeftSwitchRight();
     Scheduler.getInstance().add(autonCommand);
   }
   
@@ -146,7 +147,7 @@ public class Robot extends IterativeRobot {
   public void updateSmartDashboard() {
     updateDriving();
     updateElevator();
-    SmartDashboard.putString("Choice", choice);
+//    SmartDashboard.putString("Choice", choice);
   }
 
   public void updateDriving() {

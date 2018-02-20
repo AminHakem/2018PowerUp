@@ -37,9 +37,9 @@ public class DriveForward extends Command {
     } else
       this.driveController = new PIDController(DriveTrain.driveStraightPLong,
           DriveTrain.driveStraightILong, DriveTrain.driveStraightDLong);
-    this.driveController.setDoneRange(1.0);
-    this.driveController.setMaxOutput(1.0);
-    this.driveController.setMinDoneCycles(5);
+    this.driveController.setDoneRange(7.0);
+    this.driveController.setMaxOutput(0.5);
+    this.driveController.setMinDoneCycles(10);
     this.zeroAngle = this.driveTrain.getAngle();
 
     this.directionController = new PIDController(driveTrain.driveStraightGyroP, 0, 0);
@@ -58,7 +58,7 @@ public class DriveForward extends Command {
   protected void execute() {
     double ySpeed = driveController.calcPID(driveTrain.getFrontBackEncoderDistance());
     double rVal = directionController.calcPID(driveTrain.getAngle());
-    this.driveTrain.mecanumDrive(0, -ySpeed, -rVal);
+    this.driveTrain.mecanumDrive(0, ySpeed, rVal);
     SmartDashboard.putNumber("ySpeed", ySpeed);
 
   }
