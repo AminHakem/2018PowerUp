@@ -3,6 +3,8 @@ package org.usfirst.frc.team3501.robot;
 import org.usfirst.frc.team3501.robot.autoncommandgroups.CenterToLeft;
 import org.usfirst.frc.team3501.robot.autoncommandgroups.CenterToRight;
 import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchLeft;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchRight;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.StartRightSwitchLeft;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
@@ -49,6 +51,7 @@ public class Robot extends IterativeRobot {
 
     autonChooser = new SendableChooser();
     // autonCommand = (Command) autonChooser.getSelected();
+    autonCommand = new StartRightSwitchLeft();
 
     String gameData;
     gameData = DriverStation.getInstance().getGameSpecificMessage();
