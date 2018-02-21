@@ -36,7 +36,6 @@ public class DriveSideways extends Command {
   @Override
   protected void initialize() {
     this.driveTrain.resetEncoders();
-    this.driveTrain.resetGyro();
     this.zeroAngle = this.driveTrain.getAngle();
 
     if (target <= 80)
@@ -50,8 +49,7 @@ public class DriveSideways extends Command {
     this.driveController.setMinDoneCycles(5);
     this.driveController.setSetPoint(this.target);
 
-    this.directionController =
-        new PIDController(driveTrain.driveStraightGyroP, 0, 0);
+    this.directionController = new PIDController(driveTrain.driveStraightGyroP, 0, 0);
     this.directionController.setSetPoint(zeroAngle);
 
     this.yController = new PIDController(0.06, 0.00001, 0);
@@ -60,19 +58,16 @@ public class DriveSideways extends Command {
 
   @Override
   protected void execute() {
-    double xSpeed =
-        driveController.calcPID(driveTrain.getRightLeftEncoderDistance());
+    double xSpeed = driveController.calcPID(driveTrain.getRightLeftEncoderDistance());
     double rVal = directionController.calcPID(driveTrain.getAngle());
-    double ySpeed =
-        yController.calcPID(driveTrain.getFrontBackEncoderDistance());
+    double ySpeed = yController.calcPID(driveTrain.getFrontBackEncoderDistance());
     this.driveTrain.mecanumDrive(xSpeed, ySpeed, rVal);
     SmartDashboard.putNumber("DriveSideways ySpeed", ySpeed);
   }
 
   @Override
   protected boolean isFinished() {
-    return timeSinceInitialized() >= maxTimeOut
-        || this.driveController.isDone();
+    return timeSinceInitialized() >= maxTimeOut || this.driveController.isDone();
   }
 
   @Override

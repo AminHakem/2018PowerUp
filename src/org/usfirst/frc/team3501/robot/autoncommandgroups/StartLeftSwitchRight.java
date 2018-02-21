@@ -3,6 +3,7 @@ package org.usfirst.frc.team3501.robot.autoncommandgroups;
 import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.commands.driving.DriveForward;
 import org.usfirst.frc.team3501.robot.commands.driving.DriveSideways;
+import org.usfirst.frc.team3501.robot.commands.driving.ResetGyro;
 import org.usfirst.frc.team3501.robot.commands.driving.TurnForAngle;
 import org.usfirst.frc.team3501.robot.commands.elevator.ChangeElevatorTarget;
 import org.usfirst.frc.team3501.robot.commands.intake.RunOuttake;
@@ -30,6 +31,7 @@ public class StartLeftSwitchRight extends CommandGroup {
     addSequential(new DriveSideways(-(TO_CUBES - ROBOT_LENGTH) * SCALE, 10));
     addSequential(new DriveForward(LEFT_TO_RIGHT * SCALE, 10));
     addSequential(new TurnForAngle(-90, 5));
+    addSequential(new ResetGyro());
     addSequential(new DriveForward(TO_SWITCH_VERT * SCALE, 7.5));
     addSequential(new RunOuttake());
   }

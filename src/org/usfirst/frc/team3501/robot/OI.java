@@ -41,7 +41,8 @@ public class OI {
 
   // Elevator
   public static Button moveElevatorToSwitch;
-  public static Button moveElevatorToScaleNeutral;
+  public static Button moveElevatorToScale;
+  public static Button moveElevatorToVault;
   public static Button moveElevatorToBottom;
 
   // Elevator
@@ -72,15 +73,17 @@ public class OI {
     // toggleHookPiston.toggleWhenPressed(new ToggleHookPiston());
 
     // Elevator
+    moveElevatorToBottom = new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_BOTTOM);
+    moveElevatorToBottom.whenPressed(new ChangeElevatorTarget(Elevator.BOTTOM_POS));
+
+    moveElevatorToVault = new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_VAULT);
+    moveElevatorToVault.whenPressed(new ChangeElevatorTarget(Elevator.VAULT_POS));
+
     moveElevatorToSwitch = new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_SWITCH);
     moveElevatorToSwitch.whenPressed(new ChangeElevatorTarget(Elevator.SWITCH_POS));
 
-    moveElevatorToScaleNeutral =
-        new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_SCALE_NEUTRAL);
-    moveElevatorToScaleNeutral.whenPressed(new ChangeElevatorTarget(Elevator.SCALE_START_POS));
-
-    moveElevatorToBottom = new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_BOTTOM);
-    moveElevatorToBottom.whenPressed(new ChangeElevatorTarget(Elevator.BOTTOM_POS));
+    moveElevatorToScale = new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_SCALE);
+    moveElevatorToScale.whenPressed(new ChangeElevatorTarget(Elevator.SCALE_POS));
 
     // Climber
     // dropRamp = new JoystickButton(ps4_controller, Constants.OI.LOWER_RAMP);

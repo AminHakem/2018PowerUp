@@ -20,9 +20,10 @@ public class DriveForward extends Command {
   private Preferences prefs;
   private PIDController driveController, directionController;
   private double zeroAngle;
-  private int counter=0;
+  private int counter = 0;
   private double prevPos;
-  private boolean stopped=false;
+  private boolean stopped = false;
+
   /**
    * @param distance: a positive value will cause the robot to move forwards, and a negative value
    *        will cause the robot to move backwards
@@ -32,6 +33,12 @@ public class DriveForward extends Command {
     requires(driveTrain);
     this.maxTimeOut = maxTimeOut;
     this.target = distance;
+  }
+
+  @Override
+  protected void initialize() {
+    this.driveTrain.resetEncoders();
+    this.driveController.setSetPoint(this.target);
     if (target <= 20) {
       this.driveController = new PIDController(DriveTrain.driveStraightPShort,
           DriveTrain.driveStraightIShort, DriveTrain.driveStraightDShort);
@@ -43,32 +50,23 @@ public class DriveForward extends Command {
     this.driveController.setMinDoneCycles(10);
     this.zeroAngle = this.driveTrain.getAngle();
 
-    this.directionController =
-        new PIDController(driveTrain.driveStraightGyroP, 0, 0);
+    this.directionController = new PIDController(driveTrain.driveStraightGyroP, 0, 0);
     this.directionController.setSetPoint(zeroAngle);
-  }
-
-  @Override
-  protected void initialize() {
-    this.driveTrain.resetEncoders();
-    this.driveTrain.resetGyro();
-    this.driveController.setSetPoint(this.target);
-    System.out.println(this.getName() + " initialized");
-    prevPos= driveTrain.getFrontBackEncoderDistance();
+    prevPos = driveTrain.getFrontBackEncoderDistance();
   }
 
   @Override
   protected void execute() {
     double currentPosition = driveTrain.getFrontBackEncoderDistance();
-    if(counter%25==0) {
-      if(currentPosition>=prevPos-1
-          &&currentPosition<=prevPos+1) {
-          stopped = true;
-          System.out.println("STOPPED DUE TO NO MOVEMENT");
-          return;
-}
+    if (counter % 25 == 0) {
+      if (currentPosition >= prevPos - 1 && currentPosition <= prevPos + 1) {
+        stopped = true;
+        System.out.println("STOPPED DUE TO NO MOVEMENT");
+        return;
+      }
       prevPos = currentPosition;
-      System.out.println("Counter: "+counter+" CurrentPosition: "+ currentPosition+" previousPosition");
+      System.out.println(
+          "Counter: " + counter + " CurrentPosition: " + currentPosition + " previousPosition");
     }
     double ySpeed = driveController.calcPID(currentPosition);
     double rVal = directionController.calcPID(driveTrain.getAngle());
@@ -78,8 +76,7 @@ public class DriveForward extends Command {
 
   @Override
   protected boolean isFinished() {
-    return timeSinceInitialized() >= maxTimeOut
-        || this.driveController.isDone()||stopped;
+    return timeSinceInitialized() >= maxTimeOut || this.driveController.isDone() || stopped;
   }
 
   @Override

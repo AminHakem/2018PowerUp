@@ -10,17 +10,15 @@ import edu.wpi.first.wpilibj.command.Command;
  * @author rohanrodrigues
  *
  */
-public class ToggleFieldOriented extends Command {
+public class ResetGyro extends Command {
 
   private DriveTrain driveTrain = Robot.getDriveTrain();
 
-  public ToggleFieldOriented() {
-    requires(driveTrain);
-  }
+  public ResetGyro() {}
 
   @Override
   protected void initialize() {
-    driveTrain.toggleFieldOriented();
+    driveTrain.resetGyro();
   }
 
   @Override
@@ -35,7 +33,5 @@ public class ToggleFieldOriented extends Command {
   protected void end() {}
 
   @Override
-  protected void interrupted() {
-    end();
-  }
+  protected void interrupted() {}
 }
