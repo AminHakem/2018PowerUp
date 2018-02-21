@@ -6,7 +6,7 @@ import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchLeft;
 import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchRight;
 import org.usfirst.frc.team3501.robot.autoncommandgroups.StartRightSwitchLeft;
 import org.usfirst.frc.team3501.robot.autoncommandgroups.StartRightSwitchRight;
-import org.usfirst.frc.team3501.robot.commands.driving.DriveForward;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.SwitchRightScaleRight;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Sendable;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -25,6 +26,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
+  public static Ultrasonic ultra;
   private static DriveTrain driveTrain;
   private static OI oi;
   private static Elevator elevator;
@@ -45,6 +47,9 @@ public class Robot extends IterativeRobot {
     oi = OI.getOI();
     elevator = Elevator.getElevator();
     LiveWindow.setEnabled(false);
+
+    ultra = new Ultrasonic(8, 9);
+    ultra.setAutomaticMode(true);
 
     // initialize and start timer Util
     TimerUtil.startTime(); // DO NOT REMOVE WILL CAUSE ERRORS
@@ -90,13 +95,42 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void autonomousInit() {
-   driveTrain.resetGyro();
-   driveTrain.resetEncoders();
+    driveTrain.resetGyro();
+    driveTrain.resetEncoders();
     TimerUtil.startTime();
+
+    // autonStartPos = autonChooser.getSelected();
+    // if (gameData.charAt(0) == 'L') {
+    // if (autonStartPos == 0) {
+    // choice = "StartRightSwitchLeft";
+    // autonCommand = new StartRightSwitchLeft();
+    // } else if (autonStartPos == 1) {
+    // choice = "StartLeftSwitchLeft";
+    // autonCommand = new StartLeftSwitchLeft();
+    // } else if (autonStartPos == 2) {
+    // choice = "StartMiddleSwitchLeft";
+    // autonCommand = new CenterToLeft();
+    // }
+    // } else if (gameData.charAt(0) == 'R') {
+    // if (autonStartPos == 0) {
+    // choice = "StartRightSwitchRight";
+    // autonCommand = new StartRightSwitchRight();
+    // } else if (autonStartPos == 1) {
+    // choice = "StartLeftSwitchRight";
+    // autonCommand = new StartLeftSwitchRight();
+    // } else if (autonStartPos == 2) {
+    // choice = "StartMiddleSwitchRight";
+    // autonCommand = new CenterToRight();
+    // }
+    // }
+    autonCommand = new SwitchRightScaleRight();
+    System.out.println(autonCommand.getName());
+
     gameData = DriverStation.getInstance().getGameSpecificMessage();
-    chooseAuton();
-    System.out.println("FMS:"+ gameData+" Command Selected: "+ autonCommand.getName());
-   // autonCommand = new StartRightSwitchLeft();
+    // chooseAuton();
+    System.out.println(
+        "FMS:" + gameData + " Command Selected: " + autonCommand.getName());
+    // autonCommand = new StartRightSwitchLeft();
     Scheduler.getInstance().add(autonCommand);
   }
 
@@ -137,6 +171,7 @@ public class Robot extends IterativeRobot {
     SmartDashboard.putNumber("frontleft", driveTrain.getFrontLeftMotorPower());
     SmartDashboard.putNumber("frontright",
         driveTrain.getFrontRightMotorPower());
+    SmartDashboard.putNumber("ultrasonic", ultra.getRangeInches());
   }
 
   public void updateElevator() {
@@ -152,25 +187,25 @@ public class Robot extends IterativeRobot {
     SmartDashboard.putData("Hook Camera Feed",
         (Sendable) cameraServer.getVideo("hookCam"));
   }
-  
+
   public void chooseAuton() {
-     this.autonStartPos = autonChooser.getSelected();
-     if (gameData.charAt(0) == 'L') {
-     if (autonStartPos == 0) {
-     autonCommand = new StartRightSwitchLeft();
-     } else if (autonStartPos == 1) {
-     autonCommand = new StartLeftSwitchLeft();
-     } else if (autonStartPos == 2) {
-     autonCommand = new CenterToLeft();
-     }
-     } else if (gameData.charAt(0) == 'R') {
-     if (autonStartPos == 0) {
-     autonCommand = new StartRightSwitchRight();
-     } else if (autonStartPos == 1) {
-     autonCommand = new StartLeftSwitchRight();
-     } else if (autonStartPos == 2) {
-     autonCommand = new CenterToRight();
-     }
-     }
+    this.autonStartPos = autonChooser.getSelected();
+    if (gameData.charAt(0) == 'L') {
+      if (autonStartPos == 0) {
+        autonCommand = new StartRightSwitchLeft();
+      } else if (autonStartPos == 1) {
+        autonCommand = new StartLeftSwitchLeft();
+      } else if (autonStartPos == 2) {
+        autonCommand = new CenterToLeft();
+      }
+    } else if (gameData.charAt(0) == 'R') {
+      if (autonStartPos == 0) {
+        autonCommand = new StartRightSwitchRight();
+      } else if (autonStartPos == 1) {
+        autonCommand = new StartLeftSwitchRight();
+      } else if (autonStartPos == 2) {
+        autonCommand = new CenterToRight();
+      }
+    }
   }
 }
