@@ -127,7 +127,7 @@ public class Robot extends IterativeRobot {
     System.out.println(autonCommand.getName());
 
     gameData = DriverStation.getInstance().getGameSpecificMessage();
-    chooseAuton();
+    // chooseAuton();
     System.out.println(
         "FMS:" + gameData + " Command Selected: " + autonCommand.getName());
     // autonCommand = new StartRightSwitchLeft();
