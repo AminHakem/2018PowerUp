@@ -31,8 +31,14 @@ public class TurnForAngle extends Command {
     requires(Robot.getDriveTrain());
     this.maxTimeOut = maxTimeOut;
     this.target = angle;
+  }
 
-    if (angle > 90) {
+  @Override
+  protected void initialize() {
+    this.gyroController.setSetPoint(this.target);
+    this.zeroAngle = driveTrain.getAngle();
+
+    if (target > 90) {
       this.gyroP = driveTrain.largeTurnP;
       this.gyroI = driveTrain.largeTurnI;
       this.gyroD = driveTrain.largeTurnD;
@@ -45,12 +51,6 @@ public class TurnForAngle extends Command {
     this.gyroController = new PIDController(this.gyroP, this.gyroI, this.gyroD);
     this.gyroController.setDoneRange(10);
     this.gyroController.setMinDoneCycles(5);
-  }
-
-  @Override
-  protected void initialize() {
-    this.gyroController.setSetPoint(this.target);
-    this.zeroAngle = driveTrain.getAngle();
   }
 
   @Override

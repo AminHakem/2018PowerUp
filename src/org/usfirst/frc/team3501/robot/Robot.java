@@ -6,7 +6,6 @@ import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchLeft;
 import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchRight;
 import org.usfirst.frc.team3501.robot.autoncommandgroups.StartRightSwitchLeft;
 import org.usfirst.frc.team3501.robot.autoncommandgroups.StartRightSwitchRight;
-import org.usfirst.frc.team3501.robot.autoncommandgroups.SwitchRightScaleRight;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
@@ -99,38 +98,9 @@ public class Robot extends IterativeRobot {
     driveTrain.resetEncoders();
     TimerUtil.startTime();
 
-    // autonStartPos = autonChooser.getSelected();
-    // if (gameData.charAt(0) == 'L') {
-    // if (autonStartPos == 0) {
-    // choice = "StartRightSwitchLeft";
-    // autonCommand = new StartRightSwitchLeft();
-    // } else if (autonStartPos == 1) {
-    // choice = "StartLeftSwitchLeft";
-    // autonCommand = new StartLeftSwitchLeft();
-    // } else if (autonStartPos == 2) {
-    // choice = "StartMiddleSwitchLeft";
-    // autonCommand = new CenterToLeft();
-    // }
-    // } else if (gameData.charAt(0) == 'R') {
-    // if (autonStartPos == 0) {
-    // choice = "StartRightSwitchRight";
-    // autonCommand = new StartRightSwitchRight();
-    // } else if (autonStartPos == 1) {
-    // choice = "StartLeftSwitchRight";
-    // autonCommand = new StartLeftSwitchRight();
-    // } else if (autonStartPos == 2) {
-    // choice = "StartMiddleSwitchRight";
-    // autonCommand = new CenterToRight();
-    // }
-    // }
-    autonCommand = new SwitchRightScaleRight();
+    chooseAuton();
     System.out.println(autonCommand.getName());
 
-    gameData = DriverStation.getInstance().getGameSpecificMessage();
-    // chooseAuton();
-    System.out.println(
-        "FMS:" + gameData + " Command Selected: " + autonCommand.getName());
-    // autonCommand = new StartRightSwitchLeft();
     Scheduler.getInstance().add(autonCommand);
   }
 
@@ -161,16 +131,13 @@ public class Robot extends IterativeRobot {
   }
 
   public void updateDriving() {
-    SmartDashboard.putNumber("right left encoder: ",
-        driveTrain.getRightLeftEncoderDistance());
-    SmartDashboard.putNumber("front back encoder: ",
-        driveTrain.getFrontBackEncoderDistance());
+    SmartDashboard.putNumber("right left encoder: ", driveTrain.getRightLeftEncoderDistance());
+    SmartDashboard.putNumber("front back encoder: ", driveTrain.getFrontBackEncoderDistance());
     SmartDashboard.putNumber("angle", driveTrain.getAngle());
     SmartDashboard.putNumber("rearleft", driveTrain.getRearLeftMotorPower());
     SmartDashboard.putNumber("rearright", driveTrain.getRearRightMotorPower());
     SmartDashboard.putNumber("frontleft", driveTrain.getFrontLeftMotorPower());
-    SmartDashboard.putNumber("frontright",
-        driveTrain.getFrontRightMotorPower());
+    SmartDashboard.putNumber("frontright", driveTrain.getFrontRightMotorPower());
     SmartDashboard.putNumber("ultrasonic", ultra.getRangeInches());
   }
 
@@ -181,15 +148,13 @@ public class Robot extends IterativeRobot {
   }
 
   public void displayCameraFeed() {
-    SmartDashboard.putData("Ramp Camera Feed",
-        (Sendable) cameraServer.getVideo("rampCam"));
-
-    SmartDashboard.putData("Hook Camera Feed",
-        (Sendable) cameraServer.getVideo("hookCam"));
+    SmartDashboard.putData("Ramp Camera Feed", (Sendable) cameraServer.getVideo("rampCam"));
+    SmartDashboard.putData("Hook Camera Feed", (Sendable) cameraServer.getVideo("hookCam"));
   }
 
   public void chooseAuton() {
     this.autonStartPos = autonChooser.getSelected();
+    gameData = DriverStation.getInstance().getGameSpecificMessage();
     if (gameData.charAt(0) == 'L') {
       if (autonStartPos == 0) {
         autonCommand = new StartRightSwitchLeft();
