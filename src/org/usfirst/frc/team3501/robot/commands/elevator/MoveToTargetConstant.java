@@ -32,7 +32,7 @@ public class MoveToTargetConstant extends Command {
     this.elevatorController = new PIDController(Elevator.ELEVATOR_P,
         Elevator.ELEVATOR_I, Elevator.ELEVATOR_D);
     this.elevatorController.setDoneRange(3.0);
-    this.elevatorController.setMaxOutput(0.75);
+    this.elevatorController.setMaxOutput(1.0);
     this.elevatorController.setMinDoneCycles(5);
   }
 

@@ -24,7 +24,6 @@ public class ChangeElevatorTarget extends Command {
   @Override
   protected void execute() {
     elevator.setTargetElavatorPos(target);
-    System.out.println(target);
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -29,6 +29,8 @@ public class Constants {
     public static final int R1_BUTTON_PORT = 6;
     public static final int L2_BUTTON_PORT = 7;
     public static final int R2_BUTTON_PORT = 8;
+    public static final int PS_BUTTON_PORT = 13;
+    public static final int PS_SHARE_BUTTON = 9;
 
     // TODO: Confirm with Collin button mapping, then fill in the 0's below
     // (filler number) with
@@ -41,9 +43,10 @@ public class Constants {
     // Intake
     public static final int RUN_INTAKE_PORT = SQUARE_BUTTON_PORT;
     public static int REVERSE_INTAKE_PORT = CIRCLE_BUTTON_PORT;
+    public static int SHOOT_PORT = PS_SHARE_BUTTON;
 
     // Climber
-    public static final int TOGGLE_PISTON_PORT = 0;
+    public static final int TOGGLE_PISTON_PORT = PS_BUTTON_PORT;
     public static final int LOWER_RAMP = 0;
     public static final int RUN_WINCH_FORWARD = L2_BUTTON_PORT;
     public static final int RUN_WINCH_BACKWARD = 14;
@@ -84,7 +87,7 @@ public class Constants {
   }
 
   public static class Climber {
-    public static final int PISTON_CHANNEL = 0;
+    public static final int PISTON_CHANNEL = 7;
     public static final int RIGHT_WINCH = 2;
     public static final int LEFT_WINCH = 3;
   }

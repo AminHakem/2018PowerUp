@@ -21,7 +21,6 @@ public class Climber extends Subsystem {
 
   public static final int WINCH_SPEED = 0;
   private static final double SERVO_ANGLE = 0;
-
   private Climber() {
     // MOTOR CONTROLLER
     rightWinch = new WPI_TalonSRX(Constants.Climber.RIGHT_WINCH);

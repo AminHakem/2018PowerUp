@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3501.robot;
 
+import org.usfirst.frc.team3501.robot.commands.climber.ExtendHook;
 import org.usfirst.frc.team3501.robot.commands.climber.LiftRobot;
 import org.usfirst.frc.team3501.robot.commands.climber.LowerRobot;
 import org.usfirst.frc.team3501.robot.commands.driving.AlignWithCube;
@@ -7,6 +8,7 @@ import org.usfirst.frc.team3501.robot.commands.driving.ToggleFieldOriented;
 import org.usfirst.frc.team3501.robot.commands.elevator.ChangeElevatorTarget;
 import org.usfirst.frc.team3501.robot.commands.intake.RunIntake;
 import org.usfirst.frc.team3501.robot.commands.intake.RunOuttake;
+import org.usfirst.frc.team3501.robot.commands.intake.Shoot;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -24,12 +26,13 @@ public class OI {
   // Intake
   public Button runIntakeForward;
   public Button runIntakeBackward;
-
+  public Button shoot;
   // Climber
   public Button dropRamp;
   public Button climbingWinch;
   public Button loweringWinch;
   public Button toggleJoystickClimb;
+  public Button extendHook;
 
   public Button climbLeft;
   public Button climbRight;
@@ -54,7 +57,10 @@ public class OI {
 
     runIntakeBackward = new JoystickButton(ps4_controller, Constants.OI.REVERSE_INTAKE_PORT);
     runIntakeBackward.whenPressed(new RunOuttake());
-
+    
+    shoot = new JoystickButton(ps4_controller, Constants.OI.SHOOT_PORT);
+    runIntakeForward.whileHeld(new Shoot());
+    
     // Drive Train
     changeFieldOriented = new JoystickButton(ps4_controller, Constants.OI.FIELD_ORIENTED_PORT);
     changeFieldOriented.toggleWhenPressed(new ToggleFieldOriented());
@@ -80,6 +86,9 @@ public class OI {
     // dropRamp = new JoystickButton(ps4_controller, Constants.OI.LOWER_RAMP);
     // dropRamp.whenPressed(new DropRamp());
 
+    extendHook = new JoystickButton(ps4_controller, Constants.OI.TOGGLE_PISTON_PORT);
+    extendHook.whenPressed(new ExtendHook());
+    
     climbBoth = new JoystickButton(ps4_controller, Constants.OI.RUN_WINCH_FORWARD);
     climbBoth.whileHeld(new LiftRobot());
 
