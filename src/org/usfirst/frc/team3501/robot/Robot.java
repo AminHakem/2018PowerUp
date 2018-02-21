@@ -150,11 +150,14 @@ public class Robot extends IterativeRobot {
   public void displayCameraFeed() {
     SmartDashboard.putData("Ramp Camera Feed", (Sendable) cameraServer.getVideo("rampCam"));
     SmartDashboard.putData("Hook Camera Feed", (Sendable) cameraServer.getVideo("hookCam"));
+    SmartDashboard.putBoolean("Cube visible: ", NetworkThread.isBoxVisible());
   }
 
   public void chooseAuton() {
     this.autonStartPos = autonChooser.getSelected();
+    do {
     gameData = DriverStation.getInstance().getGameSpecificMessage();
+    }while(gameData.length()<1);
     if (gameData.charAt(0) == 'L') {
       if (autonStartPos == 0) {
         autonCommand = new StartRightSwitchLeft();
