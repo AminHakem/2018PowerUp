@@ -21,11 +21,9 @@ public class Elevator extends Subsystem {
 
   // POSITIONS (in inches)
   public static final int BOTTOM_POS = 0;
-  public static final int TOP_POS = 71; // assumes at max height for robot
+  public static final int VAULT_POS = 3;
   public static final int SWITCH_POS = 30;
-  public static final int SCALE_START_POS = 67; // assumes scale is at its starting position
-  public static final int SCALE_BOTTOM_POS = 48; // assumes scale is at bottom position
-  // there is no scale_top_pos because exceeds robot max height
+  public static final int SCALE_POS = 67; // assumes scale is at its starting position
   private final WPI_TalonSRX elevatorTalon;
   private final WPI_TalonSRX elevatorEncoderTalon;
   private final SensorCollection elevatorEncoder;
@@ -121,7 +119,7 @@ public class Elevator extends Subsystem {
 
   @Override
   protected void initDefaultCommand() {
-    this.setDefaultCommand( new MoveToTargetConstant());
+    this.setDefaultCommand(new MoveToTargetConstant());
   }
 
   public double getTargetElevatorPos() {
