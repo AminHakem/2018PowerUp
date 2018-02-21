@@ -1,5 +1,11 @@
 package org.usfirst.frc.team3501.robot;
 
+import org.usfirst.frc.team3501.robot.autoncommandgroups.CenterToLeft;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.CenterToRight;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchLeft;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchRight;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.StartRightSwitchLeft;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.StartRightSwitchRight;
 import org.usfirst.frc.team3501.robot.autoncommandgroups.SwitchRightScaleRight;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
@@ -48,14 +54,15 @@ public class Robot extends IterativeRobot {
     // initialize and start timer Util
     TimerUtil.startTime(); // DO NOT REMOVE WILL CAUSE ERRORS
 
-    // initialize a thread which will run code to constantly update
+    // initialize and start a thread which will run code to constantly update
     thread = new NetworkThread();
     thread.start();
 
     autonChooser = new SendableChooser();
+
     CameraServer server = CameraServer.getInstance();
     autonChooser = new SendableChooser<Integer>();
-    autonChooser.addObject("right", Integer.valueOf(0));
+    autonChooser.addDefault("right", Integer.valueOf(0));
     autonChooser.addObject("left", Integer.valueOf(1));
     autonChooser.addObject("middle", Integer.valueOf(2));
 
@@ -88,8 +95,6 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void autonomousInit() {
-    gameData = DriverStation.getInstance().getGameSpecificMessage();
-    System.out.println("***********Game Data: " + gameData + "**************");
     driveTrain.resetGyro();
     driveTrain.resetEncoders();
     TimerUtil.startTime();
@@ -120,6 +125,12 @@ public class Robot extends IterativeRobot {
     // }
     autonCommand = new SwitchRightScaleRight();
     System.out.println(autonCommand.getName());
+
+    gameData = DriverStation.getInstance().getGameSpecificMessage();
+    chooseAuton();
+    System.out.println(
+        "FMS:" + gameData + " Command Selected: " + autonCommand.getName());
+    // autonCommand = new StartRightSwitchLeft();
     Scheduler.getInstance().add(autonCommand);
   }
 
@@ -147,7 +158,6 @@ public class Robot extends IterativeRobot {
   public void updateSmartDashboard() {
     updateDriving();
     updateElevator();
-    // SmartDashboard.putString("Choice", choice);
   }
 
   public void updateDriving() {
@@ -176,5 +186,26 @@ public class Robot extends IterativeRobot {
 
     SmartDashboard.putData("Hook Camera Feed",
         (Sendable) cameraServer.getVideo("hookCam"));
+  }
+
+  public void chooseAuton() {
+    this.autonStartPos = autonChooser.getSelected();
+    if (gameData.charAt(0) == 'L') {
+      if (autonStartPos == 0) {
+        autonCommand = new StartRightSwitchLeft();
+      } else if (autonStartPos == 1) {
+        autonCommand = new StartLeftSwitchLeft();
+      } else if (autonStartPos == 2) {
+        autonCommand = new CenterToLeft();
+      }
+    } else if (gameData.charAt(0) == 'R') {
+      if (autonStartPos == 0) {
+        autonCommand = new StartRightSwitchRight();
+      } else if (autonStartPos == 1) {
+        autonCommand = new StartLeftSwitchRight();
+      } else if (autonStartPos == 2) {
+        autonCommand = new CenterToRight();
+      }
+    }
   }
 }

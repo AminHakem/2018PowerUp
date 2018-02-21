@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class SwitchRightScaleRight extends CommandGroup {
 
-  public static final double constTurn = 34.65;
+  public static final double constTurn = 40;
   public static final short robotLength = 32;
   public static final short robotWidth = 27;
   public static final short scaleHeight = 67;
@@ -24,13 +24,14 @@ public class SwitchRightScaleRight extends CommandGroup {
     addSequential(new WaitCommand(1));
     addSequential(new DriveForward(20, 1));
     addSequential(new TurnForAngle(-1 * constTurn, 5));
-    addSequential(new DriveForward(12, 1)); // just in case too far away from block
+    addSequential(new DriveForward(16, 1)); // just in case too far away from block
     addSequential(new RunIntakeOnTime(1.0));
-    addSequential(new TurnForAngle(1 * constTurn, 5));
+    addParallel(new TurnForAngle(1 * constTurn, 5));
     addSequential(new ChangeElevatorTarget(scaleHeight));
     addSequential(new DriveForward(-20, 4));
     addSequential(new DriveSideways(110, 7));
     // addSequential(new DriveForward(/* 71.75 - robotLength */20, 5));
+    addSequential(new DriveForward(30, 1));
     addSequential(new WaitCommand(2));
     addSequential(new RunOuttake());
   }
