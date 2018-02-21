@@ -20,11 +20,9 @@ public class DriveForward extends Command {
   private Preferences prefs;
   private PIDController driveController, directionController;
   private double zeroAngle;
-  int staticCount = 0;
-  double prevEncoder = 0;
-  double time;
-  double diff;
-
+  private int counter=0;
+  private double prevPos;
+  private boolean stopped=false;
   /**
    * @param distance: a positive value will cause the robot to move forwards, and a negative value
    *        will cause the robot to move backwards
@@ -56,35 +54,32 @@ public class DriveForward extends Command {
     this.driveTrain.resetGyro();
     this.driveController.setSetPoint(this.target);
     System.out.println(this.getName() + " initialized");
+    prevPos= driveTrain.getFrontBackEncoderDistance();
   }
 
   @Override
   protected void execute() {
-    diff = Math.abs(driveTrain.getFrontBackEncoderDistance() - prevEncoder);
-    if (Math.abs(this.target)
-        - Math.abs(driveTrain.getFrontBackEncoderDistance()) <= 0.1 * target) {
-      if (diff <= 1) {
-        staticCount++;
-        System.out.println("*********StaticCount: " + staticCount);
-      } else
-        staticCount = 0;
-      if (staticCount >= 25) {
-        System.out.println(
-            "****************DRIVE FORWARD ENDED DUE TO NO MOVEMENT***************");
-        this.end();
-      }
+    double currentPosition = driveTrain.getFrontBackEncoderDistance();
+    if(counter%25==0) {
+      if(currentPosition>=prevPos-1
+          &&currentPosition<=prevPos+1) {
+          stopped = true;
+          System.out.println("STOPPED DUE TO NO MOVEMENT");
+          return;
+}
+      prevPos = currentPosition;
+      System.out.println("Counter: "+counter+" CurrentPosition: "+ currentPosition+" previousPosition");
     }
-    double ySpeed =
-        driveController.calcPID(driveTrain.getFrontBackEncoderDistance());
+    double ySpeed = driveController.calcPID(currentPosition);
     double rVal = directionController.calcPID(driveTrain.getAngle());
     this.driveTrain.mecanumDrive(0, ySpeed, rVal);
-    prevEncoder = driveTrain.getFrontBackEncoderDistance();
+    counter++;
   }
 
   @Override
   protected boolean isFinished() {
     return timeSinceInitialized() >= maxTimeOut
-        || this.driveController.isDone();
+        || this.driveController.isDone()||stopped;
   }
 
   @Override
