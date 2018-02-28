@@ -25,11 +25,12 @@ public class RunIntake extends Command {
   @Override
   protected void execute() {
     intake.setMotorValues(-intake.intakeSpeed);
+    System.out.println("RunIntake Execution!!!!");
   }
 
   @Override
   protected boolean isFinished() {
-    return false;
+    return timeSinceInitialized() >= 0.5;
   }
 
   @Override
