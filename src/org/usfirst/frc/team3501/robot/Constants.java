@@ -41,7 +41,7 @@ public class Constants {
     public static final int VISION_ALIGN_PORT = X_BUTTON_PORT;
 
     // Intake
-    public static final int RUN_INTAKE_PORT = SQUARE_BUTTON_PORT;
+    public static int RUN_INTAKE_PORT = SQUARE_BUTTON_PORT;
     public static int REVERSE_INTAKE_PORT = CIRCLE_BUTTON_PORT;
     public static int SHOOT_PORT = PS_SHARE_BUTTON;
 
