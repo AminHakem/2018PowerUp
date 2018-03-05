@@ -44,11 +44,11 @@ public class Constants {
     public static int RUN_INTAKE_PORT = SQUARE_BUTTON_PORT;
     public static int REVERSE_INTAKE_PORT = CIRCLE_BUTTON_PORT;
     public static int SHOOT_PORT = PS_SHARE_BUTTON;
-
+    public static int INTAKE_PISTON_PORT = L2_BUTTON_PORT;
     // Climber
-    public static final int TOGGLE_PISTON_PORT = PS_BUTTON_PORT;
+    public static final int TOGGLE_CLIMBER_PISTON_PORT = PS_BUTTON_PORT;
     public static final int LOWER_RAMP = 0;
-    public static final int RUN_WINCH_FORWARD = L2_BUTTON_PORT;
+    public static final int RUN_WINCH_FORWARD = 0;
     public static final int RUN_WINCH_BACKWARD = 14;
     public static final int TOGGLE_CLIMB = 0;
 
@@ -84,6 +84,8 @@ public class Constants {
   public static class Intake {
     // MOTOR CONTROLLERS
     public static final int INTAKE_PORT = 8;
+    public static final int INTAKE_PISTON_PORT = 6;
+
   }
 
   public static class Climber {
@@ -100,6 +102,9 @@ public class Constants {
 
   public static enum Direction {
     LEFT, RIGHT, DOWN, UP, FORWARD, BACKWARD;
+  }
+  public static class NetworkThread {
+    public static final int CAMERA_DATA_INPUT_UDP_PORT = 5800;
   }
 
 }

@@ -45,21 +45,22 @@ public class AlignWithCube extends Command {
     if (NetworkThread.isBoxVisible()) {
       double outputX = alignmentControllerX.calcPID(NetworkThread.getBoxX());
       double outputY = alignmentControllerY.calcPID(NetworkThread.getBoxSize());
-      DriveTrain.getDriveTrain().mecanumDrive(-outputX, -outputY, 0);
+      DriveTrain.getDriveTrain().mecanumDrive(-outputX, 0, 0);
     }
 
     if (time == 0 && alignmentControllerY.isDone()) {
       time = timeSinceInitialized();
       System.out.println("detected   Y: " + NetworkThread.getBoxSize());
     }
-    System.out.println(time);
+   // System.out.println(time);
+    System.out.println("detected   Y: " + NetworkThread.getBoxSize());
   }
 
   @Override
   protected boolean isFinished() {
-    if (time != 0)
-      return timeSinceInitialized() - time > 0.25;
-    return false;
+  //  if (time != 0)
+    //  return timeSinceInitialized() - time > 0.25;
+    return (this.alignmentControllerX.isDone()&&this.alignmentControllerY.isDone());
   }
 
   @Override

@@ -6,6 +6,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import org.usfirst.frc.team3501.robot.Constants;
 /**
  * Thread which will constantly receive alignment values from RaspberryPi and update variable in
  * DriveTrain
@@ -26,7 +27,7 @@ public class NetworkThread extends Thread {
 
   public NetworkThread() {
     try {
-      socket = new DatagramSocket(10025);
+      socket = new DatagramSocket(Constants.NetworkThread.CAMERA_DATA_INPUT_UDP_PORT);
     } catch (SocketException e1) {
       e1.printStackTrace();
     }
@@ -60,6 +61,7 @@ public class NetworkThread extends Thread {
       String trimmed = received.trim();
 
       if (!trimmed.equals("")) {
+        System.out.println(trimmed);
         int startIndex = trimmed.indexOf("(");
         int firstCommaIndex = trimmed.indexOf(",");
         int secondCommaIndex = trimmed.indexOf(",", firstCommaIndex + 1);
@@ -68,8 +70,8 @@ public class NetworkThread extends Thread {
         BOX_SHIFT_X = (int) Double.parseDouble(trimmed.substring(startIndex + 1, firstCommaIndex));
         BOX_SHIFT_Y =
             60 + (int) Double.parseDouble(trimmed.substring(firstCommaIndex + 1, secondCommaIndex));
-        BOX_SIZE = Double.parseDouble(trimmed.substring(secondCommaIndex + 1, thirdCommaIndex));
-        IS_VISIBLE = trimmed.substring(thirdCommaIndex + 1, endIndex).equals("true");
+        IS_VISIBLE = trimmed.substring(secondCommaIndex + 1, thirdCommaIndex).equals("true");
+        BOX_SIZE = Double.parseDouble(trimmed.substring(thirdCommaIndex + 1, endIndex));
 
       }
 

@@ -4,6 +4,7 @@ import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.MathLib;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /****
@@ -18,12 +19,14 @@ public class Intake extends Subsystem {
 
   private static Intake intake;
   private WPI_TalonSRX intakeTalon;
-
+  private Solenoid intakeSolenoid;
+  private boolean pistonActivated = false;
   public double intakeSpeed = 1.0;
 
   private Intake() {
     // MOTOR CONTROLLERS
     intakeTalon = new WPI_TalonSRX(Constants.Intake.INTAKE_PORT);
+    this.intakeSolenoid = new Solenoid(Constants.Intake.INTAKE_PISTON_PORT);
   }
 
   public static Intake getIntake() {
@@ -45,5 +48,17 @@ public class Intake extends Subsystem {
 
   @Override
   protected void initDefaultCommand() {}
+
+  public boolean isPistonActivated() {
+    return pistonActivated;
+  }
+
+  public void setPistonActivated(boolean pistonActivated) {
+    this.pistonActivated = pistonActivated;
+  }
+
+  public Solenoid getIntakeSolenoid() {
+    return intakeSolenoid;
+  }
 
 }
