@@ -58,16 +58,6 @@ public class DriveForward extends Command {
   @Override
   protected void execute() {
     double currentPosition = driveTrain.getFrontBackEncoderDistance();
-    if (counter % 25 == 0) {
-      if (currentPosition >= prevPos - 1 && currentPosition <= prevPos + 1) {
-        stopped = true;
-        System.out.println("STOPPED DUE TO NO MOVEMENT");
-        return;
-      }
-      prevPos = currentPosition;
-      System.out.println(
-          "Counter: " + counter + " CurrentPosition: " + currentPosition + " previousPosition");
-    }
     double ySpeed = driveController.calcPID(currentPosition);
     double rVal = directionController.calcPID(driveTrain.getAngle());
     this.driveTrain.mecanumDrive(0, ySpeed, rVal);
