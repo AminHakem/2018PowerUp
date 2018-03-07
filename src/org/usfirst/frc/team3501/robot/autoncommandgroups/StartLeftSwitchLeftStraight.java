@@ -21,7 +21,7 @@ public class StartLeftSwitchLeftStraight extends CommandGroup {
   public StartLeftSwitchLeftStraight() {
     addSequential(new ChangeElevatorTarget(Elevator.SWITCH_POS));
     addSequential(new DriveForward(-VERT_SWITCH_DIST, 10));
-    addSequential(new TurnForAngle(-90, 5));
+    addSequential(new TurnForAngle(90, 5));
     addSequential(new DriveForward((HORIZ_SWITCH_DIST) * SCALE, 6.5));
     addSequential(new RunOuttake());
     addSequential(new TurnForAngle(-90, 5));
