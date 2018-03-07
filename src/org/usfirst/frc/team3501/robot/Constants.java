@@ -57,6 +57,7 @@ public class Constants {
     public static final int ELEVATOR_TO_SCALE = R2_BUTTON_PORT;
     public static final int ELEVATOR_TO_VAULT = 10;
     public static final int ELEVATOR_TO_BOTTOM = L1_BUTTON_PORT;
+    public static final int ELEVATOR_TO_LOWER_SCALE = 14;
   }
 
   public static class Elevator {

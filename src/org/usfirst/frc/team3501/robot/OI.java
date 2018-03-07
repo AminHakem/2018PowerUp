@@ -47,6 +47,7 @@ public class OI {
   public static Button moveElevatorToScale;
   public static Button moveElevatorToVault;
   public static Button moveElevatorToBottom;
+  public static Button moveElevatorToLowerScale;
 
   // Elevator
   public static Button toggleHookPiston;
@@ -117,6 +118,11 @@ public class OI {
     backDriveBoth =
         new JoystickButton(ps4_controller, Constants.OI.RUN_WINCH_BACKWARD);
     backDriveBoth.whileHeld(new LowerRobot());
+
+    moveElevatorToLowerScale = new JoystickButton(ps4_controller,
+        Constants.OI.ELEVATOR_TO_LOWER_SCALE);
+    moveElevatorToLowerScale
+        .whenPressed(new ChangeElevatorTarget(Elevator.SCALE_LOW_POS));
   }
 
   public static OI getOI() {
