@@ -38,19 +38,21 @@ public class DriveForward extends Command {
   @Override
   protected void initialize() {
     this.driveTrain.resetEncoders();
-    this.driveController.setSetPoint(this.target);
     if (target <= 20) {
       this.driveController = new PIDController(DriveTrain.driveStraightPShort,
           DriveTrain.driveStraightIShort, DriveTrain.driveStraightDShort);
     } else
       this.driveController = new PIDController(DriveTrain.driveStraightPLong,
           DriveTrain.driveStraightILong, DriveTrain.driveStraightDLong);
+
+    this.driveController.setSetPoint(this.target);
     this.driveController.setDoneRange(7.0);
     this.driveController.setMaxOutput(0.5);
     this.driveController.setMinDoneCycles(10);
     this.zeroAngle = this.driveTrain.getAngle();
 
-    this.directionController = new PIDController(driveTrain.driveStraightGyroP, 0, 0);
+    this.directionController =
+        new PIDController(driveTrain.driveStraightGyroP, 0, 0);
     this.directionController.setSetPoint(zeroAngle);
     prevPos = driveTrain.getFrontBackEncoderDistance();
   }
@@ -66,7 +68,8 @@ public class DriveForward extends Command {
 
   @Override
   protected boolean isFinished() {
-    return timeSinceInitialized() >= maxTimeOut || this.driveController.isDone() || stopped;
+    return timeSinceInitialized() >= maxTimeOut || this.driveController.isDone()
+        || stopped;
   }
 
   @Override
