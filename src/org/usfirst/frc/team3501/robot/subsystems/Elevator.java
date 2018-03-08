@@ -133,4 +133,7 @@ public class Elevator extends Subsystem {
   public void setTargetElavatorPos(double val) {
     this.targetElevatorPos = val;
   }
+  public void setHookPiston(boolean val) {
+    hookPiston.set(val);
+  }
 }

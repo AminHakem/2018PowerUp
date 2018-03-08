@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3501.robot;
 
+import org.usfirst.frc.team3501.robot.commands.climber.DropRamp;
 import org.usfirst.frc.team3501.robot.commands.climber.ExtendHook;
 import org.usfirst.frc.team3501.robot.commands.climber.LiftRobot;
 import org.usfirst.frc.team3501.robot.commands.climber.LowerRobot;
@@ -71,9 +72,9 @@ public class OI {
     toggleIntakePiston.whenReleased(new ToggleIntakePiston());
     
     // Drive Train
-    changeFieldOriented =
-        new JoystickButton(ps4_controller, Constants.OI.FIELD_ORIENTED_PORT);
-    changeFieldOriented.toggleWhenPressed(new ToggleFieldOriented());
+//    changeFieldOriented =
+//        new JoystickButton(ps4_controller, Constants.OI.FIELD_ORIENTED_PORT);
+//    changeFieldOriented.toggleWhenPressed(new ToggleFieldOriented());
 
     alignWithCube = new JoystickButton(ps4_controller, Constants.OI.VISION_ALIGN_PORT);
     alignWithCube.toggleWhenPressed(new AlignWithCube());
@@ -103,8 +104,8 @@ public class OI {
         .whenPressed(new ChangeElevatorTarget(Elevator.SCALE_POS));
 
     // Climber
-    // dropRamp = new JoystickButton(ps4_controller, Constants.OI.LOWER_RAMP);
-    // dropRamp.whenPressed(new DropRamp());
+     dropRamp = new JoystickButton(ps4_controller, Constants.OI.LOWER_RAMP);
+     dropRamp.whenPressed(new DropRamp());
 
     extendHook =
         new JoystickButton(ps4_controller, Constants.OI.TOGGLE_CLIMBER_PISTON_PORT);

@@ -31,6 +31,8 @@ public class Constants {
     public static final int R2_BUTTON_PORT = 8;
     public static final int PS_BUTTON_PORT = 13;
     public static final int PS_SHARE_BUTTON = 9;
+    public static final int L3_BUTTON = 11;
+    public static final int R3_BUTTON = 12;
 
     // TODO: Confirm with Collin button mapping, then fill in the 0's below
     // (filler number) with
@@ -46,10 +48,10 @@ public class Constants {
     public static int SHOOT_PORT = PS_SHARE_BUTTON;
     public static int INTAKE_PISTON_PORT = L2_BUTTON_PORT;
     // Climber
-    public static final int TOGGLE_CLIMBER_PISTON_PORT = PS_BUTTON_PORT;
-    public static final int LOWER_RAMP = 0;
-    public static final int RUN_WINCH_FORWARD = 0;
-    public static final int RUN_WINCH_BACKWARD = 14;
+    public static final int TOGGLE_CLIMBER_PISTON_PORT = TRIANGLE_BUTTON_PORT;
+    public static final int LOWER_RAMP = PS_BUTTON_PORT;
+    public static final int RUN_WINCH_FORWARD = R3_BUTTON;
+    public static final int RUN_WINCH_BACKWARD = L3_BUTTON;
     public static final int TOGGLE_CLIMB = 0;
 
     // Elevator
@@ -68,7 +70,7 @@ public class Constants {
     public static final int TOP_LIMIT_SWITCH = 1;
     public static final int BOTTOM_LIMIT_SWITCH = 0;
 
-    public static final int PISTON_CHANNEL = 1;
+    public static final int PISTON_CHANNEL = 7;
 
   }
 
@@ -83,13 +85,13 @@ public class Constants {
 
   public static class Intake {
     // MOTOR CONTROLLERS
-    public static final int INTAKE_PORT = 8;
+    public static final int INTAKE_PORT = 6;
     public static final int INTAKE_PISTON_PORT = 6;
 
   }
 
   public static class Climber {
-    public static final int PISTON_CHANNEL = 7;
+    public static final int PISTON_CHANNEL = 1;
     public static final int RIGHT_WINCH = 2;
     public static final int LEFT_WINCH = 3;
   }
