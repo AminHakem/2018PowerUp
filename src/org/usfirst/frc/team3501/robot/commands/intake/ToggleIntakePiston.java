@@ -14,7 +14,7 @@ public class ToggleIntakePiston extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-      if(!intake.isPistonActivated())intake.setMotorValues(-intake.intakeSpeed);
+      if(intake.isPistonActivated())intake.setMotorValues(-intake.intakeSpeed);
       intake.setPistonActivated(!intake.isPistonActivated());
       intake.getIntakeSolenoid().set(intake.isPistonActivated());
     }

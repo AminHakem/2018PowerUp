@@ -18,7 +18,7 @@ public class Elevator extends Subsystem {
   // PID VALUES
   public static double ELEVATOR_P = 0.03, ELEVATOR_I = 0.00115,
       ELEVATOR_D = -0.002;
-  public static final double ACCELERATION_CONTROL = 0.01;
+  public static final double ACCELERATION_CONTROL = 0.05;
 
   // POSITIONS (in inches)
   public static final int BOTTOM_POS = 0;
@@ -30,7 +30,7 @@ public class Elevator extends Subsystem {
   private final SensorCollection elevatorEncoder;
   private final DigitalInput topLimitSwitch, bottomLimitSwitch;
 
-  private Solenoid hookPiston;
+  private Solenoid hookPistonOne, hookPistonTwo;
 
   // Calibration constants for encoders
   public static final double MOTOR_CIRCUMFERENCE = 1.18 * Math.PI; // inches
@@ -53,7 +53,8 @@ public class Elevator extends Subsystem {
     bottomLimitSwitch =
         new DigitalInput(Constants.Elevator.BOTTOM_LIMIT_SWITCH);
 
-    hookPiston = new Solenoid(Constants.Elevator.PISTON_CHANNEL);
+    hookPistonOne = new Solenoid(Constants.Elevator.PISTON_CHANNEL_ONE);
+   // hookPistonTwo = new Solenoid(Constants.Elevator.PISTON_CHANNEL_TWO);
 
     this.setCANTalonsBrake();
   }
@@ -116,7 +117,7 @@ public class Elevator extends Subsystem {
   }
 
   public void togglePiston() {
-    hookPiston.set(!hookPiston.get());
+    hookPistonOne.set(!hookPistonOne.get());
   }
 
   public void periodicWarning() {}
@@ -133,7 +134,7 @@ public class Elevator extends Subsystem {
   public void setTargetElavatorPos(double val) {
     this.targetElevatorPos = val;
   }
-  public void setHookPiston(boolean val) {
-    hookPiston.set(val);
+  public void setHookPistonOne(boolean val) {
+    hookPistonOne.set(val);
   }
 }

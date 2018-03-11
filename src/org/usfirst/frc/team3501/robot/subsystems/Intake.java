@@ -22,11 +22,13 @@ public class Intake extends Subsystem {
   private Solenoid intakeSolenoid;
   private boolean pistonActivated = false;
   public double intakeSpeed = 1.0;
+  public double outtakeSpeed = 0.3;
 
   private Intake() {
     // MOTOR CONTROLLERS
     intakeTalon = new WPI_TalonSRX(Constants.Intake.INTAKE_PORT);
     this.intakeSolenoid = new Solenoid(Constants.Intake.INTAKE_PISTON_PORT);
+    this.getIntakeSolenoid().set(false);
   }
 
   public static Intake getIntake() {

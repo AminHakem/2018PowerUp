@@ -5,6 +5,7 @@ import org.usfirst.frc.team3501.robot.commands.driving.JoystickDrive;
 import com.ctre.phoenix.motorcontrol.SensorCollection;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
@@ -30,7 +31,7 @@ public class DriveTrain extends Subsystem {
       smallTurnD = 0.006;
   public static double largeTurnP = .003, largeTurnI = .0012, largeTurnD = .006;
   public static double driveStraightGyroP = 0.01;
-
+  public static Compressor compressor;
   // Calibration constants for encoders
   public static final double WHEEL_DIAMETER = 4; // inches
   public static final double ENCODER_PULSES_PER_REVOLUTION = 1024;
@@ -76,6 +77,7 @@ public class DriveTrain extends Subsystem {
       System.out.println("Gyro Null Pointer Exception");
       this.imu = null;
     }
+    compressor = new Compressor();
   }
 
   /**
@@ -208,4 +210,9 @@ public class DriveTrain extends Subsystem {
   public void toggleAlignedWithCube() {
     this.setAlignedWithCube(!alignedWithCube);
   }
+
+  public static Compressor getCompressor() {
+    return compressor;
+  }
+  
 }

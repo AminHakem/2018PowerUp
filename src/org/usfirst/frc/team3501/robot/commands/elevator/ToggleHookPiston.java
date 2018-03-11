@@ -6,22 +6,29 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class ToggleHookPiston extends Command {
   private Elevator elevator = Robot.getElevator();
-
+    public ToggleHookPiston() {
+      requires(elevator);
+    }
   @Override
   protected void initialize() {
     this.elevator.togglePiston();
   }
 
   @Override
-  protected void execute() {}
-
-  @Override
-  protected boolean isFinished() {
-    return true;
+  protected void execute() {
+    elevator.setMotorValue(-0.3);
+    System.out.println("toggle hook execute");
   }
 
   @Override
-  protected void end() {}
+  protected boolean isFinished() {
+    return timeSinceInitialized()>1;
+  }
+
+  @Override
+  protected void end() {
+    elevator.stop();
+  }
 
   @Override
   protected void interrupted() {

@@ -49,7 +49,7 @@ public class Constants {
     public static int INTAKE_PISTON_PORT = L2_BUTTON_PORT;
     // Climber
     public static final int TOGGLE_CLIMBER_PISTON_PORT = TRIANGLE_BUTTON_PORT;
-    public static final int LOWER_RAMP = PS_BUTTON_PORT;
+    public static final int LOWER_RAMP=0;
     public static final int RUN_WINCH_FORWARD = R3_BUTTON;
     public static final int RUN_WINCH_BACKWARD = L3_BUTTON;
     public static final int TOGGLE_CLIMB = 0;
@@ -70,7 +70,8 @@ public class Constants {
     public static final int TOP_LIMIT_SWITCH = 1;
     public static final int BOTTOM_LIMIT_SWITCH = 0;
 
-    public static final int PISTON_CHANNEL = 7;
+    public static final int PISTON_CHANNEL_ONE = 4;//******
+    public static final int PISTON_CHANNEL_TWO = 3;//******
 
   }
 
@@ -85,13 +86,12 @@ public class Constants {
 
   public static class Intake {
     // MOTOR CONTROLLERS
-    public static final int INTAKE_PORT = 6;
-    public static final int INTAKE_PISTON_PORT = 6;
-
+    public static final int INTAKE_PORT = 8;
+    public static final int INTAKE_PISTON_PORT = 6;//*****
   }
 
   public static class Climber {
-    public static final int PISTON_CHANNEL = 1;
+    public static final int PISTON_CHANNEL = 2;//*****
     public static final int RIGHT_WINCH = 2;
     public static final int LEFT_WINCH = 3;
   }

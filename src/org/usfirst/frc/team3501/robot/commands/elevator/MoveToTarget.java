@@ -43,7 +43,7 @@ public class MoveToTarget extends Command {
   @Override
   protected void initialize() {
     this.elevatorController =
-        new PIDController(Elevator.ELEVATOR_P, Elevator.ELEVATOR_I, Elevator.ELEVATOR_D);
+        new PIDController(0.01, Elevator.ELEVATOR_I, Elevator.ELEVATOR_D);
     this.elevatorController.setDoneRange(1.0);
     this.elevatorController.setMaxOutput(0.75);
     this.elevatorController.setMinDoneCycles(5);

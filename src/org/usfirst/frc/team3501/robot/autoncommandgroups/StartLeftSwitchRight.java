@@ -27,12 +27,13 @@ public class StartLeftSwitchRight extends CommandGroup {
   public static final double TO_SWITCH_VERT = 60;
 
   public StartLeftSwitchRight() {
-    addSequential(new ChangeElevatorTarget(Elevator.SWITCH_POS));
-    addSequential(new DriveSideways(-(TO_CUBES - ROBOT_LENGTH) * SCALE, 10));
-    addSequential(new DriveForward(LEFT_TO_RIGHT * SCALE, 10));
-    addSequential(new TurnForAngle(-90, 5));
-    addSequential(new ResetGyro());
-    addSequential(new DriveForward(TO_SWITCH_VERT * SCALE, 7.5));
-    addSequential(new RunOuttake());
+    addSequential(new DriveForward(150,10));
+//    addSequential(new ChangeElevatorTarget(Elevator.SWITCH_POS));
+//    addSequential(new DriveSideways(-(TO_CUBES - ROBOT_LENGTH) * SCALE, 10));
+//    addSequential(new DriveForward(LEFT_TO_RIGHT * SCALE, 10));
+//    addSequential(new TurnForAngle(-90, 5));
+//    addSequential(new ResetGyro());
+//    addSequential(new DriveForward(TO_SWITCH_VERT * SCALE, 7.5));
+//    addSequential(new RunOuttake());
   }
 }
