@@ -36,12 +36,9 @@ public class TurnForAngle extends Command {
   @Override
   protected void initialize() {
     this.gyroController = new PIDController(this.gyroP, this.gyroI, this.gyroD);
-<<<<<<< HEAD
     this.gyroController.setSetPoint(this.target);
     this.zeroAngle = driveTrain.getAngle();
 
-=======
->>>>>>> 29073106e1a809bec0cfcb64aa91bc6ea4f3ce52
     if (target > 90) {
       this.gyroP = driveTrain.largeTurnP;
       this.gyroI = driveTrain.largeTurnI;
@@ -52,11 +49,8 @@ public class TurnForAngle extends Command {
       this.gyroD = driveTrain.smallTurnD;
     }
 
-<<<<<<< HEAD
-=======
     this.gyroController.setSetPoint(this.target);
     this.zeroAngle = driveTrain.getAngle();
->>>>>>> 29073106e1a809bec0cfcb64aa91bc6ea4f3ce52
     this.gyroController.setDoneRange(10);
     this.gyroController.setMinDoneCycles(5);
   }
