@@ -61,9 +61,9 @@ public class MoveToTargetConstant extends Command {
     if (val - prevVal > Elevator.ACCELERATION_CONTROL)
       motorVal = prevVal + Elevator.ACCELERATION_CONTROL;
     this.elevator.setMotorValue(motorVal);
-    System.out.println("Elevator motor val"+motorVal);
+   // System.out.println("Elevator motor val"+motorVal);
     prevVal = motorVal;
-    SmartDashboard.putNumber("elevator power", motorVal);
+    //SmartDashboard.putNumber("elevator power", motorVal);
 }
 
   @Override

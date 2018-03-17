@@ -31,7 +31,7 @@ public class Elevator extends Subsystem {
   private final WPI_TalonSRX elevatorEncoderTalon;
   private final SensorCollection elevatorEncoder;
   private final DigitalInput topLimitSwitch, bottomLimitSwitch;
-
+  public boolean hookPistonActivated = false;
   private Solenoid hookPistonOne, hookPistonTwo;
 
   // Calibration constants for encoders
@@ -56,6 +56,7 @@ public class Elevator extends Subsystem {
         new DigitalInput(Constants.Elevator.BOTTOM_LIMIT_SWITCH);
 
     hookPistonOne = new Solenoid(Constants.Elevator.PISTON_CHANNEL_ONE);
+    hookPistonOne.set(hookPistonActivated);
    // hookPistonTwo = new Solenoid(Constants.Elevator.PISTON_CHANNEL_TWO);
 
     this.setCANTalonsBrake();

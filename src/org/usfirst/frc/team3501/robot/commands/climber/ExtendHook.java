@@ -16,7 +16,8 @@ public class ExtendHook extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-      Robot.getElevator().setHookPistonOne(true);
+      System.out.println("RUN*******");
+     elevator.setHookPistonOne(!elevator.hookPistonActivated);
 
     }
 

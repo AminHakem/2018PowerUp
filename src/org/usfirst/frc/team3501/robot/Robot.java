@@ -6,6 +6,7 @@ import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchLeft;
 import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchRight;
 import org.usfirst.frc.team3501.robot.autoncommandgroups.StartRightSwitchLeft;
 import org.usfirst.frc.team3501.robot.autoncommandgroups.StartRightSwitchRight;
+import org.usfirst.frc.team3501.robot.commands.FireAllPistonPorts;
 import org.usfirst.frc.team3501.robot.commands.driving.DriveForward;
 import org.usfirst.frc.team3501.robot.commands.driving.TurnForAngle;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
