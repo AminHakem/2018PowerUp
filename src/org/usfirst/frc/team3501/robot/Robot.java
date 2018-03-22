@@ -1,11 +1,11 @@
 package org.usfirst.frc.team3501.robot;
 
-import org.usfirst.frc.team3501.robot.autoncommandgroups.CenterToLeft;
-import org.usfirst.frc.team3501.robot.autoncommandgroups.CenterToRight;
-import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchLeft;
-import org.usfirst.frc.team3501.robot.autoncommandgroups.StartLeftSwitchRight;
-import org.usfirst.frc.team3501.robot.autoncommandgroups.StartRightSwitchLeft;
-import org.usfirst.frc.team3501.robot.autoncommandgroups.StartRightSwitchRight;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.switchcommands.CenterToLeft;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.switchcommands.CenterToRight;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.switchcommands.StartLeftSwitchLeft;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.switchcommands.StartLeftSwitchRight;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.switchcommands.StartRightSwitchLeft;
+import org.usfirst.frc.team3501.robot.autoncommandgroups.switchcommands.StartRightSwitchRight;
 import org.usfirst.frc.team3501.robot.commands.FireAllPistonPorts;
 import org.usfirst.frc.team3501.robot.commands.driving.DriveForward;
 import org.usfirst.frc.team3501.robot.commands.driving.TurnForAngle;
@@ -33,6 +33,7 @@ public class Robot extends IterativeRobot {
   private static DriveTrain driveTrain;
   private static OI oi;
   private static Elevator elevator;
+  private static Intake intake;
   Command autonCommand;
 
   //NetworkThread thread;
@@ -53,7 +54,7 @@ public class Robot extends IterativeRobot {
     oi = OI.getOI();
     elevator = Elevator.getElevator();
     LiveWindow.setEnabled(false);
-
+    intake = Intake.getIntake();
     ultra = new Ultrasonic(8, 9);
     ultra.setAutomaticMode(true);
 
@@ -82,6 +83,8 @@ public class Robot extends IterativeRobot {
     // UsbCamera hookCam = server.startAutomaticCapture("hookCam", 1);
     // hookCam.setResolution(1024, 1060);
     SmartDashboard.putData("Autonomous Selector", autonChooser);
+    SmartDashboard.putData("Cross Field Selector", autonCrossChooser);
+
   }
 
   public static Elevator getElevator() {
@@ -134,6 +137,7 @@ public class Robot extends IterativeRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     updateSmartDashboard();
+    System.out.println("Intake Encoder pulses: "+intake.getEncoderPulses());
     if (elevator.isAtBottom() == true)
       elevator.resetEncoders();
   }
@@ -182,7 +186,6 @@ public class Robot extends IterativeRobot {
         }
       } else if (autonStartPos == 1) {
         autonCommand = new StartLeftSwitchLeft();
-        System.out.println("Got it!");
       } else if (autonStartPos == 2) {
         autonCommand = new CenterToLeft();
       }
@@ -199,8 +202,6 @@ public class Robot extends IterativeRobot {
         autonCommand = new CenterToRight();
       }
     }
-    autonCommand = new StartLeftSwitchLeft();
-    autonCommand =  new TurnForAngle(90, 5);
    // if(gameData.charAt(0)=='R') autonCommand = new StartRightSwitchRight();
   }
 }

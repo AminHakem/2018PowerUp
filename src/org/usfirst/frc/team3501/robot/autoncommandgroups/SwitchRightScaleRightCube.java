@@ -4,6 +4,7 @@ import org.usfirst.frc.team3501.robot.commands.driving.AlignWithCube;
 import org.usfirst.frc.team3501.robot.commands.driving.DriveForward;
 import org.usfirst.frc.team3501.robot.commands.driving.DriveSideways;
 import org.usfirst.frc.team3501.robot.commands.driving.TurnForAngle;
+import org.usfirst.frc.team3501.robot.commands.elevator.ChangeElevatorTarget;
 import org.usfirst.frc.team3501.robot.commands.elevator.MoveToTarget;
 import org.usfirst.frc.team3501.robot.commands.intake.RunIntake;
 import org.usfirst.frc.team3501.robot.commands.intake.RunOuttake;
@@ -23,7 +24,7 @@ public class SwitchRightScaleRightCube extends CommandGroup {
     addSequential(new AlignWithCube());
     addSequential(new RunIntake());
     addSequential(new DriveForward(1, 1));
-    addSequential(new MoveToTarget(scaleHeight, 7));
+    addSequential(new ChangeElevatorTarget(scaleHeight));
     addSequential(new DriveForward(-1 * diagonal, 4));
     addSequential(new TurnForAngle(-1 * constTurn, 2));
     addSequential(new DriveForward(71.75 - robotLength, 5));

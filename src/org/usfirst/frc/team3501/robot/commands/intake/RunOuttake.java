@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3501.robot.commands.intake;
 
 import org.usfirst.frc.team3501.robot.Robot;
+import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import org.usfirst.frc.team3501.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -35,7 +36,9 @@ public class RunOuttake extends Command {
   @Override
   protected void end() {
     Robot.getIntake().stop();
-  }
+   // Robot.getElevator().setTargetElavatorPos(Elevator.BOTTOM_POS);
+    intake.setPistonActivated(!intake.isPistonActivated());
+    intake.getIntakeSolenoid().set(intake.isPistonActivated());  }
 
   @Override
   protected void interrupted() {

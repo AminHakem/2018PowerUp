@@ -89,6 +89,8 @@ public class Constants {
     // MOTOR CONTROLLERS
     public static final int INTAKE_PORT = 8;
     public static final int INTAKE_PISTON_PORT = 6;//*****
+    public static final int INTAKE_ANGLE_PORT = 6;
+    public static final int INTAKE_ANGLE_ENCODER_PORT = 6;
   }
 
   public static class Climber {

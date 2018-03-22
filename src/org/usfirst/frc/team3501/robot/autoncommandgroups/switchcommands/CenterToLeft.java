@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3501.robot.autoncommandgroups;
+package org.usfirst.frc.team3501.robot.autoncommandgroups.switchcommands;
 
 import org.usfirst.frc.team3501.robot.Constants;
 import org.usfirst.frc.team3501.robot.commands.driving.DriveForward;
@@ -11,19 +11,19 @@ import org.usfirst.frc.team3501.robot.commands.intake.Shoot;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class CenterToRight extends CommandGroup {
-
+public class CenterToLeft extends CommandGroup {
+  
   public static final double ROBOT_LENGTH = 38.0;
   public static final double SCALE = Constants.Auton.SCALE_FACTOR_TESTING;
 
   public static final double TO_CUBES = 93;
   public static final double HORIZ_SWITCH_DIST = 50.0;
-  public static final double VERT_SWITCH_DIST = 60;
+  public static final double VERT_SWITCH_DIST = 70;
 
-  public CenterToRight() {
+  public CenterToLeft() {
     addSequential(new ChangeElevatorTarget(Elevator.SWITCH_POS));
-    addSequential(new DriveForward((TO_CUBES - ROBOT_LENGTH) * SCALE, 10));
-    addSequential(new DriveSideways(HORIZ_SWITCH_DIST * SCALE, 6.5));
+    addSequential(new DriveForward((TO_CUBES-ROBOT_LENGTH) * SCALE, 10));
+    addSequential(new DriveSideways(-HORIZ_SWITCH_DIST * SCALE, 6.5));
     addSequential(new DriveForward(VERT_SWITCH_DIST * SCALE, 5));
     addSequential(new Shoot());
   }
