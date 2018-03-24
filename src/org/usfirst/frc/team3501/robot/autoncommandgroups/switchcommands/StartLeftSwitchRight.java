@@ -20,8 +20,8 @@ public class StartLeftSwitchRight extends CommandGroup {
   public static final double ROBOT_LENGTH = 38.0;
   public static final double SCALE = Constants.Auton.SCALE_FACTOR_TESTING;
 
-  public static final double FIRST_VERT_DIST = 518;
-  public static final double LEFT_TO_RIGHT = 439;
+  public static final double FIRST_VERT_DIST = 225;
+  public static final double LEFT_TO_RIGHT = 350;
   public static final double TO_SWITCH_VERT = 10;
 
   public StartLeftSwitchRight() {

@@ -31,6 +31,7 @@ public class Constants {
     public static final int R2_BUTTON_PORT = 8;
     public static final int PS_BUTTON_PORT = 13;
     public static final int PS_SHARE_BUTTON = 9;
+    public static final int OPTIONS_BUTTON = 10;
     public static final int L3_BUTTON = 11;
     public static final int R3_BUTTON = 12;
 
@@ -39,16 +40,18 @@ public class Constants {
     // button constants above
 
     // Drive Train
-    public static final int FIELD_ORIENTED_PORT = TRIANGLE_BUTTON_PORT;
-    public static final int VISION_ALIGN_PORT = X_BUTTON_PORT;
+    //public static final int FIELD_ORIENTED_PORT = TRIANGLE_BUTTON_PORT;
+    //public static final int VISION_ALIGN_PORT = X_BUTTON_PORT;
 
     // Intake
     public static int RUN_INTAKE_PORT = SQUARE_BUTTON_PORT;
     public static int REVERSE_INTAKE_PORT = CIRCLE_BUTTON_PORT;
     public static int SHOOT_PORT = PS_SHARE_BUTTON;
     public static int INTAKE_PISTON_PORT = L2_BUTTON_PORT;
+    public static int ZERO_INTAKE_PORT =PS_BUTTON_PORT;
+
     // Climber
-    public static final int TOGGLE_CLIMBER_PISTON_PORT = TRIANGLE_BUTTON_PORT;
+    public static final int TOGGLE_CLIMBER_PISTON_PORT = 0;
     public static final int LOWER_RAMP=0;
     public static final int RUN_WINCH_FORWARD = R3_BUTTON;
     public static final int RUN_WINCH_BACKWARD = L3_BUTTON;
@@ -57,7 +60,7 @@ public class Constants {
     // Elevator
     public static final int ELEVATOR_TO_SWITCH = R1_BUTTON_PORT;
     public static final int ELEVATOR_TO_SCALE = R2_BUTTON_PORT;
-    public static final int ELEVATOR_TO_VAULT = 10;
+    public static final int ELEVATOR_TO_VAULT = 0;
     public static final int ELEVATOR_TO_BOTTOM = L1_BUTTON_PORT;
     public static final int ELEVATOR_TO_LOWER_SCALE = 14;
   }
@@ -71,7 +74,7 @@ public class Constants {
     public static final int TOP_LIMIT_SWITCH = 1;
     public static final int BOTTOM_LIMIT_SWITCH = 0;
 
-    public static final int PISTON_CHANNEL_ONE = 4;//******
+    public static final int PISTON_CHANNEL_ONE = 1;//******
     public static final int PISTON_CHANNEL_TWO = 3;//******
 
   }
@@ -88,7 +91,9 @@ public class Constants {
   public static class Intake {
     // MOTOR CONTROLLERS
     public static final int INTAKE_PORT = 8;
-    public static final int INTAKE_PISTON_PORT = 6;//*****
+    public static final int INTAKE_PISTON_PORT = 0;//*****
+    public static final int INTAKE_PISTON_PORT_TWO = 7;//*****
+
     public static final int INTAKE_ANGLE_PORT = 6;
     public static final int INTAKE_ANGLE_ENCODER_PORT = 6;
   }

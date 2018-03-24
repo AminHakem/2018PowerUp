@@ -16,15 +16,15 @@ public class CenterToLeft extends CommandGroup {
   public static final double ROBOT_LENGTH = 38.0;
   public static final double SCALE = Constants.Auton.SCALE_FACTOR_TESTING;
 
-  public static final double TO_CUBES = 93;
+  public static final double TO_CUBES = 88;
   public static final double HORIZ_SWITCH_DIST = 50.0;
-  public static final double VERT_SWITCH_DIST = 70;
+  public static final double VERT_SWITCH_DIST = 60;
 
   public CenterToLeft() {
     addSequential(new ChangeElevatorTarget(Elevator.SWITCH_POS));
     addSequential(new DriveForward((TO_CUBES-ROBOT_LENGTH) * SCALE, 10));
     addSequential(new DriveSideways(-HORIZ_SWITCH_DIST * SCALE, 6.5));
-    addSequential(new DriveForward(VERT_SWITCH_DIST * SCALE, 5));
-    addSequential(new Shoot());
+    addSequential(new DriveForward(VERT_SWITCH_DIST * SCALE, 2));
+    addSequential(new RunOuttake());
   }
 }

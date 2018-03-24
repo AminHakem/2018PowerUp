@@ -37,8 +37,11 @@ public class RunOuttake extends Command {
   protected void end() {
     Robot.getIntake().stop();
    // Robot.getElevator().setTargetElavatorPos(Elevator.BOTTOM_POS);
+    if(intake.isPistonActivated())intake.setMotorValues(-intake.intakeSpeed);
     intake.setPistonActivated(!intake.isPistonActivated());
-    intake.getIntakeSolenoid().set(intake.isPistonActivated());  }
+    intake.getIntakeSolenoid().set(intake.isPistonActivated());
+    intake.getIntakeSolenoidTwo().set(intake.isPistonActivated());
+    }
 
   @Override
   protected void interrupted() {

@@ -2,6 +2,7 @@ package org.usfirst.frc.team3501.robot.commands.elevator;
 
 import org.usfirst.frc.team3501.robot.Robot;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
+import org.usfirst.frc.team3501.robot.subsystems.Intake;
 import org.usfirst.frc.team3501.robot.utils.PIDController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -18,7 +19,7 @@ public class MoveToTargetConstant extends Command {
 
   private Elevator elevator = Robot.getElevator();
   private PIDController elevatorController;
-
+  private Intake intake;
   private double target=Elevator.BOTTOM_POS;
   private double prevVal;
   Timer timer;
@@ -34,6 +35,7 @@ public class MoveToTargetConstant extends Command {
     this.elevatorController.setDoneRange(3.0);
     this.elevatorController.setMaxOutput(1.0);
     this.elevatorController.setMinDoneCycles(5);
+    this.intake = Intake.getIntake();
   }
 
   @Override
@@ -61,10 +63,15 @@ public class MoveToTargetConstant extends Command {
     if (val - prevVal > Elevator.ACCELERATION_CONTROL)
       motorVal = prevVal + Elevator.ACCELERATION_CONTROL;
     this.elevator.setMotorValue(motorVal);
-   // System.out.println("Elevator motor val"+motorVal);
     prevVal = motorVal;
     //SmartDashboard.putNumber("elevator power", motorVal);
-}
+    if(elevator.getTargetElevatorPos()<=elevator.SWITCH_POS) {
+      intake.setIntakeTarget(intake.BOTTOM_INTAKE_ANGLE);
+    }else if(elevator.getHeight()>elevator.MOVE_INTAKE_POS) {
+      intake.setIntakeTarget(intake.MIDDLE_INTAKE_ANGLE);
+    }
+    if(intake.raisIntake) intake.setIntakeTarget(intake.TOP_INTAKE_ANGLE);
+  }
 
   @Override
   protected boolean isFinished() {

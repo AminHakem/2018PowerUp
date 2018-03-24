@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3501.robot.commands.elevator;
 
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
+import org.usfirst.frc.team3501.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -10,7 +11,7 @@ public class ChangeElevatorTarget extends Command {
 
   private double target;
   Elevator elevator = Elevator.getElevator();
-
+  Intake intake = Intake.getIntake();
   public ChangeElevatorTarget(double target) {
     this.target = target;
   }

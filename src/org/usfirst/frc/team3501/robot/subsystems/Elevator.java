@@ -23,9 +23,10 @@ public class Elevator extends Subsystem {
   // POSITIONS (in inches)
   public static final int BOTTOM_POS = 0;
   public static final int VAULT_POS = 3;
+  public static final int MOVE_INTAKE_POS = 40;
   public static final int SWITCH_POS = 30;
-  public static final int SCALE_POS = 74; // assumes scale is at its starting position
-  public static final int SCALE_HIGH_POS = 74;
+  public static final int SCALE_POS = 69; // assumes scale is at its starting position
+  public static final int SCALE_HIGH_POS = 69;
   public static final int SCALE_LOW_POS = 57;
   private final WPI_TalonSRX elevatorTalon;
   private final WPI_TalonSRX elevatorEncoderTalon;

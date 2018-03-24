@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Shoot extends Command {
+public class Drop extends Command {
 
   private Intake intake = Robot.getIntake();
 
-  public Shoot() {
+  public Drop() {
     requires(intake);
   }
 
@@ -22,7 +22,7 @@ public class Shoot extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    intake.setMotorValues(intake.intakeSpeed);
+    intake.setMotorValues(intake.dropSpeed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -34,11 +34,11 @@ public class Shoot extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    intake.stop();
     if(intake.isPistonActivated())intake.setMotorValues(-intake.intakeSpeed);
     intake.setPistonActivated(!intake.isPistonActivated());
     intake.getIntakeSolenoid().set(intake.isPistonActivated());
     intake.getIntakeSolenoidTwo().set(intake.isPistonActivated());
+    intake.stop();
   }
 
   // Called when another command which requires one or more of the same

@@ -8,6 +8,7 @@ import org.usfirst.frc.team3501.robot.autoncommandgroups.switchcommands.StartRig
 import org.usfirst.frc.team3501.robot.autoncommandgroups.switchcommands.StartRightSwitchRight;
 import org.usfirst.frc.team3501.robot.commands.FireAllPistonPorts;
 import org.usfirst.frc.team3501.robot.commands.driving.DriveForward;
+import org.usfirst.frc.team3501.robot.commands.driving.DriveSideways;
 import org.usfirst.frc.team3501.robot.commands.driving.TurnForAngle;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
@@ -36,16 +37,16 @@ public class Robot extends IterativeRobot {
   private static Intake intake;
   Command autonCommand;
 
-  //NetworkThread thread;
+  // NetworkThread thread;
 
   UsbCamera climberCam, intakeCam;
   CameraServer cameraServer;
 
   SendableChooser<Integer> autonChooser;
-  SendableChooser<Boolean> autonCrossChooser;
-  
+  SendableChooser<Boolean> autonBaselineChooser;
+
   int autonStartPos;
-  boolean attemptCross;
+  boolean baseline;
   String gameData, choice;
 
   @Override
@@ -62,28 +63,28 @@ public class Robot extends IterativeRobot {
     TimerUtil.startTime(); // DO NOT REMOVE WILL CAUSE ERRORS
 
     // initialize and start a thread which will run code to constantly update
-  //  thread = new NetworkThread();
-    //thread.start();
+    // thread = new NetworkThread();
+    // thread.start();
     CameraServer server = CameraServer.getInstance();
 
     autonChooser = new SendableChooser();
-    autonCrossChooser = new SendableChooser();
+    autonBaselineChooser = new SendableChooser();
 
     autonChooser = new SendableChooser<Integer>();
-    autonChooser.addDefault("right", Integer.valueOf(0));
-    autonChooser.addObject("left", Integer.valueOf(1));
-    autonChooser.addObject("middle", Integer.valueOf(2));
+    autonChooser.addDefault("Right", Integer.valueOf(0));
+    autonChooser.addObject("Left", Integer.valueOf(1));
+    autonChooser.addObject("Middle", Integer.valueOf(2));
 
-    autonCrossChooser = new SendableChooser<Boolean>();
-    autonCrossChooser.addDefault("Don't Cross", Boolean.valueOf(false));
-    autonCrossChooser.addObject("Cross", Boolean.valueOf(true));
+    autonBaselineChooser = new SendableChooser<Boolean>();
+    autonBaselineChooser.addDefault("Switch", Boolean.valueOf(false));
+    autonBaselineChooser.addObject("Baseline (Collin is a sissy)", Boolean.valueOf(true));
 
     // UsbCamera rampCam = server.startAutomaticCapture("rampCam", 0);
     // rampCam.setResolution(1024, 1060);
     // UsbCamera hookCam = server.startAutomaticCapture("hookCam", 1);
     // hookCam.setResolution(1024, 1060);
     SmartDashboard.putData("Autonomous Selector", autonChooser);
-    SmartDashboard.putData("Cross Field Selector", autonCrossChooser);
+    SmartDashboard.putData("Cross Field Selector", autonBaselineChooser);
 
   }
 
@@ -111,10 +112,11 @@ public class Robot extends IterativeRobot {
   public void autonomousInit() {
     driveTrain.resetGyro();
     driveTrain.resetEncoders();
+    intake.resetEncoder();
     TimerUtil.startTime();
 
     chooseAuton();
-    System.out.println("Game data: "+gameData+"***********");
+    System.out.println("Game data: " + gameData + "***********");
     SmartDashboard.putString("Game Data", gameData);
     System.out.println(autonChooser.getSelected());
     System.out.println(autonCommand.getName());
@@ -128,16 +130,18 @@ public class Robot extends IterativeRobot {
     if (elevator.isAtBottom() == true)
       elevator.resetEncoders();
   }
+
   @Override
   public void teleopInit() {
     Scheduler.getInstance().removeAll();
+    intake.resetEncoder();
   }
 
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     updateSmartDashboard();
-    System.out.println("Intake Encoder pulses: "+intake.getEncoderPulses());
+    System.out.println("Intake Encoder pulses: " + intake.getEncoderPulses());
     if (elevator.isAtBottom() == true)
       elevator.resetEncoders();
   }
@@ -172,36 +176,31 @@ public class Robot extends IterativeRobot {
 
   public void chooseAuton() {
     this.autonStartPos = autonChooser.getSelected();
-    this.attemptCross = autonCrossChooser.getSelected();
-    this.attemptCross = false;
+    this.baseline = autonBaselineChooser.getSelected();
     do {
-    gameData = DriverStation.getInstance().getGameSpecificMessage();//Right=0 Left=1 Mid=2
-    }while(gameData.length()<1);
+      gameData = DriverStation.getInstance().getGameSpecificMessage();// Right=0 Left=1 Mid=2
+    } while (gameData.length() < 1);
     if (gameData.charAt(0) == 'L') {
       if (autonStartPos == 0) {
-        if(attemptCross) {
-          autonCommand = new StartRightSwitchLeft();
-        }else {
-          autonCommand = new DriveForward(150,10);
-        }
+        autonCommand = new StartRightSwitchLeft();
       } else if (autonStartPos == 1) {
         autonCommand = new StartLeftSwitchLeft();
       } else if (autonStartPos == 2) {
         autonCommand = new CenterToLeft();
       }
+      if (baseline)
+        autonCommand = new DriveSideways(-150, 5);
     } else if (gameData.charAt(0) == 'R') {
       if (autonStartPos == 0) {
         autonCommand = new StartRightSwitchRight();
       } else if (autonStartPos == 1) {
-        if(attemptCross) {
-          autonCommand = new  StartRightSwitchLeft();
-        }else {
-        autonCommand = new DriveForward(150,10);
-        }
+        autonCommand = new StartLeftSwitchRight();
       } else if (autonStartPos == 2) {
         autonCommand = new CenterToRight();
       }
+      if (baseline) {
+        autonCommand = new DriveSideways(150, 5);
+      }
     }
-   // if(gameData.charAt(0)=='R') autonCommand = new StartRightSwitchRight();
   }
 }
