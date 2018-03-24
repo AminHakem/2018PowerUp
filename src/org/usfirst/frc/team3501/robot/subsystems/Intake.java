@@ -38,6 +38,7 @@ public class Intake extends Subsystem {
   public double outtakeSpeed = 0.5;
   public double dropSpeed = .75;
   public double intakeTarget = 0;
+  public boolean down;
 
   private Intake() {
     // MOTOR CONTROLLERS
@@ -51,6 +52,7 @@ public class Intake extends Subsystem {
     this.getIntakeSolenoid().set(pistonActivated);
     this.getIntakeSolenoidTwo().set(pistonActivated);
     this.intakeAngleMotor.set(0);
+    this.down = true;
   }
 
   public static Intake getIntake() {
@@ -119,6 +121,14 @@ public class Intake extends Subsystem {
 
   public void setRaisIntake(boolean raisIntake) {
     this.raisIntake = raisIntake;
+  }
+
+  public boolean isDown() {
+    return down;
+  }
+
+  public void setDown(boolean down) {
+    this.down = down;
   }
   
 }

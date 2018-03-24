@@ -9,8 +9,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Set this to the default command for the elevator and then update targetElevatorPos
- * with the ChangeElevatorTarget
+ * Set this to the default command for the elevator and then update targetElevatorPos with the
+ * ChangeElevatorTarget
+ * 
  * @author Amin
  *
  */
@@ -20,18 +21,18 @@ public class MoveToTargetConstant extends Command {
   private Elevator elevator = Robot.getElevator();
   private PIDController elevatorController;
   private Intake intake;
-  private double target=Elevator.BOTTOM_POS;
+  private double target = Elevator.BOTTOM_POS;
   private double prevVal;
   Timer timer;
-  double previousTarget=Elevator.BOTTOM_POS;
+  double previousTarget = Elevator.BOTTOM_POS;
 
   public MoveToTargetConstant() {
     requires(elevator);
     this.target = elevator.getTargetElevatorPos();
     this.previousTarget = target;
     timer = new Timer();
-    this.elevatorController = new PIDController(Elevator.ELEVATOR_P,
-        Elevator.ELEVATOR_I, Elevator.ELEVATOR_D);
+    this.elevatorController =
+        new PIDController(Elevator.ELEVATOR_P, Elevator.ELEVATOR_I, Elevator.ELEVATOR_D);
     this.elevatorController.setDoneRange(3.0);
     this.elevatorController.setMaxOutput(1.0);
     this.elevatorController.setMinDoneCycles(5);
@@ -48,9 +49,9 @@ public class MoveToTargetConstant extends Command {
   @Override
   protected void execute() {
     target = elevator.getTargetElevatorPos();
-    if(target!=previousTarget) {
+    if (target != previousTarget) {
       double startTime = timer.get();
-      while(timer.get()<startTime+0.5) {
+      while (timer.get() < startTime + 0.5) {
         elevator.setMotorValue(0);
       }
       this.previousTarget = target;
@@ -64,13 +65,18 @@ public class MoveToTargetConstant extends Command {
       motorVal = prevVal + Elevator.ACCELERATION_CONTROL;
     this.elevator.setMotorValue(motorVal);
     prevVal = motorVal;
-    //SmartDashboard.putNumber("elevator power", motorVal);
-    if(elevator.getTargetElevatorPos()<=elevator.SWITCH_POS) {
+    // SmartDashboard.putNumber("elevator power", motorVal);
+    if (elevator.getTargetElevatorPos() <= elevator.SWITCH_POS) {
+      if (!intake.down) {
+        intake.setIntakeTarget(intake.TOP_INTAKE_ANGLE);
+      } else {
+        intake.setIntakeTarget(intake.BOTTOM_INTAKE_ANGLE);
+      }
+    } else if (elevator.getHeight() == elevator.SWITCH_POS) {
       intake.setIntakeTarget(intake.BOTTOM_INTAKE_ANGLE);
-    }else if(elevator.getHeight()>elevator.MOVE_INTAKE_POS) {
+    } else if (elevator.getHeight() > elevator.MOVE_INTAKE_POS) {
       intake.setIntakeTarget(intake.MIDDLE_INTAKE_ANGLE);
     }
-    if(intake.raisIntake) intake.setIntakeTarget(intake.TOP_INTAKE_ANGLE);
   }
 
   @Override

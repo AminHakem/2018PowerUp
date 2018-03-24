@@ -19,6 +19,8 @@ public class ChangeElevatorTarget extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    if(this.target>=elevator.SWITCH_POS) intake.setDown(true);
+    if(this.target==elevator.BOTTOM_POS) intake.setDown(true);
   }
 
   // Called repeatedly when this Command is scheduled to run

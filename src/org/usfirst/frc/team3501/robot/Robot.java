@@ -77,7 +77,7 @@ public class Robot extends IterativeRobot {
 
     autonBaselineChooser = new SendableChooser<Boolean>();
     autonBaselineChooser.addDefault("Switch", Boolean.valueOf(false));
-    autonBaselineChooser.addObject("Baseline (Collin is a sissy)", Boolean.valueOf(true));
+    autonBaselineChooser.addObject("Baseline", Boolean.valueOf(true));
 
     // UsbCamera rampCam = server.startAutomaticCapture("rampCam", 0);
     // rampCam.setResolution(1024, 1060);
@@ -182,7 +182,8 @@ public class Robot extends IterativeRobot {
     } while (gameData.length() < 1);
     if (gameData.charAt(0) == 'L') {
       if (autonStartPos == 0) {
-        autonCommand = new StartRightSwitchLeft();
+       // autonCommand = new StartRightSwitchLeft();
+        autonCommand = new DriveSideways(150, 5);
       } else if (autonStartPos == 1) {
         autonCommand = new StartLeftSwitchLeft();
       } else if (autonStartPos == 2) {
@@ -194,7 +195,8 @@ public class Robot extends IterativeRobot {
       if (autonStartPos == 0) {
         autonCommand = new StartRightSwitchRight();
       } else if (autonStartPos == 1) {
-        autonCommand = new StartLeftSwitchRight();
+        //autonCommand = new StartLeftSwitchRight();
+        autonCommand = new DriveSideways(-150, 5);
       } else if (autonStartPos == 2) {
         autonCommand = new CenterToRight();
       }

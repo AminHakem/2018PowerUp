@@ -13,6 +13,7 @@ import org.usfirst.frc.team3501.robot.commands.intake.MoveIntakeToTargetConstant
 import org.usfirst.frc.team3501.robot.commands.intake.RunIntake;
 import org.usfirst.frc.team3501.robot.commands.intake.RunOuttake;
 import org.usfirst.frc.team3501.robot.commands.intake.Shoot;
+import org.usfirst.frc.team3501.robot.commands.intake.ToggleIntakeAngle;
 import org.usfirst.frc.team3501.robot.commands.intake.ToggleIntakePiston;
 import org.usfirst.frc.team3501.robot.commands.intake.ZeroIntake;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
@@ -38,7 +39,7 @@ public class OI {
   public Button moveIntakeToMiddle;
   public Button zeroIntake;
   public Button drop;
-  public Button raiseIntake;
+  public Button toggleIntakeAngle;
   // Climber
   public Button dropRamp;
   public Button climbingWinch;
@@ -66,80 +67,66 @@ public class OI {
     gamePad = new Joystick(Constants.OI.GAME_PAD_PORT);
 
     // Intake
-    runIntakeForward =
-        new JoystickButton(ps4_controller, Constants.OI.RUN_INTAKE_PORT);
+    runIntakeForward = new JoystickButton(ps4_controller, Constants.OI.RUN_INTAKE_PORT);
     runIntakeForward.whileHeld(new RunIntake());
 
-    runIntakeBackward =
-        new JoystickButton(ps4_controller, Constants.OI.REVERSE_INTAKE_PORT);
+    runIntakeBackward = new JoystickButton(ps4_controller, Constants.OI.REVERSE_INTAKE_PORT);
     runIntakeBackward.whenPressed(new RunOuttake());
 
     shoot = new JoystickButton(ps4_controller, Constants.OI.SHOOT_PORT);
     shoot.whileHeld(new Shoot());
-    
+
     toggleIntakePiston = new JoystickButton(ps4_controller, Constants.OI.INTAKE_PISTON_PORT);
     toggleIntakePiston.whenReleased(new ToggleIntakePiston());
-    
-    
-    // Drive Train
-//    changeFieldOriented =
-//        new JoystickButton(ps4_controller, Constants.OI.FIELD_ORIENTED_PORT);
-//    changeFieldOriented.toggleWhenPressed(new ToggleFieldOriented());
 
-//    alignWithCube = new JoystickButton(ps4_controller, Constants.OI.VISION_ALIGN_PORT);
-//    alignWithCube.toggleWhenPressed(new AlignWithCube());
+
+    // Drive Train
+    // changeFieldOriented =
+    // new JoystickButton(ps4_controller, Constants.OI.FIELD_ORIENTED_PORT);
+    // changeFieldOriented.toggleWhenPressed(new ToggleFieldOriented());
+
+    // alignWithCube = new JoystickButton(ps4_controller, Constants.OI.VISION_ALIGN_PORT);
+    // alignWithCube.toggleWhenPressed(new AlignWithCube());
 
     // toggleHookPiston = new JoystickButton(ps4_controller, Constants.OI.TOGGLE_PISTON_PORT);
     // toggleHookPiston.toggleWhenPressed(new ToggleHookPiston());
 
     // Elevator
-    moveElevatorToBottom =
-        new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_BOTTOM);
-    moveElevatorToBottom
-        .whenPressed(new ChangeElevatorTarget(Elevator.BOTTOM_POS));
+    moveElevatorToBottom = new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_BOTTOM);
+    moveElevatorToBottom.whenPressed(new ChangeElevatorTarget(Elevator.BOTTOM_POS));
 
-    moveElevatorToVault =
-        new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_VAULT);
-    moveElevatorToVault
-        .whenPressed(new ChangeElevatorTarget(Elevator.VAULT_POS));
+    moveElevatorToVault = new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_VAULT);
+    moveElevatorToVault.whenPressed(new ChangeElevatorTarget(Elevator.VAULT_POS));
 
-    moveElevatorToSwitch =
-        new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_SWITCH);
-    moveElevatorToSwitch
-        .whenPressed(new ChangeElevatorTarget(Elevator.SWITCH_POS));
+    moveElevatorToSwitch = new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_SWITCH);
+    moveElevatorToSwitch.whenPressed(new ChangeElevatorTarget(Elevator.SWITCH_POS));
 
-    moveElevatorToScale =
-        new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_SCALE);
-    moveElevatorToScale
-        .whenPressed(new ChangeElevatorTarget(Elevator.SCALE_POS));
+    moveElevatorToScale = new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_SCALE);
+    moveElevatorToScale.whenPressed(new ChangeElevatorTarget(Elevator.SCALE_POS));
 
     // Climber
-     dropRamp = new JoystickButton(ps4_controller, Constants.OI.LOWER_RAMP);
-     dropRamp.whenPressed(new DropRamp());
+    dropRamp = new JoystickButton(ps4_controller, Constants.OI.LOWER_RAMP);
+    dropRamp.whenPressed(new DropRamp());
 
-//    extendHook =
-//        new JoystickButton(ps4_controller, Constants.OI.TOGGLE_CLIMBER_PISTON_PORT);
-//    extendHook.whenPressed(new ExtendHook());
+    // extendHook =
+    // new JoystickButton(ps4_controller, Constants.OI.TOGGLE_CLIMBER_PISTON_PORT);
+    // extendHook.whenPressed(new ExtendHook());
 
-    climbBoth =
-        new JoystickButton(ps4_controller, Constants.OI.RUN_WINCH_FORWARD);
+    climbBoth = new JoystickButton(ps4_controller, Constants.OI.RUN_WINCH_FORWARD);
     climbBoth.whileHeld(new LiftRobot());
 
-    backDriveBoth =
-        new JoystickButton(ps4_controller, Constants.OI.RUN_WINCH_BACKWARD);
+    backDriveBoth = new JoystickButton(ps4_controller, Constants.OI.RUN_WINCH_BACKWARD);
     backDriveBoth.whileHeld(new LowerRobot());
 
-    moveElevatorToLowerScale = new JoystickButton(ps4_controller,
-        Constants.OI.ELEVATOR_TO_LOWER_SCALE);
-    moveElevatorToLowerScale
-        .whenPressed(new ChangeElevatorTarget(Elevator.SCALE_LOW_POS));
-    zeroIntake = new JoystickButton(ps4_controller,
-        Constants.OI.ZERO_INTAKE_PORT);
+    moveElevatorToLowerScale =
+        new JoystickButton(ps4_controller, Constants.OI.ELEVATOR_TO_LOWER_SCALE);
+    moveElevatorToLowerScale.whenPressed(new ChangeElevatorTarget(Elevator.SCALE_LOW_POS));
+    zeroIntake = new JoystickButton(ps4_controller, Constants.OI.ZERO_INTAKE_PORT);
     zeroIntake.whileHeld(new ZeroIntake());
-    drop = new JoystickButton(ps4_controller,Constants.OI.OPTIONS_BUTTON);
+    drop = new JoystickButton(ps4_controller, Constants.OI.OPTIONS_BUTTON);
     drop.whileHeld(new Drop());
-    raiseIntake = new JoystickButton (ps4_controller, Constants.OI.R3_BUTTON);
-    raiseIntake.whenPressed(new ChangeIntakeTarget(Intake.TOP_INTAKE_ANGLE));
+    toggleIntakeAngle = new JoystickButton(ps4_controller, Constants.OI.R3_BUTTON);
+    toggleIntakeAngle.whenPressed(new ToggleIntakeAngle());
   }
 
   public static OI getOI() {
