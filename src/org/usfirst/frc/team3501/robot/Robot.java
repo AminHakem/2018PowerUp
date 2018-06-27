@@ -3,13 +3,8 @@ package org.usfirst.frc.team3501.robot;
 import org.usfirst.frc.team3501.robot.autoncommandgroups.switchcommands.CenterToLeft;
 import org.usfirst.frc.team3501.robot.autoncommandgroups.switchcommands.CenterToRight;
 import org.usfirst.frc.team3501.robot.autoncommandgroups.switchcommands.StartLeftSwitchLeft;
-import org.usfirst.frc.team3501.robot.autoncommandgroups.switchcommands.StartLeftSwitchRight;
-import org.usfirst.frc.team3501.robot.autoncommandgroups.switchcommands.StartRightSwitchLeft;
 import org.usfirst.frc.team3501.robot.autoncommandgroups.switchcommands.StartRightSwitchRight;
-import org.usfirst.frc.team3501.robot.commands.FireAllPistonPorts;
-import org.usfirst.frc.team3501.robot.commands.driving.DriveForward;
 import org.usfirst.frc.team3501.robot.commands.driving.DriveSideways;
-import org.usfirst.frc.team3501.robot.commands.driving.TurnForAngle;
 import org.usfirst.frc.team3501.robot.subsystems.Climber;
 import org.usfirst.frc.team3501.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3501.robot.subsystems.Elevator;
@@ -18,7 +13,6 @@ import org.usfirst.frc.team3501.robot.utils.NetworkThread;
 import org.usfirst.frc.team3501.robot.utils.TimerUtil;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Sendable;
@@ -58,6 +52,8 @@ public class Robot extends IterativeRobot {
     intake = Intake.getIntake();
     ultra = new Ultrasonic(8, 9);
     ultra.setAutomaticMode(true);
+
+    // intake.setDown(!intake.isDown());
 
     // initialize and start timer Util
     TimerUtil.startTime(); // DO NOT REMOVE WILL CAUSE ERRORS
@@ -152,13 +148,16 @@ public class Robot extends IterativeRobot {
   }
 
   public void updateDriving() {
-    SmartDashboard.putNumber("right left encoder: ", driveTrain.getRightLeftEncoderDistance());
-    SmartDashboard.putNumber("front back encoder: ", driveTrain.getFrontBackEncoderDistance());
+    SmartDashboard.putNumber("right left encoder: ",
+        driveTrain.getRightLeftEncoderDistance());
+    SmartDashboard.putNumber("front back encoder: ",
+        driveTrain.getFrontBackEncoderDistance());
     SmartDashboard.putNumber("angle", driveTrain.getAngle());
     SmartDashboard.putNumber("rearleft", driveTrain.getRearLeftMotorPower());
     SmartDashboard.putNumber("rearright", driveTrain.getRearRightMotorPower());
     SmartDashboard.putNumber("frontleft", driveTrain.getFrontLeftMotorPower());
-    SmartDashboard.putNumber("frontright", driveTrain.getFrontRightMotorPower());
+    SmartDashboard.putNumber("frontright",
+        driveTrain.getFrontRightMotorPower());
     SmartDashboard.putNumber("ultrasonic", ultra.getRangeInches());
   }
 
@@ -169,8 +168,10 @@ public class Robot extends IterativeRobot {
   }
 
   public void displayCameraFeed() {
-    SmartDashboard.putData("Ramp Camera Feed", (Sendable) cameraServer.getVideo("rampCam"));
-    SmartDashboard.putData("Hook Camera Feed", (Sendable) cameraServer.getVideo("hookCam"));
+    SmartDashboard.putData("Ramp Camera Feed",
+        (Sendable) cameraServer.getVideo("rampCam"));
+    SmartDashboard.putData("Hook Camera Feed",
+        (Sendable) cameraServer.getVideo("hookCam"));
     SmartDashboard.putBoolean("Cube visible: ", NetworkThread.isBoxVisible());
   }
 
@@ -182,7 +183,7 @@ public class Robot extends IterativeRobot {
     } while (gameData.length() < 1);
     if (gameData.charAt(0) == 'L') {
       if (autonStartPos == 0) {
-       // autonCommand = new StartRightSwitchLeft();
+        // autonCommand = new StartRightSwitchLeft();
         autonCommand = new DriveSideways(150, 5);
       } else if (autonStartPos == 1) {
         autonCommand = new StartLeftSwitchLeft();
@@ -195,7 +196,7 @@ public class Robot extends IterativeRobot {
       if (autonStartPos == 0) {
         autonCommand = new StartRightSwitchRight();
       } else if (autonStartPos == 1) {
-        //autonCommand = new StartLeftSwitchRight();
+        // autonCommand = new StartLeftSwitchRight();
         autonCommand = new DriveSideways(-150, 5);
       } else if (autonStartPos == 2) {
         autonCommand = new CenterToRight();

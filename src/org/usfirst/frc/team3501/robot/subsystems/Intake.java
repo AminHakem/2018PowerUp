@@ -7,7 +7,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SensorCollection;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -20,16 +19,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 
 public class Intake extends Subsystem {
-  public static final double BOTTOM_INTAKE_ANGLE = 70.0;
+  public static final double BOTTOM_INTAKE_ANGLE = /* 70.0; */ 0;
   public static final double TOP_INTAKE_ANGLE = 1.0;
   public static final double MIDDLE_INTAKE_ANGLE = 30.0;
-  public static double INTAKE_P = 0.01, INTAKE_I = 0.0,
-      INTAKE_D = -0.001;
+  public static double INTAKE_P = 0.01, INTAKE_I = 0.0, INTAKE_D = -0.001;
   public boolean raisIntake = false;
   private static Intake intake;
   private WPI_TalonSRX intakeTalon;
-  private WPI_TalonSRX intakeAngleMotor; //controls angle of intake
-  private WPI_TalonSRX intakeAngleEncoderTalon; //reads angle of intake
+  private WPI_TalonSRX intakeAngleMotor; // controls angle of intake
+  private WPI_TalonSRX intakeAngleEncoderTalon; // reads angle of intake
   private final SensorCollection intakeEncoder;
   private Solenoid intakeSolenoid;
   private Solenoid intakeSolenoidTwo;
@@ -44,9 +42,12 @@ public class Intake extends Subsystem {
     // MOTOR CONTROLLERS
     this.intakeTalon = new WPI_TalonSRX(Constants.Intake.INTAKE_PORT);
     this.intakeSolenoid = new Solenoid(Constants.Intake.INTAKE_PISTON_PORT);
-    this.intakeSolenoidTwo = new Solenoid(Constants.Intake.INTAKE_PISTON_PORT_TWO);
-    this.intakeAngleMotor = new WPI_TalonSRX(Constants.Intake.INTAKE_ANGLE_PORT);
-    this.intakeAngleEncoderTalon = new WPI_TalonSRX(Constants.Intake.INTAKE_ANGLE_ENCODER_PORT);
+    this.intakeSolenoidTwo =
+        new Solenoid(Constants.Intake.INTAKE_PISTON_PORT_TWO);
+    this.intakeAngleMotor =
+        new WPI_TalonSRX(Constants.Intake.INTAKE_ANGLE_PORT);
+    this.intakeAngleEncoderTalon =
+        new WPI_TalonSRX(Constants.Intake.INTAKE_ANGLE_ENCODER_PORT);
     this.intakeEncoder = intakeAngleEncoderTalon.getSensorCollection();
     this.intakeAngleMotor.setNeutralMode(NeutralMode.Brake);
     this.getIntakeSolenoid().set(pistonActivated);
@@ -92,13 +93,16 @@ public class Intake extends Subsystem {
   public WPI_TalonSRX getIntakeAngleMotor() {
     return this.intakeAngleMotor;
   }
+
   public double getEncoderPulses() {
-    return this.intakeEncoder.getQuadraturePosition()/2500;
+    return this.intakeEncoder.getQuadraturePosition() / 2500;
   }
+
   public void setAngleMotorValue(double motorVal) {
     motorVal = MathLib.restrictToRange(motorVal, -1.0, 1.0);
-      this.intakeAngleMotor.set(ControlMode.PercentOutput, motorVal);
-    } 
+    this.intakeAngleMotor.set(ControlMode.PercentOutput, motorVal);
+  }
+
   public void resetEncoder() {
     intakeEncoder.setQuadraturePosition(0, 3);
   }
@@ -130,5 +134,5 @@ public class Intake extends Subsystem {
   public void setDown(boolean down) {
     this.down = down;
   }
-  
+
 }
